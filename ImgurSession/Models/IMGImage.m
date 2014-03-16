@@ -1,0 +1,90 @@
+//
+//  IMGImage.m
+//  ImgurKit
+//
+//  Created by Johann Pardanaud on 10/07/13.
+//  Distributed under the MIT license.
+//
+
+#import "IMGImage.h"
+
+
+NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
+
+
+
+@implementation IMGImage;
+
+#pragma mark - Init With JSON
+
+- (instancetype)initWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
+    
+    if(self = [super init]) {
+        
+        _imageID = jsonData[@"id"];
+        _title = jsonData[@"title"];
+        _description = jsonData[@"description"];
+        _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
+        _type = jsonData[@"type"];
+        _section = jsonData[@"section"];
+        _animated = [jsonData[@"animated"] boolValue];
+        _width = [jsonData[@"width"] integerValue];
+        _height = [jsonData[@"height"] integerValue];
+        _size = [jsonData[@"size"] integerValue];
+        _views = [jsonData[@"views"] integerValue];
+        _bandwidth = [jsonData[@"bandwidth"] integerValue];
+    }
+    return [self trackModels];
+}
+
+
+#pragma mark - Describe
+
+- (NSString *)description{
+    return [NSString stringWithFormat:
+            @"%@; title: \"%@\"; description: \"%@\"; datetime: %@; type: %@; animated: %d; width: %ld; height: %ld; size: %ld; views: %ld; bandwidth: %ld",
+            [super description], _title, _description, _datetime, _type, _animated, (long)_width, (long)_height, (long)_size, (long)_views, (long)_bandwidth];
+}
+
+#pragma mark - Display
+
+- (NSURL *)URLWithSize:(ImgurSize)size
+{
+    NSString *stringURL = [_link copy];
+    NSString *path = [stringURL stringByDeletingPathExtension];
+    NSString *extension = [stringURL pathExtension];
+    
+    switch (size) {
+        case ImgurSmallSquareSize:
+            stringURL = [NSString stringWithFormat:@"%@s.%@", path, extension];
+            break;
+            
+        case ImgurBigSquareSize:
+            stringURL = [NSString stringWithFormat:@"%@b.%@", path, extension];
+            break;
+            
+        case ImgurSmallThumbnailSize:
+            stringURL = [NSString stringWithFormat:@"%@t.%@", path, extension];
+            break;
+            
+        case ImgurMediumThumbnailSize:
+            stringURL = [NSString stringWithFormat:@"%@m.%@", path, extension];
+            break;
+            
+        case ImgurLargeThumbnailSize:
+            stringURL = [NSString stringWithFormat:@"%@l.%@", path, extension];
+            break;
+            
+        case ImgurHugeThumbnailSize:
+            stringURL = [NSString stringWithFormat:@"%@h.%@", path, extension];
+            break;
+            
+        default:
+            return nil;
+    }
+    return [NSURL URLWithString:stringURL];
+}
+
+
+
+@end
