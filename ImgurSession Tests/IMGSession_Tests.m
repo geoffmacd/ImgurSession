@@ -41,7 +41,10 @@
     NSDictionary *imgurClient = infos[@"imgurClient"];
     NSString *clientID = imgurClient[@"id"];
     NSString *clientSecret = imgurClient[@"secret"];
+#if TARGET_OS_IPHONE
+    //cannot open url in iphone unit test, not an app
     refreshToken = imgurClient[@"refreshToken"];
+#endif
     
     //Lazy init, may already exist
     IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
