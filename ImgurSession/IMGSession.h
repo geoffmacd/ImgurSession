@@ -40,6 +40,13 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
     IMGCodeAuth
 };
 
+typedef NS_ENUM(NSInteger, IMGAuthState){
+    IMGAuthStateNone,
+    IMGAuthStateAuthenticated,
+    IMGAuthStateExpired
+};
+
+
 /**
  Protocol to be alerted of ImgurSession notifcations. Called on main thread.
  */
@@ -71,6 +78,15 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 -(void)imgurSessionModelFetched:(id)model;
 
 
+/**
+ Informs delegate of new token refreshs
+ */
+-(void)imgurSessionTokenRefreshed;
+
+/**
+ Informs delegate of new authentication success
+ */
+-(void)imgurSessionAuthStateChanged:(IMGAuthState)state;
 
 @end
 
@@ -170,6 +186,7 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
  @param authType     authorization type pin,code,token
  @return    authorization URL to open in Webview or Safari
  */
+-(void)setGarbageAuth;
 - (NSURL *)authenticateWithLink;
 - (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType;
 /**

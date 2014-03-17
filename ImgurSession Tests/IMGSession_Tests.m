@@ -41,20 +41,20 @@
     NSDictionary *imgurClient = infos[@"imgurClient"];
     NSString *clientID = imgurClient[@"id"];
     NSString *clientSecret = imgurClient[@"secret"];
-#if TARGET_OS_IPHONE
     //cannot open url in iphone unit test, not an app
     refreshToken = imgurClient[@"refreshToken"];
-#endif
     
     //Lazy init, may already exist
     IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
     [ses setDelegate:self];
+//    [ses setGarbageAuth];
     
     //failure block
     __weak id testClass = self;
     failBlock = ^(NSError *error) {
         [testClass notify:XCTAsyncTestCaseStatusFailed];
     };
+    
     
     //Ensure client data is avaialble for authentication to proceed
     XCTAssertTrue(clientID, @"Client ID is missing");
@@ -78,7 +78,7 @@
     IMGSession *client = [IMGSession sharedInstance];
     
     //sets refresh token if available, required for iPhone unit test
-    if(refreshToken){
+    if([refreshToken length]){
         [client setRefreshToken:refreshToken];
         [client setLastAuthType:IMGPinAuth];
         

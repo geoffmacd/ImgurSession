@@ -1,4 +1,4 @@
-//
+    //
 //  IMGClient.m
 //  ImgurSession
 //
@@ -74,7 +74,16 @@
     return [NSURL URLWithString:path relativeToURL:[NSURL URLWithString:IMGBaseURL]];
 }
 
+-(void)setGarbageAuth{
+    
+    //change the serializer to include this authorization header
+    AFHTTPRequestSerializer * serializer = self.requestSerializer;
+    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", @"garbage"] forHTTPHeaderField:@"Authorization"];
+}
+
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
+    
+    NSLog(@"...attempting reauth...");
     
     if(!_refreshToken){
         //alert app that it needs to present webview or go to safari
@@ -89,32 +98,34 @@
                 failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
         }
     } else {
-        //if access token exists and is not expired ( 1hour)
-        if(_accessToken && [_accessTokenExpiry timeIntervalSinceReferenceDate] > [[NSDate date] timeIntervalSinceReferenceDate]){
-            //refresh not needed
+        //else get new access token with refresh token
+
+        NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
+        
+        [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            NSDictionary * json = responseObject;
+            //set auth header
+            [self setAuthorizationHeader:json];
+            
+            NSLog(@"refreshed authentication : %@   with expiry: %@", _accessToken, [_accessTokenExpiry description]);
+            
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)]){
+                //        dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate imgurSessionTokenRefreshed];
+                //        });
+            }
+
+            
             if(success)
                 success(_refreshToken);
-        
-        } else {
-            //else get new access token with refresh token
-    
-            NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
             
-            [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
-                
-                NSDictionary * json = responseObject;
-                _accessToken = json[@"access_token"];
-                _accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + [json[@"expires_in"] integerValue])];
-                if(success)
-                    success(_refreshToken);
-                
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                
-                NSLog(@"%@", [error description]);
-                if(failure)
-                    failure(error);
-            }];
-        }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            NSLog(@"%@", [error description]);
+            if(failure)
+                failure(error);
+        }];
     }
 }
 
@@ -127,15 +138,9 @@
     [super POST:IMGOAuthEndpoint parameters:pinParams success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary * json = responseObject;
-        
-        _accessToken = json[@"access_token"];
-        _refreshToken = json[@"refresh_token"];
         _lastAuthType = authType;
-        
-        //set expiracy time, currrently at 3600 seconds after
-        _accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + [json[@"expires_in"] integerValue])];
         //set auth header
-        [self setAuthorizationHeaderWithToken:_accessToken];
+        [self setAuthorizationHeader:json];
         
         if(success)
             success(_refreshToken);
@@ -148,11 +153,21 @@
     }];
 }
 
-- (void)setAuthorizationHeaderWithToken:(NSString *)token{
+- (void)setAuthorizationHeader:(NSDictionary *)tokens{
+    
+    if(tokens[@"refresh_token"]){
+        _refreshToken = tokens[@"refresh_token"];
+        
+    }
+    
+    //set expiracy time, currrently at 3600 seconds after
+    _accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + [tokens[@"expires_in"] integerValue])];
+    NSTimer * timer = [NSTimer timerWithTimeInterval:3600 target:self selector:@selector(refreshAuthentication:failure:) userInfo:nil repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;    
-    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
+    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - Rate Limit Tracking
@@ -194,7 +209,7 @@
     }
 }
 
-#pragma mark - Requests
+#pragma mark - Requests - need to retry after auth fail so had to reimplement
 
 -(NSURLSessionDataTask *)PUT:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
@@ -205,9 +220,26 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        if(failure)
-            failure(error);
-        NSLog(@"failed : %@", [error localizedDescription]);
+        
+        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
+        if(http.statusCode == 403){
+            [self refreshAuthentication:^(NSString * refreshToken) {
+                
+                NSLog(@"continuing request after auth failed: %@", URLString);
+                [self PUT:URLString parameters:parameters success:success failure:failure];
+                
+            } failure:^(NSError *error) {
+                
+                if(failure)
+                    failure(error);
+                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
+            }];
+        } else {
+            
+            if(failure)
+                failure(error);
+            NSLog(@"failed : %@", [error localizedDescription]);
+        }
     }];
 }
 
@@ -220,9 +252,25 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        if(failure)
-            failure(error);
-        NSLog(@"failed : %@", [error localizedDescription]);
+        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
+        if(http.statusCode == 403){
+            [self refreshAuthentication:^(NSString * refreshToken) {
+                
+                NSLog(@"continuing request after auth failed: %@", URLString);
+                [self DELETE:URLString parameters:parameters success:success failure:failure];
+                
+            } failure:^(NSError *error) {
+                
+                if(failure)
+                    failure(error);
+                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
+            }];
+        } else {
+            
+            if(failure)
+                failure(error);
+            NSLog(@"failed : %@", [error localizedDescription]);
+        }
     }];
 }
 
@@ -234,9 +282,25 @@
             success(task,responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        if(failure)
-            failure(error);
-        NSLog(@"failed : %@", [error localizedDescription]);
+        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
+        if(http.statusCode == 403){
+            [self refreshAuthentication:^(NSString * refreshToken) {
+                
+                NSLog(@"continuing request after auth failed: %@", URLString);
+                [self POST:URLString parameters:parameters success:success failure:failure];
+                
+            } failure:^(NSError *error) {
+                
+                if(failure)
+                    failure(error);
+                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
+            }];
+        } else {
+            
+            if(failure)
+                failure(error);
+            NSLog(@"failed : %@", [error localizedDescription]);
+        }
     }];
 }
 
@@ -249,9 +313,25 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        if(failure)
-            failure(error);
-        NSLog(@"failed : %@", [error localizedDescription]);
+        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
+        if(http.statusCode == 403){
+            [self refreshAuthentication:^(NSString * refreshToken) {
+                
+                NSLog(@"continuing request after auth failed: %@", URLString);
+                [self GET:URLString parameters:parameters success:success failure:failure];
+                
+            } failure:^(NSError *error) {
+                
+                if(failure)
+                    failure(error);
+                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
+            }];
+        } else {
+        
+            if(failure)
+                failure(error);
+            NSLog(@"failed : %@", [error localizedDescription]);
+        }
     }];
 }
 
@@ -264,7 +344,22 @@
     __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         [progress removeObserver:self forKeyPath:@"fractionCompleted" context:NULL];
         if (error) {
-            if (failure) {
+            
+            NSHTTPURLResponse * http = (NSHTTPURLResponse *)response;
+            if(http.statusCode == 403){
+                [self refreshAuthentication:^(NSString * refreshToken) {
+                    
+                    NSLog(@"continuing request after auth failed: %@", URLString);
+                    [self POST:URLString parameters:parameters constructingBodyWithBlock:block success:success failure:failure];
+                    
+                } failure:^(NSError *error) {
+                    
+                    if(failure)
+                        failure(error);
+                    NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
+                }];
+            } else {
+                
                 if(failure)
                     failure(error);
                 NSLog(@"failed : %@", [error localizedDescription]);
@@ -287,7 +382,7 @@
     
 }
 
-#pragma mark - KVO
+#pragma mark - KVO for progress
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"fractionCompleted"]) {
