@@ -1,6 +1,6 @@
 //
 //  IMGGalleryImage.m
-//  ImgurKit
+//  ImgurSession
 //
 //  Created by Johann Pardanaud on 11/07/13.
 //  Distributed under the MIT license.

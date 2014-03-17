@@ -1,6 +1,6 @@
 //
 //  IMGClient.m
-//  ImgurKit
+//  ImgurSession
 //
 //  Created by Johann Pardanaud on 29/06/13.
 //  Distributed under the MIT license.
@@ -58,25 +58,42 @@
             break;
             
         default:
-            NSAssert(NO, @"Bad ImgurKit Authorization Type");
+            NSAssert(NO, @"Bad ImgurSession Authorization Type");
             break;
     }
     return authStr;
 }
 
--(void)authenticateWithType:(IMGAuthType)authType{
+- (NSURL *)authenticateWithLink{
+    return [self authenticateWithExternalURLForType:IMGPinAuth];
+}
+
+- (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType{
+    
+    NSString *path = [NSString stringWithFormat:@"oauth2/authorize?response_type=%@&client_id=%@", [self strForAuthType:authType], _clientID];
+    return [NSURL URLWithString:path relativeToURL:[NSURL URLWithString:IMGBaseURL]];
+}
+
+-(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
     
     if(!_refreshToken){
         //alert app that it needs to present webview or go to safari
         if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_delegate imgurKitNeedsExternalWebview:[self externalURLForAuthenticationWithType:authType]];
-            });
+//            dispatch_async(dispatch_get_main_queue(), ^{
+                if(failure)
+                    failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
+                [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURLForType:_lastAuthType]];
+//            });
+        } else {
+            if(failure)
+                failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
         }
     } else {
         //if access token exists and is not expired ( 1hour)
         if(_accessToken && [_accessTokenExpiry timeIntervalSinceReferenceDate] > [[NSDate date] timeIntervalSinceReferenceDate]){
             //refresh not needed
+            if(success)
+                success(_refreshToken);
         
         } else {
             //else get new access token with refresh token
@@ -84,48 +101,50 @@
             NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
             
             [super GET:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
+                
                 NSDictionary * json = responseObject;
                 _accessToken = json[@"access_token"];
                 _accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + [json[@"expires_in"] integerValue])];
+                if(success)
+                    success(_refreshToken);
                 
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                 
                 NSLog(@"%@", [error description]);
+                if(failure)
+                    failure(error);
             }];
         }
-        
     }
 }
 
-- (NSURL *)externalURLForAuthenticationWithType:(IMGAuthType)authType{
-    
-    NSString *path = [NSString stringWithFormat:@"oauth2/authorize?response_type=%@&client_id=%@", [self strForAuthType:authType], _clientID];
-    return [NSURL URLWithString:path relativeToURL:[NSURL URLWithString:IMGBaseURL]];
-}
-
-- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * accessToken))success failure:(void (^)(NSError *error))failure{
+- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
     
     //call oauth/token with pin
     NSDictionary * pinParams = @{[self strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"pin"};
     
-    //use super to by
+    //use super to bypass tracking
     [super POST:IMGOAuthEndpoint parameters:pinParams success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary * json = responseObject;
         
         _accessToken = json[@"access_token"];
         _refreshToken = json[@"refresh_token"];
+        _lastAuthType = authType;
         
         //set expiracy time, currrently at 3600 seconds after
         _accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + [json[@"expires_in"] integerValue])];
         //set auth header
         [self setAuthorizationHeaderWithToken:_accessToken];
         
-        success(_accessToken);
+        if(success)
+            success(_refreshToken);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSLog(@"%@", [error description]);
+        if(failure)
+            failure(error);
     }];
 }
 
@@ -150,20 +169,20 @@
         
         
         //warn delegate if necessary
-        if(_delegate && [_delegate respondsToSelector:@selector(imgurKitNearRateLimit:) ]){
-            dispatch_async(dispatch_get_main_queue(), ^{
+        if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNearRateLimit:) ]){
+//            dispatch_async(dispatch_get_main_queue(), ^{
                 if(_creditsClientRemaining < _warnRateLimit && _creditsClientRemaining > 0){
-                    [_delegate imgurKitNearRateLimit:_creditsClientRemaining];
+                    [_delegate imgurSessionNearRateLimit:_creditsClientRemaining];
                     
                     //post notifications as well
                     [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitNearLimitNotification object:nil];
                 }
-            });
+//            });
         }
         if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (_creditsClientRemaining == 0){
-                    [_delegate imgurKitRateLimitExceeded];
+                    [_delegate imgurSessionRateLimitExceeded];
                     
                     //post notifications as well
                     [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitExceededNotification object:nil];
@@ -284,10 +303,10 @@
 -(void)trackModelObjectsForDelegateHandling:(id)model{
     
     //warn delegate if necessary
-    if(_delegate && [_delegate respondsToSelector:@selector(imgurKitModelFetched:)]){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate imgurKitModelFetched:model];
-        });
+    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionModelFetched:)]){
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [_delegate imgurSessionModelFetched:model];
+//        });
     }
     
     //post notifications as well to class name

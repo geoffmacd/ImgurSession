@@ -1,6 +1,6 @@
 //
 //  IMGResponseSerializer.m
-//  ImgurKit
+//  ImgurSession
 //
 //  Created by Geoff MacDonald on 2014-03-07.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
@@ -21,7 +21,7 @@
     
     if(!*error){
     
-        //let response continue processing by ImgurKit completion blocks
+        //let response continue processing by ImgurSession completion blocks
         if(jsonResult[@"data"]){
             
             //update rate limit tracking in the session

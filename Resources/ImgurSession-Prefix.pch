@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'ImgurKit' target in the 'ImgurKit' project
+// Prefix header for all source files of the 'ImgurSession' target in the 'ImgurSession' project
 //
 
 #ifdef __OBJC__

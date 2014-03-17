@@ -1,6 +1,6 @@
 //
 //  IMGClient.h
-//  ImgurKit
+//  ImgurSession
 //
 //  Created by Johann Pardanaud on 29/06/13.
 //  Distributed under the MIT license.
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 };
 
 /**
- Protocol to be alerted of Imgurkit notifcations. Called on main thread.
+ Protocol to be alerted of ImgurSession notifcations. Called on main thread.
  */
 @protocol IMGSessionDelegate <NSObject>
 
@@ -50,25 +50,25 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 /**
  Alerts delegate that request limit is hit
  */
--(void)imgurKitRateLimitExceeded;
+-(void)imgurSessionRateLimitExceeded;
 
 /**
  Alerts delegate that webview is needed to present Imgur OAuth authentication
  */
--(void)imgurKitNeedsExternalWebview:(NSURL*)url;
+-(void)imgurSessionNeedsExternalWebview:(NSURL*)url;
 
 @optional
 
 /**
  Alerts delegate that request limit is being approached
  */
--(void)imgurKitNearRateLimit:(NSInteger)remainingRequests;
+-(void)imgurSessionNearRateLimit:(NSInteger)remainingRequests;
 
 
 /**
  Informs delegate of new model objects
  */
--(void)imgurKitModelFetched:(id)model;
+-(void)imgurSessionModelFetched:(id)model;
 
 
 
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 
 
 /**
- Session manager class for ImgurKit Session instance. Controls all requests by subclassing AFHTTPSessionManager
+ Session manager class for ImgurSession Session instance. Controls all requests by subclassing AFHTTPSessionManager
  */
 @interface IMGSession : AFHTTPSessionManager
 
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 /**
  Refresh token as retrieved from oauth/token GET request with PIN
  */
-@property (readonly, nonatomic) NSString *refreshToken;
+@property (nonatomic) NSString *refreshToken;
 /**
  Access token as retrieved from oauth/token GET request with PIN. Expires after 1 hour after retrieval
  */
@@ -102,6 +102,10 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
  Access token expiry date
  */
 @property (readonly, nonatomic) NSDate *accessTokenExpiry;
+/**
+ Access token expiry date
+ */
+@property (nonatomic) IMGAuthType lastAuthType;
 
 
 // rate limiting
@@ -160,12 +164,14 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 
 #pragma mark - Authentication
 
+-(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure;
 /**
  Retrieves URL associated with website authorization page
  @param authType     authorization type pin,code,token
  @return    authorization URL to open in Webview or Safari
  */
-- (NSURL *)externalURLForAuthenticationWithType:(IMGAuthType)authType;
+- (NSURL *)authenticateWithLink;
+- (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType;
 /**
  Requests access tokens using inputted pin code
  @param authType     authorization type pin,code,token

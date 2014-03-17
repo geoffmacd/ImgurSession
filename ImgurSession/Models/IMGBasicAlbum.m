@@ -1,6 +1,6 @@
 //
 //  ImgurPartialAlbum.m
-//  ImgurKit
+//  ImgurSession
 //
 //  Created by Johann Pardanaud on 24/07/13.
 //  Distributed under the MIT license.

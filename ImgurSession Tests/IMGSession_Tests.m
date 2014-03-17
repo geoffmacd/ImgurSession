@@ -1,6 +1,6 @@
 //
-//  ImgurKit_Tests.m
-//  ImgurKit Tests
+//  ImgurSession_Tests.m
+//  ImgurSession Tests
 //
 //  Created by Geoff MacDonald on 2014-03-07.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
@@ -16,6 +16,7 @@
 @interface IMGSession_Tests : XCTestCase <IMGSessionDelegate>{
     //various metadata to store
     NSDictionary *imgurVariousValues;
+    NSString *refreshToken;
     
     __block void(^ failBlock)(NSError * error);
 }
@@ -40,6 +41,8 @@
     NSDictionary *imgurClient = infos[@"imgurClient"];
     NSString *clientID = imgurClient[@"id"];
     NSString *clientSecret = imgurClient[@"secret"];
+    refreshToken = imgurClient[@"refreshToken"];
+    
     //Lazy init, may already exist
     IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
     [ses setDelegate:self];
@@ -71,23 +74,45 @@
 {
     IMGSession *client = [IMGSession sharedInstance];
     
-#if TARGET_OS_IPHONE
-    [[UIApplication sharedApplication] openURL:[client externalURLForAuthentication]];
-#else
-    [[NSWorkspace sharedWorkspace] openURL:[client externalURLForAuthenticationWithType:IMGPinAuth]];
-#endif
-    
-    NSLog(@"Enter the code PIN");
-    char pin[20];
-    scanf("%s", pin);
-    
-    [client authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin] success:^(NSString *access) {
-        NSLog(@"Access token: %@", access);
-        [self notify:XCTAsyncTestCaseStatusSucceeded];
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error.localizedRecoverySuggestion);
-        [self notify:XCTAsyncTestCaseStatusFailed];
-    }];
+    //sets refresh token if available, required for iPhone unit test
+    if(refreshToken){
+        [client setRefreshToken:refreshToken];
+        [client setLastAuthType:IMGPinAuth];
+        
+        //should retrieve new access code
+        [client refreshAuthentication:^(NSString * refresh) {
+            
+            NSLog(@"Refresh token: %@", refresh);
+            [self notify:XCTAsyncTestCaseStatusSucceeded];
+            
+        } failure:^(NSError *error) {
+            
+            NSLog(@"%@", error.localizedRecoverySuggestion);
+            [self notify:XCTAsyncTestCaseStatusFailed];
+            
+        }];
+    } else {
+        
+        //goes to safari from delegate call
+        [client refreshAuthentication:nil failure:nil];
+        
+        //need to manually enter pin for testing
+        NSLog(@"Enter the code PIN");
+        char pin[20];
+        scanf("%s", pin);
+        
+        //send pin code to retrieve access tokens
+        [client authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin] success:^(NSString *refresh) {
+            
+            NSLog(@"Refresh token: %@", refresh);
+            [self notify:XCTAsyncTestCaseStatusSucceeded];
+            
+        } failure:^(NSError *error) {
+            
+            NSLog(@"%@", error.localizedRecoverySuggestion);
+            [self notify:XCTAsyncTestCaseStatusFailed];
+        }];
+    }
     [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
 }
 
@@ -221,12 +246,22 @@
     [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
 }
 
--(void)imgurKitModelFetched:(id)model{
+-(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
+    
+#if TARGET_OS_IPHONE
+    //cannot open url in iphone unit test, not an app
+    [self notify:XCTAsyncTestCaseStatusFailed];
+#elif TARGET_OS_MAC
+    [[NSWorkspace sharedWorkspace] openURL:url];
+#endif
+}
+
+-(void)imgurSessionModelFetched:(id)model{
     
     NSLog(@"New imgur model fetched: %@", [model description]);
 }
 
--(void)imgurKitRateLimitExceeded{
+-(void)imgurSessionRateLimitExceeded{
     
     NSLog(@"Hit rate limit");
     failBlock(nil);

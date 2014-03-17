@@ -1,6 +1,6 @@
 //
 //  IMGCommentRequest.h
-//  ImgurKit
+//  ImgurSession
 //
 //  Created by Geoff MacDonald on 2014-03-15.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.

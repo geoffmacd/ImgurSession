@@ -1,6 +1,6 @@
 //
 //  IMGImageRequest.m
-//  ImgurKit
+//  ImgurSession
 //
 //  Created by Geoff MacDonald on 2014-03-15.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
@@ -210,7 +210,7 @@
         __block NSMutableArray *images = [NSMutableArray new];
         __block NSInteger count = 0;
         
-        void (^uploadBlock)() = ^() {
+        void (^__block uploadBlock)() = ^() {
             
             [self uploadImageWithURL:urls[count] title:(titles ? titles[count] : nil) description:(descriptions ? descriptions[count] : nil) filename:(filenames ? filenames[count] : nil) andLinkToAlbumWithID:albumID success:^(IMGImage *image) {
                 

@@ -5,6 +5,12 @@
 //
 
 #ifdef __OBJC__
-    #import <UIMGit/UIMGit.h>
     #import <Foundation/Foundation.h>
+    #import <AFNetworking/AFNetworking.h>
+
+    #if TARGET_OS_IPHONE
+        #import <UIKit/UIKit.h>
+    #else
+        #import <AppKit/AppKit.h>
+    #endif
 #endif
