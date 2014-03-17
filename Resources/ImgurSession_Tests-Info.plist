@@ -8,6 +8,8 @@
 		<string></string>
 		<key>secret</key>
 		<string></string>
+		<key>refreshToken</key>
+		<string></string>
 	</dict>
 	<key>imgurVariousValues</key>
 	<dict>
