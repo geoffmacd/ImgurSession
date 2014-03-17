@@ -19,6 +19,43 @@
     return @"gallery";
 }
 
+#pragma mark - Gallery Load
+
++(void)galleryWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    NSString *path = [self path];
+    
+    [[IMGSession sharedInstance] GET:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray * jsonArray = responseObject;
+        NSMutableArray * images = [NSMutableArray new];
+        
+        for(NSDictionary * json in jsonArray){
+            
+            if([json[@"is_album"] boolValue]){
+                NSError *JSONError = nil;
+                IMGGalleryAlbum * album = [[IMGGalleryAlbum alloc] initWithJSONObject:json error:&JSONError];
+                if(!JSONError)
+                    [images addObject:album];
+            } else {
+                
+                NSError *JSONError = nil;
+                IMGGalleryImage * image = [[IMGGalleryImage alloc] initWithJSONObject:json error:&JSONError];
+                if(!JSONError)
+                    [images addObject:image];
+            }
+        }
+        
+        if(success)
+            success(images);
+       
+//        NSLog(@"%@", [responseObject description]);
+
+    } failure:failure];
+}
+
+
+
 #pragma mark - Load
 
 +(void)imageWithID:(NSString *)imageID success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *))failure{

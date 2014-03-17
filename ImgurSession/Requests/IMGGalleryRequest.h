@@ -1,4 +1,3 @@
-//
 //  IMGGalleryRequest.h
 //  ImgurSession
 //
@@ -11,8 +10,16 @@
 
 @class IMGGalleryAlbum,IMGGalleryImage,IMGGalleryProfile;
 
+typedef NS_ENUM(NSInteger, IMGGallerySectionType) {
+    IMGGallerySectionTypeHot,
+    IMGGallerySectionTypeTop,
+    IMGGallerySectionTypeUser
+};
+
+
 @interface IMGGalleryRequest : IMGEndpoint
 
++(void)galleryWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Submit Image
 + (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)(NSString *imageID))success failure:(void (^)(NSError *error))failure;

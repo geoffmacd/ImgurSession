@@ -289,4 +289,24 @@
     NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
 }
 
+#pragma mark - Test Gallery endpoints
+
+/*
+ Tests
+ **/
+- (void)testGallery{
+    
+    [IMGGalleryRequest galleryWithParameters:nil success:^(NSArray * images) {
+        
+        [self notify:XCTAsyncTestCaseStatusSucceeded];
+        
+    } failure:^(NSError * err) {
+        
+        
+    }];
+    
+    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
+    
+}
+
 @end
