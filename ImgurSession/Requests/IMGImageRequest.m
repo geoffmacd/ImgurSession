@@ -156,14 +156,14 @@
                                                  @"descriptions": descriptions }];
     }
     
-    // Return a signal that handles all the upload process
+
     
     
     if(filesNumber > 0) {
         __block NSMutableArray *images = [NSMutableArray new];
         __block NSInteger count = 0;
         
-        void (^__block uploadBlock)() = ^() {
+        void (^__unsafe_unretained __block uploadBlock)() = ^() {
             
             [self uploadImageWithFileURL:fileURLs[count] title:(titles ? titles[count] : nil) description:(descriptions ? descriptions[count] : nil) andLinkToAlbumWithID:albumID success:^(IMGImage *image) {
                 
@@ -210,7 +210,7 @@
         __block NSMutableArray *images = [NSMutableArray new];
         __block NSInteger count = 0;
         
-        void (^__block uploadBlock)() = ^() {
+        void (^__unsafe_unretained __block uploadBlock)() = ^() {
             
             [self uploadImageWithURL:urls[count] title:(titles ? titles[count] : nil) description:(descriptions ? descriptions[count] : nil) filename:(filenames ? filenames[count] : nil) andLinkToAlbumWithID:albumID success:^(IMGImage *image) {
                 

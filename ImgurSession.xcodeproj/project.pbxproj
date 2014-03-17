@@ -263,10 +263,6 @@
 		2407476A18D53BF900B92063 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				240747AD18D62B1B00B92063 /* IMGEndpoint.h */,
-				240747AC18D62B1B00B92063 /* IMGEndpoint.m */,
-				240747B418D62B1B00B92063 /* IMGResponseSerializer.h */,
-				240747A318D62B1B00B92063 /* IMGResponseSerializer.m */,
 				240747A918D62B1B00B92063 /* IMGAccountRequest.h */,
 				240747A418D62B1B00B92063 /* IMGAccountRequest.m */,
 				240747AF18D62B1B00B92063 /* IMGAlbumRequest.h */,
@@ -350,6 +346,10 @@
 			children = (
 				C30933E318CA204C009D9C57 /* IMGSession.h */,
 				C30933E418CA204C009D9C57 /* IMGSession.m */,
+				240747AD18D62B1B00B92063 /* IMGEndpoint.h */,
+				240747AC18D62B1B00B92063 /* IMGEndpoint.m */,
+				240747B418D62B1B00B92063 /* IMGResponseSerializer.h */,
+				240747A318D62B1B00B92063 /* IMGResponseSerializer.m */,
 				C30933C618CA1FFE009D9C57 /* Models */,
 				2407476A18D53BF900B92063 /* Requests */,
 			);
