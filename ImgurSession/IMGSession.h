@@ -30,11 +30,16 @@ static NSString * const IMGHeaderClientRemaining = @"X-RateLimit-ClientRemaining
 //notifications
 static NSString * const IMGRateLimitExceededNotification = @"IMGRateLimitExceededNotification";
 static NSString * const IMGRateLimitNearLimitNotification = @"IMGRateLimitNearLimitNotification";
+static NSString * const IMGNeedsExternalWebviewNotification = @"IMGNeedsExternalWebviewNotification";
+static NSString * const IMGModelFetchedNotification = @"IMGModelFetchedNotification";
+static NSString * const IMGAuthChangedNotification = @"IMGAuthChangedNotification";
+static NSString * const IMGAuthRefreshedNotification = @"IMGAuthRefreshedNotification";
 
 /**
  Type of authorization to use, you will proably use PIN
  */
 typedef NS_ENUM(NSInteger, IMGAuthType){
+    IMGNoAuthType,
     IMGPinAuth,
     IMGTokenAuth,
     IMGCodeAuth
@@ -58,7 +63,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Alerts delegate that request limit is hit
  */
 -(void)imgurSessionRateLimitExceeded;
-
 /**
  Alerts delegate that webview is needed to present Imgur OAuth authentication
  */
@@ -70,19 +74,14 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Alerts delegate that request limit is being approached
  */
 -(void)imgurSessionNearRateLimit:(NSInteger)remainingRequests;
-
-
 /**
  Informs delegate of new model objects
  */
 -(void)imgurSessionModelFetched:(id)model;
-
-
 /**
  Informs delegate of new token refreshs
  */
 -(void)imgurSessionTokenRefreshed;
-
 /**
  Informs delegate of new authentication success
  */
@@ -96,24 +95,25 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @interface IMGSession : AFHTTPSessionManager
 
+
 // client authorization
 
 /**
  App Id as registered with Imgur at http://imgur.com/account/settings/apps
  */
-@property (readonly, nonatomic) NSString *clientID;
+@property (readonly, nonatomic,copy) NSString *clientID;
 /**
  App Secret as registered with Imgur at http://imgur.com/account/settings/apps
  */
-@property (readonly, nonatomic) NSString *secret;
+@property (readonly, nonatomic, copy) NSString *secret;
 /**
  Refresh token as retrieved from oauth/token GET request with PIN
  */
-@property (nonatomic) NSString *refreshToken;
+@property (readonly, nonatomic, copy) NSString *refreshToken;
 /**
  Access token as retrieved from oauth/token GET request with PIN. Expires after 1 hour after retrieval
  */
-@property (strong, nonatomic) NSString *accessToken;
+@property (readonly, nonatomic, copy) NSString *accessToken;
 /**
  Access token expiry date
  */
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 /**
  Access token expiry date
  */
-@property (nonatomic) IMGAuthType lastAuthType;
+@property (readonly, nonatomic) IMGAuthType lastAuthType;
 
 
 // rate limiting
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 /**
  Warn client after going below this number of available requests. The default is 100 requests.
  */
-@property  NSInteger warnRateLimit;
+@property  (readonly,nonatomic) NSInteger warnRateLimit;
 
 /**
  Required delegate to warn of imgur events.
@@ -180,14 +180,27 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 #pragma mark - Authentication
 
+/**
+Testing function to remove auth
+ */
+-(void)setGarbageAuth;
+/**
+ Retrieves URL associated with website authorization page
+ @param authType     authorization type pin,code,token
+ @return    authorization URL to open in Webview or Safari
+ */
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure;
 /**
  Retrieves URL associated with website authorization page
  @param authType     authorization type pin,code,token
  @return    authorization URL to open in Webview or Safari
  */
--(void)setGarbageAuth;
 - (NSURL *)authenticateWithLink;
+/**
+ Retrieves URL associated with website authorization page
+ @param authType     authorization type pin,code,token
+ @return    authorization URL to open in Webview or Safari
+ */
 - (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType;
 /**
  Requests access tokens using inputted pin code
@@ -222,6 +235,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 #pragma mark - Model Tracking
 
+/**
+ Alerts session to a new model fetch
+ @param model     the model fetched
+ */
 -(void)trackModelObjectsForDelegateHandling:(id)model;
 
 

@@ -13,6 +13,23 @@
 
 #define kTestTimeOut     30     //seconds
 
+@interface IMGSession ()
+
+@property (readwrite, nonatomic,copy) NSString *clientID;
+@property (readwrite, nonatomic, copy) NSString *secret;
+@property (readwrite, nonatomic, copy) NSString *refreshToken;
+@property (readwrite, nonatomic, copy) NSString *accessToken;
+@property (readwrite, nonatomic) NSDate *accessTokenExpiry;
+@property (readwrite, nonatomic) IMGAuthType lastAuthType;
+@property (readwrite,nonatomic) NSInteger creditsUserRemaining;
+@property (readwrite,nonatomic) NSInteger creditsUserLimit;
+@property (readwrite,nonatomic) NSInteger creditsUserReset;
+@property (readwrite,nonatomic) NSInteger creditsClientRemaining;
+@property (readwrite,nonatomic) NSInteger creditsClientLimit;
+@property  (readwrite,nonatomic) NSInteger warnRateLimit;
+
+@end
+
 @interface IMGSession_Tests : XCTestCase <IMGSessionDelegate>{
     //various metadata to store
     NSDictionary *imgurVariousValues;
