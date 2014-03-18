@@ -14,7 +14,10 @@
 
 #define kTestTimeOut     30     //seconds
 
-//WARNING: Implementation requires client id, client secret filled out in tests plist
+#warning: Implementation requires client id, client secret filled out in tests plist
+#warning: imgur user must have refresh token filled out in tests plist in order to work on iPhone
+#warning: Imgur users must have favourites gallery items, gallery posts , and comments posted to the gallery
+#warning: delegate methods not called unless dispatch methods are overwritten due to strange run loop in test runs, may need to call directly
 
 @interface IMGSession_Tests : IMGTestCase{
 }
@@ -22,34 +25,7 @@
 
 @implementation IMGSession_Tests
 
-#pragma mark - IMGSessionDelegate Delegate methods
-
-//WARNING: delegate methods not called unless dispatch methods are overwritten due to strange run loop in test runs, may need to call directly
-
--(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
-    //show external webview to allow auth
-    
-#if TARGET_OS_IPHONE
-    //cannot open url in iphone unit test, not an app
-    XCTAssert(nil, @"Fail");
-#elif TARGET_OS_MAC
-    [[NSWorkspace sharedWorkspace] openURL:url];
-#endif
-}
-
--(void)imgurSessionModelFetched:(id)model{
-    
-    NSLog(@"New imgur model fetched: %@", [model description]);
-}
-
--(void)imgurSessionRateLimitExceeded{
-    
-    NSLog(@"Hit rate limit");
-    failBlock(nil);
-}
-
 #pragma mark - Test Account endpoints
-
 
 - (void)testAccountLoadMe{
     

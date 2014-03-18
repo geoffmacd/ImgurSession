@@ -121,4 +121,28 @@
     expect(session.accessToken).willNot.beNil();
 //    expect(session.refreshToken).willNot.beNil();
 }
+
+#pragma mark - IMGSessionDelegate Delegate methods
+
+-(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
+    //show external webview to allow auth
+    
+#if TARGET_OS_IPHONE
+    //cannot open url in iphone unit test, not an app
+    XCTAssert(nil, @"Fail");
+#elif TARGET_OS_MAC
+    [[NSWorkspace sharedWorkspace] openURL:url];
+#endif
+}
+
+-(void)imgurSessionModelFetched:(id)model{
+    
+    NSLog(@"New imgur model fetched: %@", [model description]);
+}
+
+-(void)imgurSessionRateLimitExceeded{
+    
+    NSLog(@"Hit rate limit");
+    failBlock(nil);
+}
 @end
