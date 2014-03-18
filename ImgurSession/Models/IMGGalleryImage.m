@@ -23,8 +23,8 @@
         _downs = [jsonData[@"downs"] integerValue];
         _score = [jsonData[@"score"] integerValue];
         _isAlbum = [jsonData[@"is_album"] boolValue];
-        if(jsonData[@"vote"])
-            _vote = jsonData[@"vote"];
+        if(![jsonData[@"vote"] isKindOfClass:[NSNull class]])
+            _vote = [IMGModel voteForStr:jsonData[@"vote"]];
         
         if(![jsonData[@"nsfw"] isKindOfClass:[NSNull class]])
             _nsfw = [jsonData[@"nsfw"] boolValue];

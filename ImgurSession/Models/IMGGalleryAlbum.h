@@ -18,7 +18,7 @@
 @property (nonatomic, readonly) NSInteger downs;
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSInteger isAlbum;
-@property (nonatomic, readonly) NSString *vote;
+@property (nonatomic, readonly) IMGVoteType vote;
 @property (nonatomic, readonly) BOOL favorite;
 @property (nonatomic, readonly) BOOL nsfw;
 @property (nonatomic, readonly) NSString *section;

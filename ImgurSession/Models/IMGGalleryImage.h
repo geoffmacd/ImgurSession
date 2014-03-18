@@ -14,7 +14,7 @@
  */
 @interface IMGGalleryImage : IMGImage
 
-@property (nonatomic, readonly) NSString *vote;
+@property (nonatomic, readonly) IMGVoteType vote;
 
 @property (nonatomic, readonly) NSString *accountURL;
 

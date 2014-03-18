@@ -23,4 +23,34 @@
     return self;
 }
 
++(NSString*)strForVote:(IMGVoteType)vote{
+    NSString * str;
+    switch (vote) {
+        case IMGDownVote:
+            str = @"down";
+            break;
+            
+        case IMGUpVote:
+            str = @"up";
+            break;
+        case IMGNeutralVote:
+            str = @"";
+            break;
+        default:
+            break;
+    }
+    return str;
+}
+
++(IMGVoteType)voteForStr:(NSString*)voteStr{
+    
+    if([voteStr isEqualToString:@"up"])
+        return IMGUpVote;
+    else if([voteStr isEqualToString:@"down"])
+        return IMGDownVote;
+    else
+        return IMGNeutralVote;
+}
+
+
 @end

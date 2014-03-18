@@ -43,4 +43,8 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
  */
 - (instancetype)trackModels;
 
++(NSString*)strForVote:(IMGVoteType)vote;
++(IMGVoteType)voteForStr:(NSString*)voteStr;
+
+
 @end
