@@ -28,8 +28,8 @@ typedef NS_ENUM(NSInteger, ImgurSize) {
 
 @property (nonatomic, readonly) NSString *imageID;
 
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSString *description;
+@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSString *description;
 @property (nonatomic, readonly) NSDate *datetime;
 
 @property (nonatomic, readonly) NSString *type;
@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, ImgurSize) {
 @property (nonatomic, readonly) NSString *deletehash;
 @property (nonatomic, readonly) NSString *section;
 @property (nonatomic, readonly) NSString *link;
+
 
 
 #pragma mark - Display

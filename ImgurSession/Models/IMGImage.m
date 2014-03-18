@@ -12,6 +12,12 @@
 NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
 
 
+@interface IMGImage ()
+
+@property (readwrite, nonatomic) NSString *title;
+@property (readwrite, nonatomic) NSString *description;
+
+@end
 
 @implementation IMGImage;
 
@@ -40,13 +46,12 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
     return [self trackModels];
 }
 
-
 #pragma mark - Describe
 
 - (NSString *)description{
     return [NSString stringWithFormat:
-            @"%@; title: \"%@\"; description: \"%@\"; datetime: %@; type: %@; animated: %d; width: %ld; height: %ld; size: %ld; views: %ld; bandwidth: %ld",
-            [super description], _title, _description, _datetime, _type, _animated, (long)_width, (long)_height, (long)_size, (long)_views, (long)_bandwidth];
+            @"%@; image ID: %@ ; title: \"%@\"; description: \"%@\"; datetime: %@; type: %@; animated: %d; width: %ld; height: %ld; size: %ld; views: %ld; bandwidth: %ld",
+            [super description],_imageID,  _title, _description, _datetime, _type, _animated, (long)_width, (long)_height, (long)_size, (long)_views, (long)_bandwidth];
 }
 
 #pragma mark - Display

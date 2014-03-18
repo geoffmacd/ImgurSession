@@ -27,14 +27,6 @@
 + (void)uploadImageWithURL:(NSURL *)url success:(void (^)(IMGImage *image))success failure:(void (^)(NSError *error))failure;
 + (void)uploadImageWithURL:(NSURL *)url title:(NSString *)title description:(NSString *)description filename:(NSString *)filename andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *image))success failure:(void (^)(NSError *error))failure;
 
-#pragma mark - Upload multiples images
-
-+ (void)uploadImagesWithFileURLs:(NSArray *)fileURLs success:(void (^)(NSArray *images))success failure:(void (^)(NSError *error))failure;
-+ (void)uploadImagesWithFileURLs:(NSArray *)fileURLs titles:(NSArray *)titles descriptions:(NSArray *)descriptions andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(NSArray *images))success failure:(void (^)(NSError *error))failure;
-
-+ (void)uploadImagesWithURLs:(NSArray *)urls success:(void (^)(NSArray *images))success failure:(void (^)(NSError *error))failure;
-+ (void)uploadImagesWithURLs:(NSArray *)urls titles:(NSArray *)titles descriptions:(NSArray *)descriptions filenames:(NSArray *)filenames andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(NSArray *images))success failure:(void (^)(NSError *error))failure;
-
 
 #pragma mark - Delete
 

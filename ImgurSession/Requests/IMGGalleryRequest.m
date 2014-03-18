@@ -128,6 +128,7 @@
     NSString *path = [self pathWithOption:@"album" withId2:albumID];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         NSError *JSONError = nil;
         IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
         
@@ -142,50 +143,13 @@
     } failure:failure];
 }
 
-+ (void)commentsWithGalleryID:(NSString *)galleryObjectId withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    
-    NSString * sortStr;
-    switch (commentSort) {
-        case IMGGalleryCommentSortBest:
-            sortStr = @"best";
-            break;
-        case IMGGalleryCommentSortHot:
-            sortStr = @"hot";
-            break;
-        case IMGGalleryCommentSortNew:
-            sortStr = @"new";
-            break;
-        default:
-            sortStr = @"best";
-            break;
-    }
-    NSString *path = [self pathWithId:galleryObjectId withOption:@"comments" withId2:sortStr];
-    
-    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSArray * jsonArray = responseObject;
-        NSMutableArray * comments = [NSMutableArray new];
-        
-        for(NSDictionary * json in jsonArray){
-            
-            NSError *JSONError = nil;
-            IMGComment * comment = [[IMGComment alloc] initWithJSONObject:json error:&JSONError];
-            if(!JSONError)
-                [comments addObject:comment];
-        }
-        if(success)
-            success(comments);
-        
-    } failure:failure];
-}
-
 #pragma mark - Submit Gallery Objects
 
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure{
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *))failure{
     return [self submitImageWithID:imageID title:title terms:YES success:success failure:failure];
 }
 
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure{
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"image" withId2:imageID];
     
     NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
@@ -193,15 +157,15 @@
     [[IMGSession sharedInstance] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
-            success(imageID);
+                success();
     } failure:failure];
 }
 
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure{
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *))failure{
     return [self submitAlbumWithID:albumID title:title terms:YES success:success failure:failure];
 }
 
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure{
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"album" withId2:albumID];
     
     NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
@@ -209,8 +173,7 @@
     [[IMGSession sharedInstance] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
-            success(albumID);
-        
+            success();
     } failure:failure];
 }
 
@@ -256,6 +219,138 @@
         
         if(success)
             success();
+    } failure:failure];
+}
+
+
+#pragma mark - Comment Actions - IMGCommentRequest
+
++ (void)commentsWithGalleryID:(NSString *)galleryObjectId withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    NSString * sortStr;
+    switch (commentSort) {
+        case IMGGalleryCommentSortBest:
+            sortStr = @"best";
+            break;
+        case IMGGalleryCommentSortHot:
+            sortStr = @"hot";
+            break;
+        case IMGGalleryCommentSortNew:
+            sortStr = @"new";
+            break;
+        default:
+            sortStr = @"best";
+            break;
+    }
+    NSString *path = [self pathWithId:galleryObjectId withOption:@"comments" withId2:sortStr];
+    
+    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray * jsonArray = responseObject;
+        NSMutableArray * comments = [NSMutableArray new];
+        
+        for(NSDictionary * json in jsonArray){
+            
+            NSError *JSONError = nil;
+            IMGComment * comment = [[IMGComment alloc] initWithJSONObject:json error:&JSONError];
+            if(!JSONError)
+                [comments addObject:comment];
+        }
+        if(success)
+            success(comments);
+        
+    } failure:failure];
+}
+
++ (void)commentIDsWithGalleryID:(NSString *)galleryObjectId withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    NSString *path = [self pathWithId:galleryObjectId withOption:@"comments/ids"];
+    
+    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray * idArray = responseObject;
+        if(success)
+            success(idArray);
+        
+    } failure:failure];
+}
+
++ (void)commentWithId:(NSString *)commentId galleryID:(NSString *)galleryObjectId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithId:galleryObjectId withOption:@"comment" withId2:commentId];
+    
+    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSError *JSONError = nil;
+        IMGComment *comment = [[IMGComment alloc] initWithJSONObject:responseObject error:&JSONError];
+        
+        if(!JSONError) {
+            if(success)
+                success(comment);
+        }
+        else {
+            if(failure)
+                failure(JSONError);
+        }
+        
+    } failure:failure];
+}
+
++ (void)submitComment:(NSString*)caption galleryID:(NSString *)galleryObjectId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
+    
+    [self submitComment:caption galleryID:galleryObjectId parentComment:nil success:success failure:failure];
+}
+
++ (void)submitComment:(NSString*)caption galleryID:(NSString *)galleryObjectId parentComment:(NSString*)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
+    
+    NSString *path;
+    if(parentCommentID)
+        path = [self pathWithId:galleryObjectId withOption:@"comment"];
+    else
+        path = [self pathWithId:galleryObjectId withOption:@"comment" withId2:parentCommentID];
+    
+    NSDictionary * params = @{@"comment":caption};
+    
+    [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSError *JSONError = nil;
+        IMGComment *comment = [[IMGComment alloc] initWithJSONObject:responseObject error:&JSONError];
+        
+        if(!JSONError) {
+            if(success)
+                success(comment);
+        }
+        else {
+            if(failure)
+                failure(JSONError);
+        }
+    } failure:failure];
+}
+
++ (void)replyToComment:(NSString*)caption galleryID:(NSString *)galleryObjectId parentComment:(NSString*)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
+    [self submitComment:caption galleryID:galleryObjectId parentComment:parentCommentID success:success failure:failure];
+}
+
++ (void)deleteCommentWithId:(NSString *)commentId success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithId:commentId];
+    
+    [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if(success)
+            success(commentId);
+        
+    } failure:failure];
+}
+
++ (void)commentCountWithGalleryID:(NSString *)galleryObjectId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
+    
+    NSString *path = [self pathWithId:galleryObjectId withOption:@"comments/count"];
+    
+    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSNumber * numComments = responseObject;
+        if(success)
+            success([numComments integerValue]);
+        
     } failure:failure];
 }
 

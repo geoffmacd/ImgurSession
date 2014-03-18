@@ -48,21 +48,20 @@
 }
 
 + (void)uploadImageWithFileURL:(NSURL *)fileURL title:(NSString *)title description:(NSString *)description andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    //upload file from binary data
     
-    [parameters setObject:@"file" forKey:@"type"];
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"type"] = @"file";
     
     // Add used parameters
-    
-    if(title != nil)
-        [parameters setObject:title forKey:@"title"];
-    if(description != nil)
-        [parameters setObject:description forKey:@"description"];
-    if(albumID != nil)
-        [parameters setObject:albumID forKey:@"album"];
+    if(title)
+        parameters[@"title"] = title;
+    if(description)
+        parameters[@"description"] = description;
+    if(albumID )
+        parameters[@"album"] = albumID;
     
     // Create the request with the file appended to the body
-    
     __block NSError *fileAppendingError = nil;
     
     void (^appendFile)(id<AFMultipartFormData> formData) = ^(id<AFMultipartFormData> formData) {
@@ -70,13 +69,10 @@
     };
     
     
-    
     // If there's a file appending error, we must abort and return the error
-    
-    if(fileAppendingError) {
+    if(fileAppendingError){
         if(failure)
             failure(fileAppendingError);
-        
         return;
     }
     
@@ -102,23 +98,21 @@
     return [self uploadImageWithURL:url title:nil description:nil filename:nil andLinkToAlbumWithID:nil success:success failure:failure];
 }
 
-+ (void)uploadImageWithURL:(NSURL *)url title:(NSString *)title description:(NSString *)description filename:(NSString *)filename andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
++ (void)uploadImageWithURL:(NSURL *)url title:(NSString *)title description:(NSString *)description andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
+    //just upload with a url
     
-    [parameters setObject:[url absoluteString] forKey:@"image"];
-    [parameters setObject:@"URL" forKey:@"type"];
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"image"] = [url absoluteString];
+    parameters[@"name"] = [url lastPathComponent];
+    parameters[@"type"] = @"URL";
     
     // Add used parameters
-    
-    if(title != nil)
-        [parameters setObject:title forKey:@"title"];
-    if(description != nil)
-        [parameters setObject:description forKey:@"description"];
-    if(filename != nil)
-        [parameters setObject:filename forKey:@"filename"];
-    if(albumID != nil)
-        [parameters setObject:albumID forKey:@"album"];
-    
+    if(title)
+        parameters[@"title"] = title;
+    if(description)
+        parameters[@"description"] = description;
+    if(albumID )
+        parameters[@"album"] = albumID;
     
     [[IMGSession sharedInstance] POST:[self path] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -128,112 +122,12 @@
         if(!JSONError) {
             if(success)
                 success(image);
-        }
-        else {
-            
+        } else {
             if(failure)
                 failure(JSONError);
         }
     } failure:failure];
 }
-
-#pragma mark - Upload multiples images
-
-+ (void)uploadImagesWithFileURLs:(NSArray *)fileURLs success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    return [self uploadImagesWithFileURLs:fileURLs titles:nil descriptions:nil andLinkToAlbumWithID:nil success:success failure:failure];
-}
-
-+ (void)uploadImagesWithFileURLs:(NSArray *)fileURLs titles:(NSArray *)titles descriptions:(NSArray *)descriptions andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    __block NSInteger filesNumber = [fileURLs count];
-    
-    // Check for invalid number of values
-    
-    if( (titles != nil && filesNumber != [titles count]) && (descriptions != nil && filesNumber != [descriptions count]) ) {
-        @throw [NSException exceptionWithName:@"ImgurArrayLengthException"
-                                       reason:@"There should be as much titles and descriptions as file URLs (or set them to `nil`)"
-                                     userInfo:@{ @"fileURLs": fileURLs,
-                                                 @"titles": titles,
-                                                 @"descriptions": descriptions }];
-    }
-    
-
-    
-    
-    if(filesNumber > 0) {
-        __block NSMutableArray *images = [NSMutableArray new];
-        __block NSInteger count = 0;
-        
-        void (^__unsafe_unretained __block uploadBlock)() = ^() {
-            
-            [self uploadImageWithFileURL:fileURLs[count] title:(titles ? titles[count] : nil) description:(descriptions ? descriptions[count] : nil) andLinkToAlbumWithID:albumID success:^(IMGImage *image) {
-                
-                //add  to response
-                [images addObject:image];
-                
-                count++;
-                
-                if(count < filesNumber){
-                    uploadBlock();
-                }
-                
-            } failure:^(NSError *error) {
-                
-                failure(error);
-            }];
-        };
-        
-        uploadBlock();
-    }
-    
-}
-
-+ (void)uploadImagesWithURLs:(NSArray *)urls success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    return [self uploadImagesWithURLs:urls titles:nil descriptions:nil filenames:nil andLinkToAlbumWithID:nil success:success failure:failure];
-}
-
-+ (void)uploadImagesWithURLs:(NSArray *)urls titles:(NSArray *)titles descriptions:(NSArray *)descriptions filenames:(NSArray *)filenames andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSInteger imageCount = [urls count];
-    
-    // Check for invalid number of values
-    
-    if( (titles != nil && imageCount != [titles count]) && (descriptions != nil && imageCount != [descriptions count]) && (filenames != nil && imageCount != [filenames count]) ) {
-        @throw [NSException exceptionWithName:@"ImgurArrayLengthException"
-                                       reason:@"There should be as much titles, descriptions and filenames as file URLs (or set them to `nil`)"
-                                     userInfo:@{ @"urls": urls,
-                                                 @"titles": titles,
-                                                 @"descriptions": descriptions,
-                                                 @"filenames": filenames }];
-    }
-    
-    if(imageCount > 0) {
-        
-        __block NSMutableArray *images = [NSMutableArray new];
-        __block NSInteger count = 0;
-        
-        void (^__unsafe_unretained __block uploadBlock)() = ^() {
-            
-            [self uploadImageWithURL:urls[count] title:(titles ? titles[count] : nil) description:(descriptions ? descriptions[count] : nil) filename:(filenames ? filenames[count] : nil) andLinkToAlbumWithID:albumID success:^(IMGImage *image) {
-                
-                //add  to response
-                [images addObject:image];
-                
-                count++;
-                
-                if(count < imageCount){
-                    uploadBlock();
-                }
-                
-            } failure:^(NSError *error) {
-                
-                failure(error);
-            }];
-        };
-        
-        uploadBlock();
-    }
-}
-
-
 
 #pragma mark - Delete
 

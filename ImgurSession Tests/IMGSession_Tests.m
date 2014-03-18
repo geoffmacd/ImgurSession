@@ -10,6 +10,8 @@
 #import <XCAsyncTestCase/XCTestCase+AsyncTesting.h>
 
 #import "IMGSession.h"
+#import "IMGImage.h"
+#import "IMGGalleryImage.h"
 
 #define kTestTimeOut     30     //seconds
 
@@ -367,5 +369,33 @@ void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
     [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
     
 }
+
+/*
+ Testing gallery comments
+ **/
+- (void)testGallerySubmitandComment{
+    
+    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    
+    //default gallery
+    [IMGImageRequest uploadImageWithFileURL:fileURL success:^(IMGImage *image) {
+        
+        [IMGGalleryRequest submitImageWithID:image.imageID title:@"Geoff Test" success:^() {
+            
+            [IMGGalleryRequest commentsWithGalleryID:image.imageID withSort:IMGGalleryCommentSortBest success:^(NSArray * comments) {
+                
+                
+                [self notify:XCTAsyncTestCaseStatusSucceeded];
+                
+            } failure:failBlock];
+            
+        } failure:failBlock];
+        
+    } failure:failBlock];
+    
+    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
+}
+
+
 
 @end

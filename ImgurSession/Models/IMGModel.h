@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-
 typedef NS_ENUM(NSInteger, IMGVoteType) {
     IMGDownVote      = -1,
     IMGNeutralVote   = 0,
