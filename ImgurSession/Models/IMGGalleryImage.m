@@ -23,7 +23,13 @@
         _downs = [jsonData[@"downs"] integerValue];
         _score = [jsonData[@"score"] integerValue];
         _isAlbum = [jsonData[@"is_album"] boolValue];
-        _vote = jsonData[@"vote"];
+        if(jsonData[@"vote"])
+            _vote = jsonData[@"vote"];
+        
+        if(![jsonData[@"nsfw"] isKindOfClass:[NSNull class]])
+            _nsfw = [jsonData[@"nsfw"] boolValue];
+        if(![jsonData[@"favorite"] isKindOfClass:[NSNull class]])
+            _favorite = [jsonData[@"favorite"] boolValue];
     }
     return [self trackModels];
 }

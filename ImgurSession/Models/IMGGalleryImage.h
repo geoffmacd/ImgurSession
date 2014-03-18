@@ -25,5 +25,7 @@
 @property (nonatomic, readonly) BOOL isAlbum;
 
 
+@property (nonatomic, readonly) BOOL favorite;
+@property (nonatomic, readonly) BOOL nsfw;
 
 @end

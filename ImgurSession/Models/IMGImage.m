@@ -27,12 +27,15 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _type = jsonData[@"type"];
         _section = jsonData[@"section"];
-        _animated = [jsonData[@"animated"] boolValue];
+        if(![jsonData[@"animated"] isKindOfClass:[NSNull class]])
+            _animated = [jsonData[@"animated"] boolValue];
         _width = [jsonData[@"width"] integerValue];
         _height = [jsonData[@"height"] integerValue];
         _size = [jsonData[@"size"] integerValue];
         _views = [jsonData[@"views"] integerValue];
         _bandwidth = [jsonData[@"bandwidth"] integerValue];
+        _deletehash = jsonData[@"deletehash"];
+        _link = jsonData[@"link"];
     }
     return [self trackModels];
 }

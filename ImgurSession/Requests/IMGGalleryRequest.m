@@ -21,6 +21,57 @@
 
 #pragma mark - Gallery Load
 
++(void)hotGalleryPage:(NSInteger)page success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    //all default params
+    [IMGGalleryRequest hotGalleryPage:page withViralSort:YES success:success failure:failure];
+}
+
++(void)hotGalleryPage:(NSInteger)page withViralSort:(BOOL)viralSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    NSDictionary * params = @{@"section":@"hot", @"page":[NSNumber numberWithInteger:page], @"sort":(viralSort ? @"viral" : @"time")};
+    
+    [IMGGalleryRequest galleryWithParameters:params success:success failure:failure];
+}
+
++(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window withViralSort:(BOOL)viralSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    NSString * windowStr;
+    switch (window) {
+        case IMGTopGalleryWindowDay:
+            windowStr = @"day";
+            break;
+        case IMGTopGalleryWindowWeek:
+            windowStr = @"week";
+            break;
+        case IMGTopGalleryWindowMonth:
+            windowStr = @"month";
+            break;
+        case IMGTopGalleryWindowYear:
+            windowStr = @"year";
+            break;
+        case IMGTopGalleryWindowAll:
+            windowStr = @"all";
+            break;
+        default:
+            windowStr = @"day";
+            break;
+    }
+    NSString * sortStr = (viralSort ? @"viral" : @"time");
+    
+    //defauts are viral sort
+    NSDictionary * params = @{@"section" : @"top", @"page":[NSNumber numberWithInteger:page], @"window": windowStr, @"sort":sortStr};
+    
+    [IMGGalleryRequest galleryWithParameters:params success:success failure:failure];
+}
+
++(void)userGalleryPage:(NSInteger)page withViralSort:(BOOL)viralSort showViral:(BOOL)showViral success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    NSDictionary * params = @{@"section":@"user", @"page":[NSNumber numberWithInteger:page], @"sort":(viralSort ? @"viral" : @"time"), @"showViral": [NSNumber numberWithBool:showViral]};
+    
+    [IMGGalleryRequest galleryWithParameters:params success:success failure:failure];
+}
+
 +(void)galleryWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self path];
@@ -48,13 +99,9 @@
         
         if(success)
             success(images);
-       
-//        NSLog(@"%@", [responseObject description]);
 
     } failure:failure];
 }
-
-
 
 #pragma mark - Load
 

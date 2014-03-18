@@ -309,18 +309,48 @@
 #pragma mark - Test Gallery endpoints
 
 /*
- Tests
+ Testing pulling the gallerys
  **/
 - (void)testGallery{
     
+    //default gallery
     [IMGGalleryRequest galleryWithParameters:nil success:^(NSArray * images) {
         
-        [self notify:XCTAsyncTestCaseStatusSucceeded];
+        [IMGGalleryRequest hotGalleryPage:0 withViralSort:NO success:^(NSArray * images) {
+            
+            [IMGGalleryRequest hotGalleryPage:0 withViralSort:YES success:^(NSArray * images) {
+            
+                [IMGGalleryRequest hotGalleryPage:2 withViralSort:YES success:^(NSArray * images) {
+                    
+                    [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
+                        
+                        [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowAll withViralSort:NO success:^(NSArray * images) {
+                            
+                            [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowMonth withViralSort:NO success:^(NSArray * images) {
+                                
+                                [IMGGalleryRequest userGalleryPage:0 withViralSort:NO showViral:NO success:^(NSArray * images) {
+                                    
+                                    [IMGGalleryRequest userGalleryPage:0 withViralSort:YES showViral:YES success:^(NSArray * images) {
+                                        
+                                        [self notify:XCTAsyncTestCaseStatusSucceeded];
+                                        
+                                    } failure:failBlock];
+                                    
+                                } failure:failBlock];
+                                
+                            } failure:failBlock];
+                            
+                        } failure:failBlock];
+                        
+                    } failure:failBlock];
+                    
+                } failure:failBlock];
+                
+            } failure:failBlock];
+            
+        } failure:failBlock];
         
-    } failure:^(NSError * err) {
-        
-        
-    }];
+    } failure:failBlock];
     
     [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
     

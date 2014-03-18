@@ -16,9 +16,24 @@ typedef NS_ENUM(NSInteger, IMGGallerySectionType) {
     IMGGallerySectionTypeUser
 };
 
+typedef NS_ENUM(NSInteger, IMGTopGalleryWindow) {
+    IMGTopGalleryWindowDay, //default
+    IMGTopGalleryWindowWeek,
+    IMGTopGalleryWindowMonth,
+    IMGTopGalleryWindowYear,
+    IMGTopGalleryWindowAll
+};
+
 
 @interface IMGGalleryRequest : IMGEndpoint
 
+
+#pragma mark - Gallery Load
+
++(void)hotGalleryPage:(NSInteger)page success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++(void)hotGalleryPage:(NSInteger)page withViralSort:(BOOL)viralSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window withViralSort:(BOOL)viralSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++(void)userGalleryPage:(NSInteger)page withViralSort:(BOOL)viralSort showViral:(BOOL)showViral success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 +(void)galleryWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Submit Image
