@@ -28,6 +28,10 @@
 @property (readwrite,nonatomic) NSInteger creditsClientLimit;
 @property  (readwrite,nonatomic) NSInteger warnRateLimit;
 
+/**
+ Testing function to remove auth
+ */
+-(void)setGarbageAuth;
 @end
 
 @interface IMGSession_Tests : XCTestCase <IMGSessionDelegate>{
@@ -41,6 +45,11 @@
 @end
 
 @implementation IMGSession_Tests
+
+//overwrite async so that these calls work
+void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
+    block();
+}
 
 //run before each test
 - (void)setUp
@@ -83,6 +92,30 @@
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+}
+
+#pragma mark - IMGSessionDelegate Delegate methods
+
+-(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
+    //show external webview to allow auth
+    
+#if TARGET_OS_IPHONE
+    //cannot open url in iphone unit test, not an app
+    [self notify:XCTAsyncTestCaseStatusFailed];
+#elif TARGET_OS_MAC
+    [[NSWorkspace sharedWorkspace] openURL:url];
+#endif
+}
+
+-(void)imgurSessionModelFetched:(id)model{
+    
+    NSLog(@"New imgur model fetched: %@", [model description]);
+}
+
+-(void)imgurSessionRateLimitExceeded{
+    
+    NSLog(@"Hit rate limit");
+    failBlock(nil);
 }
 
 #pragma mark - Test authentication
@@ -264,27 +297,6 @@
     } failure:failBlock];
     
     [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
-
--(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
-    
-#if TARGET_OS_IPHONE
-    //cannot open url in iphone unit test, not an app
-    [self notify:XCTAsyncTestCaseStatusFailed];
-#elif TARGET_OS_MAC
-    [[NSWorkspace sharedWorkspace] openURL:url];
-#endif
-}
-
--(void)imgurSessionModelFetched:(id)model{
-    
-    NSLog(@"New imgur model fetched: %@", [model description]);
-}
-
--(void)imgurSessionRateLimitExceeded{
-    
-    NSLog(@"Hit rate limit");
-    failBlock(nil);
 }
 
 #pragma mark - Test Album endpoints

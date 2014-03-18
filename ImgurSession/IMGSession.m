@@ -96,14 +96,17 @@
 -(void)accessTokenExpired{
     //does not pro-actively refresh, just informs delegates, lazily waits until request fails to refresh
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
             [_delegate imgurSessionAuthStateChanged:IMGAuthStateExpired];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
-//    });
+    });
 }
 
+/**
+ Testing function to remove auth
+ */
 -(void)setGarbageAuth{
     
     //change the serializer to include this authorization header
@@ -122,12 +125,12 @@
             if(failure)
                 failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
             
-//            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
                     [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURLForType:IMGPinAuth]];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
-//            });
+            });
         } else {
             if(failure)
                 failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
@@ -146,13 +149,13 @@
             NSLog(@"refreshed authentication : %@   with expiry: %@", _accessToken, [_accessTokenExpiry description]);
             
             if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)]){
-//                dispatch_async(dispatch_get_main_queue(), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
                 
                     if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
                         [_delegate imgurSessionTokenRefreshed];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
-//                });
+                });
             }
 
             
@@ -178,13 +181,13 @@
         
         //if never logged in before, alert delegate
         if(_lastAuthType == IMGNoAuthType){
-//            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
             
                 if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
                     [_delegate imgurSessionAuthStateChanged:IMGAuthStateAuthenticated];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
-//            });
+            });
         }
         _lastAuthType = authType;
         
@@ -237,7 +240,7 @@
         //warn delegate if necessary
         if(_creditsClientRemaining < _warnRateLimit && _creditsClientRemaining > 0){
             
-//            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
             
                 if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNearRateLimit:) ]){
                     [_delegate imgurSessionNearRateLimit:_creditsClientRemaining];
@@ -245,10 +248,10 @@
                 
                 //post notifications as well
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitNearLimitNotification object:nil];
-//            });
+            });
         } else if (_creditsClientRemaining == 0){
             
-//            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
             
                 if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
                     [_delegate imgurSessionRateLimitExceeded];
@@ -256,7 +259,7 @@
                 
                 //post notifications as well
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitExceededNotification object:nil];
-//            });
+            });
         }
         
         NSLog(@"Remaining daily allowable client requests: %ld",(long)_creditsClientRemaining);
@@ -453,7 +456,7 @@
     NSLog(@"Fetched object of type: <%@>", (NSStringFromClass ([model class])));
     
     //post notifications as well to class name
-//    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
     
         //warn delegate if necessary
         if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionModelFetched:)]){
@@ -461,7 +464,7 @@
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:IMGModelFetchedNotification object:model];
-//    });
+    });
 }
 
 

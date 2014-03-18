@@ -181,10 +181,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 #pragma mark - Authentication
 
 /**
-Testing function to remove auth
- */
--(void)setGarbageAuth;
-/**
  Retrieves URL associated with website authorization page
  @param authType     authorization type pin,code,token
  @return    authorization URL to open in Webview or Safari
