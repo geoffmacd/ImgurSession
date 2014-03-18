@@ -29,8 +29,6 @@
 + (void)accountWithUsername:(NSString *)username success:(void (^)(IMGAccount *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username];
     
-    
-    
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSError *JSONError = nil;
@@ -52,8 +50,6 @@
 
 + (void)accountGalleryFavourites:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"gallery_favorites"];
-    
-    
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

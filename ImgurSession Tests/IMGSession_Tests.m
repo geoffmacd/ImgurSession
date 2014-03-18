@@ -6,104 +6,32 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import <XCAsyncTestCase/XCTestCase+AsyncTesting.h>
+#import "IMGTestCase.h"
 
-#import "IMGSession.h"
 #import "IMGImage.h"
 #import "IMGGalleryImage.h"
+#import "IMGAccountSettings.h"
 
 #define kTestTimeOut     30     //seconds
 
-@interface IMGSession ()
+//WARNING: Implementation requires client id, client secret filled out in tests plist
 
-@property (readwrite, nonatomic,copy) NSString *clientID;
-@property (readwrite, nonatomic, copy) NSString *secret;
-@property (readwrite, nonatomic, copy) NSString *refreshToken;
-@property (readwrite, nonatomic, copy) NSString *accessToken;
-@property (readwrite, nonatomic) NSDate *accessTokenExpiry;
-@property (readwrite, nonatomic) IMGAuthType lastAuthType;
-@property (readwrite,nonatomic) NSInteger creditsUserRemaining;
-@property (readwrite,nonatomic) NSInteger creditsUserLimit;
-@property (readwrite,nonatomic) NSInteger creditsUserReset;
-@property (readwrite,nonatomic) NSInteger creditsClientRemaining;
-@property (readwrite,nonatomic) NSInteger creditsClientLimit;
-@property  (readwrite,nonatomic) NSInteger warnRateLimit;
-
-/**
- Testing function to remove auth
- */
--(void)setGarbageAuth;
-@end
-
-@interface IMGSession_Tests : XCTestCase <IMGSessionDelegate>{
-    //various metadata to store
-    NSDictionary *imgurVariousValues;
-    NSString *refreshToken;
-    
-    __block void(^ failBlock)(NSError * error);
+@interface IMGSession_Tests : IMGTestCase{
 }
-
 @end
 
 @implementation IMGSession_Tests
 
-//overwrite async so that these calls work
-void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
-    block();
-}
-
-//run before each test
-- (void)setUp
-{
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
-    // Storing various testing values
-    
-    NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
-    //need various values such as image title
-    imgurVariousValues = infos[@"imgurVariousValues"];
-    
-    // Initializing the client
-    NSDictionary *imgurClient = infos[@"imgurClient"];
-    NSString *clientID = imgurClient[@"id"];
-    NSString *clientSecret = imgurClient[@"secret"];
-    //cannot open url in iphone unit test, not an app
-    refreshToken = imgurClient[@"refreshToken"];
-    
-    //Lazy init, may already exist
-    IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
-    [ses setDelegate:self];
-//    [ses setGarbageAuth];
-    
-    //failure block
-    __weak id testClass = self;
-    failBlock = ^(NSError *error) {
-        [testClass notify:XCTAsyncTestCaseStatusFailed];
-    };
-    
-    
-    //Ensure client data is avaialble for authentication to proceed
-    XCTAssertTrue(clientID, @"Client ID is missing");
-    XCTAssertTrue(clientSecret, @"Client secret is missing");
-}
-
-//run after each test
-- (void)tearDown
-{
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
 #pragma mark - IMGSessionDelegate Delegate methods
+
+//WARNING: delegate methods not called unless dispatch methods are overwritten due to strange run loop in test runs, may need to call directly
 
 -(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
     //show external webview to allow auth
     
 #if TARGET_OS_IPHONE
     //cannot open url in iphone unit test, not an app
-    [self notify:XCTAsyncTestCaseStatusFailed];
+    XCTAssert(nil, @"Fail");
 #elif TARGET_OS_MAC
     [[NSWorkspace sharedWorkspace] openURL:url];
 #endif
@@ -120,243 +48,75 @@ void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
     failBlock(nil);
 }
 
-#pragma mark - Test authentication
-
-/*
- Tests authentication and sets global access token to save for rest of the test. Needs to be marked test1 so that it is run first (alphabetical order)
- **/
--(void)test1AuthenticateUsingOAuthWithPINAsync
-{
-    IMGSession *client = [IMGSession sharedInstance];
-    
-    //sets refresh token if available, required for iPhone unit test
-    if([refreshToken length]){
-        [client setRefreshToken:refreshToken];
-        [client setLastAuthType:IMGPinAuth];
-        
-        //should retrieve new access code
-        [client refreshAuthentication:^(NSString * refresh) {
-            
-            NSLog(@"Refresh token: %@", refresh);
-            [self notify:XCTAsyncTestCaseStatusSucceeded];
-            
-        } failure:^(NSError *error) {
-            
-            NSLog(@"%@", error.localizedRecoverySuggestion);
-            [self notify:XCTAsyncTestCaseStatusFailed];
-            
-        }];
-    } else {
-        
-        //goes to safari from delegate call
-        [client refreshAuthentication:nil failure:nil];
-        
-        //need to manually enter pin for testing
-        NSLog(@"Enter the code PIN");
-        char pin[20];
-        scanf("%s", pin);
-        
-        //send pin code to retrieve access tokens
-        [client authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin] success:^(NSString *refresh) {
-            
-            NSLog(@"Refresh token: %@", refresh);
-            [self notify:XCTAsyncTestCaseStatusSucceeded];
-            
-        } failure:^(NSError *error) {
-            
-            NSLog(@"%@", error.localizedRecoverySuggestion);
-            [self notify:XCTAsyncTestCaseStatusFailed];
-        }];
-    }
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
-
 #pragma mark - Test Account endpoints
 
 
-- (void)testAccountLoading{
+- (void)testAccountLoadMe{
+    
+    __block IMGAccount * acc;
     
     [IMGAccountRequest accountWithUsername:@"me" success:^(IMGAccount *account) {
         
-        [IMGAccountRequest accountGalleryFavourites:@"me" success:^(NSArray * gallery) {
-            
-            [IMGAccountRequest accountFavourites:@"me" success:^(NSArray * favourites) {
-                
-                [IMGAccountRequest accountSubmissionsPage:0 withUsername:@"me" success:^(NSArray * submissions) {
-                    
-                    [IMGAccountRequest accountGalleryProfile:@"me" success:^(IMGGalleryProfile * profile) {
-                        
-                        
-                        [self notify:XCTAsyncTestCaseStatusSucceeded];
-                        
-                    } failure:failBlock];
-                } failure:failBlock];
-            } failure:failBlock];
-        } failure:failBlock];
+        acc = account;
+        
     } failure:failBlock];
     
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
+    expect(acc).willNot.beNil();
 }
 
-- (void)testAccountSettings{
+- (void)testAccountLoadMyFavs{
+    
+    __block NSArray * favs;
+    
+    [IMGAccountRequest accountFavourites:@"me" success:^(NSArray * favorites) {
+        
+        favs = favorites;
+        
+    } failure:failBlock];
+    
+    expect(favs).willNot.beNil();
+}
+
+- (void)testAccountLoadMySubmissions{
+    
+    __block NSArray * subs;
+    
+    [IMGAccountRequest accountSubmissionsPage:0 withUsername:@"me" success:^(NSArray * submissions) {
+        
+        subs = submissions;
+        
+    } failure:failBlock];
+    
+    expect(subs).willNot.beNil();
+}
+
+- (void)testAccountSettingsLoad{
+    
+    __block IMGAccountSettings *set;
     
     [IMGAccountRequest accountSettings:^(IMGAccountSettings *settings) {
         
-        [IMGAccountRequest changeAccountWithBio:@"test bio" messagingEnabled:YES publicImages:YES albumPrivacy:IMGAlbumPublic acceptedGalleryTerms:YES success:^{
+        set = settings;
+
+    } failure:failBlock];
+    
+    expect(set).willNot.beNil();
+}
+
+- (void)testAccountSettingsChange{
+    
+    __block IMGAccountSettings *set;
+    
+    [IMGAccountRequest changeAccountWithBio:@"test bio" messagingEnabled:YES publicImages:YES albumPrivacy:IMGAlbumPublic acceptedGalleryTerms:YES success:^{
+        
+        [IMGAccountRequest accountSettings:^(IMGAccountSettings *settings) {
+            
             
             [IMGAccountRequest changeAccountWithBio:@"test bio 2" success:^{
                 
-                [self notify:XCTAsyncTestCaseStatusSucceeded];
-            
-            } failure:failBlock];
-        } failure:failBlock];
-    } failure:failBlock];
-    
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
-
-- (void)testAccountItems{
-
-    [IMGAccountRequest accountGalleryFavourites:@"me" success:^(NSArray * gallery) {
-        
-        [IMGAccountRequest accountFavourites:@"me" success:^(NSArray * favourites) {
-            
-            [IMGAccountRequest accountSubmissionsPage:0 withUsername:@"me" success:^(NSArray * submissions) {
-                
-                [IMGAccountRequest accountReplies:^(NSArray * replies) {
+                [IMGAccountRequest accountSettings:^(IMGAccountSettings *settings) {
                     
-                    [IMGAccountRequest accountRepliesWithFresh:NO success:^(NSArray * replies) {
-                        
-                        [self notify:XCTAsyncTestCaseStatusSucceeded];
-                        
-                    } failure:failBlock];
-                    
-                } failure:failBlock];
-            } failure:failBlock];
-        } failure:failBlock];
-    } failure:failBlock];
-    
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
-
-- (void)testAccountComments{
-    
-    [IMGAccountRequest accountCommentIds:@"me" success:^(NSArray * comments) {
-        
-        [IMGAccountRequest accountCommentWithId:[comments firstObject] success:^(IMGComment * comment) {
-            
-            [IMGAccountRequest accountCommentsWithUsername:@"me" success:^(NSArray * comments) {
-                
-                [IMGAccountRequest accountCommentCount:@"me" success:^(NSNumber * numcomments) {
-                    
-                    
-                    [self notify:XCTAsyncTestCaseStatusSucceeded];
-                    
-                } failure:failBlock];
-            } failure:failBlock];
-        } failure:failBlock];
-    } failure:failBlock];
-    
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
-
-- (void)testAccountImages{
-    
-    [IMGAccountRequest accountImageIds:@"me" success:^(NSArray * images) {
-        
-        [IMGAccountRequest accountImageWithId:[images firstObject] success:^(IMGImage * image) {
-            
-            [IMGAccountRequest accountImagesWithUsername:@"me" withPage:0 success:^(NSArray * images) {
-                
-                [IMGAccountRequest accountImageCount:@"me" success:^(NSNumber * numImages) {
-                    
-                    [self notify:XCTAsyncTestCaseStatusSucceeded];
-                    
-                } failure:failBlock];
-            } failure:failBlock];
-        } failure:failBlock];
-    } failure:failBlock];
-    
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
-
-- (void)testAccountAlbums{
-    
-    [IMGAccountRequest accountAlbumIds:@"me" success:^(NSArray * albums) {
-        
-        [IMGAccountRequest accountAlbumWithId:[albums firstObject] success:^(IMGAlbum * album) {
-            
-            [IMGAccountRequest accountAlbumsWithUsername:@"me" withPage:0 success:^(NSArray * albums) {
-                
-                //always returns 502??
-                [IMGAccountRequest accountAlbumCount:@"me" success:^(NSNumber * numAlbums) {
-                    
-                    [self notify:XCTAsyncTestCaseStatusSucceeded];
-                    
-                } failure:failBlock];
-            } failure:failBlock];
-        } failure:failBlock];
-    } failure:failBlock];
-    
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
-
-#pragma mark - Test Album endpoints
-
-/*
- Tests creating, submitting publicly, getting, removing from public and deleting album
- **/
-- (void)testAlbumWorkflowAsync{
-
-}
-
-#pragma mark - Test Image endpoints
-
-/*
- Tests uploading image, submission process, removal and deletion of individual images
- **/
-- (void)testImageWorkflowAsync{
-    
-    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
-}
-
-#pragma mark - Test Gallery endpoints
-
-/*
- Testing pulling the gallerys
- **/
-- (void)testGallery{
-    
-    //default gallery
-    [IMGGalleryRequest galleryWithParameters:nil success:^(NSArray * images) {
-        
-        [IMGGalleryRequest hotGalleryPage:0 withViralSort:NO success:^(NSArray * images) {
-            
-            [IMGGalleryRequest hotGalleryPage:0 withViralSort:YES success:^(NSArray * images) {
-            
-                [IMGGalleryRequest hotGalleryPage:2 withViralSort:YES success:^(NSArray * images) {
-                    
-                    [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
-                        
-                        [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowAll withViralSort:NO success:^(NSArray * images) {
-                            
-                            [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowMonth withViralSort:NO success:^(NSArray * images) {
-                                
-                                [IMGGalleryRequest userGalleryPage:0 withViralSort:NO showViral:NO success:^(NSArray * images) {
-                                    
-                                    [IMGGalleryRequest userGalleryPage:0 withViralSort:YES showViral:YES success:^(NSArray * images) {
-                                        
-                                        [self notify:XCTAsyncTestCaseStatusSucceeded];
-                                        
-                                    } failure:failBlock];
-                                    
-                                } failure:failBlock];
-                                
-                            } failure:failBlock];
-                            
-                        } failure:failBlock];
-                        
-                    } failure:failBlock];
+                    set = settings;
                     
                 } failure:failBlock];
                 
@@ -366,35 +126,173 @@ void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
         
     } failure:failBlock];
     
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-    
+    expect(set).willNot.beNil();
 }
-
-/*
- Testing gallery comments
- **/
-- (void)testGallerySubmitandComment{
-    
-    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
-    
-    //default gallery
-    [IMGImageRequest uploadImageWithFileURL:fileURL success:^(IMGImage *image) {
-        
-        [IMGGalleryRequest submitImageWithID:image.imageID title:@"Geoff Test" success:^() {
-            
-            [IMGGalleryRequest commentsWithGalleryID:image.imageID withSort:IMGGalleryCommentSortBest success:^(NSArray * comments) {
-                
-                
-                [self notify:XCTAsyncTestCaseStatusSucceeded];
-                
-            } failure:failBlock];
-            
-        } failure:failBlock];
-        
-    } failure:failBlock];
-    
-    [self waitForStatus:XCTAsyncTestCaseStatusSucceeded timeout:kTestTimeOut];
-}
+//
+//- (void)testAccountItems{
+//
+//    [IMGAccountRequest accountGalleryFavourites:@"me" success:^(NSArray * gallery) {
+//        
+//        [IMGAccountRequest accountFavourites:@"me" success:^(NSArray * favourites) {
+//            
+//            [IMGAccountRequest accountSubmissionsPage:0 withUsername:@"me" success:^(NSArray * submissions) {
+//                
+//                [IMGAccountRequest accountReplies:^(NSArray * replies) {
+//                    
+//                    [IMGAccountRequest accountRepliesWithFresh:NO success:^(NSArray * replies) {
+//                        
+//                        
+//                    } failure:failBlock];
+//                    
+//                } failure:failBlock];
+//            } failure:failBlock];
+//        } failure:failBlock];
+//    } failure:failBlock];
+//
+//}
+//
+//- (void)testAccountComments{
+//    
+//    [IMGAccountRequest accountCommentIds:@"me" success:^(NSArray * comments) {
+//        
+//        [IMGAccountRequest accountCommentWithId:[comments firstObject] success:^(IMGComment * comment) {
+//            
+//            [IMGAccountRequest accountCommentsWithUsername:@"me" success:^(NSArray * comments) {
+//                
+//                [IMGAccountRequest accountCommentCount:@"me" success:^(NSNumber * numcomments) {
+//                    
+//                    
+//                    
+//                } failure:failBlock];
+//            } failure:failBlock];
+//        } failure:failBlock];
+//    } failure:failBlock];
+//
+//}
+//
+//- (void)testAccountImages{
+//    
+//    [IMGAccountRequest accountImageIds:@"me" success:^(NSArray * images) {
+//        
+//        [IMGAccountRequest accountImageWithId:[images firstObject] success:^(IMGImage * image) {
+//            
+//            [IMGAccountRequest accountImagesWithUsername:@"me" withPage:0 success:^(NSArray * images) {
+//                
+//                [IMGAccountRequest accountImageCount:@"me" success:^(NSNumber * numImages) {
+//                    
+//                    
+//                } failure:failBlock];
+//            } failure:failBlock];
+//        } failure:failBlock];
+//    } failure:failBlock];
+//}
+//
+//- (void)testAccountAlbums{
+//    
+//    [IMGAccountRequest accountAlbumIds:@"me" success:^(NSArray * albums) {
+//        
+//        [IMGAccountRequest accountAlbumWithId:[albums firstObject] success:^(IMGAlbum * album) {
+//            
+//            [IMGAccountRequest accountAlbumsWithUsername:@"me" withPage:0 success:^(NSArray * albums) {
+//                
+//                //always returns 502??
+//                [IMGAccountRequest accountAlbumCount:@"me" success:^(NSNumber * numAlbums) {
+//                    
+//                    
+//                } failure:failBlock];
+//            } failure:failBlock];
+//        } failure:failBlock];
+//    } failure:failBlock];
+//}
+//
+//#pragma mark - Test Album endpoints
+//
+///*
+// Tests creating, submitting publicly, getting, removing from public and deleting album
+// **/
+//- (void)testAlbumWorkflowAsync{
+//
+//}
+//
+//#pragma mark - Test Image endpoints
+//
+///*
+// Tests uploading image, submission process, removal and deletion of individual images
+// **/
+//- (void)testImageWorkflowAsync{
+//    
+//    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+//}
+//
+//#pragma mark - Test Gallery endpoints
+//
+///*
+// Testing pulling the gallerys
+// **/
+//- (void)testGallery{
+//    
+//    //default gallery
+//    [IMGGalleryRequest galleryWithParameters:nil success:^(NSArray * images) {
+//        
+//        [IMGGalleryRequest hotGalleryPage:0 withViralSort:NO success:^(NSArray * images) {
+//            
+//            [IMGGalleryRequest hotGalleryPage:0 withViralSort:YES success:^(NSArray * images) {
+//            
+//                [IMGGalleryRequest hotGalleryPage:2 withViralSort:YES success:^(NSArray * images) {
+//                    
+//                    [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
+//                        
+//                        [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowAll withViralSort:NO success:^(NSArray * images) {
+//                            
+//                            [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowMonth withViralSort:NO success:^(NSArray * images) {
+//                                
+//                                [IMGGalleryRequest userGalleryPage:0 withViralSort:NO showViral:NO success:^(NSArray * images) {
+//                                    
+//                                    [IMGGalleryRequest userGalleryPage:0 withViralSort:YES showViral:YES success:^(NSArray * images) {
+//                                        
+//                                        
+//                                    } failure:failBlock];
+//                                    
+//                                } failure:failBlock];
+//                                
+//                            } failure:failBlock];
+//                            
+//                        } failure:failBlock];
+//                        
+//                    } failure:failBlock];
+//                    
+//                } failure:failBlock];
+//                
+//            } failure:failBlock];
+//            
+//        } failure:failBlock];
+//        
+//    } failure:failBlock];
+//}
+//
+///*
+// Testing gallery comments
+// **/
+//- (void)testGallerySubmitandComment{
+//    
+//    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+//    
+//    //default gallery
+//    [IMGImageRequest uploadImageWithFileURL:fileURL success:^(IMGImage *image) {
+//        
+//        [IMGGalleryRequest submitImageWithID:image.imageID title:@"Geoff Test" success:^() {
+//            
+//            [IMGGalleryRequest commentsWithGalleryID:image.imageID withSort:IMGGalleryCommentSortBest success:^(NSArray * comments) {
+//                
+//                
+//                
+//            } failure:failBlock];
+//            
+//        } failure:failBlock];
+//        
+//    } failure:failBlock];
+//    
+//}
 
 
 

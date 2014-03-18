@@ -60,6 +60,8 @@
 		3D9BAF6DB88246B490830CC2 /* libPods-ImgurSession Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4D4BF99DE94FC7A493E5C4 /* libPods-ImgurSession Tests.a */; };
 		C309339918CA1F87009D9C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
 		C30933E518CA204C009D9C57 /* IMGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C30933E418CA204C009D9C57 /* IMGSession.m */; };
+		C3102D1518D8D5FF007A75C4 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
+		C3102D1618D8D600007A75C4 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
 		C319F7CC18D0CDBE00C5E880 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C319F7D418D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
 		C319F7D518D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
@@ -161,6 +163,8 @@
 		C30933A918CA1F87009D9C57 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C30933E318CA204C009D9C57 /* IMGSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGSession.h; sourceTree = "<group>"; };
 		C30933E418CA204C009D9C57 /* IMGSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGSession.m; sourceTree = "<group>"; };
+		C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGTestCase.h; sourceTree = "<group>"; };
+		C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGTestCase.m; sourceTree = "<group>"; };
 		C319F7C918D0C36300C5E880 /* ImgurSession_Tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ImgurSession_Tests-Info.plist"; sourceTree = "<group>"; };
 		C319F7D218D0DB3F00C5E880 /* IMGComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IMGComment.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C319F7D318D0DB3F00C5E880 /* IMGComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGComment.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -417,6 +421,8 @@
 			isa = PBXGroup;
 			children = (
 				C3CDA2E618CA66DA003B7F96 /* IMGSession_Tests.m */,
+				C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */,
+				C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */,
 			);
 			path = "ImgurSession Tests";
 			sourceTree = "<group>";
@@ -732,6 +738,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2482266218CABF7B00C30677 /* IMGSession_Tests.m in Sources */,
+				C3102D1618D8D600007A75C4 /* IMGTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +777,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C36C010E18CA7A7F004576A5 /* IMGSession_Tests.m in Sources */,
+				C3102D1518D8D5FF007A75C4 /* IMGTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -180,6 +180,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 #pragma mark - Authentication
 
+-(IMGAuthState)sessionAuthState;
 /**
  Retrieves URL associated with website authorization page
  @param authType     authorization type pin,code,token

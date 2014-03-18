@@ -32,10 +32,10 @@
 @implementation IMGSession;
 
 
-//overwrite async so that these calls work
-void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
-    block();
-}
+////overwrite async so that these calls work
+//void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
+//    block();
+//}
 
 
 #pragma mark - Initialize
@@ -110,6 +110,16 @@ void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
         
         [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
     });
+}
+
+-(IMGAuthState)sessionAuthState{
+    
+    if(!self.refreshToken)
+        return IMGAuthStateNone;
+    else if(self.accessTokenExpiry && [self.accessTokenExpiry timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970])
+        return IMGAuthStateAuthenticated;
+    else
+        return IMGAuthStateExpired;
 }
 
 /**
@@ -227,6 +237,7 @@ void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
     self.accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + expirySeconds)];
     NSTimer * timer = [NSTimer timerWithTimeInterval:expirySeconds target:self selector:@selector(accessTokenExpired) userInfo:nil repeats:NO];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    self.accessToken = tokens[@"access_token"];
     
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;    
