@@ -445,7 +445,7 @@
     } failure:failure];
 }
 
-+ (void)accountCommentWithID:(NSString*)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)accountCommentWithID:(NSUInteger)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
     
     [IMGCommentRequest commentWithID:commentID withReplies:NO success:success failure:failure];
 }
@@ -464,9 +464,9 @@
     } failure:failure];
 }
 
-+ (void)accountDeleteCommentWithID:(NSString*)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:@"me" withOption:@"comment" withId2:commentID];
+    NSString *path = [self pathWithId:@"me" withOption:@"comment" withId2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

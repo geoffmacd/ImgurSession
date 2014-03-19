@@ -136,7 +136,7 @@
 /**
  Return information about a specific comment. This endpoint works the same as the Comment Endpoint. You can use any of the additional actions that the comment endpoint allows on this end point.
  */
-+ (void)accountCommentWithID:(NSString*)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentWithID:(NSUInteger)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  Return a count of all of the comments associated with the current account.
  */
@@ -144,7 +144,7 @@
 /**
  Delete a comment from the current account.
  */
-+ (void)accountDeleteCommentWithID:(NSString*)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Replies associated with account
