@@ -297,7 +297,7 @@
     
 }
 
-+ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure{
++ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"albums/count"];
 
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -305,7 +305,7 @@
         NSNumber * numAccountAlbums = responseObject; //NSNumber??
         
         if(success)
-            success(numAccountAlbums);
+            success([numAccountAlbums integerValue]);
         
     } failure:failure];
     
@@ -373,14 +373,14 @@
     } failure:failure];
 }
 
-+ (void)accountImageCount:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure{
++ (void)accountImageCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"images/count"];
    
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSNumber * numAccountAlbums = responseObject; //NSNumber??
         if(success)
-            success(numAccountAlbums);
+            success([numAccountAlbums integerValue]);
         
     } failure:failure];
 }
@@ -450,7 +450,7 @@
     [IMGCommentRequest commentWithID:commentID withReplies:NO success:success failure:failure];
 }
 
-+ (void)accountCommentCount:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure{
++ (void)accountCommentCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:username withOption:@"comments/count"];
     
@@ -459,7 +459,7 @@
         NSNumber * numAccountAlbums = responseObject; //NSNumber??
         
         if(success)
-            success(numAccountAlbums);
+            success([numAccountAlbums integerValue]);
         
     } failure:failure];
 }

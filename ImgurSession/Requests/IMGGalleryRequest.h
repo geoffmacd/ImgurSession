@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param commentId    comment ID to get
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  */
-+ (void)commentWithID:(NSString *)commentID galleryID:(NSString *)galleryObjectID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)commentWithID:(NSUInteger)commentID galleryID:(NSString *)galleryObjectID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  Submits a comment to a gallery object
  @param caption    comment to post
@@ -154,12 +154,12 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  @param parentCommentID    ID string of parent comment to post this comment to
  */
-+ (void)replyToComment:(NSString*)caption galleryID:(NSString *)galleryObjectID parentComment:(NSString*)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)replyToComment:(NSString*)caption galleryID:(NSString *)galleryObjectID parentComment:(NSUInteger)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  Delete a posted comment with an ID
  @param commentId    comment ID to get
  */
-+ (void)deleteCommentWithID:(NSString *)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)deleteCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 /**
  Retrieves count of comments from gallery object
  @param galleryObjectId    ID string of gallery object to retrieve comment count from

@@ -16,7 +16,7 @@
     
     if(self = [super init]) {
         
-        _commentId = jsonData[@"comment_id"];
+        _commentId = [jsonData[@"comment_id"] integerValue];
         _imageId = jsonData[@"image_id"];
         _caption = jsonData[@"caption"];
         _author = jsonData[@"author"];

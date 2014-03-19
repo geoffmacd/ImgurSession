@@ -39,7 +39,7 @@
     
     if(self = [super init]) {
         _totalComments = [jsonData[@"total_gallery_comments"] integerValue];
-        _totalLIMGes = [jsonData[@"total_gallery_lIMGes"] integerValue];
+        _totalLikes = [jsonData[@"total_gallery_lIMGes"] integerValue];
         _totalSubmissions = [jsonData[@"total_gallery_submissions"] integerValue];
         
         //enumerate all blocked users
@@ -57,7 +57,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@; comments: %ld; lIMGes: %ld; submissions: %ld; trophies: %ld;",  [super description],(long)_totalComments, (long)_totalLIMGes, (long)_totalSubmissions, (long)[_trophies count]];
+    return [NSString stringWithFormat:@"%@; comments: %ld; lIMGes: %ld; submissions: %ld; trophies: %ld;",  [super description],(long)_totalComments, (long)_totalLikes, (long)_totalSubmissions, (long)[_trophies count]];
 }
 
 

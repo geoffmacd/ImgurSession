@@ -58,9 +58,9 @@
  */
 @property (readonly,nonatomic) NSInteger totalComments;
 /**
- Total number of images lIMGed by the user in the gallery
+ Total number of images liked by the user in the gallery
  */
-@property (readonly,nonatomic) NSInteger totalLIMGes;
+@property (readonly,nonatomic) NSInteger totalLikes;
 /**
  Total number of images submitted by the user.
  */

@@ -91,7 +91,7 @@
 /**
  Return the total number of albums associated with the account.
  */
-+ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure;
++ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
 /**
  Delete an Album with a given id.
  */
@@ -116,7 +116,7 @@
 /**
  Returns the total number of images associated with the account.
  */
-+ (void)accountImageCount:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure;
++ (void)accountImageCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
 /**
  Deletes an Image. This requires a delete hash rather than an ID.
  */
@@ -140,7 +140,7 @@
 /**
  Return a count of all of the comments associated with the current account.
  */
-+ (void)accountCommentCount:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
 /**
  Delete a comment from the current account.
  */

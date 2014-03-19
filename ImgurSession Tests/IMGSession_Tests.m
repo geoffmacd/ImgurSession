@@ -129,10 +129,10 @@
                 com = comments;
                 expect([comments count] == [commentIds count]).to.beTruthy();
 
-                [IMGAccountRequest accountCommentCount:@"me" success:^(NSNumber * numcomments) {
+                [IMGAccountRequest accountCommentCount:@"me" success:^(NSUInteger numcomments) {
 
                     
-                    expect([comments count] == [numcomments integerValue]).to.beTruthy();
+                    expect([comments count] == numcomments ).to.beTruthy();
 
                 } failure:failBlock];
             } failure:failBlock];
@@ -148,11 +148,11 @@
     __block BOOL deleteSuccess = NO;
     
     
-        [IMGCommentRequest submitComment:@"test comment" withImageID:235325 withParentID:1245 success:^(IMGComment * comment) {
+        [IMGCommentRequest submitComment:@"test comment" withImageID:@"geoff" withParentID:1245 success:^(IMGComment * comment) {
             
-            [IMGCommentRequest replyToComment:@"test reply" withImageID:33235 withCommentID:3538253 success:^(IMGComment * reply) {
+            [IMGCommentRequest replyToComment:@"test reply" withImageID:@"geoff" withCommentID:3538253 success:^(IMGComment * reply) {
                 
-                //                expect(reply.parentId == comment.commentId).beTruthy();
+                expect(reply.parentId == comment.commentId).beTruthy();
                 
                 [IMGCommentRequest deleteCommentWithID:reply.commentId success:^() {
                     
@@ -171,6 +171,20 @@
     
     
     expect(com).willNot.beNil();
+}
+
+- (void)testGallleryHot{
+    
+    __block NSArray * gals;
+    
+    [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
+        
+        gals = images;
+        
+        
+    } failure:failBlock];
+    
+    expect(gals).willNot.beNil();
 }
 
 

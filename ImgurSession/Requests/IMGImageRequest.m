@@ -138,6 +138,7 @@
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
+            
             success();
     } failure:failure];
 }
