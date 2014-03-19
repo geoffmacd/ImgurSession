@@ -6,29 +6,36 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#ifndef ImgurSession_ImgurSession_h
-#define ImgurSession_ImgurSession_h
 
-#import "IMGSession.h"
+//iOS 7 or OS X 10.9 only
+#if ( ( defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090) || \
+( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000 ) )
 
-#import "IMGAccountRequest.h"
-#import "IMGAlbumRequest.h"
-#import "IMGCommentRequest.h"
-#import "IMGConversationRequest.h"
-#import "IMGGalleryRequest.h"
-#import "IMGImageRequest.h"
-#import "IMGNotificationRequest.h"
+    #ifndef ImgurSession_ImgurSession_h
+        #define ImgurSession_ImgurSession_h
 
-#import "IMGAccount.h"
-#import "IMGAccountSettings.h"
-#import "IMGAlbum.h"
-#import "IMGBasicAlbum.h"
-#import "IMGComment.h"
-#import "IMGNotification.h"
-#import "IMGGalleryAlbum.h"
-#import "IMGGalleryImage.h"
-#import "IMGImage.h"
-#import "IMGMessage.h"
-#import "IMGVote.h"
+        #import "IMGSession.h"
+
+        #import "IMGAccountRequest.h"
+        #import "IMGAlbumRequest.h"
+        #import "IMGCommentRequest.h"
+        #import "IMGConversationRequest.h"
+        #import "IMGGalleryRequest.h"
+        #import "IMGImageRequest.h"
+        #import "IMGNotificationRequest.h"
+
+        #import "IMGAccount.h"
+        #import "IMGAccountSettings.h"
+        #import "IMGAlbum.h"
+        #import "IMGBasicAlbum.h"
+        #import "IMGComment.h"
+        #import "IMGNotification.h"
+        #import "IMGGalleryAlbum.h"
+        #import "IMGGalleryImage.h"
+        #import "IMGImage.h"
+        #import "IMGMessage.h"
+        #import "IMGVote.h"
+
+    #endif
 
 #endif

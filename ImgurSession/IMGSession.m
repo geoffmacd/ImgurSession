@@ -32,13 +32,6 @@
 
 @implementation IMGSession;
 
-
-////overwrite async so that these calls work
-//void dispatch_async(dispatch_queue_t queue, dispatch_block_t block){
-//    block();
-//}
-
-
 #pragma mark - Initialize
 
 + (instancetype)sharedInstance{
