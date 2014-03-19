@@ -21,7 +21,7 @@
  @param replies fetch the replies as well
  @return signal with request
  */
-+ (void)commentWithId:(NSString *)commentId withReplies:(BOOL)replies success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)commentWithID:(NSString *)commentId withReplies:(BOOL)replies success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  @param comment IMGComment object to fetch replies for
  @return signal with request
@@ -35,21 +35,20 @@
  @param parentId id of parent image to comment on
  @return signal with request
  */
-+ (void)submitComment:(NSString*)caption withImageId:(NSInteger)imageId withParentId:(NSInteger)parentId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)submitComment:(NSString*)caption withImageID:(NSInteger)imageID withParentID:(NSInteger)parentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  @param caption comment string
  @param imageId id of image to comment on
  @param parentCommentId id of parent comment to reply to
  @return signal with request
  */
-+ (void)replyToComment:(NSString*)caption withImageId:(NSInteger)imageId withCommentId:(NSInteger)parentCommentId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)replyToComment:(NSString*)caption withImageID:(NSInteger)imageID withCommentID:(NSInteger)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Delete
 /**
  @param commentId comment id to delete
- @return signal with request
  */
-+ (void)deleteCommentWithId:(NSString *)commentId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)deleteCommentWithID:(NSString *)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Vote
 /**
@@ -57,13 +56,13 @@
  @param vote vote to give comment
  @return signal with request
  */
-+ (void)voteCommentWithId:(NSString *)commentId withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)voteCommentWithID:(NSString *)commentID withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Report
 /**
  @param commentId comment id to report
  @return signal with request
  */
-+ (void)reportCommentWithId:(NSString *)commentId success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)reportCommentWithID:(NSString *)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 @end

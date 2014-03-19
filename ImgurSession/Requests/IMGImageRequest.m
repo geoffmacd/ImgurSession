@@ -132,13 +132,13 @@
 
 #pragma mark - Delete
 
-+ (void)deleteImageWithID:(NSString *)imageID success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure{
++ (void)deleteImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:imageID];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
-            success(imageID);
+            success();
     } failure:failure];
 }
 

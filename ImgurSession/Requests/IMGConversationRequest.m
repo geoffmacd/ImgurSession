@@ -56,7 +56,7 @@
     } failure:failure];
 }
 
-+ (void)conversationWithMessageId:(NSString*)messageId success:(void (^)(IMGMessage *))success failure:(void (^)(NSError *))failure{
++ (void)conversationWithMessageID:(NSString*)messageId success:(void (^)(IMGMessage *))success failure:(void (^)(NSError *))failure{
     NSString * path = [self pathWithId:messageId];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

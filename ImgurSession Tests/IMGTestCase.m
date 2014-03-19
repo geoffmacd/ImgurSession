@@ -47,6 +47,8 @@
     NSString *clientID = imgurClient[@"id"];
     NSString *clientSecret = imgurClient[@"secret"];
     
+    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    
     //Lazy init, may already exist
     IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
     [ses setDelegate:self];
@@ -73,7 +75,154 @@
     [super tearDown];
 }
 
-#pragma mark - Test authentication
+#pragma mark - Test methods to provide image or album to play with - this code is not infallable
+
+#warning Posting a test gallery image will create spam if not deleted successfully by this method
+/**
+ Wraps around test case block to provide one way to post gallery image for testing - This is dangerous
+ */
+-(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success{
+    
+    __block BOOL deleteSuccess = NO;
+    
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+        
+        expect(image).notTo.beNil();
+        
+        [IMGGalleryRequest submitImageWithID:image.imageID title:@"Test Gallery" terms:YES success:^(IMGGalleryImage * galImage) {
+            
+            expect(galImage).notTo.beNil();
+            
+            if(success)
+                success(galImage, ^{
+                    
+                    //remove from gallery and delete image
+                    [IMGGalleryRequest removeImageWithID:galImage.imageID success:^(NSString *albumID) {
+                        
+                        [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                            
+                            deleteSuccess = YES;
+                            
+                        } failure:failBlock];
+                        
+                    } failure:failBlock];
+                });
+            
+        } failure:failBlock];
+        
+    } failure:failBlock];
+}
+
+#warning Posting a test image will create spam if not deleted successfully by this method
+/**
+ Wraps around test case block to provide one way to post image for testing - This is dangerous
+ */
+-(void)postTestImage:(void(^)(IMGImage *,void(^)()))success{
+    
+    __block BOOL deleteSuccess = NO;
+    
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+        
+        expect(image).notTo.beNil();
+        
+        if(success)
+            success(image, ^{
+                
+                //remove from gallery and delete image
+                
+                [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                    
+                    deleteSuccess = YES;
+                    
+                } failure:failBlock];
+            });
+        
+    } failure:failBlock];
+}
+
+#warning Posting a test gallery album will create spam if not deleted successfully by this method
+/**
+ Wraps around test case block to provide one way to post gallery alboum for testing - This is dangerous
+ */
+-(void)postTestGalleryAlbumWithOneImage:(void(^)(IMGGalleryAlbum *,void(^)()))success{
+    
+    __block BOOL deleteSuccess = NO;
+    
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+        
+        expect(image).notTo.beNil();
+        
+        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+            
+            expect(album).notTo.beNil();
+            
+            [IMGGalleryRequest submitAlbumWithID:album.albumID title:@"Test Gallery Album" terms:YES success:^(IMGGalleryAlbum * galAlbum){
+                
+                expect(galAlbum).notTo.beNil();
+                
+                if(success)
+                    success(galAlbum, ^{
+                        
+                        //remove from gallery and delete image
+                        [IMGGalleryRequest removeAlbumWithID:album.albumID success:^(NSString *albumID) {
+                            
+                            [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
+                                
+                                [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                                    
+                                    deleteSuccess = YES;
+                                    
+                                } failure:failBlock];
+                                
+                            } failure:failBlock];
+                            
+                        } failure:failBlock];
+                    });
+                
+            } failure:failBlock];
+            
+        } failure:failBlock];
+        
+    } failure:failBlock];
+}
+
+#warning Posting a test album will create spam if not deleted successfully by this method
+/**
+ Wraps around test case block to provide one way to post album for testing - This is dangerous
+ */
+-(void)postTestAlbumWithOneImage:(void(^)(IMGAlbum *,void(^)()))success{
+    
+    __block BOOL deleteSuccess = NO;
+    
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+        
+        expect(image).notTo.beNil();
+        
+        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+            
+            expect(album).notTo.beNil();
+            
+            if(success)
+                success(album, ^{
+                    
+                    [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
+                        
+                        [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                            
+                            deleteSuccess = YES;
+                            
+                        } failure:failBlock];
+                        
+                    } failure:failBlock];
+                });
+            
+        } failure:failBlock];
+        
+    } failure:failBlock];
+}
+
+
+#pragma mark - Test authentication run on setup
 
 /*
  Tests authentication and sets global access token to save for rest of the test. Needs to be marked test1 so that it is run first (alphabetical order)

@@ -28,7 +28,7 @@
 /**
  Returns the data about a specific notification
  */
-+ (void)notificationWithId:(NSString*)notificationId success:(void (^)(IMGNotification *))success failure:(void (^)(NSError *))failure;
++ (void)notificationWithID:(NSString*)notificationId success:(void (^)(IMGNotification *))success failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Delete

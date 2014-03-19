@@ -30,6 +30,6 @@
 
 #pragma mark - Delete
 
-+ (void)deleteImageWithID:(NSString *)imageID success:(void (^)(NSString *imageID))success failure:(void (^)(NSError *error))failure;
++ (void)deleteImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 @end

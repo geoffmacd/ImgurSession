@@ -29,7 +29,7 @@
 
 #pragma mark - Load
 
-+ (void)accountWithUsername:(NSString *)username success:(void (^)(IMGAccount *))success failure:(void (^)(NSError *))failure{
++ (void)accountWithUser:(NSString *)username success:(void (^)(IMGAccount *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -51,7 +51,7 @@
 
 #pragma mark - Favourites
 
-+ (void)accountGalleryFavourites:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountGalleryFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"gallery_favorites"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -80,8 +80,8 @@
     } failure:failure];
 }
 
-+ (void)accountFavourites:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"favorites"];
++ (void)accountFavouritesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithId:@"me" withOption:@"favorites"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -124,7 +124,7 @@
     } failure:failure];
 }
 
-+ (void)accountSubmissionsPage:(NSInteger)page withUsername:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountSubmissionsWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"submissions" withId2:[NSString stringWithFormat:@"%ld",(long)page]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -225,7 +225,7 @@
 
 #pragma mark - Gallery Profile
 
-+ (void)accountGalleryProfile:(NSString *)username success:(void (^)(IMGGalleryProfile *))success failure:(void (^)(NSError *))failure{
++ (void)accountGalleryProfileWithUser:(NSString *)username success:(void (^)(IMGGalleryProfile *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:username withOption:@"gallery_profile"];
     
@@ -248,7 +248,7 @@
 
 #pragma mark - Albums associated with account
 
-+ (void)accountAlbumsWithUsername:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountAlbumsWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:username withOption:@"albums" withId2:[NSString stringWithFormat:@"%ld",(long)page]];
 
@@ -278,26 +278,26 @@
     } failure:failure];
 }
 
-+ (void)accountAlbumWithId:(NSString*)albumId success:(void (^)(IMGAlbum *))success failure:(void (^)(NSError *))failure{
-    [IMGAlbumRequest albumWithID:albumId success:success failure:failure];
++ (void)accountAlbumWithID:(NSString*)albumID success:(void (^)(IMGAlbum *))success failure:(void (^)(NSError *))failure{
+    [IMGAlbumRequest albumWithID:albumID success:success failure:failure];
 }
 
-+ (void)accountAlbumIds:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountAlbumIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"albums/ids"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSArray * albumIds = responseObject;
+        NSArray * albumIDs = responseObject;
         
         if(success)
-            success(albumIds);
+            success(albumIDs);
         
     } failure:failure];
     
     
 }
 
-+ (void)accountAlbumCount:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure{
++ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"albums/count"];
 
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -311,9 +311,9 @@
     
 }
 
-+ (void)accountDeleteAlbumWithID:(NSString*)albumId withUsername:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"albums" withId2:albumId];
+    NSString *path = [self pathWithId:@"me" withOption:@"albums" withId2:albumID];
 
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -327,7 +327,7 @@
 #pragma mark - Images associated with account
 
 
-+ (void)accountImagesWithUsername:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountImagesWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:username withOption:@"images" withId2:[NSString stringWithFormat:@"%ld",(long)page]];
     
@@ -356,12 +356,12 @@
     } failure:failure];
 }
 
-+ (void)accountImageWithId:(NSString*)imageId success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)accountImageWithID:(NSString*)imageID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
     
-    [IMGImageRequest imageWithID:imageId success:success failure:failure];
+    [IMGImageRequest imageWithID:imageID success:success failure:failure];
 }
 
-+ (void)accountImageIds:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountImageIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"images/ids"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -385,8 +385,8 @@
     } failure:failure];
 }
 
-+ (void)accountDeleteImageWithHash:(NSString*)deleteHash withUsername:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"image" withId2:deleteHash];
++ (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithId:@"me" withOption:@"image" withId2:deleteHash];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
     
@@ -400,7 +400,7 @@
 #pragma mark - Comments associated with account
 
 
-+ (void)accountCommentsWithUsername:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountCommentsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:username withOption:@"comments"];
     
@@ -430,12 +430,7 @@
     } failure:failure];
 }
 
-+ (void)accountCommentWithId:(NSString*)commentId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
-    
-    [IMGCommentRequest commentWithId:commentId withReplies:NO success:success failure:failure];
-}
-
-+ (void)accountCommentIds:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountCommentIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:username withOption:@"comments/ids"];
     
@@ -448,6 +443,11 @@
             success(albumIds);
         
     } failure:failure];
+}
+
++ (void)accountCommentWithID:(NSString*)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
+    
+    [IMGCommentRequest commentWithID:commentID withReplies:NO success:success failure:failure];
 }
 
 + (void)accountCommentCount:(NSString*)username success:(void (^)(NSNumber *))success failure:(void (^)(NSError *))failure{
@@ -464,9 +464,9 @@
     } failure:failure];
 }
 
-+ (void)accountDeleteCommentWithId:(NSString*)commentId withUsername:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountDeleteCommentWithID:(NSString*)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"comment" withId2:commentId];
+    NSString *path = [self pathWithId:@"me" withOption:@"comment" withId2:commentID];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

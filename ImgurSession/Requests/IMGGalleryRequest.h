@@ -88,15 +88,15 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param imageId    imageId to submit to gallery
  @param title    title to append to top of imgur page
  */
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *error))failure;
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *error))failure;
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *error))failure;
 /**
  Submits gallery album with id
  @param albumID    albumID to submit to gallery
  @param title    title to append to top of imgur page
  */
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *error))failure;
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *error))failure;
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Remove Gallery objects
 
@@ -104,8 +104,8 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  Removes gallery object from gallery
  @param albumID    albumID to remove from gallery
  */
-+ (void)removeImageWithID:(NSString *)imageID success:(void (^)(NSString *imageID))success failure:(void (^)(NSError *error))failure;
-+ (void)removeAlbumWithID:(NSString *)albumID success:(void (^)(NSString *albumID))success failure:(void (^)(NSError *error))failure;
++ (void)removeImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)removeAlbumWithID:(NSString *)albumID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 
 #pragma mark - Voting/Reporting
@@ -114,12 +114,12 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  Report gallery object ID as being offensive
  @param galleryObjectId    gallery object id string to report
  */
-+ (void)reportWithId:(NSString *)galleryObjectId success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)reportWithID:(NSString *)galleryObjectID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 /**
  Vote on gallery object ID
  @param vote    vote type for user to vote on gallery object
  */
-+ (void)voteWithId:(NSString *)galleryObjectId withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)voteWithID:(NSString *)galleryObjectID withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 
 #pragma mark - Comment Actions - IMGCommentRequest
@@ -129,42 +129,42 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  @param commentSort    sort comments by best, hot or new
  */
-+ (void)commentsWithGalleryID:(NSString *)galleryObjectId withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)commentsWithGalleryID:(NSString *)galleryObjectID withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
  Retrieves comment IDS from gallery object
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  @param commentSort    sort comments by best, hot or new
  */
-+ (void)commentIDsWithGalleryID:(NSString *)galleryObjectId withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)commentIDsWithGalleryID:(NSString *)galleryObjectID withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
  Retrieve a comment with an ID from a gallery object
  @param commentId    comment ID to get
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  */
-+ (void)commentWithId:(NSString *)commentId galleryID:(NSString *)galleryObjectId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)commentWithID:(NSString *)commentID galleryID:(NSString *)galleryObjectID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  Submits a comment to a gallery object
  @param caption    comment to post
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  */
-+ (void)submitComment:(NSString*)caption galleryID:(NSString *)galleryObjectId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)submitComment:(NSString*)caption galleryID:(NSString *)galleryObjectID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  Retrieves comments from gallery object
  @param caption    comment to post
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  @param parentCommentID    ID string of parent comment to post this comment to
  */
-+ (void)replyToComment:(NSString*)caption galleryID:(NSString *)galleryObjectId parentComment:(NSString*)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)replyToComment:(NSString*)caption galleryID:(NSString *)galleryObjectID parentComment:(NSString*)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  Delete a posted comment with an ID
  @param commentId    comment ID to get
  */
-+ (void)deleteCommentWithId:(NSString *)commentId success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure;
++ (void)deleteCommentWithID:(NSString *)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 /**
  Retrieves count of comments from gallery object
  @param galleryObjectId    ID string of gallery object to retrieve comment count from
  */
-+ (void)commentCountWithGalleryID:(NSString *)galleryObjectId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
++ (void)commentCountWithGalleryID:(NSString *)galleryObjectID success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
 
 
 

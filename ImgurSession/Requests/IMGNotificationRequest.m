@@ -64,7 +64,7 @@
     } failure:failure];
 }
 
-+ (void)notificationWithId:(NSString*)notificationId success:(void (^)(IMGNotification *))success failure:(void (^)(NSError *))failure{
++ (void)notificationWithID:(NSString*)notificationId success:(void (^)(IMGNotification *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:notificationId];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

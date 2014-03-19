@@ -20,7 +20,9 @@
 
 -(instancetype)trackModels{
     
-    [[IMGSession sharedInstance] trackModelObjectsForDelegateHandling:self];
+    //track if object is not nil
+    if(self)
+        [[IMGSession sharedInstance] trackModelObjectsForDelegateHandling:self];
     
     return self;
 }

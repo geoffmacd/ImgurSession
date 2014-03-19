@@ -18,8 +18,13 @@
     
     //various metadata to store
     NSDictionary *imgurVariousValues;
-    NSString *refreshToken;
+    NSURL * testfileURL;
     __unsafe_unretained __block void(^ failBlock)(NSError * error);
 }
+
+-(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;
+-(void)postTestImage:(void(^)(IMGImage *,void(^)()))success;
+-(void)postTestGalleryAlbumWithOneImage:(void(^)(IMGGalleryAlbum *,void(^)()))success;
+-(void)postTestAlbumWithOneImage:(void(^)(IMGAlbum *,void(^)()))success;
 
 @end
