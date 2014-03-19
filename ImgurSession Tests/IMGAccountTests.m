@@ -13,10 +13,11 @@
 #warning: Imgur users must have favourites gallery items, gallery posts , and comments posted to the gallery
 #warning: delegate methods not called unless dispatch methods are overwritten due to strange run loop in test runs, may need to call directly
 
-@interface IMGSession_Tests : IMGTestCase
+@interface IMGAccountTests : IMGTestCase
+
 @end
 
-@implementation IMGSession_Tests
+@implementation IMGAccountTests
 
 #pragma mark - Test Account endpoints
 
@@ -142,15 +143,19 @@
     expect(com).willNot.beNil();
 }
 
+/**
+ Posts image to comment on, comments on it, replies to comment, then deletes everything
+ */
 - (void)testCommentReplyAndDelete{
     
-    __block NSArray * com;
     __block BOOL deleteSuccess = NO;
     
-    
-        [IMGCommentRequest submitComment:@"test comment" withImageID:@"geoff" withParentID:1245 success:^(IMGComment * comment) {
+    [self postTestImage:^(IMGImage * image, void(^success)()){
+        
+        success();
+        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(IMGComment * comment) {
             
-            [IMGCommentRequest replyToComment:@"test reply" withImageID:@"geoff" withCommentID:3538253 success:^(IMGComment * reply) {
+            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withCommentID:comment.commentId success:^(IMGComment * reply) {
                 
                 expect(reply.parentId == comment.commentId).beTruthy();
                 
@@ -167,26 +172,11 @@
             } failure:failBlock];
             
         } failure:failBlock];
+        
+    }];
     
-    
-    
-    expect(com).willNot.beNil();
+    expect(deleteSuccess).will.beTruthy();
 }
-
-- (void)testGallleryHot{
-    
-    __block NSArray * gals;
-    
-    [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
-        
-        gals = images;
-        
-        
-    } failure:failBlock];
-    
-    expect(gals).willNot.beNil();
-}
-
 
 //
 //- (void)testAccountImages{
