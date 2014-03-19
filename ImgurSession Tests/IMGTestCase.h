@@ -18,7 +18,7 @@
     //various metadata to store
     NSDictionary *imgurVariousValues;
     NSString *refreshToken;
-    __block void(^ failBlock)(NSError * error);
+    __unsafe_unretained __block void(^ failBlock)(NSError * error);
 }
 
 @end

@@ -95,7 +95,7 @@
 }
 
 + (void)uploadImageWithURL:(NSURL *)url success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
-    return [self uploadImageWithURL:url title:nil description:nil filename:nil andLinkToAlbumWithID:nil success:success failure:failure];
+    return [self uploadImageWithURL:url title:nil description:nil andLinkToAlbumWithID:nil success:success failure:failure];
 }
 
 + (void)uploadImageWithURL:(NSURL *)url title:(NSString *)title description:(NSString *)description andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{

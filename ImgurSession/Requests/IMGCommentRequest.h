@@ -57,13 +57,13 @@
  @param vote vote to give comment
  @return signal with request
  */
-+ (void)voteCommentWithId:(NSInteger)commentId withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)voteCommentWithId:(NSString *)commentId withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Report
 /**
  @param commentId comment id to report
  @return signal with request
  */
-+ (void)reportCommentWithId:(NSInteger)commentId success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)reportCommentWithId:(NSString *)commentId success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 @end
