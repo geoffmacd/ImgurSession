@@ -8,6 +8,8 @@
 
 #import "IMGModel.h"
 
+#import "IMGBasicAlbum.h"
+
 
 /**
  Model object class to represent blocked users from account settings

@@ -9,8 +9,20 @@
 #import "IMGModel.h"
 
 
-@class IMGBasicImage;
+typedef NS_ENUM(NSUInteger, IMGAlbumPrivacy){
+    IMGAlbumDefault = 0,
+    IMGAlbumPublic = 0,
+    IMGAlbumHidden,
+    IMGAlbumSecret
+};
 
+typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
+    IMGDefaultLayout = 0,
+    IMGBlogLayout = 0,
+    IMGGridLayout,
+    IMGHorizontalLayout,
+    IMGVerticalLayout
+};
 
 /**
  Model object class to represent common denominator properties to gallery and user albums. https://api.imgur.com/models/album

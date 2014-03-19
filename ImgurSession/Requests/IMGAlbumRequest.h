@@ -7,7 +7,8 @@
 //
 
 #import "IMGEndpoint.h"
-#import "IMGModel.h"
+
+#import "IMGBasicAlbum.h"
 
 @class IMGAlbum,IMGImage;
 

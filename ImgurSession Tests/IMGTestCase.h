@@ -7,7 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "IMGSession.h"
+
+#import "ImgurSession.h"
 
 #define EXP_SHORTHAND YES
 #import "Expecta.h"

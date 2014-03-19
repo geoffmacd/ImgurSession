@@ -7,6 +7,7 @@
 //
 
 #import "IMGResponseSerializer.h"
+
 #import "IMGSession.h"
 
 @implementation IMGResponseSerializer

@@ -8,12 +8,6 @@
 
 #import "IMGTestCase.h"
 
-#import "IMGImage.h"
-#import "IMGGalleryImage.h"
-#import "IMGAccountSettings.h"
-
-#define kTestTimeOut     30     //seconds
-
 #warning: Implementation requires client id, client secret filled out in tests plist
 #warning: imgur user must have refresh token filled out in tests plist in order to work on iPhone
 #warning: Imgur users must have favourites gallery items, gallery posts , and comments posted to the gallery

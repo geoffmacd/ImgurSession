@@ -62,6 +62,7 @@
 		C30933E518CA204C009D9C57 /* IMGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C30933E418CA204C009D9C57 /* IMGSession.m */; };
 		C3102D1518D8D5FF007A75C4 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
 		C3102D1618D8D600007A75C4 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
+		C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D1818D9FF82007A75C4 /* ImgurSession.h */; };
 		C319F7CC18D0CDBE00C5E880 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C319F7D418D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
 		C319F7D518D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
@@ -165,6 +166,7 @@
 		C30933E418CA204C009D9C57 /* IMGSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGSession.m; sourceTree = "<group>"; };
 		C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGTestCase.h; sourceTree = "<group>"; };
 		C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGTestCase.m; sourceTree = "<group>"; };
+		C3102D1818D9FF82007A75C4 /* ImgurSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgurSession.h; sourceTree = "<group>"; };
 		C319F7C918D0C36300C5E880 /* ImgurSession_Tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ImgurSession_Tests-Info.plist"; sourceTree = "<group>"; };
 		C319F7D218D0DB3F00C5E880 /* IMGComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IMGComment.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C319F7D318D0DB3F00C5E880 /* IMGComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGComment.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -264,25 +266,16 @@
 			name = Gallery;
 			sourceTree = "<group>";
 		};
-		2407476A18D53BF900B92063 /* Requests */ = {
+		2407476A18D53BF900B92063 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				240747A918D62B1B00B92063 /* IMGAccountRequest.h */,
-				240747A418D62B1B00B92063 /* IMGAccountRequest.m */,
-				240747AF18D62B1B00B92063 /* IMGAlbumRequest.h */,
-				240747A618D62B1B00B92063 /* IMGAlbumRequest.m */,
-				240747B018D62B1B00B92063 /* IMGCommentRequest.h */,
-				240747A818D62B1B00B92063 /* IMGCommentRequest.m */,
-				240747B318D62B1B00B92063 /* IMGConversationRequest.h */,
-				240747AA18D62B1B00B92063 /* IMGConversationRequest.m */,
-				240747B118D62B1B00B92063 /* IMGGalleryRequest.h */,
-				240747A518D62B1B00B92063 /* IMGGalleryRequest.m */,
-				240747AE18D62B1B00B92063 /* IMGImageRequest.h */,
-				240747A718D62B1B00B92063 /* IMGImageRequest.m */,
-				240747B218D62B1B00B92063 /* IMGNotificationRequest.h */,
-				240747AB18D62B1B00B92063 /* IMGNotificationRequest.m */,
+				240747AD18D62B1B00B92063 /* IMGEndpoint.h */,
+				240747AC18D62B1B00B92063 /* IMGEndpoint.m */,
+				240747B418D62B1B00B92063 /* IMGResponseSerializer.h */,
+				240747A318D62B1B00B92063 /* IMGResponseSerializer.m */,
+				C3102D1718D9FD1C007A75C4 /* Requests */,
 			);
-			name = Requests;
+			name = Endpoints;
 			sourceTree = "<group>";
 		};
 		24AC155618CAB4F9005F86C8 /* Other Frameworks */ = {
@@ -348,14 +341,11 @@
 		C309339A18CA1F87009D9C57 /* ImgurSession */ = {
 			isa = PBXGroup;
 			children = (
+				C3102D1818D9FF82007A75C4 /* ImgurSession.h */,
 				C30933E318CA204C009D9C57 /* IMGSession.h */,
 				C30933E418CA204C009D9C57 /* IMGSession.m */,
-				240747AD18D62B1B00B92063 /* IMGEndpoint.h */,
-				240747AC18D62B1B00B92063 /* IMGEndpoint.m */,
-				240747B418D62B1B00B92063 /* IMGResponseSerializer.h */,
-				240747A318D62B1B00B92063 /* IMGResponseSerializer.m */,
 				C30933C618CA1FFE009D9C57 /* Models */,
-				2407476A18D53BF900B92063 /* Requests */,
+				2407476A18D53BF900B92063 /* Endpoints */,
 			);
 			path = ImgurSession;
 			sourceTree = "<group>";
@@ -408,6 +398,27 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		C3102D1718D9FD1C007A75C4 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				240747A918D62B1B00B92063 /* IMGAccountRequest.h */,
+				240747A418D62B1B00B92063 /* IMGAccountRequest.m */,
+				240747AF18D62B1B00B92063 /* IMGAlbumRequest.h */,
+				240747A618D62B1B00B92063 /* IMGAlbumRequest.m */,
+				240747B018D62B1B00B92063 /* IMGCommentRequest.h */,
+				240747A818D62B1B00B92063 /* IMGCommentRequest.m */,
+				240747B318D62B1B00B92063 /* IMGConversationRequest.h */,
+				240747AA18D62B1B00B92063 /* IMGConversationRequest.m */,
+				240747B118D62B1B00B92063 /* IMGGalleryRequest.h */,
+				240747A518D62B1B00B92063 /* IMGGalleryRequest.m */,
+				240747AE18D62B1B00B92063 /* IMGImageRequest.h */,
+				240747A718D62B1B00B92063 /* IMGImageRequest.m */,
+				240747B218D62B1B00B92063 /* IMGNotificationRequest.h */,
+				240747AB18D62B1B00B92063 /* IMGNotificationRequest.m */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
 		C319F7D118D0DB1D00C5E880 /* Comment */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +452,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		C3102D1A18DA0267007A75C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */ = {
 			isa = PBXNativeTarget;
@@ -451,6 +473,7 @@
 				24B4CB7518CAB7B300EC8E4A /* Frameworks */,
 				24B4CB7718CAB7B300EC8E4A /* Resources */,
 				624F18CA8C3F4D8090FE97EE /* Copy Pods Resources */,
+				C3102D1A18DA0267007A75C4 /* Headers */,
 			);
 			buildRules = (
 			);

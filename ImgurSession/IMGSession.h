@@ -6,17 +6,6 @@
 //  Distributed under the MIT license.
 //
 
-
-#import "IMGAccountRequest.h"
-#import "IMGAlbumRequest.h"
-#import "IMGCommentRequest.h"
-#import "IMGConversationRequest.h"
-#import "IMGGalleryRequest.h"
-#import "IMGImageRequest.h"
-#import "IMGNotificationRequest.h"
-
-#import "IMGModel.h"
-
 static NSString * const IMGBaseURL = @"https://api.imgur.com";
 static NSString * const IMGAPIVersion = @"3";
 static NSString * const IMGOAuthEndpoint = @"oauth2/token";

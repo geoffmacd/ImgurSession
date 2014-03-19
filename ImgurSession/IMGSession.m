@@ -1,4 +1,4 @@
-    //
+//
 //  IMGClient.m
 //  ImgurSession
 //
@@ -7,6 +7,7 @@
 //
 
 #import "IMGSession.h"
+
 #import "IMGResponseSerializer.h"
 
 @interface IMGSession ()

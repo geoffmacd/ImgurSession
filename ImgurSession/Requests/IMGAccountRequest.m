@@ -7,6 +7,9 @@
 //
 
 #import "IMGAccountRequest.h"
+#import "IMGAlbumRequest.h"
+#import "IMGCommentRequest.h"
+#import "IMGImageRequest.h"
 #import "IMGAccount.h"
 #import "IMGAccountSettings.h"
 #import "IMGAlbum.h"

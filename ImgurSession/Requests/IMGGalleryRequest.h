@@ -7,6 +7,8 @@
 
 #import "IMGEndpoint.h"
 
+#import "IMGVote.h"
+
 
 @class IMGGalleryAlbum,IMGGalleryImage,IMGGalleryProfile,IMGComment;
 

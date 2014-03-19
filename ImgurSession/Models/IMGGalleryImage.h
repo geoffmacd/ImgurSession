@@ -8,6 +8,7 @@
 
 #import "IMGImage.h"
 
+#import "IMGVote.h"
 
 /**
  Model object class to represent images that are posted to the Imgur Gallery. Can be a part of an album. https://api.imgur.com/models/gallery_image 

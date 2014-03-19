@@ -8,6 +8,7 @@
 
 #import "IMGGalleryImage.h"
 
+
 @implementation IMGGalleryImage;
 
 #pragma mark - Init With Json
@@ -24,7 +25,7 @@
         _score = [jsonData[@"score"] integerValue];
         _isAlbum = [jsonData[@"is_album"] boolValue];
         if(![jsonData[@"vote"] isKindOfClass:[NSNull class]])
-            _vote = [IMGModel voteForStr:jsonData[@"vote"]];
+            _vote = [IMGVote voteForStr:jsonData[@"vote"]];
         
         if(![jsonData[@"nsfw"] isKindOfClass:[NSNull class]])
             _nsfw = [jsonData[@"nsfw"] boolValue];

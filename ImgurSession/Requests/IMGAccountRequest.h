@@ -5,11 +5,13 @@
 //  Created by Geoff MacDonald on 2014-03-15.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
-
 #import "IMGEndpoint.h"
+
 #import "IMGSession.h"
+#import "IMGBasicAlbum.h"
 
 @class IMGAccount,IMGAccountSettings,IMGAlbum,IMGImage,IMGComment,IMGGalleryProfile;
+
 
 /**
  Account requests. https://api.imgur.com/endpoints/account

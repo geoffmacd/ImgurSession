@@ -213,7 +213,7 @@
 }
 
 + (void)voteWithId:(NSString *)galleryObjectId withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *error))failure{
-    NSString *path = [self pathWithId:galleryObjectId withOption:@"vote" withId2:[IMGModel strForVote:vote]];
+    NSString *path = [self pathWithId:galleryObjectId withOption:@"vote" withId2:[IMGVote strForVote:vote]];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
