@@ -43,7 +43,7 @@
         NSMutableArray * messages = [NSMutableArray new];
         for(NSDictionary * messageJSON in messagesJSON){
             NSError *JSONError = nil;
-            IMGNotification * notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:messageJSON error:&JSONError];
+            IMGNotification * notification = [[IMGNotification alloc] initConversationNotificationWithJSONObject:messageJSON error:&JSONError];
             if(!JSONError && notification)
                 [messages addObject:notification];
         }
@@ -68,10 +68,10 @@
         //is it a reply or message
         if(responseObject[@"content"][@"caption"]){
             //reply
-            notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:responseObject error:&JSONError];
+            notification = [[IMGNotification alloc] initReplyNotificationWithJSONObject:responseObject error:&JSONError];
         } else {
-            //message
-            notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:responseObject error:&JSONError];
+            //convo
+            notification = [[IMGNotification alloc] initConversationNotificationWithJSONObject:responseObject error:&JSONError];
         }
         
         if(!JSONError && notification) {

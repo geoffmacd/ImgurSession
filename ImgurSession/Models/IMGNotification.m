@@ -10,6 +10,7 @@
 
 #import "IMGComment.h"
 #import "IMGMessage.h"
+#import "IMGConversation.h"
 
 @implementation IMGNotification
 
@@ -30,7 +31,7 @@
     return [self trackModels];
 }
 
-- (instancetype)initMessageNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
+- (instancetype)initConversationNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
     
     if(self = [super init]) {
         
@@ -41,8 +42,8 @@
         
         NSDictionary * content = jsonData[@"content"];
         
-        IMGMessage * message = [[IMGMessage alloc] initWithJSONObject:content error:error];
-        _message = message;
+        IMGConversation * convo = [[IMGConversation alloc] initWithJSONObjectFromNotification:content error:error];
+        _conversation = convo;
     }
     return [self trackModels];
 }

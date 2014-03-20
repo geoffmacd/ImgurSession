@@ -465,10 +465,10 @@
             //is it a reply or message
             if(notificationJSON[@"caption"]){
                 //reply
-                notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:responseObject error:&JSONError];
+                notification = [[IMGNotification alloc] initReplyNotificationWithJSONObject:responseObject error:&JSONError];
             } else {
                 //message
-                notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:responseObject error:&JSONError];
+                notification = [[IMGNotification alloc] initConversationNotificationWithJSONObject:responseObject error:&JSONError];
             }
             
             if(!JSONError && notification){

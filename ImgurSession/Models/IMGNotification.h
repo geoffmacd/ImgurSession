@@ -8,7 +8,7 @@
 
 #import "IMGModel.h"
 
-@class IMGComment, IMGMessage;
+@class IMGComment, IMGMessage,IMGConversation;
 
 /**
  Model object class to represent user notifications. https://api.imgur.com/models/notifications
@@ -32,12 +32,12 @@
  */
 @property (readonly,nonatomic) BOOL isReply;
 @property (readonly,nonatomic) IMGComment * reply;
-@property (readonly,nonatomic) IMGMessage * message;
+@property (readonly,nonatomic) IMGConversation * conversation;
 
 
 
 - (instancetype)initReplyNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
 
-- (instancetype)initMessageNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
+- (instancetype)initConversationNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
 
 @end

@@ -39,6 +39,20 @@
     return [self trackModels];
 }
 
+- (instancetype)initWithJSONObjectFromNotification:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
+    
+    if(self = [super init]) {
+        
+        _conversationID = [jsonData[@"id"] integerValue];
+        _fromUsername = jsonData[@"from"];
+        _authorId = [jsonData[@"with_account"] integerValue];
+        _lastMessage = jsonData[@"last_message"];
+        _messageCount = [jsonData[@"message_num"] integerValue];
+        _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
+    }
+    return [self trackModels];
+}
+
 #pragma mark - Describe
 
 - (NSString *)description{

@@ -44,4 +44,9 @@
 @property (readonly,nonatomic) NSArray * messages;
 
 
+/**
+ Special Init for notifications with different keys
+ */
+- (instancetype)initWithJSONObjectFromNotification:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
+
 @end

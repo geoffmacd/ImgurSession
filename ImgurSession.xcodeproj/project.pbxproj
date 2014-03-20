@@ -72,6 +72,8 @@
 		C3102D2A18DB78DF007A75C4 /* IMGConversation.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D2818DB78DE007A75C4 /* IMGConversation.h */; };
 		C3102D2B18DB78DF007A75C4 /* IMGConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2918DB78DE007A75C4 /* IMGConversation.m */; };
 		C3102D2C18DB78DF007A75C4 /* IMGConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2918DB78DE007A75C4 /* IMGConversation.m */; };
+		C3102D2F18DB835A007A75C4 /* IMGNotificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */; };
+		C3102D3018DB835A007A75C4 /* IMGNotificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */; };
 		C319F7CC18D0CDBE00C5E880 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C319F7D418D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
 		C319F7D518D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
@@ -181,6 +183,7 @@
 		C3102D2518DB7713007A75C4 /* IMGConversationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGConversationTest.m; sourceTree = "<group>"; };
 		C3102D2818DB78DE007A75C4 /* IMGConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGConversation.h; sourceTree = "<group>"; };
 		C3102D2918DB78DE007A75C4 /* IMGConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGConversation.m; sourceTree = "<group>"; };
+		C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGNotificationTests.m; sourceTree = "<group>"; };
 		C319F7C918D0C36300C5E880 /* ImgurSession_Tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ImgurSession_Tests-Info.plist"; sourceTree = "<group>"; };
 		C319F7D218D0DB3F00C5E880 /* IMGComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IMGComment.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C319F7D318D0DB3F00C5E880 /* IMGComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGComment.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -453,6 +456,7 @@
 				C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */,
 				C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */,
 				C3102D2518DB7713007A75C4 /* IMGConversationTest.m */,
+				C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */,
 			);
 			path = "ImgurSession Tests";
 			sourceTree = "<group>";
@@ -783,6 +787,7 @@
 			files = (
 				2482266218CABF7B00C30677 /* IMGAccountTests.m in Sources */,
 				C3102D1F18DA3895007A75C4 /* IMGGalleryTests.m in Sources */,
+				C3102D3018DB835A007A75C4 /* IMGNotificationTests.m in Sources */,
 				C3102D1618D8D600007A75C4 /* IMGTestCase.m in Sources */,
 				C3102D2718DB7713007A75C4 /* IMGConversationTest.m in Sources */,
 				C3102D2318DB3F71007A75C4 /* IMGCommentTests.m in Sources */,
@@ -826,6 +831,7 @@
 			files = (
 				C36C010E18CA7A7F004576A5 /* IMGAccountTests.m in Sources */,
 				C3102D1E18DA3892007A75C4 /* IMGGalleryTests.m in Sources */,
+				C3102D2F18DB835A007A75C4 /* IMGNotificationTests.m in Sources */,
 				C3102D1518D8D5FF007A75C4 /* IMGTestCase.m in Sources */,
 				C3102D2618DB7713007A75C4 /* IMGConversationTest.m in Sources */,
 				C3102D2218DB3F71007A75C4 /* IMGCommentTests.m in Sources */,
