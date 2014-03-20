@@ -63,8 +63,13 @@
     
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
+        //returns string in dictionary for some reason
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber * commentId = [f numberFromString:responseObject[@"id"]];
+        
         if(success)
-            success(responseObject);
+            success([commentId integerValue]);
         
     } failure:failure];
 }
@@ -76,8 +81,13 @@
     
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
+        //returns string in dictionary for some reason
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber * commentId = [f numberFromString:responseObject[@"id"]];
+        
         if(success)
-            success(responseObject);
+            success([commentId integerValue]);
         
     } failure:failure];
 }
