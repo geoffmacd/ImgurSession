@@ -19,7 +19,7 @@
     //various metadata to store
     NSDictionary *imgurVariousValues;
     NSURL * testfileURL;
-    __unsafe_unretained __block void(^ failBlock)(NSError * error);
+    __block void(^ failBlock)(NSError * error);
 }
 
 -(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;

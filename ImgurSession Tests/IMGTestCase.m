@@ -57,16 +57,16 @@
     [ses setDelegate:self];
     if([imgurClient[@"refreshToken"] length])
         ses.refreshToken = imgurClient[@"refreshToken"];
-//    [ses setAccessToken:@"f9e5417af574ee441a2cc4b30652a887fe9fccca"];
+//    [ses setAccessToken:@""];
 //    [ses setAccessTokenExpiry: [NSDate dateWithTimeIntervalSinceNow:NSIntegerMax]];
-    //[ses setGarbageAuth];
+//    [ses setGarbageAuth];
     
     [self authenticateUsingOAuthWithPINAsync];
     
     //failure block
-//    failBlock = ^(NSError *error) {
-//        XCTAssert(nil, @"FAIL");
-//    };
+    failBlock = ^(NSError * error) {
+        XCTAssert(nil, @"FAIL");
+    };
     
     //Ensure client data is avaialble for authentication to proceed
     XCTAssertTrue(clientID, @"Client ID is missing");
