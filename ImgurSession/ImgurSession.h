@@ -29,6 +29,7 @@
         #import "IMGAlbum.h"
         #import "IMGBasicAlbum.h"
         #import "IMGComment.h"
+        #import "IMGConversation.h"
         #import "IMGNotification.h"
         #import "IMGGalleryAlbum.h"
         #import "IMGGalleryImage.h"

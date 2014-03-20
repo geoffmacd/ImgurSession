@@ -27,10 +27,6 @@
  */
 @property (readonly,nonatomic) NSInteger authorId;
 /**
- Recipients account id
- */
-@property (readonly,nonatomic) NSInteger recipientId;
-/**
  message subject
  */
 @property (readonly,nonatomic) NSString * subject;
@@ -41,11 +37,11 @@
 /**
  Readable string of time since now message was sent
  */
-@property (readonly,nonatomic) NSString * timeMessage;
+@property (readonly,nonatomic) NSDate * datetime;
 /**
- First message Id in thread
+ Parent convoId
  */
-@property (readonly,nonatomic) NSInteger parentId;
+@property (readonly,nonatomic) NSInteger conversationID;
 
 
 

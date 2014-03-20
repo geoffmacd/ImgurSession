@@ -8,7 +8,7 @@
 
 #import "IMGEndpoint.h"
 
-@class IMGMessage;
+@class IMGMessage,IMGConversation;
 
 /**
  Conversation requests. https://api.imgur.com/endpoints/conversation
@@ -24,7 +24,7 @@
 /**
  Get information about a specific conversation. Includes messages.
  */
-+ (void)conversationWithMessageID:(NSString*)messageID success:(void (^)(IMGMessage *))success failure:(void (^)(NSError *))failure;
++ (void)conversationWithMessageID:(NSUInteger)messageID success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Create
 /**
@@ -38,7 +38,7 @@
  @param commentId comment id to delete
  @return signal with request
  */
-+ (void)deleteConversation:(NSString *)messageID success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)deleteConversation:(NSUInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Report
 /**

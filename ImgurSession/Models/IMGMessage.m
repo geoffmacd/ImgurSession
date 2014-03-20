@@ -18,12 +18,11 @@
         
         _messageId = jsonData[@"id"];
         _fromUsername = jsonData[@"from"];
-        _authorId = [jsonData[@"account_id"] integerValue];
-        _recipientId = [jsonData[@"recipient_account_id"] integerValue];
+        _authorId = [jsonData[@"sender_id"] integerValue];
         _subject = jsonData[@"subject"];
         _body = jsonData[@"body"];
-        _timeMessage = jsonData[@"timestamp"];
-        _parentId = [jsonData[@"parent_id"] integerValue];
+        _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
+        _conversationID = [jsonData[@"conversation_id"] integerValue];
     }
     return [self trackModels];
 }

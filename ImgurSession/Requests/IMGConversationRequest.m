@@ -8,13 +8,14 @@
 
 #import "IMGConversationRequest.h"
 #import "IMGMessage.h"
+#import "IMGConversation.h"
 #import "IMGSession.h"
 
 @implementation IMGConversationRequest
 #pragma mark - Path
 
 +(NSString *)pathComponent{
-    return @"conversation";
+    return @"conversations";
 }
 
 #pragma mark - Load
@@ -24,36 +25,36 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSArray * messagesJSON = responseObject;
-        NSMutableArray * messages = [NSMutableArray new];
+        NSArray * convoJSON = responseObject;
+        NSMutableArray * convos = [NSMutableArray new];
         
-        for(NSDictionary * msgJSON in messagesJSON){
+        for(NSDictionary * conversationJSON in convoJSON){
             
             NSError *JSONError = nil;
-            IMGMessage *msg = [[IMGMessage alloc] initWithJSONObject:msgJSON error:&JSONError];
+            IMGConversation *convo = [[IMGConversation alloc] initWithJSONObject:conversationJSON error:&JSONError];
             
-            if(!JSONError && msg){
-                [messages addObject:msg];
+            if(!JSONError && convo){
+                [convos addObject:convo];
             }
         }
         
         if(success)
-            success([NSArray arrayWithArray:messages]);
+            success([NSArray arrayWithArray:convos]);
         
     } failure:failure];
 }
 
-+ (void)conversationWithMessageID:(NSString*)messageId success:(void (^)(IMGMessage *))success failure:(void (^)(NSError *))failure{
-    NSString * path = [self pathWithId:messageId];
++ (void)conversationWithMessageID:(NSUInteger)messageId success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure{
+    NSString * path = [self pathWithId:[NSString stringWithFormat:@"%lu", messageId]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSError *JSONError = nil;
-        IMGMessage *message = [[IMGMessage alloc] initWithJSONObject:responseObject error:&JSONError];
+        IMGConversation *convo = [[IMGConversation alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError && message) {
+        if(!JSONError && convo) {
             if(success)
-                success(message);
+                success(convo);
         }
         else {
             if(failure)
@@ -80,8 +81,8 @@
 
 #pragma mark - Delete
 
-+ (void)deleteConversation:(NSString *)messageId success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:messageId];
++ (void)deleteConversation:(NSUInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", convoID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

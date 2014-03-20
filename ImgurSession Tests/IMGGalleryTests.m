@@ -50,27 +50,27 @@
         
     } failure:failBlock];
     
-//    expect(gals).willNot.beNil();
+    expect(gals).willNot.beNil();
 }
 
-- (void)testPostAndDeleteGalleryImage{
-    
-    [self postTestGalleryImage:nil];
-}
-
-- (void)testPostAndDeleteGalleryAlbum{
-    
-    [self postTestGalleryAlbumWithOneImage:nil];
-}
-
-- (void)testPostAndDeleteImage{
-    
-    [self postTestImage:nil];
-}
-
-- (void)testPostAndDeleteAlbum{
-    
-    [self postTestAlbumWithOneImage:nil];
-}
+//- (void)testPostAndDeleteGalleryImage{
+//    
+//    [self postTestGalleryImage:nil];
+//}
+//
+//- (void)testPostAndDeleteGalleryAlbum{
+//    
+//    [self postTestGalleryAlbumWithOneImage:nil];
+//}
+//
+//- (void)testPostAndDeleteImage{
+//    
+//    [self postTestImage:nil];
+//}
+//
+//- (void)testPostAndDeleteAlbum{
+//    
+//    [self postTestAlbumWithOneImage:nil];
+//}
 
 @end

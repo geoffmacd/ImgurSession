@@ -44,7 +44,6 @@
 }
 
 + (void)repliesWithComment:(IMGComment*)comment success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
-#warning incorrect
     
     return [self commentWithID:comment.commentId withReplies:YES success:success failure:failure];
 }
