@@ -53,7 +53,7 @@
         
         if(!JSONError) {
             if(success)
-                success(result);
+                success([NSArray arrayWithArray:result]);
         }
         else {
         

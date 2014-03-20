@@ -110,23 +110,18 @@
         [parameters setObject:[idsParameter substringToIndex:[idsParameter length] - 1] forKey:@"ids"];
     }
     
-    if(privacy != IMGBlogLayout)
-    {
+    if(privacy != IMGBlogLayout){
         NSString *parameterValue = [IMGAlbum strForPrivacy:privacy];
         
         if(parameterValue)
             [parameters setObject:parameterValue forKey:@"privacy"];
     }
-    
-    if (layout != IMGDefaultLayout)
-    {
+    if (layout != IMGDefaultLayout){
         NSString *parameterValue = [IMGAlbum strForLayout:layout];
         
         if(parameterValue)
             [parameters setObject:parameterValue forKey:@"layout"];
     }
-    
-    
     
     
     [[IMGSession sharedInstance] POST:[self path] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {

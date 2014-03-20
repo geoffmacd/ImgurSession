@@ -75,7 +75,7 @@
         }
         
         if(success)
-            success(favImages);
+            success([NSArray arrayWithArray:favImages]);
         
     } failure:failure];
 }
@@ -119,7 +119,7 @@
         }
         
         if(success)
-            success(favs);
+            success([NSArray arrayWithArray:favs]);
         
     } failure:failure];
 }
@@ -162,7 +162,7 @@
         }
         
         if(success)
-            success(submissionsPage);
+            success([NSArray arrayWithArray:submissionsPage]);
         
     } failure:failure];
 }
@@ -273,7 +273,7 @@
         }
         
         if(success)
-            success(accountAlbums);
+            success([NSArray arrayWithArray:accountAlbums]);
         
     } failure:failure];
 }
@@ -351,7 +351,7 @@
         }
     
         if(success)
-            success(accountAlbums);
+            success([NSArray arrayWithArray:accountAlbums]);
         
     } failure:failure];
 }
@@ -425,7 +425,7 @@
         }
         
         if(success)
-            success(comments);
+            success([NSArray arrayWithArray:comments]);
         
     } failure:failure];
 }
@@ -519,7 +519,7 @@
         }
         
         if(success)
-            success(notifications);
+            success([NSArray arrayWithArray:notifications]);
         
     } failure:failure];
 }

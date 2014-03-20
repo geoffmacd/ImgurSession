@@ -97,7 +97,7 @@
             }
         }
         if(success)
-            success(images);
+            success([NSArray arrayWithArray:images]);
 
     } failure:failure];
 }
@@ -276,7 +276,7 @@
                 [comments addObject:comment];
         }
         if(success)
-            success(comments);
+            success([NSArray arrayWithArray:comments]);
         
     } failure:failure];
 }

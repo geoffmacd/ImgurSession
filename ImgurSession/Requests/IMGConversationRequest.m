@@ -45,7 +45,7 @@
         
         if(!JSONError) {
             if(success)
-                success(messages);
+                success([NSArray arrayWithArray:messages]);
         }
         else {
             
@@ -69,7 +69,6 @@
                 success(message);
         }
         else {
-            
             if(failure)
                 failure(JSONError);
         }
