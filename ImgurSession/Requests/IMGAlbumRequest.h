@@ -19,6 +19,7 @@
 @interface IMGAlbumRequest : IMGEndpoint
 
 #pragma mark - Load
+
 + (void)albumWithID:(NSString *)albumID success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Create
@@ -28,7 +29,7 @@
 
 #pragma mark - Delete
 
-+ (void)deleteAlbumWithID:(NSString *)albumID success:(void (^)(NSString *albumID))success failure:(void (^)(NSError *error))failure;
++ (void)deleteAlbumWithID:(NSString *)albumID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 
 

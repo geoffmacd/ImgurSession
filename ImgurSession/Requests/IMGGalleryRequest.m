@@ -145,53 +145,36 @@
 
 #pragma mark - Submit Gallery Objects
 
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *))failure{
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *))failure{
     return [self submitImageWithID:imageID title:title terms:YES success:success failure:failure];
 }
 
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *))failure{
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"image" withId2:imageID];
     
     NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
     
     [[IMGSession sharedInstance] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        if(success)
+            success();
         
-        NSError *JSONError = nil;
-        IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:responseObject error:&JSONError];
-        
-        if(!JSONError && image) {
-            if(success)
-                success(image);
-        }
-        else {
-            if(failure)
-                failure(JSONError);
-        }
     } failure:failure];
 }
 
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *))failure{
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *))failure{
     return [self submitAlbumWithID:albumID title:title terms:YES success:success failure:failure];
 }
 
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *))failure{
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"album" withId2:albumID];
     
     NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
     
     [[IMGSession sharedInstance] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSError *JSONError = nil;
-        IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
-        
-        if(!JSONError && album) {
-            if(success)
-                success(album);
-        }
-        else {
-            if(failure)
-                failure(JSONError);
-        }
+    
+        if(success)
+            success();
     } failure:failure];
 }
 

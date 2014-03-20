@@ -53,24 +53,50 @@
     expect(gals).willNot.beNil();
 }
 
-//- (void)testPostAndDeleteGalleryImage{
-//    
-//    [self postTestGalleryImage:nil];
-//}
-//
-//- (void)testPostAndDeleteGalleryAlbum{
-//    
-//    [self postTestGalleryAlbumWithOneImage:nil];
-//}
-//
-//- (void)testPostAndDeleteImage{
-//    
-//    [self postTestImage:nil];
-//}
-//
-//- (void)testPostAndDeleteAlbum{
-//    
-//    [self postTestAlbumWithOneImage:nil];
-//}
+- (void)testPostAndDeleteGalleryImage{
+    
+    __block BOOL isDeleted;
+    
+    [self postTestGalleryImage:^(IMGGalleryImage * image, void(^success)()) {
+        
+        success();
+        isDeleted = YES;
+    }];
+    
+    expect(isDeleted).will.beTruthy();
+}
+
+- (void)testPostAndDeleteGalleryAlbum{
+    
+    __block BOOL isDeleted;
+    [self postTestGalleryAlbumWithOneImage:^(IMGGalleryAlbum * album, void(^success)()) {
+        
+        success();
+        isDeleted = YES;
+    }];
+    expect(isDeleted).will.beTruthy();
+}
+
+- (void)testPostAndDeleteImage{
+    
+    __block BOOL isDeleted;
+    [self postTestImage:^(IMGImage * image, void(^success)()) {
+        
+        success();
+        isDeleted = YES;
+    }];
+    expect(isDeleted).will.beTruthy();
+}
+
+- (void)testPostAndDeleteAlbum{
+    
+    __block BOOL isDeleted;
+    [self postTestAlbumWithOneImage:^(IMGAlbum * album, void(^success)()) {
+        
+        success();
+        isDeleted = YES;
+    }];
+    expect(isDeleted).will.beTruthy();
+}
 
 @end

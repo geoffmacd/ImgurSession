@@ -34,8 +34,8 @@
                     
                     [IMGCommentRequest deleteCommentWithID:commentId  success:^() {
                         
-                        deleteSuccess = YES;
                         success();
+                        deleteSuccess = YES;
                         
                     } failure:failBlock];
                     
@@ -47,6 +47,11 @@
     }];
     
     expect(deleteSuccess).will.beTruthy();
+}
+
+-(void)testReportComment{
+    
+    //Not sure how to implement test of this without destroying account
 }
 
 @end

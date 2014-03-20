@@ -93,36 +93,26 @@
         
         expect(image).notTo.beNil();
         
-        [IMGGalleryRequest submitImageWithID:image.imageID title:@"Test Gallery" terms:YES success:^(IMGGalleryImage * galImage) {
+        [IMGGalleryRequest submitImageWithID:image.imageID title:@"Test Gallery" terms:YES success:^() {
             
-            expect(galImage).notTo.beNil();
-            
-            if(success)
-                success(galImage, ^{
-                    
-                    //remove from gallery and delete image
-                    [IMGGalleryRequest removeImageWithID:galImage.imageID success:^(NSString *albumID) {
+            [IMGGalleryRequest imageWithID:image.imageID success:^(IMGGalleryImage *galImage) {
+                
+                if(success)
+                    success(galImage, ^{
                         
-                        [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                        //remove from gallery and delete image
+                        [IMGGalleryRequest removeImageWithID:image.imageID success:^(NSString *albumID) {
                             
-                            deleteSuccess = YES;
+                            [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                                
+                                deleteSuccess = YES;
+                                
+                            } failure:failBlock];
                             
                         } failure:failBlock];
-                        
-                    } failure:failBlock];
-                });
-            else{
-                //remove from gallery and delete image
-                [IMGGalleryRequest removeImageWithID:galImage.imageID success:^(NSString *albumID) {
-                    
-                    [IMGImageRequest deleteImageWithID:image.imageID success:^() {
-                        
-                        deleteSuccess = YES;
-                        
-                    } failure:failBlock];
-                    
-                } failure:failBlock];
-            }
+                    });
+            } failure:failBlock];
+            
             
         } failure:failBlock];
         
@@ -152,15 +142,6 @@
                     
                 } failure:failBlock];
             });
-        else{
-            //remove from gallery and delete image
-            
-            [IMGImageRequest deleteImageWithID:image.imageID success:^() {
-                
-                deleteSuccess = YES;
-                
-            } failure:failBlock];
-        }
         
     } failure:failBlock];
 }
@@ -177,49 +158,34 @@
         
         expect(image).notTo.beNil();
         
-        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
             
             expect(album).notTo.beNil();
             
-            [IMGGalleryRequest submitAlbumWithID:album.albumID title:@"Test Gallery Album" terms:YES success:^(IMGGalleryAlbum * galAlbum){
+            [IMGGalleryRequest submitAlbumWithID:album.albumID title:@"Test Gallery Album" terms:YES success:^(){
                 
-                expect(galAlbum).notTo.beNil();
-                
-                if(success)
-                    success(galAlbum, ^{
-                        
-                        //remove from gallery and delete image
-                        [IMGGalleryRequest removeAlbumWithID:album.albumID success:^(NSString *albumID) {
+                [IMGGalleryRequest albumWithID:album.albumID success:^(IMGGalleryAlbum *galAlbum) {
+                    
+                    if(success)
+                        success(galAlbum, ^{
                             
-                            [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
+                            //remove from gallery and delete image
+                            [IMGGalleryRequest removeAlbumWithID:album.albumID success:^(NSString *albumID) {
                                 
-                                [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                                [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
                                     
-                                    deleteSuccess = YES;
+                                    [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                                        
+                                        deleteSuccess = YES;
+                                        
+                                    } failure:failBlock];
                                     
                                 } failure:failBlock];
                                 
                             } failure:failBlock];
-                            
-                        } failure:failBlock];
-                    });
-                else{
+                        });
                     
-                    //remove from gallery and delete image
-                    [IMGGalleryRequest removeAlbumWithID:album.albumID success:^(NSString *albumID) {
-                        
-                        [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
-                            
-                            [IMGImageRequest deleteImageWithID:image.imageID success:^() {
-                                
-                                deleteSuccess = YES;
-                                
-                            } failure:failBlock];
-                            
-                        } failure:failBlock];
-                        
-                    } failure:failBlock];
-                }
+                } failure:failBlock];
                 
             } failure:failBlock];
             
@@ -240,14 +206,14 @@
         
         expect(image).notTo.beNil();
         
-        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
             
             expect(album).notTo.beNil();
             
             if(success)
                 success(album, ^{
                     
-                    [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
+                    [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^() {
                         
                         [IMGImageRequest deleteImageWithID:image.imageID success:^() {
                             
@@ -257,18 +223,6 @@
                         
                     } failure:failBlock];
                 });
-            else {
-                
-                [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
-                    
-                    [IMGImageRequest deleteImageWithID:image.imageID success:^() {
-                        
-                        deleteSuccess = YES;
-                        
-                    } failure:failBlock];
-                    
-                } failure:failBlock];
-            }
             
         } failure:failBlock];
         

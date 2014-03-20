@@ -88,15 +88,15 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param imageId    imageId to submit to gallery
  @param title    title to append to top of imgur page
  */
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *error))failure;
-+ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *error))failure;
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *error))failure;
 /**
  Submits gallery album with id
  @param albumID    albumID to submit to gallery
  @param title    title to append to top of imgur page
  */
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *error))failure;
-+ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *error))failure;
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Remove Gallery objects
 

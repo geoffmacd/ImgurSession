@@ -452,11 +452,11 @@
 			children = (
 				C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */,
 				C3102D2118DB3F71007A75C4 /* IMGCommentTests.m */,
+				C3102D2518DB7713007A75C4 /* IMGConversationTest.m */,
 				C3102D1D18DA3892007A75C4 /* IMGGalleryTests.m */,
+				C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */,
 				C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */,
 				C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */,
-				C3102D2518DB7713007A75C4 /* IMGConversationTest.m */,
-				C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */,
 			);
 			path = "ImgurSession Tests";
 			sourceTree = "<group>";
