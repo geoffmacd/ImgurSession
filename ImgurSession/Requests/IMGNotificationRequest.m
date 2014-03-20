@@ -29,11 +29,11 @@
     
     [[IMGSession sharedInstance] GET:path parameters:@{@"new":[NSNumber numberWithBool:freshOnly]} success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
         
         NSArray * repliesJSON = responseObject[@"replies"];
         NSMutableArray * replies = [NSMutableArray new];
         for(NSDictionary * replyJSON in repliesJSON){
+            NSError *JSONError = nil;
             IMGNotification * notification = [[IMGNotification alloc] initReplyNotificationWithJSONObject:replyJSON error:&JSONError];
             if(!JSONError && notification)
                 [replies addObject:notification];
@@ -42,6 +42,7 @@
         NSArray * messagesJSON = responseObject[@"messages"];
         NSMutableArray * messages = [NSMutableArray new];
         for(NSDictionary * messageJSON in messagesJSON){
+            NSError *JSONError = nil;
             IMGNotification * notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:messageJSON error:&JSONError];
             if(!JSONError && notification)
                 [messages addObject:notification];
@@ -50,16 +51,8 @@
         NSMutableArray * result = [NSMutableArray arrayWithArray:messages];
         [result addObjectsFromArray:replies];
         
-        
-        if(!JSONError) {
-            if(success)
-                success([NSArray arrayWithArray:result]);
-        }
-        else {
-        
-            if(failure)
-                failure(JSONError);
-        }
+        if(success)
+            success([NSArray arrayWithArray:result]);
         
     } failure:failure];
 }
@@ -81,7 +74,7 @@
             notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:responseObject error:&JSONError];
         }
         
-        if(!JSONError) {
+        if(!JSONError && notification) {
             if(success)
                 success(notification);
         }

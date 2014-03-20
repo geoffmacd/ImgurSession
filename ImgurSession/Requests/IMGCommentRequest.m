@@ -31,7 +31,7 @@
         NSError *JSONError = nil;
         IMGComment *comment = [[IMGComment alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && comment) {
             if(success)
                 success(comment);
         }

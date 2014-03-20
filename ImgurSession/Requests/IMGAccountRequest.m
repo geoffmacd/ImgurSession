@@ -37,12 +37,11 @@
         NSError *JSONError = nil;
         IMGAccount *account = [[IMGAccount alloc] initWithJSONObject:responseObject withName:username error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && account) {
             if(success)
                 success(account);
         }
         else {
-            
             if(failure)
                 failure(JSONError);
         }
@@ -56,20 +55,15 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
         NSArray * favImagesJSON = responseObject;
         NSMutableArray * favImages = [NSMutableArray new];
         
         for(NSDictionary * imageJSON in favImagesJSON){
-            JSONError = nil;
             
+            NSError *JSONError = nil;
             IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:imageJSON error:&JSONError];
             
-            if(JSONError){
-                
-                if(failure)
-                    failure(JSONError);
-            } else {
+            if(!JSONError && image){
                 [favImages addObject:image];
             }
         }
@@ -85,34 +79,25 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
         NSArray * fullJSON = responseObject;
         NSMutableArray * favs = [NSMutableArray new];
         
         //could be gallery image or gallery album
         for(NSDictionary * json in fullJSON){
-            JSONError = nil;
             
-            //album
+            NSError *JSONError = nil;
             if(json[@"layout"]){
+                //album
                 
                 IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:json error:&JSONError];
-                if(JSONError){
-                    
-                    if(failure)
-                        failure(JSONError);
-                } else {
+                if(!JSONError && album){
                     [favs addObject:album];
                 }
             } else {
                 //image
+                
                 IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:json error:&JSONError];
-                
-                if(JSONError){
-                
-                    if(failure)
-                        failure(JSONError);
-                } else {
+                if(!JSONError && image){
                     [favs addObject:image];
                 }
             }
@@ -137,25 +122,18 @@
         for(NSDictionary * json in fullJSON){
             JSONError = nil;
             
-            //album
             if(json[@"layout"]){
+                //album
                 
                 IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:json error:&JSONError];
-                if(JSONError){
-                    
-                    if(failure)
-                        failure(JSONError);
-                } else {
+                if(!JSONError && album){
                     [submissionsPage addObject:album];
                 }
             } else {
                 //image
-                IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:json error:&JSONError];
                 
-                if(JSONError){
-                    if(failure)
-                        failure(JSONError);
-                } else {
+                IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:json error:&JSONError];
+                if(!JSONError && image){
                     [submissionsPage addObject:image];
                 }
             }
@@ -178,7 +156,7 @@
         NSError *JSONError = nil;
         IMGAccountSettings *settings = [[IMGAccountSettings alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && settings) {
             if(success)
                 success(settings);
         }
@@ -234,7 +212,7 @@
         NSError *JSONError = nil;
         IMGGalleryProfile *profile = [[IMGGalleryProfile alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && profile) {
             if(success)
                 success(profile);
         }
@@ -254,20 +232,15 @@
 
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
         NSArray * accountAlbumsJSON = responseObject;
         NSMutableArray * accountAlbums = [NSMutableArray new];
         
         for(NSDictionary * albumJSON in accountAlbumsJSON){
-            JSONError = nil;
             
+            NSError *JSONError = nil;
             IMGAlbum *album = [[IMGAlbum alloc] initWithJSONObject:albumJSON error:&JSONError];
             
-            if(JSONError){
-                
-                if(failure)
-                    failure(JSONError);
-            } else {
+            if(!JSONError && album){
                 [accountAlbums addObject:album];
             }
         }
@@ -288,7 +261,6 @@
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSArray * albumIDs = responseObject;
-        
         if(success)
             success(albumIDs);
         
@@ -303,7 +275,6 @@
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSNumber * numAccountAlbums = responseObject; //NSNumber??
-        
         if(success)
             success([numAccountAlbums integerValue]);
         
@@ -333,19 +304,15 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
         NSArray * accountAlbumsJSON = responseObject;
         NSMutableArray * accountAlbums = [NSMutableArray new];
         
         for(NSDictionary * albumJSON in accountAlbumsJSON){
-            JSONError = nil;
             
+            NSError *JSONError = nil;
             IMGAlbum *album = [[IMGAlbum alloc] initWithJSONObject:albumJSON error:&JSONError];
             
-            if(JSONError){
-                if(failure)
-                    failure(JSONError);
-            } else {
+            if(!JSONError && album){
                 [accountAlbums addObject:album];
             }
         }
@@ -406,20 +373,15 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
         NSArray * commentsJSON = responseObject;
         NSMutableArray * comments = [NSMutableArray new];
         
         for(NSDictionary * commentJSON in commentsJSON){
-            JSONError = nil;
             
+            NSError *JSONError = nil;
             IMGComment *comment = [[IMGComment alloc] initWithJSONObject:commentJSON error:&JSONError];
             
-            if(JSONError){
-        
-                if(failure)
-                    failure(JSONError);
-            } else {
+            if(!JSONError && comment){
                 [comments addObject:comment];
             }
         }
@@ -464,14 +426,14 @@
     } failure:failure];
 }
 
-+ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:@"me" withOption:@"comment" withId2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
-            success(nil);
+            success();
         
     } failure:failure];
 }
@@ -493,13 +455,12 @@
     
     [[IMGSession sharedInstance] GET:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
         NSArray * notificationsJSON = responseObject;
         NSMutableArray * notifications = [NSMutableArray new];
         
         for(NSDictionary * notificationJSON in notificationsJSON){
-            JSONError = nil;
             
+            NSError *JSONError = nil;
             IMGNotification * notification;
             //is it a reply or message
             if(notificationJSON[@"caption"]){
@@ -510,10 +471,7 @@
                 notification = [[IMGNotification alloc] initMessageNotificationWithJSONObject:responseObject error:&JSONError];
             }
             
-            if(JSONError){
-                if(failure)
-                    failure(JSONError);
-            } else {
+            if(!JSONError && notification){
                 [notifications addObject:notification];
             }
         }

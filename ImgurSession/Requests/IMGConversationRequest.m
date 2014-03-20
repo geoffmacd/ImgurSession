@@ -24,34 +24,21 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        
-        NSError *JSONError = nil;
         NSArray * messagesJSON = responseObject;
         NSMutableArray * messages = [NSMutableArray new];
         
         for(NSDictionary * msgJSON in messagesJSON){
-            JSONError = nil;
             
+            NSError *JSONError = nil;
             IMGMessage *msg = [[IMGMessage alloc] initWithJSONObject:msgJSON error:&JSONError];
             
-            if(JSONError){
-                
-                if(failure)
-                    failure(JSONError);
-            } else {
+            if(!JSONError && msg){
                 [messages addObject:msg];
             }
         }
         
-        if(!JSONError) {
-            if(success)
-                success([NSArray arrayWithArray:messages]);
-        }
-        else {
-            
-            if(failure)
-                failure(JSONError);
-        }
+        if(success)
+            success([NSArray arrayWithArray:messages]);
         
     } failure:failure];
 }
@@ -64,7 +51,7 @@
         NSError *JSONError = nil;
         IMGMessage *message = [[IMGMessage alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && message) {
             if(success)
                 success(message);
         }

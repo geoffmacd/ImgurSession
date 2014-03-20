@@ -86,13 +86,13 @@
             if([json[@"is_album"] boolValue]){
                 NSError *JSONError = nil;
                 IMGGalleryAlbum * album = [[IMGGalleryAlbum alloc] initWithJSONObject:json error:&JSONError];
-                if(!JSONError)
+                if(!JSONError && album)
                     [images addObject:album];
             } else {
                 
                 NSError *JSONError = nil;
                 IMGGalleryImage * image = [[IMGGalleryImage alloc] initWithJSONObject:json error:&JSONError];
-                if(!JSONError)
+                if(!JSONError && image)
                     [images addObject:image];
             }
         }
@@ -112,7 +112,7 @@
         NSError *JSONError = nil;
         IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && image) {
             if(success)
                 success(image);
         }
@@ -132,7 +132,7 @@
         NSError *JSONError = nil;
         IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && album) {
             if(success)
                 success(album);
         }
@@ -159,12 +159,11 @@
         NSError *JSONError = nil;
         IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && image) {
             if(success)
                 success(image);
         }
         else {
-            
             if(failure)
                 failure(JSONError);
         }
@@ -185,7 +184,7 @@
         NSError *JSONError = nil;
         IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && album) {
             if(success)
                 success(album);
         }
@@ -272,7 +271,7 @@
             
             NSError *JSONError = nil;
             IMGComment * comment = [[IMGComment alloc] initWithJSONObject:json error:&JSONError];
-            if(!JSONError)
+            if(!JSONError && comment)
                 [comments addObject:comment];
         }
         if(success)
@@ -302,7 +301,7 @@
         NSError *JSONError = nil;
         IMGComment *comment = [[IMGComment alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && comment) {
             if(success)
                 success(comment);
         }
@@ -334,7 +333,7 @@
         NSError *JSONError = nil;
         IMGComment *comment = [[IMGComment alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && comment) {
             if(success)
                 success(comment);
         }

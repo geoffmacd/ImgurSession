@@ -144,7 +144,7 @@
 /**
  Delete a comment from the current account.
  */
-+ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Replies associated with account

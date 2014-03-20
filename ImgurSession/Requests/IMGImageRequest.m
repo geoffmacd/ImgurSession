@@ -26,11 +26,10 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        
         NSError *JSONError = nil;
         IMGImage *image = [[IMGImage alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && image) {
             if(success)
                 success(image);
         }
@@ -83,7 +82,7 @@
         NSError *JSONError = nil;
         IMGImage *image = [[IMGImage alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && image) {
             if(success)
                 success(image);
         }
@@ -120,7 +119,7 @@
         NSError *JSONError = nil;
         IMGImage *image = [[IMGImage alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && image) {
             if(success)
                 success(image);
         } else {

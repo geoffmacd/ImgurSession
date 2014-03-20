@@ -30,7 +30,7 @@
         NSError *JSONError = nil;
         IMGAlbum *album = [[IMGAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && album) {
             if(success)
                 success(album);
         }
@@ -49,7 +49,7 @@
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         
-        NSArray * jsonArray = responseObject[@"data"];
+        NSArray * jsonArray = responseObject;
         __block NSMutableArray * images = [NSMutableArray new];
         
         [jsonArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -58,20 +58,12 @@
             NSError *JSONError = nil;
             IMGImage * image = [[IMGImage alloc] initWithJSONObject:imageDict error:&JSONError];
             
-            if(!JSONError)
+            if(!JSONError && image)
                 [images addObject:image];
         }];
         
-        
-        if(!responseObject) {
-            if(success)
-                success(images);
-        }
-        else {
-            
-            if(failure)
-                failure(nil);
-        }
+        if(success)
+            success(images);
         
     } failure:failure];
 }
@@ -128,16 +120,14 @@
         NSError *JSONError = nil;
         IMGAlbum *album = [[IMGAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
         
-        if(!JSONError) {
+        if(!JSONError && album) {
             if(success)
                 success(album);
         }
         else {
-            
             if(failure)
                 failure(JSONError);
         }
-        
         
     } failure:failure];
 }
