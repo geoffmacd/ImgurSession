@@ -34,13 +34,13 @@
  @param imageId id of image to comment on
  @param parentId id of parent image to comment on
  */
-+ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageID withParentID:(NSUInteger)parentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageID withParentID:(NSUInteger)parentID success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
 /**
  @param caption comment string
  @param imageId id of image to comment on
  @param parentCommentId id of parent comment to reply to
  */
-+ (void)replyToComment:(NSString*)caption withImageID:(NSString *)imageID withCommentID:(NSUInteger)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)replyToComment:(NSString*)caption withImageID:(NSString *)imageID withCommentID:(NSUInteger)parentCommentID success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Delete
 /**

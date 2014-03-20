@@ -21,6 +21,7 @@
 
 #pragma mark - Test Account endpoints
 
+
 - (void)testAccountLoadMe{
     
     __block IMGAccount * acc;
@@ -68,7 +69,7 @@
         
         set = settings;
 
-    } failure:failBlock];
+    } failure: failBlock];
     
     expect(set).willNot.beNil();
 }
@@ -123,7 +124,7 @@
     
     [IMGAccountRequest accountCommentIDsWithUser:@"me" success:^(NSArray * commentIds) {
 
-        [IMGAccountRequest accountCommentWithID:[commentIds firstObject] success:^(IMGComment * firstComment) {
+        [IMGAccountRequest accountCommentWithID:[[commentIds firstObject] integerValue] success:^(IMGComment * firstComment) {
 
             [IMGAccountRequest accountCommentsWithUser:@"me" success:^(NSArray * comments) {
                 
@@ -152,18 +153,17 @@
     
     [self postTestImage:^(IMGImage * image, void(^success)()){
         
-        success();
-        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(IMGComment * comment) {
+        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSUInteger commentId) {
             
-            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withCommentID:comment.commentId success:^(IMGComment * reply) {
+            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withCommentID:commentId success:^(NSUInteger replyId) {
+
                 
-                expect(reply.parentId == comment.commentId).beTruthy();
-                
-                [IMGCommentRequest deleteCommentWithID:reply.commentId success:^() {
+                [IMGCommentRequest deleteCommentWithID:replyId success:^() {
                     
-                    [IMGCommentRequest deleteCommentWithID:reply.commentId success:^() {
+                    [IMGCommentRequest deleteCommentWithID:replyId success:^() {
                         
                         deleteSuccess = YES;
+                        success();
                         
                     } failure:failBlock];
                     

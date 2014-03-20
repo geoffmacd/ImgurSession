@@ -50,48 +50,34 @@
 
 #pragma mark - Create
 
-+ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageId withParentID:(NSUInteger)parentId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self path];
++ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageId withParentID:(NSUInteger)parentId success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithId:imageId];
     
-    NSDictionary * params = @{@"image_id":imageId,@"comment":caption,@"parent_id":[NSNumber numberWithInteger:parentId]};
+    NSDictionary * params;
+    
+    if(parentId)
+        params = @{@"image_id":imageId,@"comment":caption,@"parent_id":[NSNumber numberWithInteger:parentId]};
+    else
+        params = @{@"image_id":imageId,@"comment":caption};
+        
     
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
-        IMGComment *comment = [[IMGComment alloc] initWithJSONObject:responseObject error:&JSONError];
-        
-        if(!JSONError) {
-            if(success)
-                success(comment);
-        }
-        else {
-            
-            if(failure)
-                failure(JSONError);
-        }
+        if(success)
+            success(responseObject);
         
     } failure:failure];
 }
 
-+ (void)replyToComment:(NSString*)caption withImageID:(NSString*)imageId withCommentID:(NSUInteger)parentCommentId success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)replyToComment:(NSString*)caption withImageID:(NSString*)imageId withCommentID:(NSUInteger)parentCommentId success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%ld",(long)parentCommentId]];
     
     NSDictionary * params = @{@"image_id":imageId,@"comment":caption};
     
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSError *JSONError = nil;
-        IMGComment *comment = [[IMGComment alloc] initWithJSONObject:responseObject error:&JSONError];
-        
-        if(!JSONError) {
-            if(success)
-                success(comment);
-        }
-        else {
-            
-            if(failure)
-                failure(JSONError);
-        }
+        if(success)
+            success(responseObject);
         
     } failure:failure];
 }

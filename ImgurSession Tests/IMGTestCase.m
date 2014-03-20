@@ -36,6 +36,9 @@
     [super setUp];
     //run before each test
     
+    //30 second timeout
+    [Expecta setAsynchronousTestTimeout:30.0];
+    
         
     // Storing various testing values
     NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
@@ -54,21 +57,22 @@
     [ses setDelegate:self];
     if([imgurClient[@"refreshToken"] length])
         ses.refreshToken = imgurClient[@"refreshToken"];
+//    [ses setAccessToken:@"f9e5417af574ee441a2cc4b30652a887fe9fccca"];
+//    [ses setAccessTokenExpiry: [NSDate dateWithTimeIntervalSinceNow:NSIntegerMax]];
     //[ses setGarbageAuth];
     
     [self authenticateUsingOAuthWithPINAsync];
     
     //failure block
-    failBlock = ^(NSError *error) {
-        XCTAssert(nil, @"FAIL");
-    };
+//    failBlock = ^(NSError *error) {
+//        XCTAssert(nil, @"FAIL");
+//    };
     
     //Ensure client data is avaialble for authentication to proceed
     XCTAssertTrue(clientID, @"Client ID is missing");
     XCTAssertTrue(clientSecret, @"Client secret is missing");
     
-    //30 second timeout
-    [Expecta setAsynchronousTestTimeout:30.0];
+    
 }
 
 - (void)tearDown {
