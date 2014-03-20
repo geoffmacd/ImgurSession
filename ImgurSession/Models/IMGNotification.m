@@ -50,7 +50,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@ ; notifyId: \"%@\"; accountId: %ld; viewed: %@;", [super description],  _notificationId, (long)_accountId, (_isViewed ? @"YES" : @"NO")];
+    return [NSString stringWithFormat:@"%@ ; notifyId: \"%@\"; accountId: %ld; viewed: %@;", [super description], self.notificationId, (long)self.accountId, (self.isViewed ? @"YES" : @"NO")];
 }
 
 

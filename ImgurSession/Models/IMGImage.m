@@ -51,14 +51,14 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
 - (NSString *)description{
     return [NSString stringWithFormat:
             @"%@; image ID: %@ ; title: \"%@\"; description: \"%@\"; datetime: %@; type: %@; animated: %d; width: %ld; height: %ld; size: %ld; views: %ld; bandwidth: %ld",
-            [super description],_imageID,  _title, _description, _datetime, _type, _animated, (long)_width, (long)_height, (long)_size, (long)_views, (long)_bandwidth];
+            [super description],  self.imageID, self.title, self.description, self.datetime, self.type, self.animated, (long)self.width, (long)self.height, (long)self.size, (long)self.views, (long)self.bandwidth];
 }
 
 #pragma mark - Display
 
 - (NSURL *)URLWithSize:(ImgurSize)size
 {
-    NSString *stringURL = [_link copy];
+    NSString *stringURL = [self.link copy];
     NSString *path = [stringURL stringByDeletingPathExtension];
     NSString *extension = [stringURL pathExtension];
     

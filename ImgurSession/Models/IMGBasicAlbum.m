@@ -39,11 +39,11 @@
             NSError *JSONError = nil;
             IMGImage * image = [[IMGImage alloc] initWithJSONObject:imageJSON error:&JSONError];
             
-            if(!JSONError){
+            if(!JSONError && image){
                 [images addObject:image];
             }
         }
-        _images = images;
+        _images = [NSArray arrayWithArray:images];
     }
     return [self trackModels];
 }

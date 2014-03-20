@@ -25,7 +25,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@; ups: \"%ld\"; downs: \"%ld\";",  [super description], (long)_ups, (long)_downs];
+    return [NSString stringWithFormat:@"%@; ups: \"%ld\"; downs: \"%ld\";",  [super description], (long)self.ups, (long)self.downs];
 }
 
 +(NSString*)strForVote:(IMGVoteType)vote{

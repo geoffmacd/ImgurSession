@@ -40,7 +40,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %.2f; created: %@", [super description], (unsigned long)_accountID, _url, _bio, _reputation, _created];
+    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %.2f; created: %@", [super description], (unsigned long)self.accountID, self.url, self.bio, self.reputation, self.created];
 }
 
 

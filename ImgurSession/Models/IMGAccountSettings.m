@@ -66,7 +66,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@; email: \"%@\"; high quality: \"%@\"; album_privact: \"%@\"",  [super description], _email, (_highQuality ? @"YES" : @"NO"), [IMGBasicAlbum strForPrivacy:_albumPrivacy]];
+    return [NSString stringWithFormat: @"%@; email: \"%@\"; high quality: \"%@\"; album_privact: \"%@\"",  [super description], self.email, (self.highQuality ? @"YES" : @"NO"), [IMGBasicAlbum strForPrivacy:self.albumPrivacy]];
 }
 
 

@@ -25,7 +25,6 @@
 @property (readwrite,nonatomic) NSInteger creditsClientLimit;
 @property  (readwrite,nonatomic) NSInteger warnRateLimit;
 
-
 -(void)accessTokenExpired;
 
 @end

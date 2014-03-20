@@ -38,7 +38,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@; caption: \"%@\"; author: \"%@\"; authorId: %ld; imageId: %@;",  [super description], _caption, _author, (long)_authorId, _imageId];
+    return [NSString stringWithFormat:@"%@; caption: \"%@\"; author: \"%@\"; authorId: %ld; imageId: %@;",  [super description], self.caption, self.author, (long)self.authorId, self.imageId];
 }
 
 

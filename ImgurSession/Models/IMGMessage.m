@@ -31,7 +31,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@ ; subject: \"%@\"; author: \"%@\"; message: %@;", [super description], _subject, _fromUsername, _body];
+    return [NSString stringWithFormat:@"%@ ; subject: \"%@\"; author: \"%@\"; message: %@;", [super description], self.subject, self.fromUsername, self.body];
 }
 
 

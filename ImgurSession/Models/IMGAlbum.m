@@ -27,7 +27,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@ ; deletehash: %@",[super description], _deletehash];
+    return [NSString stringWithFormat: @"%@ ; deletehash: %@",[super description], self.deletehash];
 }
 
 @end

@@ -41,7 +41,7 @@
 - (NSString *)description{
     return [NSString stringWithFormat:
             @"%@; accountURL: \"%@\"; ups: %ld; downs: %ld; score: %ld; vote: %ld",
-            [super description], _accountURL, (long)_ups, (long)_downs, (long)_score, (long)_vote];
+            [super description], self.accountURL, (long)self.ups, (long)self.downs, (long)self.score, (long)self.vote];
 }
 
 

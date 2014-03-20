@@ -39,7 +39,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat: @"%@; ups: %ld; downs: %ld; score: %ld; vote: %ld", [super description], (long)_ups, (long)_downs, (long)_score, (long)_vote];
+    return [NSString stringWithFormat: @"%@; ups: %ld; downs: %ld; score: %ld; vote: %ld", [super description], (long)self.ups, (long)self.downs, (long)self.score, (long)self.vote];
 }
 
 
