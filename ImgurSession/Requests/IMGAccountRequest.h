@@ -95,7 +95,7 @@
 /**
  Delete an Album with a given id.
  */
-+ (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 
 
@@ -120,7 +120,7 @@
 /**
  Deletes an Image. This requires a delete hash rather than an ID.
  */
-+ (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Comments associated with account

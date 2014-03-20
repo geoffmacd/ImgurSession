@@ -9,7 +9,7 @@
 
 #import "IMGTestCase.h"
 
-#warning: Must have at least one new and old notification of both reply type and conversation type
+#warning: Must have at least one new and old notification
 
 @interface IMGNotificationTests : IMGTestCase
 

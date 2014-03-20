@@ -282,14 +282,14 @@
     
 }
 
-+ (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)())success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:@"me" withOption:@"albums" withId2:albumID];
 
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
-            success(nil);
+            success();
         
     } failure:failure];
 }
@@ -352,13 +352,13 @@
     } failure:failure];
 }
 
-+ (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:@"me" withOption:@"image" withId2:deleteHash];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
     
         if(success)
-            success(nil);
+            success();
         
     } failure:failure];
 }

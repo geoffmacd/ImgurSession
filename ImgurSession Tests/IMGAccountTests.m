@@ -8,10 +8,10 @@
 
 #import "IMGTestCase.h"
 
-#warning: Implementation requires client id, client secret filled out in tests plist
-#warning: imgur user must have refresh token filled out in tests plist in order to work on iPhone
-#warning: Imgur users must have favourites gallery items, gallery posts , and comments posted to the gallery
-#warning: delegate methods not called unless dispatch methods are overwritten due to strange run loop in test runs, may need to call directly
+#warning: Tests requires client id, client secret filled out in tests plist
+#warning: Tests must have refresh token filled out in tests plist in order to work on iPhone
+#warning: Test user must have at least: one notification, one comment, one image post, one favourtie
+
 
 @interface IMGAccountTests : IMGTestCase
 
@@ -106,16 +106,15 @@
     
     [IMGAccountRequest accountReplies:^(NSArray * replies) {
 
-        [IMGAccountRequest accountRepliesWithFresh:NO success:^(NSArray * freshReplies) {
-
-            //should have less fresh replies
-//            expect(freshReplies).to.beLessThanOrEqualTo(replies);
+        [IMGAccountRequest accountRepliesWithFresh:NO success:^(NSArray * oldReplies) {
+            
+            rep = oldReplies;
 
         } failure:failBlock];
         
     } failure:failBlock];
     
-//    expect(rep).willNot.beNil();
+    expect(rep).willNot.beNil();
 }
 
 - (void)testAccountComments{
@@ -152,7 +151,7 @@
         [IMGAccountRequest accountImageWithID:[images firstObject] success:^(IMGImage * image) {
             
             [IMGAccountRequest accountImagesWithUser:@"me" withPage:0 success:^(NSArray * images) {
-                
+                    
                 [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
                     
                     numImages = num;
@@ -190,17 +189,55 @@
 
 -(void)testAccountCommentDelete{
     
-
+    __block BOOL isDeleted;
+    [self postTestImage:^(IMGImage * image, void(^success)()) {
+        
+        
+        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSUInteger commentId) {
+                
+            [IMGAccountRequest accountDeleteCommentWithID:commentId success:^{
+                
+                success();
+                isDeleted = YES;
+                
+            } failure:failBlock];
+            
+        } failure:failBlock];
+    }];
+    
+    expect(isDeleted).will.beTruthy();
 }
 
 -(void)testAccountImageDelete{
     
+    __block BOOL isDeleted;
+    [self postTestImage:^(IMGImage * image, void(^success)()) {
+
+        [IMGAccountRequest accountDeleteImageWithHash:image.deletehash success:^() {
+            
+            success();
+            isDeleted = YES;
     
+        } failure:failBlock];
+    }];
+    
+    expect(isDeleted).will.beTruthy();
 }
 
 -(void)testAccountAlbumDelete{
     
+    __block BOOL isDeleted;
+    [self postTestAlbumWithOneImage:^(IMGAlbum * album, void(^success)()) {
+        
+        [IMGAccountRequest accountDeleteAlbumWithID:album.albumID success:^{
+            
+            success();
+            isDeleted = YES;
+            
+        } failure:failBlock];
+    }];
     
+    expect(isDeleted).will.beTruthy();
 }
 
 @end
