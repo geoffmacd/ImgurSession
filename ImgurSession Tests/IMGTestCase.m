@@ -79,6 +79,39 @@
     [super tearDown];
 }
 
+
+#pragma mark - Testing Authentication
+
+-(void)testGarbageAccessToken{
+    
+    __block BOOL isLoaded;
+    [[IMGSession sharedInstance] setGarbageAuth];
+    
+    //should fail and trigger re-auth
+    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        
+        expect(account.username).beTruthy();
+        
+    } failure:failBlock];
+    expect(isLoaded).will.beTruthy();
+}
+
+-(void)testGarbageRefreshToken{
+    
+    __block BOOL isLoaded;
+    [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
+    
+    //should fail and trigger re-auth, then fail again
+    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        
+        //should not get here
+        expect(0).beTruthy();
+        
+    } failure:failBlock];
+    
+    expect(isLoaded).willNot.beTruthy();
+}
+
 #pragma mark - Test methods to provide image or album to play with - this code is not infallable
 
 #warning Posting a test gallery image will create spam if not deleted successfully by this method
