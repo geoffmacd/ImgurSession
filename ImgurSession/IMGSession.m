@@ -447,7 +447,6 @@
                   options:NSKeyValueObservingOptionNew
                   context:NULL];
     return task;
-    
 }
 
 #pragma mark - KVO for progress

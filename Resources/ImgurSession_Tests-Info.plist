@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>imgurClient</key>
+	<key>imgurClientCredentials</key>
 	<dict>
 		<key>id</key>
 		<string></string>
@@ -11,16 +11,12 @@
 		<key>refreshToken</key>
 		<string></string>
 	</dict>
-	<key>imgurVariousValues</key>
+	<key>imgurUnitTestParams</key>
 	<dict>
 		<key>title</key>
 		<string>Just messing with the API, you can ignore this</string>
-		<key>imageID</key>
-		<string>lwIMGLWk</string>
-		<key>tokenURL</key>
-		<string>YourImgurAppProtocol://#access_token=ACCESS_TOKEN&amp;expires_in=3600&amp;token_type=bearer&amp;refresh_token=REFRESH_TOKEN&amp;account_username=ACCOUNT_USERNAME</string>
-		<key>codeURL</key>
-		<string>YourImgurAppProtocol://?code=AUTHORIZATION_CODE</string>
+		<key>recipientId</key>
+		<string>geoffmacd</string>
 	</dict>
 </dict>
 </plist>

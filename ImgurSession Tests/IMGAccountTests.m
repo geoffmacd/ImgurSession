@@ -37,28 +37,28 @@
 
 - (void)testAccountLoadMyFavs{
     
-    __block NSArray * favs;
+    __block BOOL isSuccess;
     
     [IMGAccountRequest accountFavouritesWithSuccess:^(NSArray * favorites) {
         
-        favs = favorites;
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(favs).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testAccountLoadMySubmissions{
     
-    __block NSArray * subs;
+    __block BOOL isSuccess;
     
     [IMGAccountRequest accountSubmissionsWithUser:@"me" withPage:0 success:^(NSArray * submissions) {
         
-        subs = submissions;
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(subs).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testAccountSettingsLoad{
@@ -102,94 +102,106 @@
 
 - (void)testAccountReplies{
     
-    __block NSArray * rep;
+    __block BOOL isSuccess;
     
     [IMGAccountRequest accountReplies:^(NSArray * replies) {
 
         [IMGAccountRequest accountRepliesWithFresh:NO success:^(NSArray * oldReplies) {
-            
-            rep = oldReplies;
+        
+            isSuccess = YES;
 
         } failure:failBlock];
         
     } failure:failBlock];
     
-    expect(rep).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testAccountComments{
     
-    __block NSArray * com;
+    __block BOOL isSuccess;
     
     [IMGAccountRequest accountCommentIDsWithUser:@"me" success:^(NSArray * commentIds) {
 
-        [IMGAccountRequest accountCommentWithID:[[commentIds firstObject] integerValue] success:^(IMGComment * firstComment) {
+        if([commentIds firstObject]){
+            [IMGAccountRequest accountCommentWithID:[[commentIds firstObject] integerValue] success:^(IMGComment * firstComment) {
 
-            [IMGAccountRequest accountCommentsWithUser:@"me" success:^(NSArray * comments) {
-                
-                com = comments;
-
-                [IMGAccountRequest accountCommentCount:@"me" success:^(NSUInteger numcomments) {
-
+                [IMGAccountRequest accountCommentsWithUser:@"me" success:^(NSArray * comments) {
                     
-                    expect([comments count] == numcomments ).to.beTruthy();
+                    [IMGAccountRequest accountCommentCount:@"me" success:^(NSUInteger numcomments) {
 
+                        expect([comments count] == numcomments ).to.beTruthy();
+                        isSuccess = YES;
+
+                    } failure:failBlock];
                 } failure:failBlock];
             } failure:failBlock];
-        } failure:failBlock];
+        } else {
+            isSuccess = YES;
+        }
     } failure:failBlock];
-
-    expect(com).willNot.beNil();
+    
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testAccountImages{
     
-    __block NSUInteger numImages = 0;
+    __block BOOL isSuccess;
     
     [IMGAccountRequest accountImageIDsWithUser:@"me" success:^(NSArray * images) {
         
-        [IMGAccountRequest accountImageWithID:[images firstObject] success:^(IMGImage * image) {
-            
-            [IMGAccountRequest accountImagesWithUser:@"me" withPage:0 success:^(NSArray * images) {
-                    
-                [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
-                    
-                    numImages = num;
-                    
+        if([images firstObject]){
+            [IMGAccountRequest accountImageWithID:[images firstObject] success:^(IMGImage * image) {
+                
+                [IMGAccountRequest accountImagesWithUser:@"me" withPage:0 success:^(NSArray * images) {
+                        
+                    [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
+                        
+                        expect(num).beGreaterThan(0);
+                        isSuccess = YES;
+                        
+                    } failure:failBlock];
                 } failure:failBlock];
             } failure:failBlock];
-        } failure:failBlock];
+        } else {
+            isSuccess = YES;
+        }
     } failure:failBlock];
     
-    expect(numImages).will.beGreaterThan(0);
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testAccountAlbums{
     
-    __block NSUInteger numAlbums = 0;
+    __block BOOL isSuccess;
     
     [IMGAccountRequest accountAlbumIDsWithUser:@"me" success:^(NSArray * albums) {
         
-        [IMGAccountRequest accountAlbumWithID:[albums firstObject] success:^(IMGAlbum * album) {
-            
-            [IMGAccountRequest accountAlbumsWithUser:@"me" withPage:0 success:^(NSArray * albums) {
+        if([albums firstObject]){
+            [IMGAccountRequest accountAlbumWithID:[albums firstObject] success:^(IMGAlbum * album) {
                 
-                //always returns 502??
-                [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSUInteger num) {
+                [IMGAccountRequest accountAlbumsWithUser:@"me" withPage:0 success:^(NSArray * albums) {
                     
-                    numAlbums = num;
-                    
+                    [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSUInteger num) {
+                        
+                        expect(num).beGreaterThan(0);
+                        isSuccess = YES;
+                        
+                    } failure:failBlock];
                 } failure:failBlock];
             } failure:failBlock];
-        } failure:failBlock];
+        } else {
+            isSuccess = YES;
+        }
     } failure:failBlock];
     
-    expect(numAlbums).will.beGreaterThan(0);
+    expect(isSuccess).will.beTruthy();
 }
 
 -(void)testAccountCommentDelete{
     
     __block BOOL isDeleted;
+    
     [self postTestImage:^(IMGImage * image, void(^success)()) {
         
         
@@ -211,6 +223,7 @@
 -(void)testAccountImageDelete{
     
     __block BOOL isDeleted;
+    
     [self postTestImage:^(IMGImage * image, void(^success)()) {
 
         [IMGAccountRequest accountDeleteImageWithHash:image.deletehash success:^() {
@@ -227,6 +240,7 @@
 -(void)testAccountAlbumDelete{
     
     __block BOOL isDeleted;
+    
     [self postTestAlbumWithOneImage:^(IMGAlbum * album, void(^success)()) {
         
         [IMGAccountRequest accountDeleteAlbumWithID:album.albumID success:^{

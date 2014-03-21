@@ -17,25 +17,29 @@
 
 -(void)testLoadConversations{
     
-    __block IMGConversation * convo;
+    __block BOOL isSuccess;
     
     [IMGConversationRequest conversations:^(NSArray * messages) {
         
         IMGConversation * first = [messages firstObject];
         
-        expect(first.conversationID).beGreaterThan(0);
-        expect(first.lastMessage).beTruthy();
-        
-        [IMGConversationRequest conversationWithMessageID:first.conversationID success:^(IMGConversation * convseration) {
+        if(first){
+            expect(first.conversationID).beGreaterThan(0);
+            expect(first.lastMessage).beTruthy();
             
-            convo = convseration;
+            [IMGConversationRequest conversationWithMessageID:first.conversationID success:^(IMGConversation * convseration) {
+                
+                isSuccess = YES;
+                
+            } failure:failBlock];
+        } else {
             
-        } failure:failBlock];
-        
+            isSuccess = YES;
+        }
         
     } failure:failBlock];
     
-    expect(convo).will.beTruthy();
+    expect(isSuccess).will.beTruthy();
 }
 
 
@@ -43,7 +47,7 @@
     
     __block BOOL didDelete;
     
-    [IMGConversationRequest createMessageWithRecipient:@"geoffmacd" withBody:@"you must be the designer of this api" success:^{
+    [IMGConversationRequest createMessageWithRecipient:imgurUnitTestParams[@"recipientId"] withBody:@"you must be the designer of this api" success:^{
         
         [IMGConversationRequest conversations:^(NSArray * allConvos) {
             
@@ -51,7 +55,7 @@
                
                 IMGConversation * con = obj;
                 
-                if([con.fromUsername isEqualToString:@"geoffmacd"]){
+                if([con.fromUsername isEqualToString:imgurUnitTestParams[@"recipientId"]]){
                     *stop = YES;
                     
                     [IMGConversationRequest deleteConversation:con.conversationID success:^{
@@ -78,7 +82,6 @@
 -(void)testReportSender{
     
     //can't figure out how to test this
-    
 }
 
 @end

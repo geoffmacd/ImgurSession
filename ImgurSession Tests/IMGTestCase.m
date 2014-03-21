@@ -43,10 +43,10 @@
     // Storing various testing values
     NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
     //need various values such as image title
-    imgurVariousValues = infos[@"imgurVariousValues"];
+    imgurUnitTestParams = infos[@"imgurUnitTestParams"];
     
     // Initializing the client
-    NSDictionary *imgurClient = infos[@"imgurClient"];
+    NSDictionary *imgurClient = infos[@"imgurClientCredentials"];
     NSString *clientID = imgurClient[@"id"];
     NSString *clientSecret = imgurClient[@"secret"];
     
@@ -85,20 +85,24 @@
 -(void)testGarbageAccessToken{
     
     __block BOOL isLoaded;
+    //just sets bad access token in header which will cause re-auth with correct refresh token
     [[IMGSession sharedInstance] setGarbageAuth];
     
     //should fail and trigger re-auth
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
+        isLoaded = YES;
         expect(account.username).beTruthy();
         
     } failure:failBlock];
+    
     expect(isLoaded).will.beTruthy();
 }
 
 -(void)testGarbageRefreshToken{
     
-    __block BOOL isLoaded;
+    __block BOOL isFailed = NO;
+    //re-auth will be unsuccessful
     [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
     
     //should fail and trigger re-auth, then fail again
@@ -107,9 +111,12 @@
         //should not get here
         expect(0).beTruthy();
         
-    } failure:failBlock];
-    
-    expect(isLoaded).willNot.beTruthy();
+    } failure:^(NSError *error) {
+        
+        isFailed = YES;
+    }];
+
+    expect(isFailed).will.beTruthy();
 }
 
 #pragma mark - Test methods to provide image or album to play with - this code is not infallable
@@ -122,7 +129,7 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         
@@ -160,7 +167,7 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         
@@ -187,15 +194,15 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         
-        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+        [IMGAlbumRequest createAlbumWithTitle:imgurUnitTestParams[@"title"] description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
             
             expect(album).notTo.beNil();
             
-            [IMGGalleryRequest submitAlbumWithID:album.albumID title:@"Test Gallery Album" terms:YES success:^(){
+            [IMGGalleryRequest submitAlbumWithID:album.albumID title:imgurUnitTestParams[@"title"] terms:YES success:^(){
                 
                 [IMGGalleryRequest albumWithID:album.albumID success:^(IMGGalleryAlbum *galAlbum) {
                     
@@ -235,11 +242,11 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:@"Test Image" description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         
-        [IMGAlbumRequest createAlbumWithTitle:@"Test Album" description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+        [IMGAlbumRequest createAlbumWithTitle:imgurUnitTestParams[@"title"] description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
             
             expect(album).notTo.beNil();
             

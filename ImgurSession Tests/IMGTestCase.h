@@ -17,7 +17,7 @@
 @interface IMGTestCase : XCTestCase <IMGSessionDelegate>{
     
     //various metadata to store
-    NSDictionary *imgurVariousValues;
+    NSDictionary *imgurUnitTestParams;
     NSURL * testfileURL;
     __block void(^ failBlock)(NSError * error);
 }

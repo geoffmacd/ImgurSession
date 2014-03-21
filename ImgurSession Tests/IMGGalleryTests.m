@@ -16,41 +16,41 @@
 
 - (void)testGalleryHot{
     
-    __block NSArray * gals;
+    __block BOOL isSuccess;
     
     [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
         
-        gals = images;
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(gals).willNot.beNil();
+    expect(isSuccess).willNot.beNil();
 }
 
 - (void)testGalleryViral{
     
-    __block NSArray * gals;
+    __block BOOL isSuccess;
     
     [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
         
-        gals = images;
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(gals).willNot.beNil();
+    expect(isSuccess).willNot.beNil();
 }
 
 - (void)testGalleryUser{
     
-    __block NSArray * gals;
+    __block BOOL isSuccess;
     
     [IMGGalleryRequest userGalleryPage:0 withViralSort:YES showViral:YES success:^(NSArray * images) {
         
-        gals = images;
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(gals).willNot.beNil();
+    expect(isSuccess).willNot.beNil();
 }
 
 - (void)testPostAndDeleteGalleryImage{

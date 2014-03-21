@@ -20,48 +20,52 @@
 
 - (void)testLoadNotifications{
     
-    __block NSArray * notes;
+    __block BOOL isSuccess;
     
     [IMGNotificationRequest notifications:^(NSArray * notifications) {
         
-        notes = notifications;
-
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(notes).willNot.beNil();
+    expect(isSuccess).willNot.beNil();
 }
 
 - (void)testLoadNotificationsAndMarkOneAsViewed{
     
-    __block BOOL viewed;
+    __block BOOL isSuccess;
     
     [IMGNotificationRequest notifications:^(NSArray * notifications) {
         
         IMGNotification * first = [notifications firstObject];
         
-        //mark first one as viewed
-        [IMGNotificationRequest notificationViewed:first.notificationId success:^{
-            
-            viewed = YES;
-            
-        } failure:failBlock];
+        if(first){
+        
+            //mark first one as viewed
+            [IMGNotificationRequest notificationViewed:first.notificationId success:^{
+                
+                isSuccess = YES;
+                
+            } failure:failBlock];
+        } else {
+            isSuccess = YES;
+        }
         
     } failure:failBlock];
     
-    expect(viewed).will.beTruthy();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testLoadStaleNotifications{
     
-    __block NSArray * notes;
+    __block BOOL isSuccess;
     
     [IMGNotificationRequest notificationsWithFresh:NO success:^(NSArray * notifications) {
         
-        notes = notifications;
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(notes).willNot.beNil();
+    expect(isSuccess).willNot.beNil();
 }
 @end
