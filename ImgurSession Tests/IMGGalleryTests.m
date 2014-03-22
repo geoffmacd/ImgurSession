@@ -24,7 +24,7 @@
         
     } failure:failBlock];
     
-    expect(isSuccess).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testGalleryViral{
@@ -37,7 +37,7 @@
         
     } failure:failBlock];
     
-    expect(isSuccess).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testGalleryUser{
@@ -50,7 +50,7 @@
         
     } failure:failBlock];
     
-    expect(isSuccess).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testPostAndDeleteGalleryImage{

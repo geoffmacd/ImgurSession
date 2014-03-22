@@ -111,6 +111,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Access token expiry date
  */
 @property (readonly, nonatomic) IMGAuthType lastAuthType;
+/**
+ Anonymous type
+ */
+@property (readonly, nonatomic) BOOL isAnonymous;
 
 
 // rate limiting
@@ -166,9 +170,9 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 - (instancetype)initWithClientID:(NSString *)clientID secret:(NSString *)secret;
 
-
 #pragma mark - Authentication
 
+-(void)setAnonmyousAuthenticationWithID:(NSString*)clientID;
 -(IMGAuthState)sessionAuthState;
 /**
  Retrieves URL associated with website authorization page

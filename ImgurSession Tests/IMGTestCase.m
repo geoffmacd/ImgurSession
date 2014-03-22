@@ -49,30 +49,33 @@
     NSDictionary *imgurClient = infos[@"imgurClientCredentials"];
     NSString *clientID = imgurClient[@"id"];
     NSString *clientSecret = imgurClient[@"secret"];
+    anon = [imgurClient[@"anonymous"] boolValue];
     
-    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
-    
-    //Lazy init, may already exist
-    IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
-    [ses setDelegate:self];
-    if([imgurClient[@"refreshToken"] length])
-        ses.refreshToken = imgurClient[@"refreshToken"];
-//    [ses setAccessToken:@""];
-//    [ses setAccessTokenExpiry: [NSDate dateWithTimeIntervalSinceNow:NSIntegerMax]];
-//    [ses setGarbageAuth];
-    
-    [self authenticateUsingOAuthWithPINAsync];
+    if(anon){
+        [IMGSession sharedInstanceWithClientID:clientID secret:nil];
+        
+    } else {
+        //Lazy init, may already exist
+        IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
+        [ses setDelegate:self];
+        if([imgurClient[@"refreshToken"] length])
+            ses.refreshToken = imgurClient[@"refreshToken"];
+    //    [ses setAccessToken:@""];
+    //    [ses setAccessTokenExpiry: [NSDate dateWithTimeIntervalSinceNow:NSIntegerMax]];
+    //    [ses setGarbageAuth];
+        [self authenticateUsingOAuthWithPINAsync];
+    }
     
     //failure block
     failBlock = ^(NSError * error) {
         XCTAssert(nil, @"FAIL");
     };
     
+    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    
     //Ensure client data is avaialble for authentication to proceed
     XCTAssertTrue(clientID, @"Client ID is missing");
     XCTAssertTrue(clientSecret, @"Client secret is missing");
-    
-    
 }
 
 - (void)tearDown {
@@ -85,38 +88,42 @@
 -(void)testGarbageAccessToken{
     
     __block BOOL isLoaded;
-    //just sets bad access token in header which will cause re-auth with correct refresh token
-    [[IMGSession sharedInstance] setGarbageAuth];
-    
-    //should fail and trigger re-auth
-    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+    if(!anon){
+        //just sets bad access token in header which will cause re-auth with correct refresh token
+        [[IMGSession sharedInstance] setGarbageAuth];
         
-        isLoaded = YES;
-        expect(account.username).beTruthy();
+        //should fail and trigger re-auth
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            isLoaded = YES;
+            expect(account.username).beTruthy();
+            
+        } failure:failBlock];
         
-    } failure:failBlock];
-    
-    expect(isLoaded).will.beTruthy();
+        expect(isLoaded).will.beTruthy();
+    }
 }
 
 -(void)testGarbageRefreshToken{
     
     __block BOOL isFailed = NO;
-    //re-auth will be unsuccessful
-    [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
-    
-    //should fail and trigger re-auth, then fail again
-    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+    if(!anon){
+        //re-auth will be unsuccessful
+        [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
         
-        //should not get here
-        expect(0).beTruthy();
-        
-    } failure:^(NSError *error) {
-        
-        isFailed = YES;
-    }];
+        //should fail and trigger re-auth, then fail again
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            //should not get here
+            expect(0).beTruthy();
+            
+        } failure:^(NSError *error) {
+            
+            isFailed = YES;
+        }];
 
-    expect(isFailed).will.beTruthy();
+        expect(isFailed).will.beTruthy();
+    }
 }
 
 #pragma mark - Test methods to provide image or album to play with - this code is not infallable

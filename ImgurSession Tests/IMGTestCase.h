@@ -20,6 +20,7 @@
     NSDictionary *imgurUnitTestParams;
     NSURL * testfileURL;
     __block void(^ failBlock)(NSError * error);
+    BOOL anon;
 }
 
 -(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;

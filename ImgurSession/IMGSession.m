@@ -24,6 +24,7 @@
 @property (readwrite,nonatomic) NSInteger creditsClientRemaining;
 @property (readwrite,nonatomic) NSInteger creditsClientLimit;
 @property  (readwrite,nonatomic) NSInteger warnRateLimit;
+@property (readwrite, nonatomic) BOOL isAnonymous;
 
 -(void)accessTokenExpired;
 
@@ -36,6 +37,7 @@
 + (instancetype)sharedInstance{
     return [self sharedInstanceWithClientID:nil secret:nil];
 }
+
 
 +(instancetype)sharedInstanceWithClientID:(NSString *)clientID secret:(NSString *)secret{
     
@@ -50,8 +52,15 @@
 - (instancetype)initWithClientID:(NSString *)clientID secret:(NSString *)secret{
     if(self = [self initWithBaseURL:[NSURL URLWithString:IMGBaseURL]]){
 
+        if(secret){
+            self.secret = secret;
+            self.isAnonymous = NO;
+        } else {
+            //should be anonymous
+            self.isAnonymous = YES;
+            [self setAnonmyousAuthenticationWithID:clientID];
+        }
         self.clientID = clientID;
-        self.secret = secret;
         //default
         self.warnRateLimit = 100;
         self.lastAuthType = IMGNoAuthType;
@@ -123,6 +132,14 @@
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;
     [serializer setValue:[NSString stringWithFormat:@"Bearer %@", @"garbage"] forHTTPHeaderField:@"Authorization"];
+}
+
+
+-(void)setAnonmyousAuthenticationWithID:(NSString*)clientID{
+    
+    //change the serializer to include this authorization header
+    AFHTTPRequestSerializer * serializer = self.requestSerializer;
+    [serializer setValue:[NSString stringWithFormat:@"Client-ID %@", clientID] forHTTPHeaderField:@"Authorization"];
 }
 
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
@@ -291,7 +308,7 @@
         
         
         NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403){
+        if(http.statusCode == 403 && !self.isAnonymous){
             [self refreshAuthentication:^(NSString * refreshToken) {
                 
                 NSLog(@"continuing request after auth failed: %@", URLString);
@@ -322,7 +339,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403){
+        if(http.statusCode == 403 && !self.isAnonymous){
             [self refreshAuthentication:^(NSString * refreshToken) {
                 
                 NSLog(@"continuing request after auth failed: %@", URLString);
@@ -353,7 +370,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403){
+        if(http.statusCode == 403 && !self.isAnonymous){
             [self refreshAuthentication:^(NSString * refreshToken) {
                 
                 NSLog(@"continuing request after auth failed: %@", URLString);
@@ -384,7 +401,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403){
+        if(http.statusCode == 403 && !self.isAnonymous){
             [self refreshAuthentication:^(NSString * refreshToken) {
                 
                 NSLog(@"continuing request after auth failed: %@", URLString);
@@ -416,7 +433,7 @@
         if (error) {
             
             NSHTTPURLResponse * http = (NSHTTPURLResponse *)response;
-            if(http.statusCode == 403){
+            if(http.statusCode == 403 && !self.isAnonymous){
                 [self refreshAuthentication:^(NSString * refreshToken) {
                     
                     NSLog(@"continuing request after auth failed: %@", URLString);
