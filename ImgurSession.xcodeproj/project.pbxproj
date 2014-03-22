@@ -50,6 +50,12 @@
 		240747C418D62B1B00B92063 /* IMGNotificationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 240747AB18D62B1B00B92063 /* IMGNotificationRequest.m */; };
 		240747C518D62B1B00B92063 /* IMGEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 240747AC18D62B1B00B92063 /* IMGEndpoint.m */; };
 		240747C618D62B1B00B92063 /* IMGEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 240747AC18D62B1B00B92063 /* IMGEndpoint.m */; };
+		243CCDA118DD32EF00B4FBC6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AC155418CAB4F9005F86C8 /* Cocoa.framework */; };
+		243CCDA218DD32EF00B4FBC6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
+		243CCDA318DD32EF00B4FBC6 /* libPods-ImgurSessionOSXTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB8418ED9DE407C843F636C /* libPods-ImgurSessionOSXTests.a */; };
+		243CCDA518DD32EF00B4FBC6 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
+		243CCDB018DD336900B4FBC6 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */; };
+		243CCDB118DD338700B4FBC6 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
 		2482266218CABF7B00C30677 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
 		249DABDC18D65FD7008531FE /* IMGBasicAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */; };
 		249DABDD18D65FD7008531FE /* IMGBasicAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */; };
@@ -86,6 +92,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		243CCD9718DD32EF00B4FBC6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C309338D18CA1F87009D9C57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24B4CB7818CAB7B300EC8E4A;
+			remoteInfo = ImgurKitOSX;
+		};
 		24B4CB8C18CAB7B300EC8E4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C309338D18CA1F87009D9C57 /* Project object */;
@@ -153,6 +166,10 @@
 		240747B218D62B1B00B92063 /* IMGNotificationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGNotificationRequest.h; path = Requests/IMGNotificationRequest.h; sourceTree = "<group>"; };
 		240747B318D62B1B00B92063 /* IMGConversationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGConversationRequest.h; path = Requests/IMGConversationRequest.h; sourceTree = "<group>"; };
 		240747B418D62B1B00B92063 /* IMGResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGResponseSerializer.h; path = Requests/IMGResponseSerializer.h; sourceTree = "<group>"; };
+		243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSessionOSXTests copy.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		243CCDAB18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ImgurSessionOSXTests copy-Info.plist"; path = "/Users/geoffmacdonald/Developer/ImgurSession/ImgurSessionOSXTests copy-Info.plist"; sourceTree = "<absolute>"; };
+		243CCDAE18DD336900B4FBC6 /* IMGAnonymousTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGAnonymousTests.h; sourceTree = "<group>"; };
+		243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGAnonymousTests.m; sourceTree = "<group>"; };
 		249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGBasicAlbum.h; path = ImgurSession/Models/IMGBasicAlbum.h; sourceTree = SOURCE_ROOT; };
 		249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGBasicAlbum.m; path = ImgurSession/Models/IMGBasicAlbum.m; sourceTree = SOURCE_ROOT; };
 		24AC155418CAB4F9005F86C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -200,6 +217,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		243CCDA018DD32EF00B4FBC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				243CCDA118DD32EF00B4FBC6 /* Cocoa.framework in Frameworks */,
+				243CCDA218DD32EF00B4FBC6 /* XCTest.framework in Frameworks */,
+				243CCDA318DD32EF00B4FBC6 /* libPods-ImgurSessionOSXTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		24B4CB7518CAB7B300EC8E4A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -297,6 +324,27 @@
 			name = Endpoints;
 			sourceTree = "<group>";
 		};
+		243CCDAC18DD332F00B4FBC6 /* Authenticated */ = {
+			isa = PBXGroup;
+			children = (
+				C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */,
+				C3102D2118DB3F71007A75C4 /* IMGCommentTests.m */,
+				C3102D2518DB7713007A75C4 /* IMGConversationTest.m */,
+				C3102D1D18DA3892007A75C4 /* IMGGalleryTests.m */,
+				C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */,
+			);
+			name = Authenticated;
+			sourceTree = "<group>";
+		};
+		243CCDAD18DD333900B4FBC6 /* Anonymous */ = {
+			isa = PBXGroup;
+			children = (
+				243CCDAE18DD336900B4FBC6 /* IMGAnonymousTests.h */,
+				243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */,
+			);
+			name = Anonymous;
+			sourceTree = "<group>";
+		};
 		24AC155618CAB4F9005F86C8 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +368,7 @@
 				0C0063A653ED432BB416EDEC /* Pods-ImgurSession Tests.xcconfig */,
 				92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */,
 				93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */,
+				243CCDAB18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -330,6 +379,7 @@
 				C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */,
 				24B4CB7918CAB7B300EC8E4A /* ImgurSessionOSX.framework */,
 				24B4CB8918CAB7B300EC8E4A /* ImgurSessionOSXTests.xctest */,
+				243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -450,11 +500,8 @@
 		C3CDA2E018CA66DA003B7F96 /* ImgurSession Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */,
-				C3102D2118DB3F71007A75C4 /* IMGCommentTests.m */,
-				C3102D2518DB7713007A75C4 /* IMGConversationTest.m */,
-				C3102D1D18DA3892007A75C4 /* IMGGalleryTests.m */,
-				C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */,
+				243CCDAC18DD332F00B4FBC6 /* Authenticated */,
+				243CCDAD18DD333900B4FBC6 /* Anonymous */,
 				C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */,
 				C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */,
 			);
@@ -488,6 +535,26 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		243CCD9518DD32EF00B4FBC6 /* ImgurSessionOSXAnonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 243CCDA718DD32EF00B4FBC6 /* Build configuration list for PBXNativeTarget "ImgurSessionOSXAnonTests" */;
+			buildPhases = (
+				243CCD9818DD32EF00B4FBC6 /* Check Pods Manifest.lock */,
+				243CCD9918DD32EF00B4FBC6 /* Sources */,
+				243CCDA018DD32EF00B4FBC6 /* Frameworks */,
+				243CCDA418DD32EF00B4FBC6 /* Resources */,
+				243CCDA618DD32EF00B4FBC6 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				243CCD9618DD32EF00B4FBC6 /* PBXTargetDependency */,
+			);
+			name = ImgurSessionOSXAnonTests;
+			productName = ImgurKitOSXTests;
+			productReference = 243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24B4CB9718CAB7B400EC8E4A /* Build configuration list for PBXNativeTarget "ImgurSessionOSX" */;
@@ -596,11 +663,20 @@
 				C3CDA2DB18CA66DA003B7F96 /* ImgurSession Tests */,
 				24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */,
 				24B4CB8818CAB7B300EC8E4A /* ImgurSessionOSXTests */,
+				243CCD9518DD32EF00B4FBC6 /* ImgurSessionOSXAnonTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		243CCDA418DD32EF00B4FBC6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				243CCDA518DD32EF00B4FBC6 /* image-example.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		24B4CB7718CAB7B300EC8E4A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -627,6 +703,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		243CCD9818DD32EF00B4FBC6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		243CCDA618DD32EF00B4FBC6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ImgurSessionOSXTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		46E46679617747D3B90A29DC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -750,6 +856,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		243CCD9918DD32EF00B4FBC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				243CCDB118DD338700B4FBC6 /* IMGTestCase.m in Sources */,
+				243CCDB018DD336900B4FBC6 /* IMGAnonymousTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		24B4CB7418CAB7B300EC8E4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -841,6 +956,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		243CCD9618DD32EF00B4FBC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */;
+			targetProxy = 243CCD9718DD32EF00B4FBC6 /* PBXContainerItemProxy */;
+		};
 		24B4CB8D18CAB7B300EC8E4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */;
@@ -849,6 +969,55 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		243CCDA818DD32EF00B4FBC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ImgurSessionOSXTests copy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "ImgurSessionOSXTests copy";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		243CCDA918DD32EF00B4FBC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
+				INFOPLIST_FILE = "ImgurSessionOSXTests copy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "ImgurSessionOSXTests copy";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		24B4CB9818CAB7B400EC8E4A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */;
@@ -1084,6 +1253,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		243CCDA718DD32EF00B4FBC6 /* Build configuration list for PBXNativeTarget "ImgurSessionOSXAnonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				243CCDA818DD32EF00B4FBC6 /* Debug */,
+				243CCDA918DD32EF00B4FBC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		24B4CB9718CAB7B400EC8E4A /* Build configuration list for PBXNativeTarget "ImgurSessionOSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

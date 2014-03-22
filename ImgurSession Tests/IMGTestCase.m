@@ -84,7 +84,7 @@
 
 
 #pragma mark - Testing Authentication
-
+/*
 -(void)testGarbageAccessToken{
     
     __block BOOL isLoaded;
@@ -125,6 +125,7 @@
         expect(isFailed).will.beTruthy();
     }
 }
+ */
 
 #pragma mark - Test methods to provide image or album to play with - this code is not infallable
 
