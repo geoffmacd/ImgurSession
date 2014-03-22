@@ -986,7 +986,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "ImgurSessionOSXTests copy-Info.plist";
+				INFOPLIST_FILE = "Resources/ImgurSession_Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "ImgurSessionOSXTests copy";
 				SDKROOT = macosx;
@@ -1009,7 +1009,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
-				INFOPLIST_FILE = "ImgurSessionOSXTests copy-Info.plist";
+				INFOPLIST_FILE = "Resources/ImgurSession_Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "ImgurSessionOSXTests copy";
 				SDKROOT = macosx;
