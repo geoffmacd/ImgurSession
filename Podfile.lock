@@ -20,15 +20,18 @@ PODS:
     - AFNetworking/NSURLSession
   - Expecta (0.3.0)
   - OCMock (2.2.3)
+  - OHHTTPStubs (3.1.0)
 
 DEPENDENCIES:
   - AFNetworking
   - Expecta
   - OCMock
+  - OHHTTPStubs
 
 SPEC CHECKSUMS:
   AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
   Expecta: 322f1dc42610106a5ba9871b4924cf1635d80833
   OCMock: 74e4ddbcef134170dcc844f91c691f13868075d7
+  OHHTTPStubs: d67c42c0212f0883ddb8592375aa0dc00dc50a36
 
 COCOAPODS: 0.29.0

@@ -32,48 +32,21 @@
 
 @end
 
-@implementation IMGSession (TestSession)
-
-static id session;
-
-+(instancetype)sharedInstance{
-    return session;
-}
-
-+(void)setTestMockSession:(id)mockSes{
-    session = mockSes;
-}
-
-@end
-
 @implementation IMGTestCase
-
 
 - (void)setUp {
     [super setUp];
     //run before each test
     
-    //30 second timeout
-    [Expecta setAsynchronousTestTimeout:30.0];
-    
+    //5 second timeout
+    [Expecta setAsynchronousTestTimeout:5.0];
         
     // Storing various testing values
     NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
+    
     //need various values such as image title
     imgurUnitTestParams = infos[@"imgurUnitTestParams"];
-    
-    // Initializing the client
-//    NSDictionary *imgurClient = infos[@"imgurClientCredentials"];
-//    NSString *clientID = imgurClient[@"id"];
-//    NSString *clientSecret = imgurClient[@"secret"];
-//    BOOL anon = [imgurClient[@"anonymous"] boolValue];
-    
-    mockSession = [OCMockObject mockForClass:[IMGSession class]];
-    
     testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
-    
-    //Ensure client data is avaialble for authentication to proceed
-//    XCTAssertTrue(clientID, @"Client ID is missing");
     
     //failure block
     failBlock = ^(NSError * error) {
@@ -81,69 +54,19 @@ static id session;
     };
 }
 
--(void)setMockSession:(id)mock{
-    
-    [[[mock stub] andDo:^(NSInvocation * invoke) {
-        
-    }] trackModelObjectsForDelegateHandling:[OCMArg any] ];
-    
-    [IMGSession setTestMockSession:mock];
-}
-
--(void)getTest:(NSDictionary*)result{
-    
-    [[[mockSession stub] andDo:^(NSInvocation * invoke) {
-    
-        //the block we will invoke
-        void (^responseHandler)(NSURLSessionDataTask *task, id responseObject)= nil;
-        
-        [invoke getArgument:&responseHandler atIndex:4];
-        
-        //invoke the block
-        responseHandler(nil, result);
-        
-    }] GET:[OCMArg any] parameters:[OCMArg isNil] success:[OCMArg any]  failure:[OCMArg isNotNil] ];
-    
-    [self setMockSession:mockSession];
-}
-
--(void)postTest:(NSDictionary*)result{
-    
-    [[[mockSession stub] andDo:^(NSInvocation * invoke) {
-        
-        //the block we will invoke
-        void (^responseHandler)(NSURLSessionDataTask *task, id responseObject)= nil;
-        
-        [invoke getArgument:&responseHandler atIndex:4];
-        
-        //invoke the block
-        responseHandler(nil, result);
-        
-    }] POST:[OCMArg any] parameters:[OCMArg isNil] success:[OCMArg any]  failure:[OCMArg isNotNil] ];
-    
-    [self setMockSession:mockSession];
-}
-
--(void)deleteTest:(NSDictionary*)result{
-    
-    [[[mockSession stub] andDo:^(NSInvocation * invoke) {
-        
-        //the block we will invoke
-        void (^responseHandler)(NSURLSessionDataTask *task, id responseObject)= nil;
-        
-        [invoke getArgument:&responseHandler atIndex:4];
-        
-        //invoke the block
-        responseHandler(nil, result);
-        
-    }] DELETE:[OCMArg any] parameters:[OCMArg isNil] success:[OCMArg any]  failure:[OCMArg isNotNil] ];
-    
-    [self setMockSession:mockSession];
-}
-
-
 - (void)tearDown {
     [super tearDown];
+}
+
+-(void)stubWithFile:(NSString * )filename {
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return YES;
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        // Stub it with our "wsresponse.json" stub file
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(filename,nil)
+                                                statusCode:200 headers:@{@"Content-Type":@"text/json"}];
+    }];
 }
 
 

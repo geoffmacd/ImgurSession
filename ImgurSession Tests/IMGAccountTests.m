@@ -23,31 +23,23 @@
 
 
 - (void)testAccountLoadMe{
-
-    __block BOOL success;
     
-    [self getTest: @{
-                @"id": @10660555,
-                @"url": @"geoffmacd",
-                @"bio": [NSNull null],
-                @"reputation": @0,
-                @"created": @1395605015,
-                @"pro_expiration": @NO
-                }];
+    __block BOOL isSuccess;
+    [self stubWithFile:@"myaccount.json"];
     
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
-        success = YES;
+        expect(account).beTruthy();
         
     } failure:failBlock];
     
-    
-    expect(success).will.beTruthy();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testAccountLoadMyFavs{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"myaccount.json"];
     
     [IMGAccountRequest accountFavouritesWithSuccess:^(NSArray * favorites) {
         

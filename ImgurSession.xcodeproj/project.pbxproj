@@ -56,6 +56,9 @@
 		243CCDA518DD32EF00B4FBC6 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		243CCDB018DD336900B4FBC6 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */; };
 		243CCDB118DD338700B4FBC6 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
+		2472F25A18DF8BE800918143 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 2472F25918DF8BE800918143 /* myaccount.json */; };
+		2472F25B18DF8BE800918143 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 2472F25918DF8BE800918143 /* myaccount.json */; };
+		2472F25C18DF8BE800918143 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 2472F25918DF8BE800918143 /* myaccount.json */; };
 		2482266218CABF7B00C30677 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
 		249DABDC18D65FD7008531FE /* IMGBasicAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */; };
 		249DABDD18D65FD7008531FE /* IMGBasicAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */; };
@@ -170,6 +173,7 @@
 		243CCDAB18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ImgurSessionOSXTests copy-Info.plist"; path = "/Users/geoffmacdonald/Developer/ImgurSession/ImgurSessionOSXTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		243CCDAE18DD336900B4FBC6 /* IMGAnonymousTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGAnonymousTests.h; sourceTree = "<group>"; };
 		243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGAnonymousTests.m; sourceTree = "<group>"; };
+		2472F25918DF8BE800918143 /* myaccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myaccount.json; path = ../../../Desktop/myaccount.json; sourceTree = "<group>"; };
 		249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGBasicAlbum.h; path = ImgurSession/Models/IMGBasicAlbum.h; sourceTree = SOURCE_ROOT; };
 		249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGBasicAlbum.m; path = ImgurSession/Models/IMGBasicAlbum.m; sourceTree = SOURCE_ROOT; };
 		24AC155418CAB4F9005F86C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -511,6 +515,7 @@
 		C3EB4B3E18CA20B20010FD19 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2472F25918DF8BE800918143 /* myaccount.json */,
 				C319F7C918D0C36300C5E880 /* ImgurSession_Tests-Info.plist */,
 				C3EB4B3F18CA20B20010FD19 /* image-example.jpg */,
 				C3EB4B4018CA20B20010FD19 /* ImgurSession-Info.plist */,
@@ -673,6 +678,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2472F25C18DF8BE800918143 /* myaccount.json in Resources */,
 				243CCDA518DD32EF00B4FBC6 /* image-example.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,6 +694,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2472F25B18DF8BE800918143 /* myaccount.json in Resources */,
 				C319F7CC18D0CDBE00C5E880 /* image-example.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2472F25A18DF8BE800918143 /* myaccount.json in Resources */,
 				C36C00F318CA7611004576A5 /* image-example.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

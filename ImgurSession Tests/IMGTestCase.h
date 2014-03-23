@@ -13,6 +13,7 @@
 #define EXP_SHORTHAND YES
 #import "Expecta.h"
 #import "OCMock.h"
+#import <OHHTTPStubs.h>
 
 @interface IMGTestCase : XCTestCase <IMGSessionDelegate>{
     
@@ -21,15 +22,12 @@
     NSURL * testfileURL;
     __block void(^ failBlock)(NSError * error);
     
-    /**
-     Mock session to return stubbed data
-     */
-    id mockSession;
 }
 
--(void)getTest:(NSDictionary*)result;
--(void)postTest:(NSDictionary*)result;
--(void)deleteTest:(NSDictionary*)result;
+/**
+ Stub reponse for next request
+ */
+-(void)stubWithFile:(NSString * )filename;
 
 -(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;
 -(void)postTestImage:(void(^)(IMGImage *,void(^)()))success;

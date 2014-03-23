@@ -13,6 +13,7 @@ target "ImgurSessionOSXTests", :exclusive => true do
 platform :osx, "10.8"
 pod 'Expecta'
 pod 'OCMock'
+pod 'OHHTTPStubs'
 
 end
 
@@ -28,6 +29,7 @@ target "ImgurSession Tests", :exclusive => true do
 platform :ios, "6.0"
 pod 'Expecta'
 pod 'OCMock'
+pod 'OHHTTPStubs'
 
 end
 
