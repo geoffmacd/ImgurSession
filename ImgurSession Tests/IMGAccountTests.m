@@ -23,16 +23,43 @@
 
 
 - (void)testAccountLoadMe{
+
+    __block BOOL success;
     
-    __block IMGAccount * acc;
+    [[[mockSession stub] andDo:^(NSInvocation * invoke) {
+        
+        
+        //our stubbed results
+        NSDictionary * account = @{
+                                           @"id": @10660555,
+                                           @"url": @"geoffmacd",
+                                           @"bio": [NSNull null],
+                                           @"reputation": @0,
+                                           @"created": @1395605015,
+                                           @"pro_expiration": @NO\
+                                   
+                                   };
+        
+        //the block we will invoke
+        void (^responseHandler)(NSURLSessionDataTask *task, id responseObject)= nil;
+
+        [invoke getArgument:&responseHandler atIndex:4];
+        
+        //invoke the block
+        responseHandler(nil, account);
+        
+    }] GET:[OCMArg any] parameters:[OCMArg isNil] success:[OCMArg any]  failure:[OCMArg isNotNil] ];
+    
+    [self setMockSession:mockSession];
     
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
-        acc = account;
+        success = YES;
         
     } failure:failBlock];
     
-    expect(acc).willNot.beNil();
+    
+    expect(success).will.beTruthy();
 }
 
 - (void)testAccountLoadMyFavs{

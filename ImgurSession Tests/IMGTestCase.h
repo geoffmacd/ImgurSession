@@ -20,8 +20,14 @@
     NSDictionary *imgurUnitTestParams;
     NSURL * testfileURL;
     __block void(^ failBlock)(NSError * error);
-    BOOL anon;
+    
+    /**
+     Mock session to return stubbed data
+     */
+    id mockSession;
 }
+
+-(void)setMockSession:(id)mock;
 
 -(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;
 -(void)postTestImage:(void(^)(IMGImage *,void(^)()))success;

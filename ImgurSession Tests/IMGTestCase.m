@@ -9,7 +9,7 @@
 #import "IMGTestCase.h"
 
 //add read-write prop
-@interface IMGSession ()
+@interface IMGSession (TestSession)
 
 @property (readwrite, nonatomic,copy) NSString *clientID;
 @property (readwrite, nonatomic, copy) NSString *secret;
@@ -28,9 +28,27 @@
  Testing function to remove auth
  */
 -(void)setGarbageAuth;
+- (instancetype)initWithClientID:(NSString *)clientID secret:(NSString *)secret;
+
+@end
+
+@implementation IMGSession (TestSession)
+
+static id session;
+
++(instancetype)sharedInstance{
+    return session;
+}
+
++(void)setTestMockSession:(id)mockSes{
+    session = mockSes;
+}
+
 @end
 
 @implementation IMGTestCase
+
+
 
 - (void)setUp {
     [super setUp];
@@ -46,36 +64,31 @@
     imgurUnitTestParams = infos[@"imgurUnitTestParams"];
     
     // Initializing the client
-    NSDictionary *imgurClient = infos[@"imgurClientCredentials"];
-    NSString *clientID = imgurClient[@"id"];
-    NSString *clientSecret = imgurClient[@"secret"];
-    anon = [imgurClient[@"anonymous"] boolValue];
+//    NSDictionary *imgurClient = infos[@"imgurClientCredentials"];
+//    NSString *clientID = imgurClient[@"id"];
+//    NSString *clientSecret = imgurClient[@"secret"];
+//    BOOL anon = [imgurClient[@"anonymous"] boolValue];
     
-    if(anon){
-        [IMGSession sharedInstanceWithClientID:clientID secret:nil];
-        
-    } else {
-        //Lazy init, may already exist
-        IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
-        [ses setDelegate:self];
-        if([imgurClient[@"refreshToken"] length])
-            ses.refreshToken = imgurClient[@"refreshToken"];
-    //    [ses setAccessToken:@""];
-    //    [ses setAccessTokenExpiry: [NSDate dateWithTimeIntervalSinceNow:NSIntegerMax]];
-    //    [ses setGarbageAuth];
-        [self authenticateUsingOAuthWithPINAsync];
-    }
+    mockSession = [OCMockObject mockForClass:[IMGSession class]];
+    
+    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    
+    //Ensure client data is avaialble for authentication to proceed
+//    XCTAssertTrue(clientID, @"Client ID is missing");
     
     //failure block
     failBlock = ^(NSError * error) {
         XCTAssert(nil, @"FAIL");
     };
+}
+
+-(void)setMockSession:(id)mock{
     
-    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    [[[mock stub] andDo:^(NSInvocation * invoke) {
+        
+    }] trackModelObjectsForDelegateHandling:[OCMArg any] ];
     
-    //Ensure client data is avaialble for authentication to proceed
-    XCTAssertTrue(clientID, @"Client ID is missing");
-    XCTAssertTrue(clientSecret, @"Client secret is missing");
+    [IMGSession setTestMockSession:mock];
 }
 
 - (void)tearDown {
