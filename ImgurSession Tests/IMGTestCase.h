@@ -27,7 +27,9 @@
     id mockSession;
 }
 
--(void)setMockSession:(id)mock;
+-(void)getTest:(NSDictionary*)result;
+-(void)postTest:(NSDictionary*)result;
+-(void)deleteTest:(NSDictionary*)result;
 
 -(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;
 -(void)postTestImage:(void(^)(IMGImage *,void(^)()))success;

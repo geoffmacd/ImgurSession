@@ -49,7 +49,6 @@ static id session;
 @implementation IMGTestCase
 
 
-
 - (void)setUp {
     [super setUp];
     //run before each test
@@ -90,6 +89,58 @@ static id session;
     
     [IMGSession setTestMockSession:mock];
 }
+
+-(void)getTest:(NSDictionary*)result{
+    
+    [[[mockSession stub] andDo:^(NSInvocation * invoke) {
+    
+        //the block we will invoke
+        void (^responseHandler)(NSURLSessionDataTask *task, id responseObject)= nil;
+        
+        [invoke getArgument:&responseHandler atIndex:4];
+        
+        //invoke the block
+        responseHandler(nil, result);
+        
+    }] GET:[OCMArg any] parameters:[OCMArg isNil] success:[OCMArg any]  failure:[OCMArg isNotNil] ];
+    
+    [self setMockSession:mockSession];
+}
+
+-(void)postTest:(NSDictionary*)result{
+    
+    [[[mockSession stub] andDo:^(NSInvocation * invoke) {
+        
+        //the block we will invoke
+        void (^responseHandler)(NSURLSessionDataTask *task, id responseObject)= nil;
+        
+        [invoke getArgument:&responseHandler atIndex:4];
+        
+        //invoke the block
+        responseHandler(nil, result);
+        
+    }] POST:[OCMArg any] parameters:[OCMArg isNil] success:[OCMArg any]  failure:[OCMArg isNotNil] ];
+    
+    [self setMockSession:mockSession];
+}
+
+-(void)deleteTest:(NSDictionary*)result{
+    
+    [[[mockSession stub] andDo:^(NSInvocation * invoke) {
+        
+        //the block we will invoke
+        void (^responseHandler)(NSURLSessionDataTask *task, id responseObject)= nil;
+        
+        [invoke getArgument:&responseHandler atIndex:4];
+        
+        //invoke the block
+        responseHandler(nil, result);
+        
+    }] DELETE:[OCMArg any] parameters:[OCMArg isNil] success:[OCMArg any]  failure:[OCMArg isNotNil] ];
+    
+    [self setMockSession:mockSession];
+}
+
 
 - (void)tearDown {
     [super tearDown];
