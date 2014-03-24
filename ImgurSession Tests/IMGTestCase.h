@@ -29,9 +29,4 @@
  */
 -(void)stubWithFile:(NSString * )filename;
 
--(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;
--(void)postTestImage:(void(^)(IMGImage *,void(^)()))success;
--(void)postTestGalleryAlbumWithOneImage:(void(^)(IMGGalleryAlbum *,void(^)()))success;
--(void)postTestAlbumWithOneImage:(void(^)(IMGAlbum *,void(^)()))success;
-
 @end
