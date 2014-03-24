@@ -9,8 +9,6 @@
 
 #import "IMGTestCase.h"
 
-#warning: Must have at least one new and old notification
-
 @interface IMGNotificationTests : IMGTestCase
 
 @end
@@ -26,6 +24,11 @@
     [IMGNotificationRequest notifications:^(NSArray * notifications) {
         
         expect(notifications).haveCountOf(1);
+        IMGNotification * first = [notifications firstObject];
+        expect(first).beInstanceOf([IMGNotification class]);
+        expect(first.notificationId).beTruthy();
+        expect(first.accountId).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -56,6 +59,11 @@
     [IMGNotificationRequest notificationsWithFresh:NO success:^(NSArray * notifications) {
         
         expect(notifications).haveCountOf(1);
+        IMGNotification * first = [notifications firstObject];
+        expect(first).beInstanceOf([IMGNotification class]);
+        expect(first.notificationId).beTruthy();
+        expect(first.accountId).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];

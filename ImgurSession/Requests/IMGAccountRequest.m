@@ -304,21 +304,21 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSArray * accountAlbumsJSON = responseObject;
-        NSMutableArray * accountAlbums = [NSMutableArray new];
+        NSArray * accountImagesJSON = responseObject;
+        NSMutableArray * accountImages = [NSMutableArray new];
         
-        for(NSDictionary * albumJSON in accountAlbumsJSON){
+        for(NSDictionary * imageJSON in accountImagesJSON){
             
             NSError *JSONError = nil;
-            IMGAlbum *album = [[IMGAlbum alloc] initWithJSONObject:albumJSON error:&JSONError];
+            IMGImage *image = [[IMGImage alloc] initWithJSONObject:imageJSON error:&JSONError];
             
-            if(!JSONError && album){
-                [accountAlbums addObject:album];
+            if(!JSONError && image){
+                [accountImages addObject:image];
             }
         }
     
         if(success)
-            success([NSArray arrayWithArray:accountAlbums]);
+            success([NSArray arrayWithArray:accountImages]);
         
     } failure:failure];
 }

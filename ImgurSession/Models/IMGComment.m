@@ -18,7 +18,7 @@
         
         _commentId = [jsonData[@"id"] integerValue];
         _imageId = jsonData[@"image_id"];
-        _caption = jsonData[@"caption"];
+        _caption = jsonData[@"comment"];
         _author = jsonData[@"author"];
         _authorId = [jsonData[@"author_id"] integerValue];
         _onAlbum = [jsonData[@"on_album"] boolValue];

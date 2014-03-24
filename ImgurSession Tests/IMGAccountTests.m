@@ -8,9 +8,6 @@
 
 #import "IMGTestCase.h"
 
-#warning: Tests requires client id, client secret filled out in tests plist
-#warning: Tests must have refresh token filled out in tests plist in order to work on iPhone
-
 @interface IMGAccountTests : IMGTestCase
 
 @end
@@ -28,6 +25,8 @@
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
         expect(account).beTruthy();
+        expect(account.accountID).beGreaterThan(0);
+        expect(account.username).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];
@@ -73,6 +72,8 @@
     [IMGAccountRequest accountSettings:^(IMGAccountSettings *settings) {
         
         expect(settings.email).beTruthy();
+        expect(settings.highQuality).beFalsy();
+        
         set = settings;
 
     } failure: failBlock];
@@ -116,6 +117,8 @@
     [IMGAccountRequest accountCommentIDsWithUser:@"me" success:^(NSArray * commentIds) {
         
         expect(commentIds).haveCountOf(1);
+        expect([commentIds firstObject]).beGreaterThan(1);
+        
         isSuccess = YES;
 
     } failure:failBlock];
@@ -131,6 +134,11 @@
     [IMGAccountRequest accountCommentsWithUser:@"me" success:^(NSArray * comments) {
         
         expect(comments).haveCountOf(1);
+        IMGComment * first = [comments firstObject];
+        expect(first).beInstanceOf([IMGComment class]);
+        expect(first.caption).beTruthy();
+        expect(first.imageId).beTruthy();
+        
         isSuccess = YES;
 
     } failure:failBlock];
@@ -146,6 +154,7 @@
     [IMGAccountRequest accountCommentWithID:15325 success:^(IMGComment * firstComment) {
         
         expect(firstComment.caption).beTruthy();
+        expect(firstComment.imageId).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];
@@ -176,6 +185,7 @@
     [IMGAccountRequest accountImageIDsWithUser:@"me" success:^(NSArray * images) {
         
         expect(images).haveCountOf(1);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -191,6 +201,11 @@
     [IMGAccountRequest accountImagesWithUser:@"me" withPage:0 success:^(NSArray * images) {
         
         expect(images).haveCountOf(1);
+        IMGImage * first = [images firstObject];
+        expect(first).beInstanceOf([IMGImage class]);
+        expect(first.imageID).beTruthy();
+        expect(first.link).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -205,7 +220,10 @@
     
     [IMGAccountRequest accountImageWithID:@"dshfudsf" success:^(IMGImage * image) {
         
+        expect(image.imageID).beTruthy();
+        expect(image.link).beTruthy();
         expect(image.deletehash).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -221,6 +239,7 @@
     [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
         
         expect(num).equal(1);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -236,6 +255,7 @@
     [IMGAccountRequest accountAlbumIDsWithUser:@"me" success:^(NSArray  * albumIDs) {
         
         expect(albumIDs).haveCountOf(1);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -251,6 +271,11 @@
     [IMGAccountRequest accountAlbumsWithUser:@"me" withPage:0 success:^(NSArray * albums) {
         
         expect(albums).haveCountOf(1);
+        IMGAlbum * first = [albums firstObject];
+        expect(first).beInstanceOf([IMGAlbum class]);
+        expect(first.albumID).beTruthy();
+        expect(first.link).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -265,7 +290,11 @@
     
     [IMGAccountRequest accountAlbumWithID:@"dshfudsf" success:^(IMGAlbum * album) {
         
+        expect(album).beInstanceOf([IMGAlbum class]);
+        expect(album.albumID).beTruthy();
+        expect(album.link).beTruthy();
         expect(album.deletehash).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -281,6 +310,7 @@
     [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSUInteger num) {
         
         expect(num).equal(1);
+        
         isSuccess = YES;
         
     } failure:failBlock];

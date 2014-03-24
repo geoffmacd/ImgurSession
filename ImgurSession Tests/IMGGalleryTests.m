@@ -22,6 +22,7 @@
     [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
         
         expect(images).haveCountOf(185);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -37,6 +38,7 @@
     [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
         
         expect(images).haveCountOf(185);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -52,6 +54,7 @@
     [IMGGalleryRequest userGalleryPage:0 withViralSort:YES showViral:YES success:^(NSArray * images) {
         
         expect(images).haveCountOf(185);
+        
         isSuccess = YES;
         
     } failure:failBlock];

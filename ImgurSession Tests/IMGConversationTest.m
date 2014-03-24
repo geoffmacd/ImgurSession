@@ -23,6 +23,11 @@
     [IMGConversationRequest conversations:^(NSArray * messages) {
         
         expect(messages).haveCountOf(1);
+        expect([messages firstObject]).beInstanceOf([IMGConversation class]);
+        IMGConversation * first = [messages firstObject];
+        expect(first.lastMessage).beTruthy();
+        expect(first.conversationID).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -38,6 +43,9 @@
     [IMGConversationRequest conversationWithMessageID:346346 success:^(IMGConversation * conversation) {
         
         expect(conversation.lastMessage).beTruthy();
+        expect(conversation.conversationID).beTruthy();
+        expect(conversation.messageCount).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];
