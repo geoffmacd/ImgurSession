@@ -10,8 +10,6 @@
 
 #warning: Tests requires client id, client secret filled out in tests plist
 #warning: Tests must have refresh token filled out in tests plist in order to work on iPhone
-#warning: Test user must have at least: one notification, one comment, one image post, one favourtie
-
 
 @interface IMGAccountTests : IMGTestCase
 
@@ -30,6 +28,7 @@
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
         expect(account).beTruthy();
+        isSuccess = YES;
         
     } failure:failBlock];
     
@@ -39,10 +38,11 @@
 - (void)testAccountLoadMyFavs{
     
     __block BOOL isSuccess;
-    [self stubWithFile:@"myaccount.json"];
+    [self stubWithFile:@"myfavs.json"];
     
     [IMGAccountRequest accountFavouritesWithSuccess:^(NSArray * favorites) {
         
+        expect(favorites).haveCountOf(2);
         isSuccess = YES;
         
     } failure:failBlock];
@@ -53,9 +53,11 @@
 - (void)testAccountLoadMySubmissions{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"mysubmissions.json"];
     
     [IMGAccountRequest accountSubmissionsWithUser:@"me" withPage:0 success:^(NSArray * submissions) {
         
+        expect(submissions).haveCountOf(1);
         isSuccess = YES;
         
     } failure:failBlock];
@@ -66,9 +68,11 @@
 - (void)testAccountSettingsLoad{
     
     __block IMGAccountSettings *set;
+    [self stubWithFile:@"mysettings.json"];
     
     [IMGAccountRequest accountSettings:^(IMGAccountSettings *settings) {
         
+        expect(settings.email).beTruthy();
         set = settings;
 
     } failure: failBlock];
@@ -78,42 +82,42 @@
 
 - (void)testAccountSettingsChange{
     
-    __block IMGAccountSettings *set;
+    __block BOOL isSuccess;
+    [self stubWithFile:@"mysettingschange.json"];
     
     [IMGAccountRequest changeAccountWithBio:@"test bio" messagingEnabled:YES publicImages:YES albumPrivacy:IMGAlbumPublic acceptedGalleryTerms:YES success:^{
         
-        [IMGAccountRequest accountSettings:^(IMGAccountSettings *settings) {
-            
-            
-            [IMGAccountRequest changeAccountWithBio:@"test bio 2" success:^{
-                
-                [IMGAccountRequest accountSettings:^(IMGAccountSettings *settings) {
-                    
-                    set = settings;
-                    
-                } failure:failBlock];
-                
-            } failure:failBlock];
-            
-        } failure:failBlock];
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(set).willNot.beNil();
+    expect(isSuccess).willNot.beNil();
 }
 
-- (void)testAccountReplies{
+//- (void)testAccountReplies{
+//    
+//    __block BOOL isSuccess;
+//    [self stubWithFile:@"myreplies.json"];
+//    
+//    [IMGAccountRequest accountReplies:^(NSArray * replies) {
+//
+//        isSuccess = YES;
+//        
+//    } failure:failBlock];
+//    
+//    expect(isSuccess).will.beTruthy();
+//}
+
+- (void)testAccountCommentIDs{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"mycommentids.json"];
     
-    [IMGAccountRequest accountReplies:^(NSArray * replies) {
-
-        [IMGAccountRequest accountRepliesWithFresh:NO success:^(NSArray * oldReplies) {
+    [IMGAccountRequest accountCommentIDsWithUser:@"me" success:^(NSArray * commentIds) {
         
-            isSuccess = YES;
+        expect(commentIds).haveCountOf(1);
+        isSuccess = YES;
 
-        } failure:failBlock];
-        
     } failure:failBlock];
     
     expect(isSuccess).will.beTruthy();
@@ -122,25 +126,58 @@
 - (void)testAccountComments{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"mycomments.json"];
     
-    [IMGAccountRequest accountCommentIDsWithUser:@"me" success:^(NSArray * commentIds) {
+    [IMGAccountRequest accountCommentsWithUser:@"me" success:^(NSArray * comments) {
+        
+        expect(comments).haveCountOf(1);
+        isSuccess = YES;
 
-        if([commentIds firstObject]){
-            [IMGAccountRequest accountCommentWithID:[[commentIds firstObject] integerValue] success:^(IMGComment * firstComment) {
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
 
-                [IMGAccountRequest accountCommentsWithUser:@"me" success:^(NSArray * comments) {
-                    
-                    [IMGAccountRequest accountCommentCount:@"me" success:^(NSUInteger numcomments) {
+- (void)testAccountCommentWithID{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"mycommentwithid.json"];
+    
+    [IMGAccountRequest accountCommentWithID:15325 success:^(IMGComment * firstComment) {
+        
+        expect(firstComment.caption).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
 
-                        expect([comments count] == numcomments ).to.beTruthy();
-                        isSuccess = YES;
+- (void)testAccountCommentCount{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"mycommentcount.json"];
+    
+    [IMGAccountRequest accountCommentCount:@"me" success:^(NSUInteger numcomments) {
+        
+        expect(numcomments).equal(1);
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
 
-                    } failure:failBlock];
-                } failure:failBlock];
-            } failure:failBlock];
-        } else {
-            isSuccess = YES;
-        }
+- (void)testAccountImageIDS{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"myimageIDs.json"];
+    
+    [IMGAccountRequest accountImageIDsWithUser:@"me" success:^(NSArray * images) {
+        
+        expect(images).haveCountOf(1);
+        isSuccess = YES;
+        
     } failure:failBlock];
     
     expect(isSuccess).will.beTruthy();
@@ -149,25 +186,58 @@
 - (void)testAccountImages{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"myimages.json"];
     
-    [IMGAccountRequest accountImageIDsWithUser:@"me" success:^(NSArray * images) {
+    [IMGAccountRequest accountImagesWithUser:@"me" withPage:0 success:^(NSArray * images) {
         
-        if([images firstObject]){
-            [IMGAccountRequest accountImageWithID:[images firstObject] success:^(IMGImage * image) {
-                
-                [IMGAccountRequest accountImagesWithUser:@"me" withPage:0 success:^(NSArray * images) {
-                        
-                    [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
-                        
-                        expect(num).beGreaterThan(0);
-                        isSuccess = YES;
-                        
-                    } failure:failBlock];
-                } failure:failBlock];
-            } failure:failBlock];
-        } else {
-            isSuccess = YES;
-        }
+        expect(images).haveCountOf(1);
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+- (void)testAccountImageWithID{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"myimagewithid.json"];
+    
+    [IMGAccountRequest accountImageWithID:@"dshfudsf" success:^(IMGImage * image) {
+        
+        expect(image.deletehash).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+- (void)testAccountImageCount{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"myimagecount.json"];
+    
+    [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
+        
+        expect(num).equal(1);
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+- (void)testAccountAlbumIDs{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"myalbumids.json"];
+    
+    [IMGAccountRequest accountAlbumIDsWithUser:@"me" success:^(NSArray  * albumIDs) {
+        
+        expect(albumIDs).haveCountOf(1);
+        isSuccess = YES;
+        
     } failure:failBlock];
     
     expect(isSuccess).will.beTruthy();
@@ -176,25 +246,43 @@
 - (void)testAccountAlbums{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"myalbums.json"];
     
-    [IMGAccountRequest accountAlbumIDsWithUser:@"me" success:^(NSArray * albums) {
+    [IMGAccountRequest accountAlbumsWithUser:@"me" withPage:0 success:^(NSArray * albums) {
         
-        if([albums firstObject]){
-            [IMGAccountRequest accountAlbumWithID:[albums firstObject] success:^(IMGAlbum * album) {
-                
-                [IMGAccountRequest accountAlbumsWithUser:@"me" withPage:0 success:^(NSArray * albums) {
-                    
-                    [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSUInteger num) {
-                        
-                        expect(num).beGreaterThan(0);
-                        isSuccess = YES;
-                        
-                    } failure:failBlock];
-                } failure:failBlock];
-            } failure:failBlock];
-        } else {
-            isSuccess = YES;
-        }
+        expect(albums).haveCountOf(1);
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+- (void)testAccountAlbumWithID{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"myalbumwithid.json"];
+    
+    [IMGAccountRequest accountAlbumWithID:@"dshfudsf" success:^(IMGAlbum * album) {
+        
+        expect(album.deletehash).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+- (void)testAccountAlbumCount{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"myalbumcount.json"];
+    
+    [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSUInteger num) {
+        
+        expect(num).equal(1);
+        isSuccess = YES;
+        
     } failure:failBlock];
     
     expect(isSuccess).will.beTruthy();
@@ -203,21 +291,13 @@
 -(void)testAccountCommentDelete{
     
     __block BOOL isDeleted;
-    
-    [self postTestImage:^(IMGImage * image, void(^success)()) {
+    [self stubWithFile:@"mycommentdeletewithid.json"];
+
+    [IMGAccountRequest accountDeleteCommentWithID:5325235 success:^{
         
+        isDeleted = YES;
         
-        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSUInteger commentId) {
-                
-            [IMGAccountRequest accountDeleteCommentWithID:commentId success:^{
-                
-                success();
-                isDeleted = YES;
-                
-            } failure:failBlock];
-            
-        } failure:failBlock];
-    }];
+    } failure:failBlock];
     
     expect(isDeleted).will.beTruthy();
 }
@@ -225,16 +305,13 @@
 -(void)testAccountImageDelete{
     
     __block BOOL isDeleted;
+    [self stubWithFile:@"myimagedelete.json"];
     
-    [self postTestImage:^(IMGImage * image, void(^success)()) {
+    [IMGAccountRequest accountDeleteImageWithHash:@"fdshbfdjshfs" success:^() {
+        
+        isDeleted = YES;
 
-        [IMGAccountRequest accountDeleteImageWithHash:image.deletehash success:^() {
-            
-            success();
-            isDeleted = YES;
-    
-        } failure:failBlock];
-    }];
+    } failure:failBlock];
     
     expect(isDeleted).will.beTruthy();
 }
@@ -242,16 +319,13 @@
 -(void)testAccountAlbumDelete{
     
     __block BOOL isDeleted;
+    [self stubWithFile:@"myimagedelete.json"];
     
-    [self postTestAlbumWithOneImage:^(IMGAlbum * album, void(^success)()) {
+    [IMGAccountRequest accountDeleteAlbumWithID:@"3fdsfds436436" success:^{
         
-        [IMGAccountRequest accountDeleteAlbumWithID:album.albumID success:^{
-            
-            success();
-            isDeleted = YES;
-            
-        } failure:failBlock];
-    }];
+        isDeleted = YES;
+        
+    } failure:failBlock];
     
     expect(isDeleted).will.beTruthy();
 }

@@ -18,24 +18,27 @@
 -(void)testLoadConversations{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"conversations.json"];
     
     [IMGConversationRequest conversations:^(NSArray * messages) {
         
-        IMGConversation * first = [messages firstObject];
+        expect(messages).haveCountOf(1);
+        isSuccess = YES;
         
-        if(first){
-            expect(first.conversationID).beGreaterThan(0);
-            expect(first.lastMessage).beTruthy();
-            
-            [IMGConversationRequest conversationWithMessageID:first.conversationID success:^(IMGConversation * convseration) {
-                
-                isSuccess = YES;
-                
-            } failure:failBlock];
-        } else {
-            
-            isSuccess = YES;
-        }
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+-(void)testLoadConversationWithID{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"conversationwithid.json"];
+    
+    [IMGConversationRequest conversationWithMessageID:346346 success:^(IMGConversation * conversation) {
+        
+        expect(conversation.lastMessage).beTruthy();
+        isSuccess = YES;
         
     } failure:failBlock];
     
@@ -43,34 +46,32 @@
 }
 
 
--(void)testSendConversatioToSelfAndDelete{
+-(void)testSendConversation{
     
-    __block BOOL didDelete;
+    __block BOOL isSuccess;
+    [self stubWithFile:@"conversationpost.json"];
     
     [IMGConversationRequest createMessageWithRecipient:imgurUnitTestParams[@"recipientId"] withBody:@"you must be the designer of this api" success:^{
         
-        [IMGConversationRequest conversations:^(NSArray * allConvos) {
-            
-            [allConvos enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-               
-                IMGConversation * con = obj;
-                
-                if([con.fromUsername isEqualToString:imgurUnitTestParams[@"recipientId"]]){
-                    *stop = YES;
-                    
-                    [IMGConversationRequest deleteConversation:con.conversationID success:^{
-                        
-                        didDelete = YES;
-                        
-                    } failure:failBlock];
-                }
-            }];
-            
-        } failure:failBlock];
-
+        isSuccess = YES;
+        
     } failure:failBlock];
     
-    expect(didDelete).will.beTruthy();
+    expect(isSuccess).will.beTruthy();
+}
+
+-(void)testDeleteConvo{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"conversationdelete.json"];
+    
+    [IMGConversationRequest deleteConversation:634436 success:^{
+        
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
 }
 
 

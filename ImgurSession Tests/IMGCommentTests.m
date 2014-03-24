@@ -18,35 +18,49 @@
 /**
  Posts image to comment on, comments on it, replies to comment, then deletes everything
  */
-#warning: may fail due to comment rate, which imgur thinks is spam
-- (void)testCommentReplyAndDelete{
+- (void)testCommentSubmit{
     
-    __block BOOL deleteSuccess = NO;
-    
-    [self postTestImage:^(IMGImage * image, void(^success)()){
+    __block BOOL isSuccess;
+    [self stubWithFile:@"postcomment.json"];
         
-        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSUInteger commentId) {
-            
-            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withCommentID:commentId success:^(NSUInteger replyId) {
-                
-                
-                [IMGCommentRequest deleteCommentWithID:replyId success:^() {
-                    
-                    [IMGCommentRequest deleteCommentWithID:commentId  success:^() {
-                        
-                        success();
-                        deleteSuccess = YES;
-                        
-                    } failure:failBlock];
-                    
-                } failure:failBlock];
-                
-            } failure:failBlock];
-            
-        } failure:failBlock];
-    }];
+    [IMGCommentRequest submitComment:@"test comment" withImageID:@"grsgdf" withParentID:0 success:^(NSUInteger commentId) {
+        
+        expect(commentId).beGreaterThan(0);
+        isSuccess = YES;
+        
+    } failure:failBlock];
     
-    expect(deleteSuccess).will.beTruthy();
+    expect(isSuccess).will.beTruthy();
+}
+
+-(void)testCommentReply{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"replytocomment.json"];
+    
+    [IMGCommentRequest replyToComment:@"test reply" withImageID:@"sdfsdf" withCommentID:4354363476 success:^(NSUInteger replyId) {
+        
+        expect(replyId).beGreaterThan(0);
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+-(void)testCommentDelete{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"deletecomment.json"];
+    
+    [IMGCommentRequest deleteCommentWithID:25235 success:^() {
+        
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    
+    expect(isSuccess).will.beTruthy();
 }
 
 -(void)testReportComment{

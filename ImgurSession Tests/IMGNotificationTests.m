@@ -21,35 +21,27 @@
 - (void)testLoadNotifications{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"freshnotification.json"];
     
     [IMGNotificationRequest notifications:^(NSArray * notifications) {
         
+        expect(notifications).haveCountOf(1);
         isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(isSuccess).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
-- (void)testLoadNotificationsAndMarkOneAsViewed{
+- (void)testViewedNotification{
     
     __block BOOL isSuccess;
-    
-    [IMGNotificationRequest notifications:^(NSArray * notifications) {
+    [self stubWithFile:@"deletenotification.json"];
+
+    //mark first one as viewed
+    [IMGNotificationRequest notificationViewed:@"dsgdsg" success:^{
         
-        IMGNotification * first = [notifications firstObject];
-        
-        if(first){
-        
-            //mark first one as viewed
-            [IMGNotificationRequest notificationViewed:first.notificationId success:^{
-                
-                isSuccess = YES;
-                
-            } failure:failBlock];
-        } else {
-            isSuccess = YES;
-        }
+        isSuccess = YES;
         
     } failure:failBlock];
     
@@ -59,9 +51,11 @@
 - (void)testLoadStaleNotifications{
     
     __block BOOL isSuccess;
+    [self stubWithFile:@"allnotifications.json"];
     
     [IMGNotificationRequest notificationsWithFresh:NO success:^(NSArray * notifications) {
         
+        expect(notifications).haveCountOf(1);
         isSuccess = YES;
         
     } failure:failBlock];
