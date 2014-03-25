@@ -68,6 +68,6 @@
         
     } failure:failBlock];
     
-    expect(isSuccess).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 @end
