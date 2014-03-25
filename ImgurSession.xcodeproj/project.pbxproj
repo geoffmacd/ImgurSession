@@ -1776,6 +1776,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -1800,6 +1801,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1821,6 +1823,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -1845,6 +1848,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
