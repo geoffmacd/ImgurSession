@@ -49,9 +49,6 @@
         [ses setDelegate:self];
         if([imgurClient[@"refreshToken"] length])
             ses.refreshToken = imgurClient[@"refreshToken"];
-//        [ses setAccessToken:imgurClient[@"accessToken"]];
-    //    [ses setAccessTokenExpiry: [NSDate dateWithTimeIntervalSinceNow:NSIntegerMax]];
-    //    [ses setGarbageAuth];
         [self authenticateUsingOAuthWithPINAsync];
     }
     

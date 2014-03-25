@@ -5,7 +5,7 @@
 	<key>imgurClientCredentials</key>
 	<dict>
 		<key>anonymous</key>
-		<false/>
+		<true/>
 		<key>id</key>
 		<string></string>
 		<key>secret</key>
@@ -18,7 +18,7 @@
 		<key>title</key>
 		<string>Just messing with the API, you can ignore this</string>
 		<key>recipientId</key>
-		<string>geoffmacd</string>
+		<string>geoffygeoff</string>
 	</dict>
 </dict>
 </plist>

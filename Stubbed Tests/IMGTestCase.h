@@ -19,7 +19,6 @@
     
     //various metadata to store
     NSDictionary *imgurUnitTestParams;
-    NSURL * testfileURL;
     __block void(^ failBlock)(NSError * error);
     
 }
