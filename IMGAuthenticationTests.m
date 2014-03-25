@@ -62,8 +62,9 @@
      __block BOOL isFailed = NO;
      
      //re-auth will be unsuccessful
-     [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
-     
+    [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
+    [[IMGSession sharedInstance] setGarbageAuth];
+    
      //should fail and trigger re-auth, then fail again
      [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
      
@@ -78,19 +79,24 @@
      expect(isFailed).will.beTruthy();
 }
 
-#pragma mark - Testing Rate tracking
+#pragma mark - Testing Rate Limit tracking
 
--(void)testTracking{
+-(void)testTrackingClientRateLimiting{
     
     __block BOOL isSuccess;
-    NSInteger remaining = [[IMGSession sharedInstance] creditsClientRemaining];
     
-    //should fail and trigger re-auth
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
-        //ensure counter has gone down since we've done one request
-        expect([[IMGSession sharedInstance] creditsClientRemaining]).beLessThan(remaining);
-        isSuccess = YES;
+        NSInteger remaining = [[IMGSession sharedInstance] creditsClientRemaining];
+        
+        //should fail and trigger re-auth
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            //ensure counter has gone down since we've done one request
+            expect([[IMGSession sharedInstance] creditsClientRemaining]).beLessThan(remaining);
+            isSuccess = YES;
+            
+        } failure:failBlock];
         
     } failure:failBlock];
     
