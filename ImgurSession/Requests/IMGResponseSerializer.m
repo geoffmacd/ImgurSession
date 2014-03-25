@@ -12,7 +12,9 @@
 
 @implementation IMGResponseSerializer
 
-
+/**
+ Returns data for IMG Request classes to parse from network request. The json should be parsed from data using the JSON serializer which this class inherits from. Thus the json should be the basic model described at https://api.imgur.com/models/basic . The 'data' key is all that matters unless we have 403 or success=false. We also use this opportunity to grab the response headers and track rate limiting since this method is called for every single response.
+ */
 -(id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error{
     
     IMGSession * ses = [IMGSession sharedInstance];

@@ -124,24 +124,6 @@
         return IMGAuthStateExpired;
 }
 
-/**
- Testing function to remove auth
- */
--(void)setGarbageAuth{
-    
-    //change the serializer to include this authorization header
-    AFHTTPRequestSerializer * serializer = self.requestSerializer;
-    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", @"garbage"] forHTTPHeaderField:@"Authorization"];
-}
-
-
--(void)setAnonmyousAuthenticationWithID:(NSString*)clientID{
-    
-    //change the serializer to include this authorization header
-    AFHTTPRequestSerializer * serializer = self.requestSerializer;
-    [serializer setValue:[NSString stringWithFormat:@"Client-ID %@", clientID] forHTTPHeaderField:@"Authorization"];
-}
-
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
     
     NSLog(@"...attempting reauth...");
@@ -234,6 +216,15 @@
     }];
 }
 
+#pragma mark - Authorization header
+
+-(void)setAnonmyousAuthenticationWithID:(NSString*)clientID{
+    
+    //change the serializer to include this authorization header
+    AFHTTPRequestSerializer * serializer = self.requestSerializer;
+    [serializer setValue:[NSString stringWithFormat:@"Client-ID %@", clientID] forHTTPHeaderField:@"Authorization"];
+}
+
 - (void)setAuthorizationHeader:(NSDictionary *)tokens{
     //store authentication from oauth/token response
     
@@ -252,6 +243,13 @@
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;    
     [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
+}
+
+-(void)setGarbageAuth{
+    
+    //change the serializer to include this authorization header
+    AFHTTPRequestSerializer * serializer = self.requestSerializer;
+    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", @"garbage"] forHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - Rate Limit Tracking
@@ -295,7 +293,8 @@
     }
 }
 
-#pragma mark - Requests - need to retry after auth fail so had to reimplement
+#pragma mark - Requests
+//needed to subclass to manage re-authentication
 
 -(NSURLSessionDataTask *)PUT:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
@@ -466,7 +465,7 @@
     return task;
 }
 
-#pragma mark - KVO for progress
+#pragma mark - KVO for progress upload
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"fractionCompleted"]) {

@@ -101,10 +101,14 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
 #pragma mark - Remove Gallery objects
 
 /**
- Removes gallery object from gallery
- @param albumID    albumID to remove from gallery
+ Removes gallery image from gallery
+ @param imageID    imageID to remove from gallery
  */
 + (void)removeImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *error))failure;
+/**
+ Removes gallery album from gallery
+ @param albumID    albumID to remove from gallery
+ */
 + (void)removeAlbumWithID:(NSString *)albumID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 

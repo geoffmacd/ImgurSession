@@ -70,7 +70,9 @@
  Update current account settings with new values
  */
 + (void)changeAccountWithBio:(NSString*)bio success:(void (^)())success failure:(void (^)(NSError *error))failure;
-
+/**
+ Update current account settings with new values
+ */
 + (void)changeAccountWithBio:(NSString*)bio messagingEnabled:(BOOL)msgEnabled publicImages:(BOOL)publicImages albumPrivacy:(IMGAlbumPrivacy)privacy acceptedGalleryTerms:(BOOL)galTerms success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 
@@ -150,9 +152,12 @@
 #pragma mark - Replies associated with account
 
 /**
- Returns all of the reply notifications for the current account
+ Returns all new reply notifications for the current account
  */
 + (void)accountReplies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
+/**
+ Returns all of the reply notifications for the current account
+ */
 + (void)accountRepliesWithFresh:(BOOL)freshOnly success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 @end

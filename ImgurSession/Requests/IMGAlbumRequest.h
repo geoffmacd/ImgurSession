@@ -20,15 +20,24 @@
 
 #pragma mark - Load
 
+/**
+ Retrieve album details with the albumID
+ */
 + (void)albumWithID:(NSString *)albumID success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Create
 
+/**
+ Create an album with an array of imageIDs which currently exist
+ */
 + (void)createAlbumWithTitle:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
 + (void)createAlbumWithTitle:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(IMGImage *)cover success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Delete
 
+/**
+ Delete an album with an albumID if you are the owner of the album. For anonymous delete, you must pass the deletehash instead
+ */
 + (void)deleteAlbumWithID:(NSString *)albumID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 

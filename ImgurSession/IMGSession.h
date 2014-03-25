@@ -6,17 +6,19 @@
 //  Distributed under the MIT license.
 //
 
+//endpoints
 static NSString * const IMGBaseURL = @"https://api.imgur.com";
 static NSString * const IMGAPIVersion = @"3";
 static NSString * const IMGOAuthEndpoint = @"oauth2/token";
 
+//rate limit header names
 static NSString * const IMGHeaderUserLimit = @"X-RateLimit-UserLimit";
 static NSString * const IMGHeaderUserRemaining = @"X-RateLimit-UserRemaining";
 static NSString * const IMGHeaderUserReset = @"X-RateLimit-UserReset";
 static NSString * const IMGHeaderClientLimit = @"X-RateLimit-ClientLimit";
 static NSString * const IMGHeaderClientRemaining = @"X-RateLimit-ClientRemaining";
 
-//notifications
+//notification names
 static NSString * const IMGRateLimitExceededNotification = @"IMGRateLimitExceededNotification";
 static NSString * const IMGRateLimitNearLimitNotification = @"IMGRateLimitNearLimitNotification";
 static NSString * const IMGNeedsExternalWebviewNotification = @"IMGNeedsExternalWebviewNotification";
@@ -25,7 +27,7 @@ static NSString * const IMGAuthChangedNotification = @"IMGAuthChangedNotificatio
 static NSString * const IMGAuthRefreshedNotification = @"IMGAuthRefreshedNotification";
 
 /**
- Type of authorization to use, you will proably use PIN
+ Type of authorization to use, you will probably use PIN. See https://api.imgur.com/oauth2
  */
 typedef NS_ENUM(NSInteger, IMGAuthType){
     IMGNoAuthType,
@@ -34,6 +36,9 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
     IMGCodeAuth
 };
 
+/**
+ State of authentication
+ */
 typedef NS_ENUM(NSInteger, IMGAuthState){
     IMGAuthStateNone,
     IMGAuthStateAuthenticated,
@@ -108,11 +113,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (readonly, nonatomic) NSDate *accessTokenExpiry;
 /**
- Access token expiry date
+ Most recent type of authentication, if it has been attempted yet
  */
 @property (readonly, nonatomic) IMGAuthType lastAuthType;
 /**
- Anonymous type
+ Is current session anonymous?
  */
 @property (readonly, nonatomic) BOOL isAnonymous;
 
@@ -172,7 +177,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 #pragma mark - Authentication
 
--(void)setAnonmyousAuthenticationWithID:(NSString*)clientID;
+/**
+ Returns status of session authentication
+ @return    IMGAuthState state of current session
+ */
 -(IMGAuthState)sessionAuthState;
 /**
  Retrieves URL associated with website authorization page
@@ -200,6 +208,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param failure     failure completion
  */
 - (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * accessToken))success failure:(void (^)(NSError *error))failure;
+
 
 
 #pragma mark - Requests
