@@ -6,14 +6,13 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#import "IMGTestCase.h"
+#import "IMGIntegratedTestCase.h"
 
 #warning: Tests requires client id, client secret filled out in tests plist
 #warning: Tests must have refresh token filled out in tests plist in order to work on iPhone
-#warning: Test user must have at least: one notification, one comment, one image post, one favourtie
 
 
-@interface IMGAccountTests : IMGTestCase
+@interface IMGAccountTests : IMGIntegratedTestCase
 
 @end
 
@@ -52,7 +51,7 @@
     
     __block BOOL isSuccess;
     
-    [IMGAccountRequest accountSubmissionsWithUser:@"me" withPage:0 success:^(NSArray * submissions) {
+    [IMGAccountRequest accountSubmissionsWithUser:@"jobsjobs" withPage:0 success:^(NSArray * submissions) {
         
         isSuccess = YES;
         

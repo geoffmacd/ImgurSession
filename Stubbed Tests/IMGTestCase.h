@@ -13,19 +13,19 @@
 #define EXP_SHORTHAND YES
 #import "Expecta.h"
 #import "OCMock.h"
+#import <OHHTTPStubs.h>
 
 @interface IMGTestCase : XCTestCase <IMGSessionDelegate>{
     
     //various metadata to store
     NSDictionary *imgurUnitTestParams;
-    NSURL * testfileURL;
     __block void(^ failBlock)(NSError * error);
-    BOOL anon;
+    
 }
 
--(void)postTestGalleryImage:(void(^)(IMGGalleryImage *,void(^)()))success;
--(void)postTestImage:(void(^)(IMGImage *,void(^)()))success;
--(void)postTestGalleryAlbumWithOneImage:(void(^)(IMGGalleryAlbum *,void(^)()))success;
--(void)postTestAlbumWithOneImage:(void(^)(IMGAlbum *,void(^)()))success;
+/**
+ Stub reponse for next request
+ */
+-(void)stubWithFile:(NSString * )filename;
 
 @end

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		141072577CF94E32B576AE22 /* libPods-ImgurSessionOSXTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB8418ED9DE407C843F636C /* libPods-ImgurSessionOSXTests.a */; };
+		022E51D618CE4F15810C28EE /* libPods-OSXAuthenticatedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2155B9E8F1254B7783782111 /* libPods-OSXAuthenticatedTests.a */; };
 		1A559323052940B29978A00B /* libPods-ImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */; };
 		1E1C67B716E5400B8EF06B87 /* libPods-ImgurSessionOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE72095F6B24FBB9104E2EE /* libPods-ImgurSessionOSX.a */; };
 		2407474F18D4F31600B92063 /* IMGVote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2407474E18D4F31600B92063 /* IMGVote.m */; };
@@ -52,8 +52,6 @@
 		240747C618D62B1B00B92063 /* IMGEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 240747AC18D62B1B00B92063 /* IMGEndpoint.m */; };
 		243CCDA118DD32EF00B4FBC6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AC155418CAB4F9005F86C8 /* Cocoa.framework */; };
 		243CCDA218DD32EF00B4FBC6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
-		243CCDA318DD32EF00B4FBC6 /* libPods-ImgurSessionOSXTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB8418ED9DE407C843F636C /* libPods-ImgurSessionOSXTests.a */; };
-		243CCDA518DD32EF00B4FBC6 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		243CCDB018DD336900B4FBC6 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */; };
 		243CCDB118DD338700B4FBC6 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
 		2482266218CABF7B00C30677 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
@@ -63,7 +61,10 @@
 		24B4CB8A18CAB7B300EC8E4A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		24B4CB8B18CAB7B300EC8E4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AC155418CAB4F9005F86C8 /* Cocoa.framework */; };
 		24B4CBA218CABA2D00EC8E4A /* IMGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C30933E418CA204C009D9C57 /* IMGSession.m */; };
-		3D9BAF6DB88246B490830CC2 /* libPods-ImgurSession Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4D4BF99DE94FC7A493E5C4 /* libPods-ImgurSession Tests.a */; };
+		5E1DA40C40264D889B02B30B /* libPods-OSXAnonTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19486AE3CD394A55907AA7A3 /* libPods-OSXAnonTests.a */; };
+		81F56629D24C4F64BB24BD06 /* libPods-OSXIntegratedAnonTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70AD5E4AAC7E4142A9272C14 /* libPods-OSXIntegratedAnonTests.a */; };
+		A021706E08CD481190E372E3 /* libPods-OSXIntegratedAuthenticatedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B18FC49F01B74CE7997BECDF /* libPods-OSXIntegratedAuthenticatedTests.a */; };
+		A7833EC50C0449A6AE200342 /* libPods-iOSAuthenticatedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C17F7D4AE624C3C855B4547 /* libPods-iOSAuthenticatedTests.a */; };
 		C309339918CA1F87009D9C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
 		C30933E518CA204C009D9C57 /* IMGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C30933E418CA204C009D9C57 /* IMGSession.m */; };
 		C3102D1518D8D5FF007A75C4 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
@@ -75,20 +76,133 @@
 		C3102D2318DB3F71007A75C4 /* IMGCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2118DB3F71007A75C4 /* IMGCommentTests.m */; };
 		C3102D2618DB7713007A75C4 /* IMGConversationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2518DB7713007A75C4 /* IMGConversationTest.m */; };
 		C3102D2718DB7713007A75C4 /* IMGConversationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2518DB7713007A75C4 /* IMGConversationTest.m */; };
-		C3102D2A18DB78DF007A75C4 /* IMGConversation.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D2818DB78DE007A75C4 /* IMGConversation.h */; };
 		C3102D2B18DB78DF007A75C4 /* IMGConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2918DB78DE007A75C4 /* IMGConversation.m */; };
 		C3102D2C18DB78DF007A75C4 /* IMGConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2918DB78DE007A75C4 /* IMGConversation.m */; };
 		C3102D2F18DB835A007A75C4 /* IMGNotificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */; };
 		C3102D3018DB835A007A75C4 /* IMGNotificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */; };
-		C319F7CC18D0CDBE00C5E880 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C319F7D418D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
 		C319F7D518D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
 		C355E5CF18CA80A100D5CEA5 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
 		C36C00F318CA7611004576A5 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C36C010E18CA7A7F004576A5 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
+		C397093218E0B45B001DA560 /* allnotifications.json in Resources */ = {isa = PBXBuildFile; fileRef = C397090F18E0B45B001DA560 /* allnotifications.json */; };
+		C397093318E0B45B001DA560 /* allnotifications.json in Resources */ = {isa = PBXBuildFile; fileRef = C397090F18E0B45B001DA560 /* allnotifications.json */; };
+		C397093418E0B45B001DA560 /* allnotifications.json in Resources */ = {isa = PBXBuildFile; fileRef = C397090F18E0B45B001DA560 /* allnotifications.json */; };
+		C397093518E0B45B001DA560 /* conversationdelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091018E0B45B001DA560 /* conversationdelete.json */; };
+		C397093618E0B45B001DA560 /* conversationdelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091018E0B45B001DA560 /* conversationdelete.json */; };
+		C397093718E0B45B001DA560 /* conversationdelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091018E0B45B001DA560 /* conversationdelete.json */; };
+		C397093818E0B45B001DA560 /* conversationpost.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091118E0B45B001DA560 /* conversationpost.json */; };
+		C397093918E0B45B001DA560 /* conversationpost.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091118E0B45B001DA560 /* conversationpost.json */; };
+		C397093A18E0B45B001DA560 /* conversationpost.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091118E0B45B001DA560 /* conversationpost.json */; };
+		C397093B18E0B45B001DA560 /* conversations.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091218E0B45B001DA560 /* conversations.json */; };
+		C397093C18E0B45B001DA560 /* conversations.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091218E0B45B001DA560 /* conversations.json */; };
+		C397093D18E0B45B001DA560 /* conversations.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091218E0B45B001DA560 /* conversations.json */; };
+		C397093E18E0B45B001DA560 /* conversationswithravener.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091318E0B45B001DA560 /* conversationswithravener.json */; };
+		C397093F18E0B45B001DA560 /* conversationswithravener.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091318E0B45B001DA560 /* conversationswithravener.json */; };
+		C397094018E0B45B001DA560 /* conversationswithravener.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091318E0B45B001DA560 /* conversationswithravener.json */; };
+		C397094118E0B45B001DA560 /* conversationwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091418E0B45B001DA560 /* conversationwithid.json */; };
+		C397094218E0B45B001DA560 /* conversationwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091418E0B45B001DA560 /* conversationwithid.json */; };
+		C397094318E0B45B001DA560 /* conversationwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091418E0B45B001DA560 /* conversationwithid.json */; };
+		C397094418E0B45B001DA560 /* deletecomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091518E0B45B001DA560 /* deletecomment.json */; };
+		C397094518E0B45B001DA560 /* deletecomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091518E0B45B001DA560 /* deletecomment.json */; };
+		C397094618E0B45B001DA560 /* deletecomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091518E0B45B001DA560 /* deletecomment.json */; };
+		C397094718E0B45B001DA560 /* deleteimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091618E0B45B001DA560 /* deleteimage.json */; };
+		C397094818E0B45B001DA560 /* deleteimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091618E0B45B001DA560 /* deleteimage.json */; };
+		C397094918E0B45B001DA560 /* deleteimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091618E0B45B001DA560 /* deleteimage.json */; };
+		C397094A18E0B45B001DA560 /* deletenotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091718E0B45B001DA560 /* deletenotification.json */; };
+		C397094B18E0B45B001DA560 /* deletenotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091718E0B45B001DA560 /* deletenotification.json */; };
+		C397094C18E0B45B001DA560 /* deletenotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091718E0B45B001DA560 /* deletenotification.json */; };
+		C397094D18E0B45B001DA560 /* freshnotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091818E0B45B001DA560 /* freshnotification.json */; };
+		C397094E18E0B45B001DA560 /* freshnotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091818E0B45B001DA560 /* freshnotification.json */; };
+		C397094F18E0B45B001DA560 /* freshnotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091818E0B45B001DA560 /* freshnotification.json */; };
+		C397095018E0B45B001DA560 /* hotgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091918E0B45B001DA560 /* hotgallery.json */; };
+		C397095118E0B45B001DA560 /* hotgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091918E0B45B001DA560 /* hotgallery.json */; };
+		C397095218E0B45B001DA560 /* hotgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091918E0B45B001DA560 /* hotgallery.json */; };
+		C397095318E0B45B001DA560 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091A18E0B45B001DA560 /* myaccount.json */; };
+		C397095418E0B45B001DA560 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091A18E0B45B001DA560 /* myaccount.json */; };
+		C397095518E0B45B001DA560 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091A18E0B45B001DA560 /* myaccount.json */; };
+		C397095618E0B45B001DA560 /* myalbumcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091B18E0B45B001DA560 /* myalbumcount.json */; };
+		C397095718E0B45B001DA560 /* myalbumcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091B18E0B45B001DA560 /* myalbumcount.json */; };
+		C397095818E0B45B001DA560 /* myalbumcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091B18E0B45B001DA560 /* myalbumcount.json */; };
+		C397095918E0B45B001DA560 /* myalbumids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091C18E0B45B001DA560 /* myalbumids.json */; };
+		C397095A18E0B45B001DA560 /* myalbumids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091C18E0B45B001DA560 /* myalbumids.json */; };
+		C397095B18E0B45B001DA560 /* myalbumids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091C18E0B45B001DA560 /* myalbumids.json */; };
+		C397095C18E0B45B001DA560 /* myalbums.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091D18E0B45B001DA560 /* myalbums.json */; };
+		C397095D18E0B45B001DA560 /* myalbums.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091D18E0B45B001DA560 /* myalbums.json */; };
+		C397095E18E0B45B001DA560 /* myalbums.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091D18E0B45B001DA560 /* myalbums.json */; };
+		C397095F18E0B45B001DA560 /* myalbumwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091E18E0B45B001DA560 /* myalbumwithid.json */; };
+		C397096018E0B45B001DA560 /* myalbumwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091E18E0B45B001DA560 /* myalbumwithid.json */; };
+		C397096118E0B45B001DA560 /* myalbumwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091E18E0B45B001DA560 /* myalbumwithid.json */; };
+		C397096218E0B45B001DA560 /* mycommentcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091F18E0B45B001DA560 /* mycommentcount.json */; };
+		C397096318E0B45B001DA560 /* mycommentcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091F18E0B45B001DA560 /* mycommentcount.json */; };
+		C397096418E0B45B001DA560 /* mycommentcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091F18E0B45B001DA560 /* mycommentcount.json */; };
+		C397096518E0B45B001DA560 /* mycommentdeletewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092018E0B45B001DA560 /* mycommentdeletewithid.json */; };
+		C397096618E0B45B001DA560 /* mycommentdeletewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092018E0B45B001DA560 /* mycommentdeletewithid.json */; };
+		C397096718E0B45B001DA560 /* mycommentdeletewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092018E0B45B001DA560 /* mycommentdeletewithid.json */; };
+		C397096818E0B45B001DA560 /* mycommentids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092118E0B45B001DA560 /* mycommentids.json */; };
+		C397096918E0B45B001DA560 /* mycommentids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092118E0B45B001DA560 /* mycommentids.json */; };
+		C397096A18E0B45B001DA560 /* mycommentids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092118E0B45B001DA560 /* mycommentids.json */; };
+		C397096B18E0B45B001DA560 /* mycomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092218E0B45B001DA560 /* mycomments.json */; };
+		C397096C18E0B45B001DA560 /* mycomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092218E0B45B001DA560 /* mycomments.json */; };
+		C397096D18E0B45B001DA560 /* mycomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092218E0B45B001DA560 /* mycomments.json */; };
+		C397096E18E0B45B001DA560 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092318E0B45B001DA560 /* mycommentwithid.json */; };
+		C397096F18E0B45B001DA560 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092318E0B45B001DA560 /* mycommentwithid.json */; };
+		C397097018E0B45B001DA560 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092318E0B45B001DA560 /* mycommentwithid.json */; };
+		C397097118E0B45B001DA560 /* myfavs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092418E0B45B001DA560 /* myfavs.json */; };
+		C397097218E0B45B001DA560 /* myfavs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092418E0B45B001DA560 /* myfavs.json */; };
+		C397097318E0B45B001DA560 /* myfavs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092418E0B45B001DA560 /* myfavs.json */; };
+		C397097418E0B45B001DA560 /* myimagecount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092518E0B45B001DA560 /* myimagecount.json */; };
+		C397097518E0B45B001DA560 /* myimagecount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092518E0B45B001DA560 /* myimagecount.json */; };
+		C397097618E0B45B001DA560 /* myimagecount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092518E0B45B001DA560 /* myimagecount.json */; };
+		C397097718E0B45B001DA560 /* myimagedelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092618E0B45B001DA560 /* myimagedelete.json */; };
+		C397097818E0B45B001DA560 /* myimagedelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092618E0B45B001DA560 /* myimagedelete.json */; };
+		C397097918E0B45B001DA560 /* myimagedelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092618E0B45B001DA560 /* myimagedelete.json */; };
+		C397097A18E0B45B001DA560 /* myimageIDs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092718E0B45B001DA560 /* myimageIDs.json */; };
+		C397097B18E0B45B001DA560 /* myimageIDs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092718E0B45B001DA560 /* myimageIDs.json */; };
+		C397097C18E0B45B001DA560 /* myimageIDs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092718E0B45B001DA560 /* myimageIDs.json */; };
+		C397097D18E0B45B001DA560 /* myimages.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092818E0B45B001DA560 /* myimages.json */; };
+		C397097E18E0B45B001DA560 /* myimages.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092818E0B45B001DA560 /* myimages.json */; };
+		C397097F18E0B45B001DA560 /* myimages.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092818E0B45B001DA560 /* myimages.json */; };
+		C397098018E0B45B001DA560 /* myimagewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092918E0B45B001DA560 /* myimagewithid.json */; };
+		C397098118E0B45B001DA560 /* myimagewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092918E0B45B001DA560 /* myimagewithid.json */; };
+		C397098218E0B45B001DA560 /* myimagewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092918E0B45B001DA560 /* myimagewithid.json */; };
+		C397098318E0B45B001DA560 /* mysettings.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092A18E0B45B001DA560 /* mysettings.json */; };
+		C397098418E0B45B001DA560 /* mysettings.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092A18E0B45B001DA560 /* mysettings.json */; };
+		C397098518E0B45B001DA560 /* mysettings.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092A18E0B45B001DA560 /* mysettings.json */; };
+		C397098618E0B45B001DA560 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092B18E0B45B001DA560 /* mysettingschange.json */; };
+		C397098718E0B45B001DA560 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092B18E0B45B001DA560 /* mysettingschange.json */; };
+		C397098818E0B45B001DA560 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092B18E0B45B001DA560 /* mysettingschange.json */; };
+		C397098918E0B45B001DA560 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092C18E0B45B001DA560 /* mysubmissions.json */; };
+		C397098A18E0B45B001DA560 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092C18E0B45B001DA560 /* mysubmissions.json */; };
+		C397098B18E0B45B001DA560 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092C18E0B45B001DA560 /* mysubmissions.json */; };
+		C397098C18E0B45B001DA560 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092D18E0B45B001DA560 /* postcomment.json */; };
+		C397098D18E0B45B001DA560 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092D18E0B45B001DA560 /* postcomment.json */; };
+		C397098E18E0B45B001DA560 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092D18E0B45B001DA560 /* postcomment.json */; };
+		C397098F18E0B45B001DA560 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092E18E0B45B001DA560 /* postimage.json */; };
+		C397099018E0B45B001DA560 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092E18E0B45B001DA560 /* postimage.json */; };
+		C397099118E0B45B001DA560 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092E18E0B45B001DA560 /* postimage.json */; };
+		C397099218E0B45B001DA560 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092F18E0B45B001DA560 /* replytocomment.json */; };
+		C397099318E0B45B001DA560 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092F18E0B45B001DA560 /* replytocomment.json */; };
+		C397099418E0B45B001DA560 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092F18E0B45B001DA560 /* replytocomment.json */; };
+		C397099518E0B45B001DA560 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093018E0B45B001DA560 /* topgallery.json */; };
+		C397099618E0B45B001DA560 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093018E0B45B001DA560 /* topgallery.json */; };
+		C397099718E0B45B001DA560 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093018E0B45B001DA560 /* topgallery.json */; };
+		C397099818E0B45B001DA560 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093118E0B45B001DA560 /* usersubmittedgallery.json */; };
+		C397099918E0B45B001DA560 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093118E0B45B001DA560 /* usersubmittedgallery.json */; };
+		C397099A18E0B45B001DA560 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093118E0B45B001DA560 /* usersubmittedgallery.json */; };
 		C3CDA2DD18CA66DA003B7F96 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		C3CDA2DE18CA66DA003B7F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
 		C3CDA2DF18CA66DA003B7F96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A918CA1F87009D9C57 /* UIKit.framework */; };
+		C3F1B36818E2041C004ED254 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
+		C3F1B37C18E2042C004ED254 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
+		C3F1B38B18E2043C004ED254 /* IMGIntegratedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B35018E200E0004ED254 /* IMGIntegratedTestCase.m */; };
+		C3F1B38C18E2043D004ED254 /* IMGIntegratedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B35018E200E0004ED254 /* IMGIntegratedTestCase.m */; };
+		C3F1B38D18E20450004ED254 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B34818E200E0004ED254 /* IMGAccountTests.m */; };
+		C3F1B38E18E20450004ED254 /* IMGCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B34B18E200E0004ED254 /* IMGCommentTests.m */; };
+		C3F1B38F18E20450004ED254 /* IMGConversationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B34C18E200E0004ED254 /* IMGConversationTest.m */; };
+		C3F1B39018E20450004ED254 /* IMGGalleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B34D18E200E0004ED254 /* IMGGalleryTests.m */; };
+		C3F1B39118E20450004ED254 /* IMGNotificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B34E18E200E0004ED254 /* IMGNotificationTests.m */; };
+		C3F1B39218E2045D004ED254 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B36018E20167004ED254 /* IMGAnonymousTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +220,20 @@
 			remoteGlobalIDString = 24B4CB7818CAB7B300EC8E4A;
 			remoteInfo = ImgurKitOSX;
 		};
+		C3F1B37218E2041C004ED254 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C309338D18CA1F87009D9C57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24B4CB7818CAB7B300EC8E4A;
+			remoteInfo = ImgurSessionOSX;
+		};
+		C3F1B38618E2042C004ED254 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C309338D18CA1F87009D9C57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24B4CB7818CAB7B300EC8E4A;
+			remoteInfo = ImgurSessionOSX;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,10 +250,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAnonTests.xcconfig"; path = "Pods/Pods-OSXIntegratedAnonTests.xcconfig"; sourceTree = "<group>"; };
 		092DC70EA0C4429E854604CD /* Pods-ImgurSession.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSession.xcconfig"; path = "Pods/Pods-ImgurSession.xcconfig"; sourceTree = "<group>"; };
-		0AB8418ED9DE407C843F636C /* libPods-ImgurSessionOSXTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSessionOSXTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C0063A653ED432BB416EDEC /* Pods-ImgurSession Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSession Tests.xcconfig"; path = "Pods/Pods-ImgurSession Tests.xcconfig"; sourceTree = "<group>"; };
-		17AC339478B24B2E80209067 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		19486AE3CD394A55907AA7A3 /* libPods-OSXAnonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXAnonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2155B9E8F1254B7783782111 /* libPods-OSXAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2407474D18D4F31600B92063 /* IMGVote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGVote.h; sourceTree = "<group>"; };
 		2407474E18D4F31600B92063 /* IMGVote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGVote.m; sourceTree = "<group>"; };
 		2407475218D4F3FC00B92063 /* IMGNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGNotification.h; sourceTree = "<group>"; };
@@ -167,8 +295,6 @@
 		240747B318D62B1B00B92063 /* IMGConversationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGConversationRequest.h; path = Requests/IMGConversationRequest.h; sourceTree = "<group>"; };
 		240747B418D62B1B00B92063 /* IMGResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGResponseSerializer.h; path = Requests/IMGResponseSerializer.h; sourceTree = "<group>"; };
 		243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSessionOSXTests copy.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		243CCDAB18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ImgurSessionOSXTests copy-Info.plist"; path = "/Users/geoffmacdonald/Developer/ImgurSession/ImgurSessionOSXTests copy-Info.plist"; sourceTree = "<absolute>"; };
-		243CCDAE18DD336900B4FBC6 /* IMGAnonymousTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGAnonymousTests.h; sourceTree = "<group>"; };
 		243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGAnonymousTests.m; sourceTree = "<group>"; };
 		249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGBasicAlbum.h; path = ImgurSession/Models/IMGBasicAlbum.h; sourceTree = SOURCE_ROOT; };
 		249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGBasicAlbum.m; path = ImgurSession/Models/IMGBasicAlbum.m; sourceTree = SOURCE_ROOT; };
@@ -178,13 +304,16 @@
 		24AC155918CAB4F9005F86C8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		24B4CB7918CAB7B300EC8E4A /* ImgurSessionOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ImgurSessionOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B4CB8918CAB7B300EC8E4A /* ImgurSessionOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImgurSessionOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		36C4A9712AAA43E7B8683776 /* libPods-ImgurKit Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurKit Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAuthenticatedTests.xcconfig"; path = "Pods/Pods-iOSAuthenticatedTests.xcconfig"; sourceTree = "<group>"; };
+		2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAnonTests.xcconfig"; path = "Pods/Pods-OSXAnonTests.xcconfig"; sourceTree = "<group>"; };
+		3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAuthenticatedTests.xcconfig"; path = "Pods/Pods-OSXIntegratedAuthenticatedTests.xcconfig"; sourceTree = "<group>"; };
+		4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAuthenticatedTests.xcconfig"; path = "Pods/Pods-OSXAuthenticatedTests.xcconfig"; sourceTree = "<group>"; };
+		5C17F7D4AE624C3C855B4547 /* libPods-iOSAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE72095F6B24FBB9104E2EE /* libPods-ImgurSessionOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSessionOSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSession.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70AD5E4AAC7E4142A9272C14 /* libPods-OSXIntegratedAnonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXIntegratedAnonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSX.xcconfig"; path = "Pods/Pods-ImgurSessionOSX.xcconfig"; sourceTree = "<group>"; };
-		93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSXTests.xcconfig"; path = "Pods/Pods-ImgurSessionOSXTests.xcconfig"; sourceTree = "<group>"; };
-		942247EA23F04DBB9A8B23D0 /* libPods-ImgurKitOSXTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurKitOSXTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B38AB8E68E78446D9C94DB90 /* libPods-ImgurKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B18FC49F01B74CE7997BECDF /* libPods-OSXIntegratedAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXIntegratedAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E1EE857AF64A31A8CAA72E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C309339518CA1F87009D9C57 /* libImgurSession.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImgurSession.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C309339818CA1F87009D9C57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -205,6 +334,41 @@
 		C319F7D218D0DB3F00C5E880 /* IMGComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IMGComment.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C319F7D318D0DB3F00C5E880 /* IMGComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGComment.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C36C00E618CA7472004576A5 /* ImgurSession Tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ImgurSession Tests-Prefix.pch"; path = "Resources/ImgurSession Tests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		C397090F18E0B45B001DA560 /* allnotifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allnotifications.json; sourceTree = "<group>"; };
+		C397091018E0B45B001DA560 /* conversationdelete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationdelete.json; sourceTree = "<group>"; };
+		C397091118E0B45B001DA560 /* conversationpost.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationpost.json; sourceTree = "<group>"; };
+		C397091218E0B45B001DA560 /* conversations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversations.json; sourceTree = "<group>"; };
+		C397091318E0B45B001DA560 /* conversationswithravener.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationswithravener.json; sourceTree = "<group>"; };
+		C397091418E0B45B001DA560 /* conversationwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationwithid.json; sourceTree = "<group>"; };
+		C397091518E0B45B001DA560 /* deletecomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deletecomment.json; sourceTree = "<group>"; };
+		C397091618E0B45B001DA560 /* deleteimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deleteimage.json; sourceTree = "<group>"; };
+		C397091718E0B45B001DA560 /* deletenotification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deletenotification.json; sourceTree = "<group>"; };
+		C397091818E0B45B001DA560 /* freshnotification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = freshnotification.json; sourceTree = "<group>"; };
+		C397091918E0B45B001DA560 /* hotgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hotgallery.json; sourceTree = "<group>"; };
+		C397091A18E0B45B001DA560 /* myaccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myaccount.json; sourceTree = "<group>"; };
+		C397091B18E0B45B001DA560 /* myalbumcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbumcount.json; sourceTree = "<group>"; };
+		C397091C18E0B45B001DA560 /* myalbumids.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbumids.json; sourceTree = "<group>"; };
+		C397091D18E0B45B001DA560 /* myalbums.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbums.json; sourceTree = "<group>"; };
+		C397091E18E0B45B001DA560 /* myalbumwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbumwithid.json; sourceTree = "<group>"; };
+		C397091F18E0B45B001DA560 /* mycommentcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentcount.json; sourceTree = "<group>"; };
+		C397092018E0B45B001DA560 /* mycommentdeletewithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentdeletewithid.json; sourceTree = "<group>"; };
+		C397092118E0B45B001DA560 /* mycommentids.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentids.json; sourceTree = "<group>"; };
+		C397092218E0B45B001DA560 /* mycomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycomments.json; sourceTree = "<group>"; };
+		C397092318E0B45B001DA560 /* mycommentwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentwithid.json; sourceTree = "<group>"; };
+		C397092418E0B45B001DA560 /* myfavs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myfavs.json; sourceTree = "<group>"; };
+		C397092518E0B45B001DA560 /* myimagecount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimagecount.json; sourceTree = "<group>"; };
+		C397092618E0B45B001DA560 /* myimagedelete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimagedelete.json; sourceTree = "<group>"; };
+		C397092718E0B45B001DA560 /* myimageIDs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimageIDs.json; sourceTree = "<group>"; };
+		C397092818E0B45B001DA560 /* myimages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimages.json; sourceTree = "<group>"; };
+		C397092918E0B45B001DA560 /* myimagewithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimagewithid.json; sourceTree = "<group>"; };
+		C397092A18E0B45B001DA560 /* mysettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mysettings.json; sourceTree = "<group>"; };
+		C397092B18E0B45B001DA560 /* mysettingschange.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mysettingschange.json; sourceTree = "<group>"; };
+		C397092C18E0B45B001DA560 /* mysubmissions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mysubmissions.json; sourceTree = "<group>"; };
+		C397092D18E0B45B001DA560 /* postcomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = postcomment.json; sourceTree = "<group>"; };
+		C397092E18E0B45B001DA560 /* postimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = postimage.json; sourceTree = "<group>"; };
+		C397092F18E0B45B001DA560 /* replytocomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = replytocomment.json; sourceTree = "<group>"; };
+		C397093018E0B45B001DA560 /* topgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topgallery.json; sourceTree = "<group>"; };
+		C397093118E0B45B001DA560 /* usersubmittedgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usersubmittedgallery.json; sourceTree = "<group>"; };
 		C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSession Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGAccountTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -212,8 +376,16 @@
 		C3EB4B4018CA20B20010FD19 /* ImgurSession-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ImgurSession-Info.plist"; sourceTree = "<group>"; };
 		C3EB4B4118CA20B20010FD19 /* ImgurSession-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImgurSession-Prefix.pch"; sourceTree = "<group>"; };
 		C3EB4B4918CA32BE0010FD19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		CA4D4BF99DE94FC7A493E5C4 /* libPods-ImgurSession Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSession Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3427EBCC7A7495C86C9B77C /* libPods-ImgurKitOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurKitOSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3F1B34818E200E0004ED254 /* IMGAccountTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGAccountTests.m; path = "Integrated Tests/IMGAccountTests.m"; sourceTree = SOURCE_ROOT; };
+		C3F1B34B18E200E0004ED254 /* IMGCommentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGCommentTests.m; path = "Integrated Tests/IMGCommentTests.m"; sourceTree = SOURCE_ROOT; };
+		C3F1B34C18E200E0004ED254 /* IMGConversationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGConversationTest.m; path = "Integrated Tests/IMGConversationTest.m"; sourceTree = SOURCE_ROOT; };
+		C3F1B34D18E200E0004ED254 /* IMGGalleryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGGalleryTests.m; path = "Integrated Tests/IMGGalleryTests.m"; sourceTree = SOURCE_ROOT; };
+		C3F1B34E18E200E0004ED254 /* IMGNotificationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGNotificationTests.m; path = "Integrated Tests/IMGNotificationTests.m"; sourceTree = SOURCE_ROOT; };
+		C3F1B34F18E200E0004ED254 /* IMGIntegratedTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGIntegratedTestCase.h; path = "Integrated Tests/IMGIntegratedTestCase.h"; sourceTree = SOURCE_ROOT; };
+		C3F1B35018E200E0004ED254 /* IMGIntegratedTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGIntegratedTestCase.m; path = "Integrated Tests/IMGIntegratedTestCase.m"; sourceTree = SOURCE_ROOT; };
+		C3F1B36018E20167004ED254 /* IMGAnonymousTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGAnonymousTests.m; path = "Integrated Tests/IMGAnonymousTests.m"; sourceTree = SOURCE_ROOT; };
+		C3F1B36718E2041C004ED254 /* OSXIntegratedAuthenticatedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSXIntegratedAuthenticatedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3F1B37B18E2042C004ED254 /* OSXIntegratedAnonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSXIntegratedAnonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,7 +395,7 @@
 			files = (
 				243CCDA118DD32EF00B4FBC6 /* Cocoa.framework in Frameworks */,
 				243CCDA218DD32EF00B4FBC6 /* XCTest.framework in Frameworks */,
-				243CCDA318DD32EF00B4FBC6 /* libPods-ImgurSessionOSXTests.a in Frameworks */,
+				5E1DA40C40264D889B02B30B /* libPods-OSXAnonTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +414,7 @@
 			files = (
 				24B4CB8B18CAB7B300EC8E4A /* Cocoa.framework in Frameworks */,
 				24B4CB8A18CAB7B300EC8E4A /* XCTest.framework in Frameworks */,
-				141072577CF94E32B576AE22 /* libPods-ImgurSessionOSXTests.a in Frameworks */,
+				022E51D618CE4F15810C28EE /* libPods-OSXAuthenticatedTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +435,25 @@
 				C3CDA2DF18CA66DA003B7F96 /* UIKit.framework in Frameworks */,
 				C3CDA2DE18CA66DA003B7F96 /* Foundation.framework in Frameworks */,
 				C355E5CF18CA80A100D5CEA5 /* libImgurSession.a in Frameworks */,
-				3D9BAF6DB88246B490830CC2 /* libPods-ImgurSession Tests.a in Frameworks */,
+				A7833EC50C0449A6AE200342 /* libPods-iOSAuthenticatedTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3F1B36418E2041C004ED254 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3F1B36818E2041C004ED254 /* XCTest.framework in Frameworks */,
+				A021706E08CD481190E372E3 /* libPods-OSXIntegratedAuthenticatedTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3F1B37818E2042C004ED254 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3F1B37C18E2042C004ED254 /* XCTest.framework in Frameworks */,
+				81F56629D24C4F64BB24BD06 /* libPods-OSXIntegratedAnonTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +529,6 @@
 		243CCDAD18DD333900B4FBC6 /* Anonymous */ = {
 			isa = PBXGroup;
 			children = (
-				243CCDAE18DD336900B4FBC6 /* IMGAnonymousTests.h */,
 				243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */,
 			);
 			name = Anonymous;
@@ -359,16 +548,18 @@
 			isa = PBXGroup;
 			children = (
 				C309339A18CA1F87009D9C57 /* ImgurSession */,
-				C3CDA2E018CA66DA003B7F96 /* ImgurSession Tests */,
+				C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */,
+				C3F1B33F18E1FE63004ED254 /* Integrated Tests */,
 				C3EB4B3E18CA20B20010FD19 /* Resources */,
 				C309339718CA1F87009D9C57 /* Frameworks */,
 				C309339618CA1F87009D9C57 /* Products */,
-				17AC339478B24B2E80209067 /* Pods.xcconfig */,
 				092DC70EA0C4429E854604CD /* Pods-ImgurSession.xcconfig */,
-				0C0063A653ED432BB416EDEC /* Pods-ImgurSession Tests.xcconfig */,
 				92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */,
-				93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */,
-				243CCDAB18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy-Info.plist */,
+				2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */,
+				4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */,
+				2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */,
+				021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */,
+				3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -380,6 +571,8 @@
 				24B4CB7918CAB7B300EC8E4A /* ImgurSessionOSX.framework */,
 				24B4CB8918CAB7B300EC8E4A /* ImgurSessionOSXTests.xctest */,
 				243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */,
+				C3F1B36718E2041C004ED254 /* OSXIntegratedAuthenticatedTests.xctest */,
+				C3F1B37B18E2042C004ED254 /* OSXIntegratedAnonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -393,16 +586,15 @@
 				C30933A618CA1F87009D9C57 /* XCTest.framework */,
 				C30933A918CA1F87009D9C57 /* UIKit.framework */,
 				C0E1EE857AF64A31A8CAA72E /* libPods.a */,
-				36C4A9712AAA43E7B8683776 /* libPods-ImgurKit Tests.a */,
 				24AC155418CAB4F9005F86C8 /* Cocoa.framework */,
 				24AC155618CAB4F9005F86C8 /* Other Frameworks */,
-				942247EA23F04DBB9A8B23D0 /* libPods-ImgurKitOSXTests.a */,
-				F3427EBCC7A7495C86C9B77C /* libPods-ImgurKitOSX.a */,
-				B38AB8E68E78446D9C94DB90 /* libPods-ImgurKit.a */,
 				63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */,
-				CA4D4BF99DE94FC7A493E5C4 /* libPods-ImgurSession Tests.a */,
 				5CE72095F6B24FBB9104E2EE /* libPods-ImgurSessionOSX.a */,
-				0AB8418ED9DE407C843F636C /* libPods-ImgurSessionOSXTests.a */,
+				19486AE3CD394A55907AA7A3 /* libPods-OSXAnonTests.a */,
+				2155B9E8F1254B7783782111 /* libPods-OSXAuthenticatedTests.a */,
+				5C17F7D4AE624C3C855B4547 /* libPods-iOSAuthenticatedTests.a */,
+				70AD5E4AAC7E4142A9272C14 /* libPods-OSXIntegratedAnonTests.a */,
+				B18FC49F01B74CE7997BECDF /* libPods-OSXIntegratedAuthenticatedTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -497,7 +689,49 @@
 			name = Comment;
 			sourceTree = "<group>";
 		};
-		C3CDA2E018CA66DA003B7F96 /* ImgurSession Tests */ = {
+		C397090E18E0B45B001DA560 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C397090F18E0B45B001DA560 /* allnotifications.json */,
+				C397091018E0B45B001DA560 /* conversationdelete.json */,
+				C397091118E0B45B001DA560 /* conversationpost.json */,
+				C397091218E0B45B001DA560 /* conversations.json */,
+				C397091318E0B45B001DA560 /* conversationswithravener.json */,
+				C397091418E0B45B001DA560 /* conversationwithid.json */,
+				C397091518E0B45B001DA560 /* deletecomment.json */,
+				C397091618E0B45B001DA560 /* deleteimage.json */,
+				C397091718E0B45B001DA560 /* deletenotification.json */,
+				C397091818E0B45B001DA560 /* freshnotification.json */,
+				C397091918E0B45B001DA560 /* hotgallery.json */,
+				C397091A18E0B45B001DA560 /* myaccount.json */,
+				C397091B18E0B45B001DA560 /* myalbumcount.json */,
+				C397091C18E0B45B001DA560 /* myalbumids.json */,
+				C397091D18E0B45B001DA560 /* myalbums.json */,
+				C397091E18E0B45B001DA560 /* myalbumwithid.json */,
+				C397091F18E0B45B001DA560 /* mycommentcount.json */,
+				C397092018E0B45B001DA560 /* mycommentdeletewithid.json */,
+				C397092118E0B45B001DA560 /* mycommentids.json */,
+				C397092218E0B45B001DA560 /* mycomments.json */,
+				C397092318E0B45B001DA560 /* mycommentwithid.json */,
+				C397092418E0B45B001DA560 /* myfavs.json */,
+				C397092518E0B45B001DA560 /* myimagecount.json */,
+				C397092618E0B45B001DA560 /* myimagedelete.json */,
+				C397092718E0B45B001DA560 /* myimageIDs.json */,
+				C397092818E0B45B001DA560 /* myimages.json */,
+				C397092918E0B45B001DA560 /* myimagewithid.json */,
+				C397092A18E0B45B001DA560 /* mysettings.json */,
+				C397092B18E0B45B001DA560 /* mysettingschange.json */,
+				C397092C18E0B45B001DA560 /* mysubmissions.json */,
+				C397092D18E0B45B001DA560 /* postcomment.json */,
+				C397092E18E0B45B001DA560 /* postimage.json */,
+				C397092F18E0B45B001DA560 /* replytocomment.json */,
+				C397093018E0B45B001DA560 /* topgallery.json */,
+				C397093118E0B45B001DA560 /* usersubmittedgallery.json */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */ = {
 			isa = PBXGroup;
 			children = (
 				243CCDAC18DD332F00B4FBC6 /* Authenticated */,
@@ -505,12 +739,13 @@
 				C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */,
 				C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */,
 			);
-			path = "ImgurSession Tests";
+			path = "Stubbed Tests";
 			sourceTree = "<group>";
 		};
 		C3EB4B3E18CA20B20010FD19 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C397090E18E0B45B001DA560 /* Responses */,
 				C319F7C918D0C36300C5E880 /* ImgurSession_Tests-Info.plist */,
 				C3EB4B3F18CA20B20010FD19 /* image-example.jpg */,
 				C3EB4B4018CA20B20010FD19 /* ImgurSession-Info.plist */,
@@ -518,6 +753,38 @@
 				C36C00E618CA7472004576A5 /* ImgurSession Tests-Prefix.pch */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		C3F1B33F18E1FE63004ED254 /* Integrated Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C3F1B34418E1FE94004ED254 /* Anonymous */,
+				C3F1B34518E1FE9A004ED254 /* Authenticated */,
+				C3F1B34F18E200E0004ED254 /* IMGIntegratedTestCase.h */,
+				C3F1B35018E200E0004ED254 /* IMGIntegratedTestCase.m */,
+			);
+			name = "Integrated Tests";
+			path = "ImgurSession Tests";
+			sourceTree = "<group>";
+		};
+		C3F1B34418E1FE94004ED254 /* Anonymous */ = {
+			isa = PBXGroup;
+			children = (
+				C3F1B36018E20167004ED254 /* IMGAnonymousTests.m */,
+			);
+			name = Anonymous;
+			sourceTree = "<group>";
+		};
+		C3F1B34518E1FE9A004ED254 /* Authenticated */ = {
+			isa = PBXGroup;
+			children = (
+				C3F1B34818E200E0004ED254 /* IMGAccountTests.m */,
+				C3F1B34B18E200E0004ED254 /* IMGCommentTests.m */,
+				C3F1B34C18E200E0004ED254 /* IMGConversationTest.m */,
+				C3F1B34D18E200E0004ED254 /* IMGGalleryTests.m */,
+				C3F1B34E18E200E0004ED254 /* IMGNotificationTests.m */,
+			);
+			name = Authenticated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -528,16 +795,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */,
-				C3102D2A18DB78DF007A75C4 /* IMGConversation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		243CCD9518DD32EF00B4FBC6 /* ImgurSessionOSXAnonTests */ = {
+		243CCD9518DD32EF00B4FBC6 /* OSXAnonTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 243CCDA718DD32EF00B4FBC6 /* Build configuration list for PBXNativeTarget "ImgurSessionOSXAnonTests" */;
+			buildConfigurationList = 243CCDA718DD32EF00B4FBC6 /* Build configuration list for PBXNativeTarget "OSXAnonTests" */;
 			buildPhases = (
 				243CCD9818DD32EF00B4FBC6 /* Check Pods Manifest.lock */,
 				243CCD9918DD32EF00B4FBC6 /* Sources */,
@@ -550,7 +816,7 @@
 			dependencies = (
 				243CCD9618DD32EF00B4FBC6 /* PBXTargetDependency */,
 			);
-			name = ImgurSessionOSXAnonTests;
+			name = OSXAnonTests;
 			productName = ImgurKitOSXTests;
 			productReference = 243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -575,9 +841,9 @@
 			productReference = 24B4CB7918CAB7B300EC8E4A /* ImgurSessionOSX.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		24B4CB8818CAB7B300EC8E4A /* ImgurSessionOSXTests */ = {
+		24B4CB8818CAB7B300EC8E4A /* OSXAuthenticatedTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 24B4CB9A18CAB7B400EC8E4A /* Build configuration list for PBXNativeTarget "ImgurSessionOSXTests" */;
+			buildConfigurationList = 24B4CB9A18CAB7B400EC8E4A /* Build configuration list for PBXNativeTarget "OSXAuthenticatedTests" */;
 			buildPhases = (
 				46E46679617747D3B90A29DC /* Check Pods Manifest.lock */,
 				24B4CB8518CAB7B300EC8E4A /* Sources */,
@@ -590,7 +856,7 @@
 			dependencies = (
 				24B4CB8D18CAB7B300EC8E4A /* PBXTargetDependency */,
 			);
-			name = ImgurSessionOSXTests;
+			name = OSXAuthenticatedTests;
 			productName = ImgurKitOSXTests;
 			productReference = 24B4CB8918CAB7B300EC8E4A /* ImgurSessionOSXTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -614,9 +880,9 @@
 			productReference = C309339518CA1F87009D9C57 /* libImgurSession.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		C3CDA2DB18CA66DA003B7F96 /* ImgurSession Tests */ = {
+		C3CDA2DB18CA66DA003B7F96 /* iOSAuthenticatedTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3CDA2EB18CA66DA003B7F96 /* Build configuration list for PBXNativeTarget "ImgurSession Tests" */;
+			buildConfigurationList = C3CDA2EB18CA66DA003B7F96 /* Build configuration list for PBXNativeTarget "iOSAuthenticatedTests" */;
 			buildPhases = (
 				875BF3F1C7FF4E5C985CBB06 /* Check Pods Manifest.lock */,
 				C36C010D18CA7A79004576A5 /* Sources */,
@@ -628,9 +894,49 @@
 			);
 			dependencies = (
 			);
-			name = "ImgurSession Tests";
+			name = iOSAuthenticatedTests;
 			productName = "ImgurKit Tests";
 			productReference = C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C3F1B36618E2041C004ED254 /* OSXIntegratedAuthenticatedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3F1B37418E2041C004ED254 /* Build configuration list for PBXNativeTarget "OSXIntegratedAuthenticatedTests" */;
+			buildPhases = (
+				B7069A2DA43749C2B305489E /* Check Pods Manifest.lock */,
+				C3F1B36318E2041C004ED254 /* Sources */,
+				C3F1B36418E2041C004ED254 /* Frameworks */,
+				C3F1B36518E2041C004ED254 /* Resources */,
+				AF73007D9E5443B2A6D9768F /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3F1B37318E2041C004ED254 /* PBXTargetDependency */,
+			);
+			name = OSXIntegratedAuthenticatedTests;
+			productName = OSXIntegratedAuthenticatedTests;
+			productReference = C3F1B36718E2041C004ED254 /* OSXIntegratedAuthenticatedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C3F1B37A18E2042C004ED254 /* OSXIntegratedAnonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3F1B38818E2042C004ED254 /* Build configuration list for PBXNativeTarget "OSXIntegratedAnonTests" */;
+			buildPhases = (
+				A5E2DA87B8A14AD486298C27 /* Check Pods Manifest.lock */,
+				C3F1B37718E2042C004ED254 /* Sources */,
+				C3F1B37818E2042C004ED254 /* Frameworks */,
+				C3F1B37918E2042C004ED254 /* Resources */,
+				EBAD6AE1537D4F76B4941F4A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3F1B38718E2042C004ED254 /* PBXTargetDependency */,
+			);
+			name = OSXIntegratedAnonTests;
+			productName = OSXIntegratedAnonTests;
+			productReference = C3F1B37B18E2042C004ED254 /* OSXIntegratedAnonTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -643,6 +949,9 @@
 				ORGANIZATIONNAME = GeoffMacDonald;
 				TargetAttributes = {
 					24B4CB8818CAB7B300EC8E4A = {
+						TestTargetID = 24B4CB7818CAB7B300EC8E4A;
+					};
+					C3F1B36618E2041C004ED254 = {
 						TestTargetID = 24B4CB7818CAB7B300EC8E4A;
 					};
 				};
@@ -660,10 +969,12 @@
 			projectRoot = "";
 			targets = (
 				C309339418CA1F87009D9C57 /* ImgurSession */,
-				C3CDA2DB18CA66DA003B7F96 /* ImgurSession Tests */,
+				C3CDA2DB18CA66DA003B7F96 /* iOSAuthenticatedTests */,
 				24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */,
-				24B4CB8818CAB7B300EC8E4A /* ImgurSessionOSXTests */,
-				243CCD9518DD32EF00B4FBC6 /* ImgurSessionOSXAnonTests */,
+				24B4CB8818CAB7B300EC8E4A /* OSXAuthenticatedTests */,
+				C3F1B36618E2041C004ED254 /* OSXIntegratedAuthenticatedTests */,
+				243CCD9518DD32EF00B4FBC6 /* OSXAnonTests */,
+				C3F1B37A18E2042C004ED254 /* OSXIntegratedAnonTests */,
 			);
 		};
 /* End PBXProject section */
@@ -673,7 +984,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				243CCDA518DD32EF00B4FBC6 /* image-example.jpg in Resources */,
+				C397098218E0B45B001DA560 /* myimagewithid.json in Resources */,
+				C397096D18E0B45B001DA560 /* mycomments.json in Resources */,
+				C397094F18E0B45B001DA560 /* freshnotification.json in Resources */,
+				C397099418E0B45B001DA560 /* replytocomment.json in Resources */,
+				C397094618E0B45B001DA560 /* deletecomment.json in Resources */,
+				C397097618E0B45B001DA560 /* myimagecount.json in Resources */,
+				C397094C18E0B45B001DA560 /* deletenotification.json in Resources */,
+				C397093418E0B45B001DA560 /* allnotifications.json in Resources */,
+				C397096718E0B45B001DA560 /* mycommentdeletewithid.json in Resources */,
+				C397097018E0B45B001DA560 /* mycommentwithid.json in Resources */,
+				C397096118E0B45B001DA560 /* myalbumwithid.json in Resources */,
+				C397094918E0B45B001DA560 /* deleteimage.json in Resources */,
+				C397097C18E0B45B001DA560 /* myimageIDs.json in Resources */,
+				C397097F18E0B45B001DA560 /* myimages.json in Resources */,
+				C397097918E0B45B001DA560 /* myimagedelete.json in Resources */,
+				C397098B18E0B45B001DA560 /* mysubmissions.json in Resources */,
+				C397099A18E0B45B001DA560 /* usersubmittedgallery.json in Resources */,
+				C397096418E0B45B001DA560 /* mycommentcount.json in Resources */,
+				C397098E18E0B45B001DA560 /* postcomment.json in Resources */,
+				C397097318E0B45B001DA560 /* myfavs.json in Resources */,
+				C397099118E0B45B001DA560 /* postimage.json in Resources */,
+				C397093D18E0B45B001DA560 /* conversations.json in Resources */,
+				C397093A18E0B45B001DA560 /* conversationpost.json in Resources */,
+				C397094018E0B45B001DA560 /* conversationswithravener.json in Resources */,
+				C397098518E0B45B001DA560 /* mysettings.json in Resources */,
+				C397095818E0B45B001DA560 /* myalbumcount.json in Resources */,
+				C397093718E0B45B001DA560 /* conversationdelete.json in Resources */,
+				C397096A18E0B45B001DA560 /* mycommentids.json in Resources */,
+				C397098818E0B45B001DA560 /* mysettingschange.json in Resources */,
+				C397095B18E0B45B001DA560 /* myalbumids.json in Resources */,
+				C397095518E0B45B001DA560 /* myaccount.json in Resources */,
+				C397099718E0B45B001DA560 /* topgallery.json in Resources */,
+				C397095218E0B45B001DA560 /* hotgallery.json in Resources */,
+				C397094318E0B45B001DA560 /* conversationwithid.json in Resources */,
+				C397095E18E0B45B001DA560 /* myalbums.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,7 +1033,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C319F7CC18D0CDBE00C5E880 /* image-example.jpg in Resources */,
+				C397098118E0B45B001DA560 /* myimagewithid.json in Resources */,
+				C397096C18E0B45B001DA560 /* mycomments.json in Resources */,
+				C397094E18E0B45B001DA560 /* freshnotification.json in Resources */,
+				C397099318E0B45B001DA560 /* replytocomment.json in Resources */,
+				C397094518E0B45B001DA560 /* deletecomment.json in Resources */,
+				C397097518E0B45B001DA560 /* myimagecount.json in Resources */,
+				C397094B18E0B45B001DA560 /* deletenotification.json in Resources */,
+				C397093318E0B45B001DA560 /* allnotifications.json in Resources */,
+				C397096618E0B45B001DA560 /* mycommentdeletewithid.json in Resources */,
+				C397096F18E0B45B001DA560 /* mycommentwithid.json in Resources */,
+				C397096018E0B45B001DA560 /* myalbumwithid.json in Resources */,
+				C397094818E0B45B001DA560 /* deleteimage.json in Resources */,
+				C397097B18E0B45B001DA560 /* myimageIDs.json in Resources */,
+				C397097E18E0B45B001DA560 /* myimages.json in Resources */,
+				C397097818E0B45B001DA560 /* myimagedelete.json in Resources */,
+				C397098A18E0B45B001DA560 /* mysubmissions.json in Resources */,
+				C397099918E0B45B001DA560 /* usersubmittedgallery.json in Resources */,
+				C397096318E0B45B001DA560 /* mycommentcount.json in Resources */,
+				C397098D18E0B45B001DA560 /* postcomment.json in Resources */,
+				C397097218E0B45B001DA560 /* myfavs.json in Resources */,
+				C397099018E0B45B001DA560 /* postimage.json in Resources */,
+				C397093C18E0B45B001DA560 /* conversations.json in Resources */,
+				C397093918E0B45B001DA560 /* conversationpost.json in Resources */,
+				C397093F18E0B45B001DA560 /* conversationswithravener.json in Resources */,
+				C397098418E0B45B001DA560 /* mysettings.json in Resources */,
+				C397095718E0B45B001DA560 /* myalbumcount.json in Resources */,
+				C397093618E0B45B001DA560 /* conversationdelete.json in Resources */,
+				C397096918E0B45B001DA560 /* mycommentids.json in Resources */,
+				C397098718E0B45B001DA560 /* mysettingschange.json in Resources */,
+				C397095A18E0B45B001DA560 /* myalbumids.json in Resources */,
+				C397095418E0B45B001DA560 /* myaccount.json in Resources */,
+				C397099618E0B45B001DA560 /* topgallery.json in Resources */,
+				C397095118E0B45B001DA560 /* hotgallery.json in Resources */,
+				C397094218E0B45B001DA560 /* conversationwithid.json in Resources */,
+				C397095D18E0B45B001DA560 /* myalbums.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,7 +1075,56 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C397098018E0B45B001DA560 /* myimagewithid.json in Resources */,
+				C397096B18E0B45B001DA560 /* mycomments.json in Resources */,
+				C397094D18E0B45B001DA560 /* freshnotification.json in Resources */,
+				C397099218E0B45B001DA560 /* replytocomment.json in Resources */,
+				C397094418E0B45B001DA560 /* deletecomment.json in Resources */,
+				C397097418E0B45B001DA560 /* myimagecount.json in Resources */,
+				C397094A18E0B45B001DA560 /* deletenotification.json in Resources */,
+				C397093218E0B45B001DA560 /* allnotifications.json in Resources */,
+				C397096518E0B45B001DA560 /* mycommentdeletewithid.json in Resources */,
+				C397096E18E0B45B001DA560 /* mycommentwithid.json in Resources */,
+				C397095F18E0B45B001DA560 /* myalbumwithid.json in Resources */,
+				C397094718E0B45B001DA560 /* deleteimage.json in Resources */,
+				C397097A18E0B45B001DA560 /* myimageIDs.json in Resources */,
+				C397097D18E0B45B001DA560 /* myimages.json in Resources */,
 				C36C00F318CA7611004576A5 /* image-example.jpg in Resources */,
+				C397097718E0B45B001DA560 /* myimagedelete.json in Resources */,
+				C397098918E0B45B001DA560 /* mysubmissions.json in Resources */,
+				C397099818E0B45B001DA560 /* usersubmittedgallery.json in Resources */,
+				C397096218E0B45B001DA560 /* mycommentcount.json in Resources */,
+				C397098C18E0B45B001DA560 /* postcomment.json in Resources */,
+				C397097118E0B45B001DA560 /* myfavs.json in Resources */,
+				C397098F18E0B45B001DA560 /* postimage.json in Resources */,
+				C397093B18E0B45B001DA560 /* conversations.json in Resources */,
+				C397093818E0B45B001DA560 /* conversationpost.json in Resources */,
+				C397093E18E0B45B001DA560 /* conversationswithravener.json in Resources */,
+				C397098318E0B45B001DA560 /* mysettings.json in Resources */,
+				C397095618E0B45B001DA560 /* myalbumcount.json in Resources */,
+				C397093518E0B45B001DA560 /* conversationdelete.json in Resources */,
+				C397096818E0B45B001DA560 /* mycommentids.json in Resources */,
+				C397098618E0B45B001DA560 /* mysettingschange.json in Resources */,
+				C397095918E0B45B001DA560 /* myalbumids.json in Resources */,
+				C397095318E0B45B001DA560 /* myaccount.json in Resources */,
+				C397099518E0B45B001DA560 /* topgallery.json in Resources */,
+				C397095018E0B45B001DA560 /* hotgallery.json in Resources */,
+				C397094118E0B45B001DA560 /* conversationwithid.json in Resources */,
+				C397095C18E0B45B001DA560 /* myalbums.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3F1B36518E2041C004ED254 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3F1B37918E2042C004ED254 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,7 +1158,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-ImgurSessionOSXTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-OSXAnonTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		46E46679617747D3B90A29DC /* Check Pods Manifest.lock */ = {
@@ -790,10 +1218,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-ImgurSession Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-iOSAuthenticatedTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		875BF3F1C7FF4E5C985CBB06 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A5E2DA87B8A14AD486298C27 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -820,7 +1263,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-ImgurSessionOSXTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-OSXAuthenticatedTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF73007D9E5443B2A6D9768F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-OSXIntegratedAuthenticatedTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7069A2DA43749C2B305489E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CB27B87B3E594738AD2415B4 /* Check Pods Manifest.lock */ = {
@@ -851,6 +1324,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EBAD6AE1537D4F76B4941F4A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-OSXIntegratedAnonTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -953,6 +1441,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C3F1B36318E2041C004ED254 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3F1B38D18E20450004ED254 /* IMGAccountTests.m in Sources */,
+				C3F1B38B18E2043C004ED254 /* IMGIntegratedTestCase.m in Sources */,
+				C3F1B39118E20450004ED254 /* IMGNotificationTests.m in Sources */,
+				C3F1B38F18E20450004ED254 /* IMGConversationTest.m in Sources */,
+				C3F1B39018E20450004ED254 /* IMGGalleryTests.m in Sources */,
+				C3F1B38E18E20450004ED254 /* IMGCommentTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3F1B37718E2042C004ED254 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3F1B38C18E2043D004ED254 /* IMGIntegratedTestCase.m in Sources */,
+				C3F1B39218E2045D004ED254 /* IMGAnonymousTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -966,12 +1476,22 @@
 			target = 24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */;
 			targetProxy = 24B4CB8C18CAB7B300EC8E4A /* PBXContainerItemProxy */;
 		};
+		C3F1B37318E2041C004ED254 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */;
+			targetProxy = C3F1B37218E2041C004ED254 /* PBXContainerItemProxy */;
+		};
+		C3F1B38718E2042C004ED254 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */;
+			targetProxy = C3F1B38618E2042C004ED254 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		243CCDA818DD32EF00B4FBC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */;
+			baseConfigurationReference = 2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -997,7 +1517,7 @@
 		};
 		243CCDA918DD32EF00B4FBC6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */;
+			baseConfigurationReference = 2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1071,7 +1591,7 @@
 		};
 		24B4CB9B18CAB7B400EC8E4A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */;
+			baseConfigurationReference = 4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1097,7 +1617,7 @@
 		};
 		24B4CB9C18CAB7B400EC8E4A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93D94651E68847DDB7A7FB52 /* Pods-ImgurSessionOSXTests.xcconfig */;
+			baseConfigurationReference = 4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1214,7 +1734,7 @@
 		};
 		C3CDA2EC18CA66DA003B7F96 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C0063A653ED432BB416EDEC /* Pods-ImgurSession Tests.xcconfig */;
+			baseConfigurationReference = 2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1235,7 +1755,7 @@
 		};
 		C3CDA2ED18CA66DA003B7F96 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C0063A653ED432BB416EDEC /* Pods-ImgurSession Tests.xcconfig */;
+			baseConfigurationReference = 2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1250,10 +1770,100 @@
 			};
 			name = Release;
 		};
+		C3F1B37518E2041C004ED254 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Resources/ImgurSession_Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C3F1B37618E2041C004ED254 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Resources/ImgurSession_Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		C3F1B38918E2042C004ED254 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Resources/ImgurSession_Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C3F1B38A18E2042C004ED254 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Resources/ImgurSession_Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		243CCDA718DD32EF00B4FBC6 /* Build configuration list for PBXNativeTarget "ImgurSessionOSXAnonTests" */ = {
+		243CCDA718DD32EF00B4FBC6 /* Build configuration list for PBXNativeTarget "OSXAnonTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				243CCDA818DD32EF00B4FBC6 /* Debug */,
@@ -1271,7 +1881,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		24B4CB9A18CAB7B400EC8E4A /* Build configuration list for PBXNativeTarget "ImgurSessionOSXTests" */ = {
+		24B4CB9A18CAB7B400EC8E4A /* Build configuration list for PBXNativeTarget "OSXAuthenticatedTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				24B4CB9B18CAB7B400EC8E4A /* Debug */,
@@ -1298,11 +1908,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3CDA2EB18CA66DA003B7F96 /* Build configuration list for PBXNativeTarget "ImgurSession Tests" */ = {
+		C3CDA2EB18CA66DA003B7F96 /* Build configuration list for PBXNativeTarget "iOSAuthenticatedTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3CDA2EC18CA66DA003B7F96 /* Debug */,
 				C3CDA2ED18CA66DA003B7F96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3F1B37418E2041C004ED254 /* Build configuration list for PBXNativeTarget "OSXIntegratedAuthenticatedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3F1B37518E2041C004ED254 /* Debug */,
+				C3F1B37618E2041C004ED254 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3F1B38818E2042C004ED254 /* Build configuration list for PBXNativeTarget "OSXIntegratedAnonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3F1B38918E2042C004ED254 /* Debug */,
+				C3F1B38A18E2042C004ED254 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#import "IMGTestCase.h"
+#import "IMGIntegratedTestCase.h"
 
-@interface IMGCommentTests : IMGTestCase
+@interface IMGCommentTests : IMGIntegratedTestCase
 
 @end
 

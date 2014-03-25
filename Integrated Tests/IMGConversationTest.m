@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#import "IMGTestCase.h"
+#import "IMGIntegratedTestCase.h"
 
-@interface IMGConversationTest : IMGTestCase
+@interface IMGConversationTest : IMGIntegratedTestCase
 
 @end
 
@@ -55,7 +55,7 @@
                
                 IMGConversation * con = obj;
                 
-                if([con.fromUsername isEqualToString:imgurUnitTestParams[@"recipientId"]]){
+                if([con.fromUsername isEqualToString:@"Ravener"]){
                     *stop = YES;
                     
                     [IMGConversationRequest deleteConversation:con.conversationID success:^{

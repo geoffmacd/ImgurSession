@@ -8,11 +8,35 @@ pod 'AFNetworking'
 
 end
 
-target "ImgurSessionOSXTests", :exclusive => true do
+target "OSXAuthenticatedTests", :exclusive => true do
 
 platform :osx, "10.8"
 pod 'Expecta'
 pod 'OCMock'
+pod 'OHHTTPStubs'
+
+end
+
+target "OSXAnonTests", :exclusive => true do
+
+platform :osx, "10.8"
+pod 'Expecta'
+pod 'OCMock'
+pod 'OHHTTPStubs'
+
+end
+
+target "OSXIntegratedAuthenticatedTests", :exclusive => true do
+
+platform :osx, "10.8"
+pod 'Expecta'
+
+end
+
+target "OSXIntegratedAnonTests", :exclusive => true do
+
+platform :osx, "10.8"
+pod 'Expecta'
 
 end
 
@@ -23,11 +47,12 @@ pod 'AFNetworking'
 
 end
 
-target "ImgurSession Tests", :exclusive => true do
+target "iOSAuthenticatedTests", :exclusive => true do
 
 platform :ios, "6.0"
 pod 'Expecta'
 pod 'OCMock'
+pod 'OHHTTPStubs'
 
 end
 

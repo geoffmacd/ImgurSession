@@ -7,11 +7,9 @@
 //
 
 
-#import "IMGTestCase.h"
+#import "IMGIntegratedTestCase.h"
 
-#warning: Must have at least one new and old notification
-
-@interface IMGNotificationTests : IMGTestCase
+@interface IMGNotificationTests : IMGIntegratedTestCase
 
 @end
 
