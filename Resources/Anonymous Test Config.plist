@@ -8,10 +8,6 @@
 		<true/>
 		<key>id</key>
 		<string></string>
-		<key>secret</key>
-		<string></string>
-		<key>refreshToken</key>
-		<string></string>
 	</dict>
 	<key>imgurUnitTestParams</key>
 	<dict>

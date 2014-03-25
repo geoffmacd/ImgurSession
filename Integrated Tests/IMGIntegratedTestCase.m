@@ -61,7 +61,6 @@
     
     //Ensure client data is avaialble for authentication to proceed
     XCTAssertTrue(clientID, @"Client ID is missing");
-    XCTAssertTrue(clientSecret, @"Client secret is missing");
 }
 
 - (void)tearDown {

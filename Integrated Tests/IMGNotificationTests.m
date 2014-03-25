@@ -7,7 +7,7 @@
 //
 
 
-#import "IMGIntegratedTestCase.h"
+#import "IMGIntegratedTestCase.h"   
 
 @interface IMGNotificationTests : IMGIntegratedTestCase
 
