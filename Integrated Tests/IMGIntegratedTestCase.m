@@ -1,16 +1,15 @@
 //
-//  IMGIntegratedTestCase.m
+//  IMGTestCase.m
 //  ImgurSession
 //
-//  Created by Xtreme Dev on 2014-03-24.
+//  Created by Xtreme Dev on 2014-03-18.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
 #import "IMGIntegratedTestCase.h"
 
-
 //add read-write prop
-@interface IMGSession (TestSession)
+@interface IMGSession ()
 
 @property (readwrite, nonatomic,copy) NSString *clientID;
 @property (readwrite, nonatomic, copy) NSString *secret;
@@ -29,8 +28,6 @@
  Testing function to remove auth
  */
 -(void)setGarbageAuth;
-- (instancetype)initWithClientID:(NSString *)clientID secret:(NSString *)secret;
-
 @end
 
 @implementation IMGIntegratedTestCase
@@ -39,20 +36,46 @@
     [super setUp];
     //run before each test
     
-    //5 second timeout
-    [Expecta setAsynchronousTestTimeout:5.0];
+    //30 second timeout
+    [Expecta setAsynchronousTestTimeout:30.0];
     
+        
     // Storing various testing values
     NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
-    
     //need various values such as image title
     imgurUnitTestParams = infos[@"imgurUnitTestParams"];
-    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    
+    // Initializing the client
+    NSDictionary *imgurClient = infos[@"imgurClientCredentials"];
+    NSString *clientID = imgurClient[@"id"];
+    NSString *clientSecret = imgurClient[@"secret"];
+    anon = [imgurClient[@"anonymous"] boolValue];
+    
+    if(anon){
+        [IMGSession sharedInstanceWithClientID:clientID secret:nil];
+        
+    } else {
+        //Lazy init, may already exist
+        IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
+        [ses setDelegate:self];
+        if([imgurClient[@"refreshToken"] length])
+            ses.refreshToken = imgurClient[@"refreshToken"];
+//        [ses setAccessToken:imgurClient[@"accessToken"]];
+    //    [ses setAccessTokenExpiry: [NSDate dateWithTimeIntervalSinceNow:NSIntegerMax]];
+    //    [ses setGarbageAuth];
+        [self authenticateUsingOAuthWithPINAsync];
+    }
     
     //failure block
     failBlock = ^(NSError * error) {
         XCTAssert(nil, @"FAIL");
     };
+    
+    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    
+    //Ensure client data is avaialble for authentication to proceed
+    XCTAssertTrue(clientID, @"Client ID is missing");
+    XCTAssertTrue(clientSecret, @"Client secret is missing");
 }
 
 - (void)tearDown {
@@ -62,46 +85,46 @@
 
 #pragma mark - Testing Authentication
 /*
- -(void)testGarbageAccessToken{
- 
- __block BOOL isLoaded;
- if(!anon){
- //just sets bad access token in header which will cause re-auth with correct refresh token
- [[IMGSession sharedInstance] setGarbageAuth];
- 
- //should fail and trigger re-auth
- [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
- 
- isLoaded = YES;
- expect(account.username).beTruthy();
- 
- } failure:failBlock];
- 
- expect(isLoaded).will.beTruthy();
- }
- }
- 
- -(void)testGarbageRefreshToken{
- 
- __block BOOL isFailed = NO;
- if(!anon){
- //re-auth will be unsuccessful
- [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
- 
- //should fail and trigger re-auth, then fail again
- [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
- 
- //should not get here
- expect(0).beTruthy();
- 
- } failure:^(NSError *error) {
- 
- isFailed = YES;
- }];
- 
- expect(isFailed).will.beTruthy();
- }
- }
+-(void)testGarbageAccessToken{
+    
+    __block BOOL isLoaded;
+    if(!anon){
+        //just sets bad access token in header which will cause re-auth with correct refresh token
+        [[IMGSession sharedInstance] setGarbageAuth];
+        
+        //should fail and trigger re-auth
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            isLoaded = YES;
+            expect(account.username).beTruthy();
+            
+        } failure:failBlock];
+        
+        expect(isLoaded).will.beTruthy();
+    }
+}
+
+-(void)testGarbageRefreshToken{
+    
+    __block BOOL isFailed = NO;
+    if(!anon){
+        //re-auth will be unsuccessful
+        [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
+        
+        //should fail and trigger re-auth, then fail again
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            //should not get here
+            expect(0).beTruthy();
+            
+        } failure:^(NSError *error) {
+            
+            isFailed = YES;
+        }];
+
+        expect(isFailed).will.beTruthy();
+    }
+}
  */
 
 #pragma mark - Test methods to provide image or album to play with - this code is not infallable
@@ -301,7 +324,7 @@
     
     //both cases should lead to access token
     expect(session.accessToken).willNot.beNil();
-    //    expect(session.refreshToken).willNot.beNil();
+//    expect(session.refreshToken).willNot.beNil();
 }
 
 #pragma mark - IMGSessionDelegate Delegate methods
@@ -327,6 +350,4 @@
     NSLog(@"Hit rate limit");
     failBlock(nil);
 }
-
-
 @end

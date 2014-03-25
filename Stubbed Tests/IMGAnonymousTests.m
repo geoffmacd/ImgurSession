@@ -6,7 +6,12 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#import "IMGAnonymousTests.h"
+#import "IMGTestCase.h"
+
+@interface IMGAnonymousTests : IMGTestCase
+
+@end
+
 
 @implementation IMGAnonymousTests
 
