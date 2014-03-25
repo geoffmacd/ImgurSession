@@ -51,7 +51,7 @@
     
     __block BOOL isSuccess;
     
-    [IMGAccountRequest accountSubmissionsWithUser:@"jobsjobs" withPage:0 success:^(NSArray * submissions) {
+    [IMGAccountRequest accountSubmissionsWithUser:imgurUnitTestParams[@"recipientId"] withPage:0 success:^(NSArray * submissions) {
         
         isSuccess = YES;
         
