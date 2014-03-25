@@ -8,6 +8,7 @@
 
 #import "IMGIntegratedTestCase.h"
 
+
 //add read-write prop
 @interface IMGSession ()
 
@@ -15,19 +16,7 @@
 @property (readwrite, nonatomic, copy) NSString *secret;
 @property (readwrite, nonatomic, copy) NSString *refreshToken;
 @property (readwrite, nonatomic, copy) NSString *accessToken;
-@property (readwrite, nonatomic) NSDate *accessTokenExpiry;
 @property (readwrite, nonatomic) IMGAuthType lastAuthType;
-@property (readwrite,nonatomic) NSInteger creditsUserRemaining;
-@property (readwrite,nonatomic) NSInteger creditsUserLimit;
-@property (readwrite,nonatomic) NSInteger creditsUserReset;
-@property (readwrite,nonatomic) NSInteger creditsClientRemaining;
-@property (readwrite,nonatomic) NSInteger creditsClientLimit;
-@property  (readwrite,nonatomic) NSInteger warnRateLimit;
-
-/**
- Testing function to remove auth
- */
--(void)setGarbageAuth;
 @end
 
 @implementation IMGIntegratedTestCase
@@ -82,50 +71,53 @@
     [super tearDown];
 }
 
+#pragma mark - authentication for tests
 
-#pragma mark - Testing Authentication
 /*
--(void)testGarbageAccessToken{
+ Tests authentication and sets global access token to save for rest of the test. Needs to be marked test1 so that it is run first (alphabetical order)
+ **/
+-(void)authenticateUsingOAuthWithPINAsync
+{
+    IMGSession *session = [IMGSession sharedInstance];
     
-    __block BOOL isLoaded;
-    if(!anon){
-        //just sets bad access token in header which will cause re-auth with correct refresh token
-        [[IMGSession sharedInstance] setGarbageAuth];
+    //sets refresh token if available, required for iPhone unit test
+    if([session sessionAuthState] == IMGAuthStateExpired){
         
-        //should fail and trigger re-auth
-        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        //should retrieve new access code
+        [session refreshAuthentication:^(NSString * refresh) {
             
-            isLoaded = YES;
-            expect(account.username).beTruthy();
-            
-        } failure:failBlock];
-        
-        expect(isLoaded).will.beTruthy();
-    }
-}
-
--(void)testGarbageRefreshToken{
-    
-    __block BOOL isFailed = NO;
-    if(!anon){
-        //re-auth will be unsuccessful
-        [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
-        
-        //should fail and trigger re-auth, then fail again
-        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
-            
-            //should not get here
-            expect(0).beTruthy();
+            NSLog(@"Refresh token: %@", refresh);
             
         } failure:^(NSError *error) {
             
-            isFailed = YES;
+            NSLog(@"%@", error.localizedRecoverySuggestion);
+            
         }];
-
-        expect(isFailed).will.beTruthy();
+    } else if ([session sessionAuthState] == IMGAuthStateNone) {
+        
+        //set to pin
+        [session setLastAuthType:IMGPinAuth];
+        //go straight to delegate call
+        [self imgurSessionNeedsExternalWebview:[[IMGSession sharedInstance] authenticateWithExternalURLForType:IMGPinAuth]];
+        
+        //need to manually enter pin for testing
+        NSLog(@"Enter the code PIN");
+        char pin[20];
+        scanf("%s", pin);
+        
+        //send pin code to retrieve access tokens
+        [session authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin] success:^(NSString *refresh) {
+            
+            NSLog(@"Refresh token: %@", refresh);
+        } failure:^(NSError *error) {
+            
+            NSLog(@"%@", error.localizedRecoverySuggestion);
+        }];
     }
+    
+    //both cases should lead to access token
+    expect(session.accessToken).willNot.beNil();
 }
- */
 
 #pragma mark - Test methods to provide image or album to play with - this code is not infallable
 
@@ -275,56 +267,6 @@
         } failure:failBlock];
         
     } failure:failBlock];
-}
-
-
-#pragma mark - Test authentication run on setup
-
-/*
- Tests authentication and sets global access token to save for rest of the test. Needs to be marked test1 so that it is run first (alphabetical order)
- **/
--(void)authenticateUsingOAuthWithPINAsync
-{
-    IMGSession *session = [IMGSession sharedInstance];
-    
-    //sets refresh token if available, required for iPhone unit test
-    if([session sessionAuthState] == IMGAuthStateExpired){
-        
-        //should retrieve new access code
-        [session refreshAuthentication:^(NSString * refresh) {
-            
-            NSLog(@"Refresh token: %@", refresh);
-            
-        } failure:^(NSError *error) {
-            
-            NSLog(@"%@", error.localizedRecoverySuggestion);
-            
-        }];
-    } else if ([session sessionAuthState] == IMGAuthStateNone) {
-        
-        //set to pin
-        [session setLastAuthType:IMGPinAuth];
-        //go straight to delegate call
-        [self imgurSessionNeedsExternalWebview:[[IMGSession sharedInstance] authenticateWithExternalURLForType:IMGPinAuth]];
-        
-        //need to manually enter pin for testing
-        NSLog(@"Enter the code PIN");
-        char pin[20];
-        scanf("%s", pin);
-        
-        //send pin code to retrieve access tokens
-        [session authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin] success:^(NSString *refresh) {
-            
-            NSLog(@"Refresh token: %@", refresh);
-        } failure:^(NSError *error) {
-            
-            NSLog(@"%@", error.localizedRecoverySuggestion);
-        }];
-    }
-    
-    //both cases should lead to access token
-    expect(session.accessToken).willNot.beNil();
-//    expect(session.refreshToken).willNot.beNil();
 }
 
 #pragma mark - IMGSessionDelegate Delegate methods

@@ -10,7 +10,6 @@
 
 #warning: Tests requires client id, client secret filled out in tests plist
 #warning: Tests must have refresh token filled out in tests plist in order to work on iPhone
-#warning: Test user must have at least: one notification, one comment, one image post, one favourtie
 
 
 @interface IMGAccountTests : IMGIntegratedTestCase
