@@ -204,7 +204,7 @@
         IMGImage * first = [images firstObject];
         expect(first).beInstanceOf([IMGImage class]);
         expect(first.imageID).beTruthy();
-        expect(first.link).beTruthy();
+        expect(first.url).beTruthy();
         
         isSuccess = YES;
         
@@ -221,7 +221,7 @@
     [IMGAccountRequest accountImageWithID:@"dshfudsf" success:^(IMGImage * image) {
         
         expect(image.imageID).beTruthy();
-        expect(image.link).beTruthy();
+        expect(image.url).beTruthy();
         expect(image.deletehash).beTruthy();
         
         isSuccess = YES;

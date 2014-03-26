@@ -85,111 +85,6 @@
 		C355E5CF18CA80A100D5CEA5 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
 		C36C00F318CA7611004576A5 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C36C010E18CA7A7F004576A5 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
-		C397093218E0B45B001DA560 /* allnotifications.json in Resources */ = {isa = PBXBuildFile; fileRef = C397090F18E0B45B001DA560 /* allnotifications.json */; };
-		C397093318E0B45B001DA560 /* allnotifications.json in Resources */ = {isa = PBXBuildFile; fileRef = C397090F18E0B45B001DA560 /* allnotifications.json */; };
-		C397093418E0B45B001DA560 /* allnotifications.json in Resources */ = {isa = PBXBuildFile; fileRef = C397090F18E0B45B001DA560 /* allnotifications.json */; };
-		C397093518E0B45B001DA560 /* conversationdelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091018E0B45B001DA560 /* conversationdelete.json */; };
-		C397093618E0B45B001DA560 /* conversationdelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091018E0B45B001DA560 /* conversationdelete.json */; };
-		C397093718E0B45B001DA560 /* conversationdelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091018E0B45B001DA560 /* conversationdelete.json */; };
-		C397093818E0B45B001DA560 /* conversationpost.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091118E0B45B001DA560 /* conversationpost.json */; };
-		C397093918E0B45B001DA560 /* conversationpost.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091118E0B45B001DA560 /* conversationpost.json */; };
-		C397093A18E0B45B001DA560 /* conversationpost.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091118E0B45B001DA560 /* conversationpost.json */; };
-		C397093B18E0B45B001DA560 /* conversations.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091218E0B45B001DA560 /* conversations.json */; };
-		C397093C18E0B45B001DA560 /* conversations.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091218E0B45B001DA560 /* conversations.json */; };
-		C397093D18E0B45B001DA560 /* conversations.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091218E0B45B001DA560 /* conversations.json */; };
-		C397093E18E0B45B001DA560 /* conversationswithravener.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091318E0B45B001DA560 /* conversationswithravener.json */; };
-		C397093F18E0B45B001DA560 /* conversationswithravener.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091318E0B45B001DA560 /* conversationswithravener.json */; };
-		C397094018E0B45B001DA560 /* conversationswithravener.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091318E0B45B001DA560 /* conversationswithravener.json */; };
-		C397094118E0B45B001DA560 /* conversationwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091418E0B45B001DA560 /* conversationwithid.json */; };
-		C397094218E0B45B001DA560 /* conversationwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091418E0B45B001DA560 /* conversationwithid.json */; };
-		C397094318E0B45B001DA560 /* conversationwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091418E0B45B001DA560 /* conversationwithid.json */; };
-		C397094418E0B45B001DA560 /* deletecomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091518E0B45B001DA560 /* deletecomment.json */; };
-		C397094518E0B45B001DA560 /* deletecomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091518E0B45B001DA560 /* deletecomment.json */; };
-		C397094618E0B45B001DA560 /* deletecomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091518E0B45B001DA560 /* deletecomment.json */; };
-		C397094718E0B45B001DA560 /* deleteimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091618E0B45B001DA560 /* deleteimage.json */; };
-		C397094818E0B45B001DA560 /* deleteimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091618E0B45B001DA560 /* deleteimage.json */; };
-		C397094918E0B45B001DA560 /* deleteimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091618E0B45B001DA560 /* deleteimage.json */; };
-		C397094A18E0B45B001DA560 /* deletenotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091718E0B45B001DA560 /* deletenotification.json */; };
-		C397094B18E0B45B001DA560 /* deletenotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091718E0B45B001DA560 /* deletenotification.json */; };
-		C397094C18E0B45B001DA560 /* deletenotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091718E0B45B001DA560 /* deletenotification.json */; };
-		C397094D18E0B45B001DA560 /* freshnotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091818E0B45B001DA560 /* freshnotification.json */; };
-		C397094E18E0B45B001DA560 /* freshnotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091818E0B45B001DA560 /* freshnotification.json */; };
-		C397094F18E0B45B001DA560 /* freshnotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091818E0B45B001DA560 /* freshnotification.json */; };
-		C397095018E0B45B001DA560 /* hotgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091918E0B45B001DA560 /* hotgallery.json */; };
-		C397095118E0B45B001DA560 /* hotgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091918E0B45B001DA560 /* hotgallery.json */; };
-		C397095218E0B45B001DA560 /* hotgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091918E0B45B001DA560 /* hotgallery.json */; };
-		C397095318E0B45B001DA560 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091A18E0B45B001DA560 /* myaccount.json */; };
-		C397095418E0B45B001DA560 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091A18E0B45B001DA560 /* myaccount.json */; };
-		C397095518E0B45B001DA560 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091A18E0B45B001DA560 /* myaccount.json */; };
-		C397095618E0B45B001DA560 /* myalbumcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091B18E0B45B001DA560 /* myalbumcount.json */; };
-		C397095718E0B45B001DA560 /* myalbumcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091B18E0B45B001DA560 /* myalbumcount.json */; };
-		C397095818E0B45B001DA560 /* myalbumcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091B18E0B45B001DA560 /* myalbumcount.json */; };
-		C397095918E0B45B001DA560 /* myalbumids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091C18E0B45B001DA560 /* myalbumids.json */; };
-		C397095A18E0B45B001DA560 /* myalbumids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091C18E0B45B001DA560 /* myalbumids.json */; };
-		C397095B18E0B45B001DA560 /* myalbumids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091C18E0B45B001DA560 /* myalbumids.json */; };
-		C397095C18E0B45B001DA560 /* myalbums.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091D18E0B45B001DA560 /* myalbums.json */; };
-		C397095D18E0B45B001DA560 /* myalbums.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091D18E0B45B001DA560 /* myalbums.json */; };
-		C397095E18E0B45B001DA560 /* myalbums.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091D18E0B45B001DA560 /* myalbums.json */; };
-		C397095F18E0B45B001DA560 /* myalbumwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091E18E0B45B001DA560 /* myalbumwithid.json */; };
-		C397096018E0B45B001DA560 /* myalbumwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091E18E0B45B001DA560 /* myalbumwithid.json */; };
-		C397096118E0B45B001DA560 /* myalbumwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091E18E0B45B001DA560 /* myalbumwithid.json */; };
-		C397096218E0B45B001DA560 /* mycommentcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091F18E0B45B001DA560 /* mycommentcount.json */; };
-		C397096318E0B45B001DA560 /* mycommentcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091F18E0B45B001DA560 /* mycommentcount.json */; };
-		C397096418E0B45B001DA560 /* mycommentcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397091F18E0B45B001DA560 /* mycommentcount.json */; };
-		C397096518E0B45B001DA560 /* mycommentdeletewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092018E0B45B001DA560 /* mycommentdeletewithid.json */; };
-		C397096618E0B45B001DA560 /* mycommentdeletewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092018E0B45B001DA560 /* mycommentdeletewithid.json */; };
-		C397096718E0B45B001DA560 /* mycommentdeletewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092018E0B45B001DA560 /* mycommentdeletewithid.json */; };
-		C397096818E0B45B001DA560 /* mycommentids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092118E0B45B001DA560 /* mycommentids.json */; };
-		C397096918E0B45B001DA560 /* mycommentids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092118E0B45B001DA560 /* mycommentids.json */; };
-		C397096A18E0B45B001DA560 /* mycommentids.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092118E0B45B001DA560 /* mycommentids.json */; };
-		C397096B18E0B45B001DA560 /* mycomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092218E0B45B001DA560 /* mycomments.json */; };
-		C397096C18E0B45B001DA560 /* mycomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092218E0B45B001DA560 /* mycomments.json */; };
-		C397096D18E0B45B001DA560 /* mycomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092218E0B45B001DA560 /* mycomments.json */; };
-		C397096E18E0B45B001DA560 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092318E0B45B001DA560 /* mycommentwithid.json */; };
-		C397096F18E0B45B001DA560 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092318E0B45B001DA560 /* mycommentwithid.json */; };
-		C397097018E0B45B001DA560 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092318E0B45B001DA560 /* mycommentwithid.json */; };
-		C397097118E0B45B001DA560 /* myfavs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092418E0B45B001DA560 /* myfavs.json */; };
-		C397097218E0B45B001DA560 /* myfavs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092418E0B45B001DA560 /* myfavs.json */; };
-		C397097318E0B45B001DA560 /* myfavs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092418E0B45B001DA560 /* myfavs.json */; };
-		C397097418E0B45B001DA560 /* myimagecount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092518E0B45B001DA560 /* myimagecount.json */; };
-		C397097518E0B45B001DA560 /* myimagecount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092518E0B45B001DA560 /* myimagecount.json */; };
-		C397097618E0B45B001DA560 /* myimagecount.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092518E0B45B001DA560 /* myimagecount.json */; };
-		C397097718E0B45B001DA560 /* myimagedelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092618E0B45B001DA560 /* myimagedelete.json */; };
-		C397097818E0B45B001DA560 /* myimagedelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092618E0B45B001DA560 /* myimagedelete.json */; };
-		C397097918E0B45B001DA560 /* myimagedelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092618E0B45B001DA560 /* myimagedelete.json */; };
-		C397097A18E0B45B001DA560 /* myimageIDs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092718E0B45B001DA560 /* myimageIDs.json */; };
-		C397097B18E0B45B001DA560 /* myimageIDs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092718E0B45B001DA560 /* myimageIDs.json */; };
-		C397097C18E0B45B001DA560 /* myimageIDs.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092718E0B45B001DA560 /* myimageIDs.json */; };
-		C397097D18E0B45B001DA560 /* myimages.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092818E0B45B001DA560 /* myimages.json */; };
-		C397097E18E0B45B001DA560 /* myimages.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092818E0B45B001DA560 /* myimages.json */; };
-		C397097F18E0B45B001DA560 /* myimages.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092818E0B45B001DA560 /* myimages.json */; };
-		C397098018E0B45B001DA560 /* myimagewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092918E0B45B001DA560 /* myimagewithid.json */; };
-		C397098118E0B45B001DA560 /* myimagewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092918E0B45B001DA560 /* myimagewithid.json */; };
-		C397098218E0B45B001DA560 /* myimagewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092918E0B45B001DA560 /* myimagewithid.json */; };
-		C397098318E0B45B001DA560 /* mysettings.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092A18E0B45B001DA560 /* mysettings.json */; };
-		C397098418E0B45B001DA560 /* mysettings.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092A18E0B45B001DA560 /* mysettings.json */; };
-		C397098518E0B45B001DA560 /* mysettings.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092A18E0B45B001DA560 /* mysettings.json */; };
-		C397098618E0B45B001DA560 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092B18E0B45B001DA560 /* mysettingschange.json */; };
-		C397098718E0B45B001DA560 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092B18E0B45B001DA560 /* mysettingschange.json */; };
-		C397098818E0B45B001DA560 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092B18E0B45B001DA560 /* mysettingschange.json */; };
-		C397098918E0B45B001DA560 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092C18E0B45B001DA560 /* mysubmissions.json */; };
-		C397098A18E0B45B001DA560 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092C18E0B45B001DA560 /* mysubmissions.json */; };
-		C397098B18E0B45B001DA560 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092C18E0B45B001DA560 /* mysubmissions.json */; };
-		C397098C18E0B45B001DA560 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092D18E0B45B001DA560 /* postcomment.json */; };
-		C397098D18E0B45B001DA560 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092D18E0B45B001DA560 /* postcomment.json */; };
-		C397098E18E0B45B001DA560 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092D18E0B45B001DA560 /* postcomment.json */; };
-		C397098F18E0B45B001DA560 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092E18E0B45B001DA560 /* postimage.json */; };
-		C397099018E0B45B001DA560 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092E18E0B45B001DA560 /* postimage.json */; };
-		C397099118E0B45B001DA560 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092E18E0B45B001DA560 /* postimage.json */; };
-		C397099218E0B45B001DA560 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092F18E0B45B001DA560 /* replytocomment.json */; };
-		C397099318E0B45B001DA560 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092F18E0B45B001DA560 /* replytocomment.json */; };
-		C397099418E0B45B001DA560 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C397092F18E0B45B001DA560 /* replytocomment.json */; };
-		C397099518E0B45B001DA560 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093018E0B45B001DA560 /* topgallery.json */; };
-		C397099618E0B45B001DA560 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093018E0B45B001DA560 /* topgallery.json */; };
-		C397099718E0B45B001DA560 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093018E0B45B001DA560 /* topgallery.json */; };
-		C397099818E0B45B001DA560 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093118E0B45B001DA560 /* usersubmittedgallery.json */; };
-		C397099918E0B45B001DA560 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093118E0B45B001DA560 /* usersubmittedgallery.json */; };
-		C397099A18E0B45B001DA560 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C397093118E0B45B001DA560 /* usersubmittedgallery.json */; };
 		C3CDA2DD18CA66DA003B7F96 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		C3CDA2DE18CA66DA003B7F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
 		C3CDA2DF18CA66DA003B7F96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A918CA1F87009D9C57 /* UIKit.framework */; };
@@ -203,6 +98,50 @@
 		C3F1B39018E20450004ED254 /* IMGGalleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B34D18E200E0004ED254 /* IMGGalleryTests.m */; };
 		C3F1B39118E20450004ED254 /* IMGNotificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B34E18E200E0004ED254 /* IMGNotificationTests.m */; };
 		C3F1B39218E2045D004ED254 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1B36018E20167004ED254 /* IMGAnonymousTests.m */; };
+		C3F1B3F518E369A9004ED254 /* allnotifications.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D218E369A9004ED254 /* allnotifications.json */; };
+		C3F1B3F618E369A9004ED254 /* conversationdelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D318E369A9004ED254 /* conversationdelete.json */; };
+		C3F1B3F718E369A9004ED254 /* conversationpost.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D418E369A9004ED254 /* conversationpost.json */; };
+		C3F1B3F818E369A9004ED254 /* conversations.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D518E369A9004ED254 /* conversations.json */; };
+		C3F1B3F918E369A9004ED254 /* conversationswithravener.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D618E369A9004ED254 /* conversationswithravener.json */; };
+		C3F1B3FA18E369A9004ED254 /* conversationwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D718E369A9004ED254 /* conversationwithid.json */; };
+		C3F1B3FB18E369A9004ED254 /* deletecomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D818E369A9004ED254 /* deletecomment.json */; };
+		C3F1B3FC18E369A9004ED254 /* deleteimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3D918E369A9004ED254 /* deleteimage.json */; };
+		C3F1B3FD18E369A9004ED254 /* deletenotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3DA18E369A9004ED254 /* deletenotification.json */; };
+		C3F1B3FE18E369A9004ED254 /* freshnotification.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3DB18E369A9004ED254 /* freshnotification.json */; };
+		C3F1B3FF18E369A9004ED254 /* hotgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3DC18E369A9004ED254 /* hotgallery.json */; };
+		C3F1B40018E369A9004ED254 /* myaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3DD18E369A9004ED254 /* myaccount.json */; };
+		C3F1B40118E369A9004ED254 /* myalbumcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3DE18E369A9004ED254 /* myalbumcount.json */; };
+		C3F1B40218E369A9004ED254 /* myalbumids.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3DF18E369A9004ED254 /* myalbumids.json */; };
+		C3F1B40318E369A9004ED254 /* myalbums.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E018E369A9004ED254 /* myalbums.json */; };
+		C3F1B40418E369A9004ED254 /* myalbumwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E118E369A9004ED254 /* myalbumwithid.json */; };
+		C3F1B40518E369A9004ED254 /* mycommentcount.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E218E369A9004ED254 /* mycommentcount.json */; };
+		C3F1B40618E369A9004ED254 /* mycommentdeletewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E318E369A9004ED254 /* mycommentdeletewithid.json */; };
+		C3F1B40718E369A9004ED254 /* mycommentids.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E418E369A9004ED254 /* mycommentids.json */; };
+		C3F1B40818E369A9004ED254 /* mycomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E518E369A9004ED254 /* mycomments.json */; };
+		C3F1B40918E369A9004ED254 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E618E369A9004ED254 /* mycommentwithid.json */; };
+		C3F1B40A18E369A9004ED254 /* myfavs.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E718E369A9004ED254 /* myfavs.json */; };
+		C3F1B40B18E369A9004ED254 /* myimagecount.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E818E369A9004ED254 /* myimagecount.json */; };
+		C3F1B40C18E369A9004ED254 /* myimagedelete.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E918E369A9004ED254 /* myimagedelete.json */; };
+		C3F1B40D18E369A9004ED254 /* myimageIDs.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3EA18E369A9004ED254 /* myimageIDs.json */; };
+		C3F1B40E18E369A9004ED254 /* myimages.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3EB18E369A9004ED254 /* myimages.json */; };
+		C3F1B40F18E369A9004ED254 /* myimagewithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3EC18E369A9004ED254 /* myimagewithid.json */; };
+		C3F1B41018E369A9004ED254 /* mysettings.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3ED18E369A9004ED254 /* mysettings.json */; };
+		C3F1B41118E369A9004ED254 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3EE18E369A9004ED254 /* mysettingschange.json */; };
+		C3F1B41218E369A9004ED254 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3EF18E369A9004ED254 /* mysubmissions.json */; };
+		C3F1B41318E369A9004ED254 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F018E369A9004ED254 /* postcomment.json */; };
+		C3F1B41418E369A9004ED254 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F118E369A9004ED254 /* postimage.json */; };
+		C3F1B41518E369A9004ED254 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F218E369A9004ED254 /* replytocomment.json */; };
+		C3F1B41618E369A9004ED254 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F318E369A9004ED254 /* topgallery.json */; };
+		C3F1B41718E369A9004ED254 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F418E369A9004ED254 /* usersubmittedgallery.json */; };
+		C3F1B42118E369B6004ED254 /* album.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41818E369B6004ED254 /* album.json */; };
+		C3F1B42218E369B6004ED254 /* galleryalbum.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41918E369B6004ED254 /* galleryalbum.json */; };
+		C3F1B42318E369B6004ED254 /* galleryimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41A18E369B6004ED254 /* galleryimage.json */; };
+		C3F1B42418E369B6004ED254 /* geoffsaccount.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41B18E369B6004ED254 /* geoffsaccount.json */; };
+		C3F1B42518E369B6004ED254 /* geoffscomments.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41C18E369B6004ED254 /* geoffscomments.json */; };
+		C3F1B42618E369B6004ED254 /* hotgalleryanon.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41D18E369B6004ED254 /* hotgalleryanon.json */; };
+		C3F1B42718E369B6004ED254 /* image.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41E18E369B6004ED254 /* image.json */; };
+		C3F1B42818E369B6004ED254 /* topgalleryanon.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41F18E369B6004ED254 /* topgalleryanon.json */; };
+		C3F1B42918E369B6004ED254 /* usersubgalleryanon.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B42018E369B6004ED254 /* usersubgalleryanon.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,41 +272,6 @@
 		C319F7D218D0DB3F00C5E880 /* IMGComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IMGComment.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C319F7D318D0DB3F00C5E880 /* IMGComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGComment.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C36C00E618CA7472004576A5 /* ImgurSession Tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ImgurSession Tests-Prefix.pch"; path = "Resources/ImgurSession Tests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		C397090F18E0B45B001DA560 /* allnotifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allnotifications.json; sourceTree = "<group>"; };
-		C397091018E0B45B001DA560 /* conversationdelete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationdelete.json; sourceTree = "<group>"; };
-		C397091118E0B45B001DA560 /* conversationpost.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationpost.json; sourceTree = "<group>"; };
-		C397091218E0B45B001DA560 /* conversations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversations.json; sourceTree = "<group>"; };
-		C397091318E0B45B001DA560 /* conversationswithravener.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationswithravener.json; sourceTree = "<group>"; };
-		C397091418E0B45B001DA560 /* conversationwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationwithid.json; sourceTree = "<group>"; };
-		C397091518E0B45B001DA560 /* deletecomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deletecomment.json; sourceTree = "<group>"; };
-		C397091618E0B45B001DA560 /* deleteimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deleteimage.json; sourceTree = "<group>"; };
-		C397091718E0B45B001DA560 /* deletenotification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deletenotification.json; sourceTree = "<group>"; };
-		C397091818E0B45B001DA560 /* freshnotification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = freshnotification.json; sourceTree = "<group>"; };
-		C397091918E0B45B001DA560 /* hotgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hotgallery.json; sourceTree = "<group>"; };
-		C397091A18E0B45B001DA560 /* myaccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myaccount.json; sourceTree = "<group>"; };
-		C397091B18E0B45B001DA560 /* myalbumcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbumcount.json; sourceTree = "<group>"; };
-		C397091C18E0B45B001DA560 /* myalbumids.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbumids.json; sourceTree = "<group>"; };
-		C397091D18E0B45B001DA560 /* myalbums.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbums.json; sourceTree = "<group>"; };
-		C397091E18E0B45B001DA560 /* myalbumwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myalbumwithid.json; sourceTree = "<group>"; };
-		C397091F18E0B45B001DA560 /* mycommentcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentcount.json; sourceTree = "<group>"; };
-		C397092018E0B45B001DA560 /* mycommentdeletewithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentdeletewithid.json; sourceTree = "<group>"; };
-		C397092118E0B45B001DA560 /* mycommentids.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentids.json; sourceTree = "<group>"; };
-		C397092218E0B45B001DA560 /* mycomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycomments.json; sourceTree = "<group>"; };
-		C397092318E0B45B001DA560 /* mycommentwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mycommentwithid.json; sourceTree = "<group>"; };
-		C397092418E0B45B001DA560 /* myfavs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myfavs.json; sourceTree = "<group>"; };
-		C397092518E0B45B001DA560 /* myimagecount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimagecount.json; sourceTree = "<group>"; };
-		C397092618E0B45B001DA560 /* myimagedelete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimagedelete.json; sourceTree = "<group>"; };
-		C397092718E0B45B001DA560 /* myimageIDs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimageIDs.json; sourceTree = "<group>"; };
-		C397092818E0B45B001DA560 /* myimages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimages.json; sourceTree = "<group>"; };
-		C397092918E0B45B001DA560 /* myimagewithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = myimagewithid.json; sourceTree = "<group>"; };
-		C397092A18E0B45B001DA560 /* mysettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mysettings.json; sourceTree = "<group>"; };
-		C397092B18E0B45B001DA560 /* mysettingschange.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mysettingschange.json; sourceTree = "<group>"; };
-		C397092C18E0B45B001DA560 /* mysubmissions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mysubmissions.json; sourceTree = "<group>"; };
-		C397092D18E0B45B001DA560 /* postcomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = postcomment.json; sourceTree = "<group>"; };
-		C397092E18E0B45B001DA560 /* postimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = postimage.json; sourceTree = "<group>"; };
-		C397092F18E0B45B001DA560 /* replytocomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = replytocomment.json; sourceTree = "<group>"; };
-		C397093018E0B45B001DA560 /* topgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topgallery.json; sourceTree = "<group>"; };
-		C397093118E0B45B001DA560 /* usersubmittedgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usersubmittedgallery.json; sourceTree = "<group>"; };
 		C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSession Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGAccountTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -387,6 +291,50 @@
 		C3F1B37B18E2042C004ED254 /* OSXIntegratedAnonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSXIntegratedAnonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F1B3BC18E2189A004ED254 /* Anonymous Test Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Anonymous Test Config.plist"; sourceTree = "<group>"; };
 		C3F1B3BD18E2189A004ED254 /* Authenticated Test Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Authenticated Test Config.plist"; sourceTree = "<group>"; };
+		C3F1B3D218E369A9004ED254 /* allnotifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = allnotifications.json; path = authenticated/allnotifications.json; sourceTree = "<group>"; };
+		C3F1B3D318E369A9004ED254 /* conversationdelete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = conversationdelete.json; path = authenticated/conversationdelete.json; sourceTree = "<group>"; };
+		C3F1B3D418E369A9004ED254 /* conversationpost.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = conversationpost.json; path = authenticated/conversationpost.json; sourceTree = "<group>"; };
+		C3F1B3D518E369A9004ED254 /* conversations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = conversations.json; path = authenticated/conversations.json; sourceTree = "<group>"; };
+		C3F1B3D618E369A9004ED254 /* conversationswithravener.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = conversationswithravener.json; path = authenticated/conversationswithravener.json; sourceTree = "<group>"; };
+		C3F1B3D718E369A9004ED254 /* conversationwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = conversationwithid.json; path = authenticated/conversationwithid.json; sourceTree = "<group>"; };
+		C3F1B3D818E369A9004ED254 /* deletecomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = deletecomment.json; path = authenticated/deletecomment.json; sourceTree = "<group>"; };
+		C3F1B3D918E369A9004ED254 /* deleteimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = deleteimage.json; path = authenticated/deleteimage.json; sourceTree = "<group>"; };
+		C3F1B3DA18E369A9004ED254 /* deletenotification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = deletenotification.json; path = authenticated/deletenotification.json; sourceTree = "<group>"; };
+		C3F1B3DB18E369A9004ED254 /* freshnotification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = freshnotification.json; path = authenticated/freshnotification.json; sourceTree = "<group>"; };
+		C3F1B3DC18E369A9004ED254 /* hotgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = hotgallery.json; path = authenticated/hotgallery.json; sourceTree = "<group>"; };
+		C3F1B3DD18E369A9004ED254 /* myaccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myaccount.json; path = authenticated/myaccount.json; sourceTree = "<group>"; };
+		C3F1B3DE18E369A9004ED254 /* myalbumcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myalbumcount.json; path = authenticated/myalbumcount.json; sourceTree = "<group>"; };
+		C3F1B3DF18E369A9004ED254 /* myalbumids.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myalbumids.json; path = authenticated/myalbumids.json; sourceTree = "<group>"; };
+		C3F1B3E018E369A9004ED254 /* myalbums.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myalbums.json; path = authenticated/myalbums.json; sourceTree = "<group>"; };
+		C3F1B3E118E369A9004ED254 /* myalbumwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myalbumwithid.json; path = authenticated/myalbumwithid.json; sourceTree = "<group>"; };
+		C3F1B3E218E369A9004ED254 /* mycommentcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mycommentcount.json; path = authenticated/mycommentcount.json; sourceTree = "<group>"; };
+		C3F1B3E318E369A9004ED254 /* mycommentdeletewithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mycommentdeletewithid.json; path = authenticated/mycommentdeletewithid.json; sourceTree = "<group>"; };
+		C3F1B3E418E369A9004ED254 /* mycommentids.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mycommentids.json; path = authenticated/mycommentids.json; sourceTree = "<group>"; };
+		C3F1B3E518E369A9004ED254 /* mycomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mycomments.json; path = authenticated/mycomments.json; sourceTree = "<group>"; };
+		C3F1B3E618E369A9004ED254 /* mycommentwithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mycommentwithid.json; path = authenticated/mycommentwithid.json; sourceTree = "<group>"; };
+		C3F1B3E718E369A9004ED254 /* myfavs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myfavs.json; path = authenticated/myfavs.json; sourceTree = "<group>"; };
+		C3F1B3E818E369A9004ED254 /* myimagecount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myimagecount.json; path = authenticated/myimagecount.json; sourceTree = "<group>"; };
+		C3F1B3E918E369A9004ED254 /* myimagedelete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myimagedelete.json; path = authenticated/myimagedelete.json; sourceTree = "<group>"; };
+		C3F1B3EA18E369A9004ED254 /* myimageIDs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myimageIDs.json; path = authenticated/myimageIDs.json; sourceTree = "<group>"; };
+		C3F1B3EB18E369A9004ED254 /* myimages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myimages.json; path = authenticated/myimages.json; sourceTree = "<group>"; };
+		C3F1B3EC18E369A9004ED254 /* myimagewithid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = myimagewithid.json; path = authenticated/myimagewithid.json; sourceTree = "<group>"; };
+		C3F1B3ED18E369A9004ED254 /* mysettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mysettings.json; path = authenticated/mysettings.json; sourceTree = "<group>"; };
+		C3F1B3EE18E369A9004ED254 /* mysettingschange.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mysettingschange.json; path = authenticated/mysettingschange.json; sourceTree = "<group>"; };
+		C3F1B3EF18E369A9004ED254 /* mysubmissions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mysubmissions.json; path = authenticated/mysubmissions.json; sourceTree = "<group>"; };
+		C3F1B3F018E369A9004ED254 /* postcomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = postcomment.json; path = authenticated/postcomment.json; sourceTree = "<group>"; };
+		C3F1B3F118E369A9004ED254 /* postimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = postimage.json; path = authenticated/postimage.json; sourceTree = "<group>"; };
+		C3F1B3F218E369A9004ED254 /* replytocomment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = replytocomment.json; path = authenticated/replytocomment.json; sourceTree = "<group>"; };
+		C3F1B3F318E369A9004ED254 /* topgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = topgallery.json; path = authenticated/topgallery.json; sourceTree = "<group>"; };
+		C3F1B3F418E369A9004ED254 /* usersubmittedgallery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersubmittedgallery.json; path = authenticated/usersubmittedgallery.json; sourceTree = "<group>"; };
+		C3F1B41818E369B6004ED254 /* album.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = album.json; path = anonymous/album.json; sourceTree = "<group>"; };
+		C3F1B41918E369B6004ED254 /* galleryalbum.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = galleryalbum.json; path = anonymous/galleryalbum.json; sourceTree = "<group>"; };
+		C3F1B41A18E369B6004ED254 /* galleryimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = galleryimage.json; path = anonymous/galleryimage.json; sourceTree = "<group>"; };
+		C3F1B41B18E369B6004ED254 /* geoffsaccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = geoffsaccount.json; path = anonymous/geoffsaccount.json; sourceTree = "<group>"; };
+		C3F1B41C18E369B6004ED254 /* geoffscomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = geoffscomments.json; path = anonymous/geoffscomments.json; sourceTree = "<group>"; };
+		C3F1B41D18E369B6004ED254 /* hotgalleryanon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = hotgalleryanon.json; path = anonymous/hotgalleryanon.json; sourceTree = "<group>"; };
+		C3F1B41E18E369B6004ED254 /* image.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = image.json; path = anonymous/image.json; sourceTree = "<group>"; };
+		C3F1B41F18E369B6004ED254 /* topgalleryanon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = topgalleryanon.json; path = anonymous/topgalleryanon.json; sourceTree = "<group>"; };
+		C3F1B42018E369B6004ED254 /* usersubgalleryanon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersubgalleryanon.json; path = anonymous/usersubgalleryanon.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -654,8 +602,8 @@
 		C30933D218CA1FFE009D9C57 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				2407479F18D62B0700B92063 /* IMGImage.m */,
 				240747A018D62B0700B92063 /* IMGImage.h */,
+				2407479F18D62B0700B92063 /* IMGImage.m */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -693,41 +641,8 @@
 		C397090E18E0B45B001DA560 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				C397090F18E0B45B001DA560 /* allnotifications.json */,
-				C397091018E0B45B001DA560 /* conversationdelete.json */,
-				C397091118E0B45B001DA560 /* conversationpost.json */,
-				C397091218E0B45B001DA560 /* conversations.json */,
-				C397091318E0B45B001DA560 /* conversationswithravener.json */,
-				C397091418E0B45B001DA560 /* conversationwithid.json */,
-				C397091518E0B45B001DA560 /* deletecomment.json */,
-				C397091618E0B45B001DA560 /* deleteimage.json */,
-				C397091718E0B45B001DA560 /* deletenotification.json */,
-				C397091818E0B45B001DA560 /* freshnotification.json */,
-				C397091918E0B45B001DA560 /* hotgallery.json */,
-				C397091A18E0B45B001DA560 /* myaccount.json */,
-				C397091B18E0B45B001DA560 /* myalbumcount.json */,
-				C397091C18E0B45B001DA560 /* myalbumids.json */,
-				C397091D18E0B45B001DA560 /* myalbums.json */,
-				C397091E18E0B45B001DA560 /* myalbumwithid.json */,
-				C397091F18E0B45B001DA560 /* mycommentcount.json */,
-				C397092018E0B45B001DA560 /* mycommentdeletewithid.json */,
-				C397092118E0B45B001DA560 /* mycommentids.json */,
-				C397092218E0B45B001DA560 /* mycomments.json */,
-				C397092318E0B45B001DA560 /* mycommentwithid.json */,
-				C397092418E0B45B001DA560 /* myfavs.json */,
-				C397092518E0B45B001DA560 /* myimagecount.json */,
-				C397092618E0B45B001DA560 /* myimagedelete.json */,
-				C397092718E0B45B001DA560 /* myimageIDs.json */,
-				C397092818E0B45B001DA560 /* myimages.json */,
-				C397092918E0B45B001DA560 /* myimagewithid.json */,
-				C397092A18E0B45B001DA560 /* mysettings.json */,
-				C397092B18E0B45B001DA560 /* mysettingschange.json */,
-				C397092C18E0B45B001DA560 /* mysubmissions.json */,
-				C397092D18E0B45B001DA560 /* postcomment.json */,
-				C397092E18E0B45B001DA560 /* postimage.json */,
-				C397092F18E0B45B001DA560 /* replytocomment.json */,
-				C397093018E0B45B001DA560 /* topgallery.json */,
-				C397093118E0B45B001DA560 /* usersubmittedgallery.json */,
+				C3F1B3BF18E36947004ED254 /* Anonymous */,
+				C3F1B3BE18E3693C004ED254 /* Authenticated */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -787,6 +702,64 @@
 				C3F1B34E18E200E0004ED254 /* IMGNotificationTests.m */,
 			);
 			name = Authenticated;
+			sourceTree = "<group>";
+		};
+		C3F1B3BE18E3693C004ED254 /* Authenticated */ = {
+			isa = PBXGroup;
+			children = (
+				C3F1B3D218E369A9004ED254 /* allnotifications.json */,
+				C3F1B3D318E369A9004ED254 /* conversationdelete.json */,
+				C3F1B3D418E369A9004ED254 /* conversationpost.json */,
+				C3F1B3D518E369A9004ED254 /* conversations.json */,
+				C3F1B3D618E369A9004ED254 /* conversationswithravener.json */,
+				C3F1B3D718E369A9004ED254 /* conversationwithid.json */,
+				C3F1B3D818E369A9004ED254 /* deletecomment.json */,
+				C3F1B3D918E369A9004ED254 /* deleteimage.json */,
+				C3F1B3DA18E369A9004ED254 /* deletenotification.json */,
+				C3F1B3DB18E369A9004ED254 /* freshnotification.json */,
+				C3F1B3DC18E369A9004ED254 /* hotgallery.json */,
+				C3F1B3DD18E369A9004ED254 /* myaccount.json */,
+				C3F1B3DE18E369A9004ED254 /* myalbumcount.json */,
+				C3F1B3DF18E369A9004ED254 /* myalbumids.json */,
+				C3F1B3E018E369A9004ED254 /* myalbums.json */,
+				C3F1B3E118E369A9004ED254 /* myalbumwithid.json */,
+				C3F1B3E218E369A9004ED254 /* mycommentcount.json */,
+				C3F1B3E318E369A9004ED254 /* mycommentdeletewithid.json */,
+				C3F1B3E418E369A9004ED254 /* mycommentids.json */,
+				C3F1B3E518E369A9004ED254 /* mycomments.json */,
+				C3F1B3E618E369A9004ED254 /* mycommentwithid.json */,
+				C3F1B3E718E369A9004ED254 /* myfavs.json */,
+				C3F1B3E818E369A9004ED254 /* myimagecount.json */,
+				C3F1B3E918E369A9004ED254 /* myimagedelete.json */,
+				C3F1B3EA18E369A9004ED254 /* myimageIDs.json */,
+				C3F1B3EB18E369A9004ED254 /* myimages.json */,
+				C3F1B3EC18E369A9004ED254 /* myimagewithid.json */,
+				C3F1B3ED18E369A9004ED254 /* mysettings.json */,
+				C3F1B3EE18E369A9004ED254 /* mysettingschange.json */,
+				C3F1B3EF18E369A9004ED254 /* mysubmissions.json */,
+				C3F1B3F018E369A9004ED254 /* postcomment.json */,
+				C3F1B3F118E369A9004ED254 /* postimage.json */,
+				C3F1B3F218E369A9004ED254 /* replytocomment.json */,
+				C3F1B3F318E369A9004ED254 /* topgallery.json */,
+				C3F1B3F418E369A9004ED254 /* usersubmittedgallery.json */,
+			);
+			name = Authenticated;
+			sourceTree = "<group>";
+		};
+		C3F1B3BF18E36947004ED254 /* Anonymous */ = {
+			isa = PBXGroup;
+			children = (
+				C3F1B41818E369B6004ED254 /* album.json */,
+				C3F1B41918E369B6004ED254 /* galleryalbum.json */,
+				C3F1B41A18E369B6004ED254 /* galleryimage.json */,
+				C3F1B41B18E369B6004ED254 /* geoffsaccount.json */,
+				C3F1B41C18E369B6004ED254 /* geoffscomments.json */,
+				C3F1B41D18E369B6004ED254 /* hotgalleryanon.json */,
+				C3F1B41E18E369B6004ED254 /* image.json */,
+				C3F1B41F18E369B6004ED254 /* topgalleryanon.json */,
+				C3F1B42018E369B6004ED254 /* usersubgalleryanon.json */,
+			);
+			name = Anonymous;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -986,41 +959,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C397098218E0B45B001DA560 /* myimagewithid.json in Resources */,
-				C397096D18E0B45B001DA560 /* mycomments.json in Resources */,
-				C397094F18E0B45B001DA560 /* freshnotification.json in Resources */,
-				C397099418E0B45B001DA560 /* replytocomment.json in Resources */,
-				C397094618E0B45B001DA560 /* deletecomment.json in Resources */,
-				C397097618E0B45B001DA560 /* myimagecount.json in Resources */,
-				C397094C18E0B45B001DA560 /* deletenotification.json in Resources */,
-				C397093418E0B45B001DA560 /* allnotifications.json in Resources */,
-				C397096718E0B45B001DA560 /* mycommentdeletewithid.json in Resources */,
-				C397097018E0B45B001DA560 /* mycommentwithid.json in Resources */,
-				C397096118E0B45B001DA560 /* myalbumwithid.json in Resources */,
-				C397094918E0B45B001DA560 /* deleteimage.json in Resources */,
-				C397097C18E0B45B001DA560 /* myimageIDs.json in Resources */,
-				C397097F18E0B45B001DA560 /* myimages.json in Resources */,
-				C397097918E0B45B001DA560 /* myimagedelete.json in Resources */,
-				C397098B18E0B45B001DA560 /* mysubmissions.json in Resources */,
-				C397099A18E0B45B001DA560 /* usersubmittedgallery.json in Resources */,
-				C397096418E0B45B001DA560 /* mycommentcount.json in Resources */,
-				C397098E18E0B45B001DA560 /* postcomment.json in Resources */,
-				C397097318E0B45B001DA560 /* myfavs.json in Resources */,
-				C397099118E0B45B001DA560 /* postimage.json in Resources */,
-				C397093D18E0B45B001DA560 /* conversations.json in Resources */,
-				C397093A18E0B45B001DA560 /* conversationpost.json in Resources */,
-				C397094018E0B45B001DA560 /* conversationswithravener.json in Resources */,
-				C397098518E0B45B001DA560 /* mysettings.json in Resources */,
-				C397095818E0B45B001DA560 /* myalbumcount.json in Resources */,
-				C397093718E0B45B001DA560 /* conversationdelete.json in Resources */,
-				C397096A18E0B45B001DA560 /* mycommentids.json in Resources */,
-				C397098818E0B45B001DA560 /* mysettingschange.json in Resources */,
-				C397095B18E0B45B001DA560 /* myalbumids.json in Resources */,
-				C397095518E0B45B001DA560 /* myaccount.json in Resources */,
-				C397099718E0B45B001DA560 /* topgallery.json in Resources */,
-				C397095218E0B45B001DA560 /* hotgallery.json in Resources */,
-				C397094318E0B45B001DA560 /* conversationwithid.json in Resources */,
-				C397095E18E0B45B001DA560 /* myalbums.json in Resources */,
+				C3F1B42718E369B6004ED254 /* image.json in Resources */,
+				C3F1B42218E369B6004ED254 /* galleryalbum.json in Resources */,
+				C3F1B42818E369B6004ED254 /* topgalleryanon.json in Resources */,
+				C3F1B42418E369B6004ED254 /* geoffsaccount.json in Resources */,
+				C3F1B42618E369B6004ED254 /* hotgalleryanon.json in Resources */,
+				C3F1B42318E369B6004ED254 /* galleryimage.json in Resources */,
+				C3F1B42918E369B6004ED254 /* usersubgalleryanon.json in Resources */,
+				C3F1B42118E369B6004ED254 /* album.json in Resources */,
+				C3F1B42518E369B6004ED254 /* geoffscomments.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,41 +982,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C397098118E0B45B001DA560 /* myimagewithid.json in Resources */,
-				C397096C18E0B45B001DA560 /* mycomments.json in Resources */,
-				C397094E18E0B45B001DA560 /* freshnotification.json in Resources */,
-				C397099318E0B45B001DA560 /* replytocomment.json in Resources */,
-				C397094518E0B45B001DA560 /* deletecomment.json in Resources */,
-				C397097518E0B45B001DA560 /* myimagecount.json in Resources */,
-				C397094B18E0B45B001DA560 /* deletenotification.json in Resources */,
-				C397093318E0B45B001DA560 /* allnotifications.json in Resources */,
-				C397096618E0B45B001DA560 /* mycommentdeletewithid.json in Resources */,
-				C397096F18E0B45B001DA560 /* mycommentwithid.json in Resources */,
-				C397096018E0B45B001DA560 /* myalbumwithid.json in Resources */,
-				C397094818E0B45B001DA560 /* deleteimage.json in Resources */,
-				C397097B18E0B45B001DA560 /* myimageIDs.json in Resources */,
-				C397097E18E0B45B001DA560 /* myimages.json in Resources */,
-				C397097818E0B45B001DA560 /* myimagedelete.json in Resources */,
-				C397098A18E0B45B001DA560 /* mysubmissions.json in Resources */,
-				C397099918E0B45B001DA560 /* usersubmittedgallery.json in Resources */,
-				C397096318E0B45B001DA560 /* mycommentcount.json in Resources */,
-				C397098D18E0B45B001DA560 /* postcomment.json in Resources */,
-				C397097218E0B45B001DA560 /* myfavs.json in Resources */,
-				C397099018E0B45B001DA560 /* postimage.json in Resources */,
-				C397093C18E0B45B001DA560 /* conversations.json in Resources */,
-				C397093918E0B45B001DA560 /* conversationpost.json in Resources */,
-				C397093F18E0B45B001DA560 /* conversationswithravener.json in Resources */,
-				C397098418E0B45B001DA560 /* mysettings.json in Resources */,
-				C397095718E0B45B001DA560 /* myalbumcount.json in Resources */,
-				C397093618E0B45B001DA560 /* conversationdelete.json in Resources */,
-				C397096918E0B45B001DA560 /* mycommentids.json in Resources */,
-				C397098718E0B45B001DA560 /* mysettingschange.json in Resources */,
-				C397095A18E0B45B001DA560 /* myalbumids.json in Resources */,
-				C397095418E0B45B001DA560 /* myaccount.json in Resources */,
-				C397099618E0B45B001DA560 /* topgallery.json in Resources */,
-				C397095118E0B45B001DA560 /* hotgallery.json in Resources */,
-				C397094218E0B45B001DA560 /* conversationwithid.json in Resources */,
-				C397095D18E0B45B001DA560 /* myalbums.json in Resources */,
+				C3F1B3F918E369A9004ED254 /* conversationswithravener.json in Resources */,
+				C3F1B41218E369A9004ED254 /* mysubmissions.json in Resources */,
+				C3F1B40518E369A9004ED254 /* mycommentcount.json in Resources */,
+				C3F1B3FA18E369A9004ED254 /* conversationwithid.json in Resources */,
+				C3F1B40E18E369A9004ED254 /* myimages.json in Resources */,
+				C3F1B40818E369A9004ED254 /* mycomments.json in Resources */,
+				C3F1B3FD18E369A9004ED254 /* deletenotification.json in Resources */,
+				C3F1B40918E369A9004ED254 /* mycommentwithid.json in Resources */,
+				C3F1B3F818E369A9004ED254 /* conversations.json in Resources */,
+				C3F1B41518E369A9004ED254 /* replytocomment.json in Resources */,
+				C3F1B41618E369A9004ED254 /* topgallery.json in Resources */,
+				C3F1B40618E369A9004ED254 /* mycommentdeletewithid.json in Resources */,
+				C3F1B3FF18E369A9004ED254 /* hotgallery.json in Resources */,
+				C3F1B40318E369A9004ED254 /* myalbums.json in Resources */,
+				C3F1B41118E369A9004ED254 /* mysettingschange.json in Resources */,
+				C3F1B40D18E369A9004ED254 /* myimageIDs.json in Resources */,
+				C3F1B40F18E369A9004ED254 /* myimagewithid.json in Resources */,
+				C3F1B40018E369A9004ED254 /* myaccount.json in Resources */,
+				C3F1B41018E369A9004ED254 /* mysettings.json in Resources */,
+				C3F1B3FB18E369A9004ED254 /* deletecomment.json in Resources */,
+				C3F1B3FE18E369A9004ED254 /* freshnotification.json in Resources */,
+				C3F1B3F518E369A9004ED254 /* allnotifications.json in Resources */,
+				C3F1B41718E369A9004ED254 /* usersubmittedgallery.json in Resources */,
+				C3F1B40C18E369A9004ED254 /* myimagedelete.json in Resources */,
+				C3F1B40B18E369A9004ED254 /* myimagecount.json in Resources */,
+				C3F1B40418E369A9004ED254 /* myalbumwithid.json in Resources */,
+				C3F1B41318E369A9004ED254 /* postcomment.json in Resources */,
+				C3F1B3F718E369A9004ED254 /* conversationpost.json in Resources */,
+				C3F1B40718E369A9004ED254 /* mycommentids.json in Resources */,
+				C3F1B40218E369A9004ED254 /* myalbumids.json in Resources */,
+				C3F1B3FC18E369A9004ED254 /* deleteimage.json in Resources */,
+				C3F1B40118E369A9004ED254 /* myalbumcount.json in Resources */,
+				C3F1B3F618E369A9004ED254 /* conversationdelete.json in Resources */,
+				C3F1B40A18E369A9004ED254 /* myfavs.json in Resources */,
+				C3F1B41418E369A9004ED254 /* postimage.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,42 +1024,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C397098018E0B45B001DA560 /* myimagewithid.json in Resources */,
-				C397096B18E0B45B001DA560 /* mycomments.json in Resources */,
-				C397094D18E0B45B001DA560 /* freshnotification.json in Resources */,
-				C397099218E0B45B001DA560 /* replytocomment.json in Resources */,
-				C397094418E0B45B001DA560 /* deletecomment.json in Resources */,
-				C397097418E0B45B001DA560 /* myimagecount.json in Resources */,
-				C397094A18E0B45B001DA560 /* deletenotification.json in Resources */,
-				C397093218E0B45B001DA560 /* allnotifications.json in Resources */,
-				C397096518E0B45B001DA560 /* mycommentdeletewithid.json in Resources */,
-				C397096E18E0B45B001DA560 /* mycommentwithid.json in Resources */,
-				C397095F18E0B45B001DA560 /* myalbumwithid.json in Resources */,
-				C397094718E0B45B001DA560 /* deleteimage.json in Resources */,
-				C397097A18E0B45B001DA560 /* myimageIDs.json in Resources */,
-				C397097D18E0B45B001DA560 /* myimages.json in Resources */,
 				C36C00F318CA7611004576A5 /* image-example.jpg in Resources */,
-				C397097718E0B45B001DA560 /* myimagedelete.json in Resources */,
-				C397098918E0B45B001DA560 /* mysubmissions.json in Resources */,
-				C397099818E0B45B001DA560 /* usersubmittedgallery.json in Resources */,
-				C397096218E0B45B001DA560 /* mycommentcount.json in Resources */,
-				C397098C18E0B45B001DA560 /* postcomment.json in Resources */,
-				C397097118E0B45B001DA560 /* myfavs.json in Resources */,
-				C397098F18E0B45B001DA560 /* postimage.json in Resources */,
-				C397093B18E0B45B001DA560 /* conversations.json in Resources */,
-				C397093818E0B45B001DA560 /* conversationpost.json in Resources */,
-				C397093E18E0B45B001DA560 /* conversationswithravener.json in Resources */,
-				C397098318E0B45B001DA560 /* mysettings.json in Resources */,
-				C397095618E0B45B001DA560 /* myalbumcount.json in Resources */,
-				C397093518E0B45B001DA560 /* conversationdelete.json in Resources */,
-				C397096818E0B45B001DA560 /* mycommentids.json in Resources */,
-				C397098618E0B45B001DA560 /* mysettingschange.json in Resources */,
-				C397095918E0B45B001DA560 /* myalbumids.json in Resources */,
-				C397095318E0B45B001DA560 /* myaccount.json in Resources */,
-				C397099518E0B45B001DA560 /* topgallery.json in Resources */,
-				C397095018E0B45B001DA560 /* hotgallery.json in Resources */,
-				C397094118E0B45B001DA560 /* conversationwithid.json in Resources */,
-				C397095C18E0B45B001DA560 /* myalbums.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

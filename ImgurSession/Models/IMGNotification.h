@@ -28,16 +28,26 @@
  */
 @property (readonly,nonatomic) BOOL isViewed;
 /**
- The notification content. Currently uses IMGComment or IMGMessage
+ Is the notification a IMGComment? Else it is IMGConversation
  */
 @property (readonly,nonatomic) BOOL isReply;
+/**
+ Message object if this notification was a reply to a user's post
+ */
 @property (readonly,nonatomic) IMGComment * reply;
+/**
+ Conversation object if this notification was a conversation
+ */
 @property (readonly,nonatomic) IMGConversation * conversation;
 
 
-
+/**
+ Special Init for notification with IMGComment object
+ */
 - (instancetype)initReplyNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
-
+/**
+ Special Init for notification with IMGConversation object
+ */
 - (instancetype)initConversationNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
 
 @end

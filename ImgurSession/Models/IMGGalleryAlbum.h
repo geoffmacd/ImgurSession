@@ -16,14 +16,15 @@
  */
 @interface IMGGalleryAlbum : IMGBasicAlbum
 
+@property (nonatomic, readonly) IMGVoteType vote;
+
 @property (nonatomic, readonly) NSInteger ups;
 @property (nonatomic, readonly) NSInteger downs;
 @property (nonatomic, readonly) NSInteger score;
-@property (nonatomic, readonly) NSInteger isAlbum;
-@property (nonatomic, readonly) IMGVoteType vote;
+
+@property (nonatomic, readonly, copy) NSString *section;
 @property (nonatomic, readonly) BOOL favorite;
 @property (nonatomic, readonly) BOOL nsfw;
-@property (nonatomic, readonly, copy) NSString *section;
 
 
 @end

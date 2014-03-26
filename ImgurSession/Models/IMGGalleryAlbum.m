@@ -20,13 +20,11 @@
         
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];
-        _score = [jsonData[@"score"] integerValue]; 
-        if(![jsonData[@"is_album"] isKindOfClass:[NSNull class]])
-            _isAlbum = [jsonData[@"is_album"] boolValue];
+        _score = [jsonData[@"score"] integerValue];
         if(![jsonData[@"vote"] isKindOfClass:[NSNull class]])
             _vote = [IMGVote voteForStr:jsonData[@"vote"]];
-        _section = jsonData[@"section"];
         
+        _section = jsonData[@"section"];
         if(![jsonData[@"nsfw"] isKindOfClass:[NSNull class]])
             _nsfw = [jsonData[@"nsfw"] boolValue];
         if(![jsonData[@"favorite"] isKindOfClass:[NSNull class]])

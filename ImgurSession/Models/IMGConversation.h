@@ -31,7 +31,7 @@
  */
 @property (readonly,nonatomic, copy) NSString * lastMessage;
 /**
- message subject
+ date last message was sent
  */
 @property (readonly,nonatomic) NSDate * datetime;
 /**
@@ -45,7 +45,7 @@
 
 
 /**
- Special Init for notifications with different keys
+ Special Init for notifications with different keys returned from /notification endpoints
  */
 - (instancetype)initWithJSONObjectFromNotification:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
 

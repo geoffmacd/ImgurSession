@@ -29,8 +29,17 @@ typedef NS_ENUM(NSInteger, IMGVoteType) {
  */
 @property (readonly,nonatomic) NSInteger downs;
 
-
+/**
+ Return string for vote value
+ @param vote enumerated value with IMGVoteType
+ @return string description of vote as per https://api.imgur.com/endpoints/gallery#gallery-voting specifications
+ */
 +(NSString*)strForVote:(IMGVoteType)vote;
+/**
+ Return NSInteger from enumerable representing input string
+ @param voteStr string description of vote type
+ @return integer representing this vote
+ */
 +(IMGVoteType)voteForStr:(NSString*)voteStr;
 
 @end

@@ -19,14 +19,13 @@
     
     if(self && !*error) {
         
-        _accountURL = jsonData[@"account_url"];
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];
         _score = [jsonData[@"score"] integerValue];
-        _isAlbum = [jsonData[@"is_album"] boolValue];
         if(![jsonData[@"vote"] isKindOfClass:[NSNull class]])
             _vote = [IMGVote voteForStr:jsonData[@"vote"]];
         
+        _accountURL = jsonData[@"account_url"];
         if(![jsonData[@"nsfw"] isKindOfClass:[NSNull class]])
             _nsfw = [jsonData[@"nsfw"] boolValue];
         if(![jsonData[@"favorite"] isKindOfClass:[NSNull class]])

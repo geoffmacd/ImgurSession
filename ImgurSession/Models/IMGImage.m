@@ -29,7 +29,7 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
         
         _imageID = jsonData[@"id"];
         _title = jsonData[@"title"];
-        _description = jsonData[@"description"];
+        _imageDescription = jsonData[@"description"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _type = jsonData[@"type"];
         _section = jsonData[@"section"];
@@ -41,8 +41,8 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
         _views = [jsonData[@"views"] integerValue];
         _bandwidth = [jsonData[@"bandwidth"] integerValue];
         _deletehash = jsonData[@"deletehash"];
-        _link = jsonData[@"link"];
-    }
+        _url = jsonData[@"link"];
+    }   
     return [self trackModels];
 }
 
@@ -56,11 +56,11 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
 
 #pragma mark - Display
 
-- (NSURL *)URLWithSize:(ImgurSize)size
-{
-    NSString *stringURL = [self.link copy];
-    NSString *path = [stringURL stringByDeletingPathExtension];
-    NSString *extension = [stringURL pathExtension];
+- (NSURL *)URLWithSize:(ImgurSize)size{
+    
+    NSString *path = [self.url stringByDeletingPathExtension];
+    NSString *extension = [self.url pathExtension];
+    NSString *stringURL;
     
     switch (size) {
         case ImgurSmallSquareSize:
@@ -88,6 +88,7 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
             break;
             
         default:
+            stringURL = [NSString stringWithFormat:@"%@m.%@", path, extension];
             return nil;
     }
     return [NSURL URLWithString:stringURL];
