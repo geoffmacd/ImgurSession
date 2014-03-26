@@ -17,7 +17,7 @@
 
 @property (nonatomic, readonly) IMGVoteType vote;
 
-@property (nonatomic, readonly) NSString *accountURL;
+@property (nonatomic, readonly, copy) NSString *accountURL;
 
 @property (nonatomic, readonly) NSInteger ups;
 @property (nonatomic, readonly) NSInteger downs;

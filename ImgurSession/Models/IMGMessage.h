@@ -17,11 +17,11 @@
 /**
  Message ID
  */
-@property (readonly,nonatomic) NSString * messageId;
+@property (readonly,nonatomic, copy) NSString * messageId;
 /**
  Username who sent the message
  */
-@property (readonly,nonatomic) NSString * fromUsername;
+@property (readonly,nonatomic, copy) NSString * fromUsername;
 /**
  Authors account id
  */
@@ -29,11 +29,11 @@
 /**
  message subject
  */
-@property (readonly,nonatomic) NSString * subject;
+@property (readonly,nonatomic, copy) NSString * subject;
 /**
  message body
  */
-@property (readonly,nonatomic) NSString * body;
+@property (readonly,nonatomic, copy) NSString * body;
 /**
  Readable string of time since now message was sent
  */

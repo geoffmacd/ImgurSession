@@ -18,7 +18,7 @@
     if(self = [super init]) {
         _albumID = jsonData[@"id"];
         _title = jsonData[@"title"];
-        _description = jsonData[@"description"];
+        _albumDescription = jsonData[@"description"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _cover = jsonData[@"cover"];
         if(_cover && ![_cover isKindOfClass:[NSNull class]]){

@@ -32,15 +32,15 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  Album ID
  */
-@property (nonatomic, readonly) NSString *albumID;
+@property (nonatomic, readonly, copy) NSString *albumID;
 /**
  Title of album
  */
-@property (nonatomic) NSString *title;
+@property (nonatomic, readonly, copy) NSString *title;
 /**
  Album description
  */
-@property (nonatomic) NSString *description;
+@property (nonatomic, readonly, copy) NSString *albumDescription;
 /**
  Album creation date
  */
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  Image Id for cover of album
  */
-@property (nonatomic) NSString *cover;
+@property (nonatomic, readonly, copy) NSString *cover;
 /**
  Cover image width in px
  */
@@ -60,11 +60,11 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  account username of album creator, not a URL biut named lIMGe this anyway. nil if anonymous
  */
-@property (nonatomic, readonly) NSString *accountURL;
+@property (nonatomic, readonly, copy) NSString *accountURL;
 /**
  Privacy of album
  */
-@property (nonatomic) NSString *privacy;
+@property (nonatomic, readonly, copy) NSString *privacy;
 /**
  Type of layout for album
  */
@@ -84,7 +84,7 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  Array of images in IMGImage form
  */
-@property (nonatomic) NSArray *images; // Optional: can be set to nil
+@property (nonatomic, readonly, copy) NSArray *images; // Optional: can be set to nil
 
 
 

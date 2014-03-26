@@ -23,7 +23,7 @@
 @property (nonatomic, readonly) IMGVoteType vote;
 @property (nonatomic, readonly) BOOL favorite;
 @property (nonatomic, readonly) BOOL nsfw;
-@property (nonatomic, readonly) NSString *section;
+@property (nonatomic, readonly, copy) NSString *section;
 
 
 @end

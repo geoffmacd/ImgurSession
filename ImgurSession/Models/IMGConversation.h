@@ -21,7 +21,7 @@
 /**
  Username who sent the message
  */
-@property (readonly,nonatomic) NSString * fromUsername;
+@property (readonly,nonatomic, copy) NSString * fromUsername;
 /**
  Authors account id
  */
@@ -29,7 +29,7 @@
 /**
  message subject
  */
-@property (readonly,nonatomic) NSString * lastMessage;
+@property (readonly,nonatomic, copy) NSString * lastMessage;
 /**
  message subject
  */
@@ -41,7 +41,7 @@
 /**
  Actual messages send with /{id}
  */
-@property (readonly,nonatomic) NSArray * messages;
+@property (readonly,nonatomic, copy) NSArray * messages;
 
 
 /**

@@ -18,7 +18,7 @@
 /**
  notification ID
  */
-@property (readonly,nonatomic) NSString * notificationId;
+@property (readonly,nonatomic, copy) NSString * notificationId;
 /**
  Account ID notification is associated with
  */

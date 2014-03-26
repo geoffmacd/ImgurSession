@@ -18,7 +18,7 @@
         _trophyId = jsonData[@"id"];
         _name = jsonData[@"name"];
         _type = jsonData[@"name_clean"];
-        _description = jsonData[@"description"];
+        _profileDescription = jsonData[@"description"];
         _data = jsonData[@"data"];
         _link = [NSURL URLWithString:jsonData[@"data_link"]];
         _dateAwarded = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];

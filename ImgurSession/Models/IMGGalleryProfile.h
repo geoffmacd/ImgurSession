@@ -14,23 +14,23 @@
 /**
  Trophy ID
  */
-@property (readonly,nonatomic) NSString * trophyId;
+@property (readonly,nonatomic, copy) NSString * trophyId;
 /**
  The name of the trophy
  */
-@property (readonly,nonatomic) NSString * name;
+@property (readonly,nonatomic, copy) NSString * name;
 /**
  Can be thought of as the ID of a trophy type
  */
-@property (readonly,nonatomic) NSString * type;
+@property (readonly,nonatomic, copy) NSString * type;
 /**
  A description of the trophy and how it was earned.
  */
-@property (readonly,nonatomic) NSString * description;
+@property (readonly,nonatomic, copy) NSString * profileDescription;
 /**
  The ID of the image or the ID of the comment where the trophy was earned
  */
-@property (readonly,nonatomic) NSString * data;
+@property (readonly,nonatomic, copy) NSString * data;
 /**
  A link to where the trophy was earned
  */
@@ -68,7 +68,7 @@
 /**
  An array of trophies that the user has.
  */
-@property (readonly,nonatomic) NSArray * trophies;
+@property (readonly,nonatomic, copy) NSArray * trophies;
 
 
 

@@ -20,15 +20,15 @@
 /**
  Image ID comment is associated with
  */
-@property (readonly,nonatomic) NSString * imageId;
+@property (readonly,nonatomic, copy) NSString * imageId;
 /**
  Actual comment string
  */
-@property (readonly,nonatomic) NSString * caption;
+@property (readonly,nonatomic, copy) NSString * caption;
 /**
  Authors username
  */
-@property (readonly,nonatomic) NSString * author;
+@property (readonly,nonatomic, copy) NSString * author;
 /**
  Authors account id
  */
@@ -40,7 +40,7 @@
 /**
  Album Cover Image Id, used for album comments
  */
-@property (readonly,nonatomic) NSString * albumCover;
+@property (readonly,nonatomic, copy) NSString * albumCover;
 /**
  Up-votes
  */
@@ -56,7 +56,7 @@
 /**
  timestamp of creation of comment
  */
-@property (readonly,nonatomic) NSDate* datetime;
+@property (readonly,nonatomic) NSDate * datetime;
 /**
  Parent comment ID, nil if no parent
  */
@@ -68,7 +68,7 @@
 /**
  Responses to this comment. Only included with withReplies=YES
  */
-@property (readonly,nonatomic) NSArray * children;
+@property (readonly,nonatomic, copy) NSArray * children;
 
 
 @end

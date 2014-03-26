@@ -26,13 +26,13 @@ typedef NS_ENUM(NSInteger, ImgurSize) {
 @interface IMGImage : IMGModel
 
 
-@property (nonatomic, readonly) NSString *imageID;
+@property (nonatomic, readonly, copy) NSString *imageID;
 
-@property (nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) NSString *description;
+@property (nonatomic, readonly, copy) NSString *title;
+@property (nonatomic, readonly, copy) NSString *description;
 @property (nonatomic, readonly) NSDate *datetime;
 
-@property (nonatomic, readonly) NSString *type;
+@property (nonatomic, readonly, copy) NSString *type;
 @property (nonatomic, readonly) BOOL animated;
 
 @property (nonatomic, readonly) NSInteger width;
@@ -42,9 +42,9 @@ typedef NS_ENUM(NSInteger, ImgurSize) {
 @property (nonatomic, readonly) NSInteger views;
 @property (nonatomic, readonly) NSInteger bandwidth;
 
-@property (nonatomic, readonly) NSString *deletehash;
-@property (nonatomic, readonly) NSString *section;
-@property (nonatomic, readonly) NSString *link;
+@property (nonatomic, readonly, copy) NSString *deletehash;
+@property (nonatomic, readonly, copy) NSString *section;
+@property (nonatomic, readonly, copy) NSString *link;
 
 
 
