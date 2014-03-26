@@ -11,12 +11,30 @@
 #import "IMGVote.h"
 
 
+/**
+ Protocol to represent both IMGGalleryImage and IMGGalleryAlbum which contain similar information.
+ */
 @protocol IMGGalleryObjectProtocol <NSObject>
 
+/**
+ Is the object an an album
+ */
 -(BOOL)isAlbum;
+/**
+ Get the cover image representation of object
+ */
 -(IMGImage*)coverImage;
+/**
+ Has the user favorited the object, false if anon
+ */
 -(BOOL)isFavorite;
+/**
+ Is it safe for work?
+ */
 -(BOOL)isNSFW;
+/**
+ The user's vote for the object, if authenticated
+ */
 -(IMGVoteType)usersVote;
 
 @end

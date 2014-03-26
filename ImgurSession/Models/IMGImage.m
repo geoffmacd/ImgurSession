@@ -8,10 +8,6 @@
 
 #import "IMGImage.h"
 
-
-NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
-
-
 @interface IMGImage ()
 
 @property (readwrite, nonatomic) NSString *title;
@@ -56,34 +52,36 @@ NSString * const IMGUploadedImagesKey = @"IMGUploadedImages";
 
 #pragma mark - Display
 
-- (NSURL *)URLWithSize:(ImgurSize)size{
+- (NSURL *)URLWithSize:(IMGSize)size{
     
     NSString *path = [self.url stringByDeletingPathExtension];
     NSString *extension = [self.url pathExtension];
     NSString *stringURL;
     
     switch (size) {
-        case ImgurSmallSquareSize:
+        case IMGSmallSquareSize:
             stringURL = [NSString stringWithFormat:@"%@s.%@", path, extension];
             break;
             
-        case ImgurBigSquareSize:
+        case IMGBigSquareSize:
             stringURL = [NSString stringWithFormat:@"%@b.%@", path, extension];
             break;
             
-        case ImgurSmallThumbnailSize:
+        //keeps image proportions below, please use these for better looking design
+            
+        case IMGSmallThumbnailSize:
             stringURL = [NSString stringWithFormat:@"%@t.%@", path, extension];
             break;
             
-        case ImgurMediumThumbnailSize:
+        case IMGMediumThumbnailSize:
             stringURL = [NSString stringWithFormat:@"%@m.%@", path, extension];
             break;
             
-        case ImgurLargeThumbnailSize:
+        case IMGLargeThumbnailSize:
             stringURL = [NSString stringWithFormat:@"%@l.%@", path, extension];
             break;
             
-        case ImgurHugeThumbnailSize:
+        case IMGHugeThumbnailSize:
             stringURL = [NSString stringWithFormat:@"%@h.%@", path, extension];
             break;
             
