@@ -9,12 +9,13 @@
 #import "IMGAlbum.h"
 
 #import "IMGVote.h"
+#import "IMGGalleryImage.h"
 
 
 /**
  Model object class to represent albums posted to the gallery. https://api.imgur.com/models/gallery_album
  */
-@interface IMGGalleryAlbum : IMGBasicAlbum
+@interface IMGGalleryAlbum : IMGBasicAlbum <IMGGalleryObjectProtocol>
 
 @property (nonatomic, readonly) IMGVoteType vote;
 

@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  Image Id for cover of album
  */
-@property (nonatomic, readonly, copy) NSString *cover;
+@property (nonatomic, readonly, copy) NSString *coverID;
 /**
  Cover image width in px
  */

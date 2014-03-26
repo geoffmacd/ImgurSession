@@ -10,10 +10,22 @@
 
 #import "IMGVote.h"
 
+
+@protocol IMGGalleryObjectProtocol <NSObject>
+
+-(BOOL)isAlbum;
+-(IMGImage*)coverImage;
+-(BOOL)isFavorite;
+-(BOOL)isNSFW;
+-(IMGVoteType)usersVote;
+
+@end
+
+
 /**
  Model object class to represent images that are posted to the Imgur Gallery. Can be a part of an album. https://api.imgur.com/models/gallery_image 
  */
-@interface IMGGalleryImage : IMGImage
+@interface IMGGalleryImage : IMGImage <IMGGalleryObjectProtocol>
 
 @property (nonatomic, readonly) IMGVoteType vote;
 

@@ -20,8 +20,8 @@
         _title = jsonData[@"title"];
         _albumDescription = jsonData[@"description"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
-        _cover = jsonData[@"cover"];
-        if(_cover && ![_cover isKindOfClass:[NSNull class]]){
+        _coverID = jsonData[@"cover"];
+        if(_coverID && ![_coverID isKindOfClass:[NSNull class]]){
             _coverHeight = [jsonData[@"cover_height"] integerValue];
             _coverWidth = [jsonData[@"cover_width"] integerValue];
         }
@@ -119,7 +119,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@; albumId:  \"%@\"; title: \"%@\"; datetime: %@; cover: %@; accountURL: \"%@\"; privacy: %@; layout: %@; views: %ld; link: %@; imagesCount: %ld",  [super description], self.albumID, self.title,  self.datetime, self.cover, self.accountURL, self.privacy, [IMGBasicAlbum strForLayout:self.layout], (long)self.views, self.link, (long)self.imagesCount];
+    return [NSString stringWithFormat: @"%@; albumId:  \"%@\"; title: \"%@\"; datetime: %@; cover: %@; accountURL: \"%@\"; privacy: %@; layout: %@; views: %ld; link: %@; imagesCount: %ld",  [super description], self.albumID, self.title,  self.datetime, self.coverID, self.accountURL, self.privacy, [IMGBasicAlbum strForLayout:self.layout], (long)self.views, self.link, (long)self.imagesCount];
 }
 
 @end

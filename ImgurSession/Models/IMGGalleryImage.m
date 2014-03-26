@@ -43,5 +43,28 @@
             [super description], self.accountURL, (long)self.ups, (long)self.downs, (long)self.score, (long)self.vote];
 }
 
+#pragma mark - IMGGalleryObjectProtocol
+
+-(BOOL)isAlbum{
+    return NO;
+}
+
+-(IMGVoteType)usersVote{
+    return self.vote;
+}
+
+-(BOOL)isFavorite{
+    return self.favorite;
+}
+
+-(BOOL)isNSFW{
+    return self.nsfw;
+}
+
+-(IMGImage *)coverImage{
+    
+    //for gallery image, the image is the cover image
+    return self;
+}
 
 @end

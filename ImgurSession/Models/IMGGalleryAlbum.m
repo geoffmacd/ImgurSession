@@ -40,5 +40,43 @@
     return [NSString stringWithFormat: @"%@; ups: %ld; downs: %ld; score: %ld; vote: %ld", [super description], (long)self.ups, (long)self.downs, (long)self.score, (long)self.vote];
 }
 
+#pragma mark - IMGGalleryObjectProtocol
+
+-(BOOL)isAlbum{
+    return YES;
+}
+
+-(IMGVoteType)usersVote{
+    return self.vote;
+}
+
+-(BOOL)isFavorite{
+    return self.favorite;
+}
+
+-(BOOL)isNSFW{
+    return self.nsfw;
+}
+
+-(IMGImage *)coverImage{
+    
+    //image should be included in the images array
+    __block IMGImage * cover;
+    
+    [self.images enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IMGImage * img = obj;
+        
+        if([self.coverID isEqualToString:img.imageID]){
+            //this is the cover
+            cover = img;
+            *stop = YES;
+        }
+    }];
+    
+    if(!cover)
+        NSLog(@"No cover image found for album");
+    
+    return cover;
+}
 
 @end
