@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, IMGSize) {
 /**
  Model object class to represent images posted to Imgur. https://api.imgur.com/models/image
  */
-@interface IMGImage : IMGModel
+@interface IMGImage : IMGModel <NSCopying,NSCoding>
 
 /**
  Image ID to reference in Imgur globally
