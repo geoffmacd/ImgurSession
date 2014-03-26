@@ -223,6 +223,26 @@
     } failure:failure];
 }
 
++ (void)voteResultsWithID:(NSString *)galleryObjectID success:(void (^)(IMGVote *))success failure:(void (^)(NSError *error))failure{
+    NSString *path = [self pathWithId:galleryObjectID withOption:@"votes"];
+    
+    [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        
+        NSError *JSONError = nil;
+        IMGVote * vote = [[IMGVote alloc] initWithJSONObject:responseObject error:&JSONError];
+        
+        if(!JSONError && vote) {
+            if(success)
+                success(vote);
+        }
+        else {
+            if(failure)
+                failure(JSONError);
+        }
+    } failure:failure];
+}
+
 
 #pragma mark - Comment Actions - IMGCommentRequest
 

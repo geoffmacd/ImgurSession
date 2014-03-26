@@ -124,7 +124,10 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param vote    vote type for user to vote on gallery object
  */
 + (void)voteWithID:(NSString *)galleryObjectID withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *error))failure;
-
+/**
+ Retrieve voting results for a gallery object
+ */
++ (void)voteResultsWithID:(NSString *)galleryObjectID success:(void (^)(IMGVote *))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Comment Actions - IMGCommentRequest
 
