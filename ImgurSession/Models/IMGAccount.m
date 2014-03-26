@@ -13,6 +13,15 @@
 #import "IMGComment.h"
 #import "IMGGalleryProfile.h"
 
+@interface IMGAccount ()
+@property (readwrite) NSString *username;
+@property (readwrite) NSString *bio;
+@property (readwrite) NSUInteger accountID;
+@property (readwrite) NSURL *url;
+@property (readwrite) float reputation;
+@property (readwrite) NSDate *created;
+@end
+
 @implementation IMGAccount;
 
 #pragma mark - Init With Json
@@ -44,6 +53,56 @@
 }
 
 
+#pragma mark - NSCoding
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSUInteger accountID = [[decoder decodeObjectForKey:@"accountID"] integerValue];
+    NSString * username = [decoder decodeObjectForKey:@"username"];
+    NSURL * url = [NSURL URLWithString:[decoder decodeObjectForKey:@"url"]];
+    NSString * bio = [decoder decodeObjectForKey:@"bio"];
+    float reputation = [[decoder decodeObjectForKey:@"reputation"] floatValue];
+    NSDate *created = [decoder decodeObjectForKey:@"created"];
+    
+    if (self = [super init]) {
+        _accountID = accountID;
+        _bio = bio;
+        _username = username;
+        _reputation = reputation;
+        _url = url;
+        _created = created;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:@(self.accountID) forKey:@"acccountID"];
+    [coder encodeObject:self.username forKey:@"username"];
+    [coder encodeObject:[self.url absoluteString] forKey:@"url"];
+    [coder encodeObject:self.bio forKey:@"bio"];
+    [coder encodeObject:@(self.reputation) forKey:@"reputation"];
+    [coder encodeObject:self.created forKey:@"created"];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone {
+    
+    id copy = [[[self class] alloc] init];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setUsername:[self.username copyWithZone:zone]];
+        [copy setBio:[self.bio copyWithZone:zone]];
+        [copy setUrl:[self.url copyWithZone:zone]];
+        [copy setCreated:[self.created copyWithZone:zone]];
+        
+        // Set primitives
+        [copy setAccountID:self.accountID];
+        [copy setReputation:self.reputation];
+    }
+    
+    return copy;
+}
 
 @end

@@ -11,7 +11,7 @@
 /**
  Model object class to represent account settings. https://api.imgur.com/models/account
  */
-@interface IMGAccount : IMGModel
+@interface IMGAccount : IMGModel  <NSCopying,NSCoding>
 
 /**
  Account ID
@@ -20,7 +20,7 @@
 /**
  Username string
  */
-@property (nonatomic) NSString *username;
+@property (nonatomic, readonly, copy) NSString *username;
 /**
  URL link for account page
  */
@@ -28,7 +28,7 @@
 /**
  Biography string displayed on right pane on account page
  */
-@property (nonatomic) NSString *bio;
+@property (nonatomic, readonly, copy) NSString *bio;
 /**
  Reputation
  */

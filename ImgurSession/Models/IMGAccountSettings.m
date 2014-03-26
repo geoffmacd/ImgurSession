@@ -11,6 +11,18 @@
 #import "IMGBasicAlbum.h"
 
 
+@interface IMGAccountSettings ()
+@property (readwrite) NSString *email;
+@property (readwrite) IMGAlbumPrivacy albumPrivacy;
+@property (readwrite) BOOL publicImages;
+@property (readwrite) BOOL highQuality;
+@property (readwrite) NSDate * proExpiration;
+@property (readwrite) BOOL acceptedGalleryTerms;
+@property (readwrite) NSArray *activeEmails;
+@property (readwrite) BOOL messagingEnabled;
+@property (readwrite) NSArray *blockedUsers;
+@end
+
 @implementation IMGBlockedUser
 
 #pragma mark - Init With Json
@@ -19,7 +31,7 @@
     
     if(self = [super init]) {
         _blockedId = jsonData[@"blocked_id"];
-        _blockedURL = jsonData[@"blocked_url"];
+        _blockedURL = [NSURL URLWithString:jsonData[@"blocked_url"]];
     }
     return [self trackModels];
 }
@@ -49,7 +61,7 @@
         for(NSString * email in jsonData[@"active_emails"]){
             [activeEmails addObject:email];
         }
-        _activeEmails = activeEmails;
+        _activeEmails = [NSArray arrayWithArray:activeEmails];
         _messagingEnabled = [jsonData[@"messaging_enabled"] integerValue];
         
         //enumerate all blocked users
@@ -58,7 +70,7 @@
             IMGBlockedUser * blocked = [[IMGBlockedUser alloc] initWithJSONObject:user error:nil];
             [blockedUsers addObject:blocked];
         }
-        _blockedUsers = blockedUsers;
+        _blockedUsers = [NSArray arrayWithArray:blockedUsers];
     }
     return [self trackModels];
 }
@@ -69,7 +81,74 @@
     return [NSString stringWithFormat: @"%@; email: \"%@\"; high quality: \"%@\"; album_privact: \"%@\"",  [super description], self.email, (self.highQuality ? @"YES" : @"NO"), [IMGBasicAlbum strForPrivacy:self.albumPrivacy]];
 }
 
+#pragma mark - NSCoding
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    IMGAlbumPrivacy albumPrivacy = [[decoder decodeObjectForKey:@"albumPrivacy"] integerValue];
+    NSString * email = [decoder decodeObjectForKey:@"email"];
+    NSDate * proExpiration = [decoder decodeObjectForKey:@"proExpiration"];
+    
+    BOOL publicImages = [[decoder decodeObjectForKey:@"publicImages"] boolValue];
+    BOOL highQuality = [[decoder decodeObjectForKey:@"highQuality"] boolValue];
+    BOOL acceptedGalleryTerms = [[decoder decodeObjectForKey:@"acceptedGalleryTerms"] boolValue];
+    BOOL messagingEnabled = [[decoder decodeObjectForKey:@"messagingEnabled"] boolValue];
+    
+    NSArray * blockUsers = [decoder decodeObjectForKey:@"blockUsers"];
+    NSArray * activeEmails = [decoder decodeObjectForKey:@"activeEmails"];
+    
+    if (self = [super init]) {
+        _email = email;
+        _albumPrivacy = albumPrivacy;
+        _proExpiration = proExpiration;
+        _blockedUsers = blockUsers;
+        _activeEmails = activeEmails;
+        
+        _messagingEnabled = messagingEnabled;
+        _acceptedGalleryTerms = acceptedGalleryTerms;
+        _publicImages = publicImages;
+        _highQuality = highQuality;
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:@(self.albumPrivacy) forKey:@"albumPrivacy"];
+    [coder encodeObject:self.email forKey:@"email"];
+    [coder encodeObject:self.proExpiration forKey:@"proExpiration"];
+    [coder encodeObject:self.blockedUsers forKey:@"blockedUsers"];
+    [coder encodeObject:self.activeEmails forKey:@"activeEmails"];
+    [coder encodeObject:@(self.albumPrivacy) forKey:@"albumPrivacy"];
+    [coder encodeObject:@(self.publicImages) forKey:@"publicImages"];
+    [coder encodeObject:@(self.messagingEnabled) forKey:@"messagingEnabled"];
+    [coder encodeObject:@(self.highQuality) forKey:@"highQuality"];;
+    [coder encodeObject:@(self.acceptedGalleryTerms) forKey:@"acceptedGalleryTerms"];;
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone {
+    
+    id copy = [[[self class] alloc] init];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setEmail:[self.email copyWithZone:zone]];
+        [copy setBlockedUsers:[self.blockedUsers copyWithZone:zone]];
+        [copy setActiveEmails:[self.activeEmails copyWithZone:zone]];
+        [copy setProExpiration:self.proExpiration];
+        
+        // Set primitives
+        [copy setAcceptedGalleryTerms:self.acceptedGalleryTerms];
+        [copy setMessagingEnabled:self.messagingEnabled];
+        [copy setPublicImages:self.publicImages];
+        [copy setHighQuality:self.highQuality];
+        [copy setAlbumPrivacy:self.albumPrivacy];
+    }
+    
+    return copy;
+}
 
 
 @end
