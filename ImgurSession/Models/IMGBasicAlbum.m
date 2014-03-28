@@ -9,6 +9,25 @@
 #import "IMGBasicAlbum.h"
 #import "IMGImage.h"
 
+@interface IMGBasicAlbum ()
+
+@property (readwrite,nonatomic) NSString *albumID;
+@property (readwrite,nonatomic) NSString *title;
+@property (readwrite,nonatomic) NSString *albumDescription;
+@property (readwrite,nonatomic) NSDate *datetime;
+@property (readwrite,nonatomic) NSString *coverID;
+@property (readwrite,nonatomic) NSInteger coverWidth;
+@property (readwrite,nonatomic) NSInteger coverHeight;
+@property (readwrite,nonatomic) NSString *accountURL;
+@property (readwrite,nonatomic) NSString *privacy;
+@property (readwrite,nonatomic) IMGAlbumLayout layout;
+@property (readwrite,nonatomic) NSInteger views;
+@property (readwrite,nonatomic) NSURL *url;
+@property (readwrite,nonatomic) NSInteger imagesCount;
+@property (readwrite,nonatomic) NSArray *images;
+
+@end
+
 @implementation IMGBasicAlbum;
 
 #pragma mark - Init With Json
@@ -29,7 +48,7 @@
         _privacy = jsonData[@"privacy"];
         _layout = [IMGBasicAlbum layoutForStr:jsonData[@"layout"]];
         _views = [jsonData[@"views"] integerValue];
-        _link = [NSURL URLWithString:jsonData[@"link"]];
+        _url = [NSURL URLWithString:jsonData[@"link"]];
         _imagesCount = [jsonData[@"images_count"] integerValue];
         
         //intrepret images if available
@@ -119,7 +138,93 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@; albumId:  \"%@\"; title: \"%@\"; datetime: %@; cover: %@; accountURL: \"%@\"; privacy: %@; layout: %@; views: %ld; link: %@; imagesCount: %ld",  [super description], self.albumID, self.title,  self.datetime, self.coverID, self.accountURL, self.privacy, [IMGBasicAlbum strForLayout:self.layout], (long)self.views, self.link, (long)self.imagesCount];
+    return [NSString stringWithFormat: @"%@; albumId:  \"%@\"; title: \"%@\"; datetime: %@; cover: %@; accountURL: \"%@\"; privacy: %@; layout: %@; views: %ld; link: %@; imagesCount: %ld",  [super description], self.albumID, self.title,  self.datetime, self.coverID, self.accountURL, self.privacy, [IMGBasicAlbum strForLayout:self.layout], (long)self.views, self.url, (long)self.imagesCount];
+}
+
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSUInteger width = [[decoder decodeObjectForKey:@"coverWidth"] integerValue];
+    NSUInteger height = [[decoder decodeObjectForKey:@"coverHeight"] integerValue];
+    NSUInteger views = [[decoder decodeObjectForKey:@"views"] integerValue];
+    IMGAlbumLayout layout = [[decoder decodeObjectForKey:@"layout"] integerValue];
+    NSUInteger imagesCount = [[decoder decodeObjectForKey:@"imagesCount"] integerValue];
+    NSString * albumID = [decoder decodeObjectForKey:@"albumID"];
+    NSString * coverID = [decoder decodeObjectForKey:@"coverID"];
+    NSURL * url = [NSURL URLWithString:[decoder decodeObjectForKey:@"url"]];
+    NSString * privacy = [decoder decodeObjectForKey:@"privacy"];
+    NSString * accountURL = [decoder decodeObjectForKey:@"accountURL"];
+    NSString * title = [decoder decodeObjectForKey:@"title"];
+    NSString * albumDescription = [decoder decodeObjectForKey:@"albumDescription"];
+    NSDate *datetime = [decoder decodeObjectForKey:@"datetime"];
+    NSArray * images = [decoder decodeObjectForKey:@"images"];
+    
+    if (self = [super init]) {
+        _albumID = albumID;
+        _albumDescription = albumDescription;
+        _coverHeight = height;
+        _coverWidth = width;
+        _coverID = coverID;
+        _views = views;
+        _layout = layout;
+        _accountURL = accountURL;
+        _privacy = privacy;
+        _datetime = datetime;
+        _title = title;
+        _imagesCount = imagesCount;
+        _url = url;
+        _images = images;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [coder encodeObject:self.albumID forKey:@"albumID"];
+    [coder encodeObject:self.coverID forKey:@"coverID"];
+    [coder encodeObject:self.url forKey:@"url"];
+    [coder encodeObject:self.privacy forKey:@"privacy"];
+    [coder encodeObject:self.albumDescription forKey:@"albumDescription"];
+    [coder encodeObject:self.accountURL forKey:@"accountURL"];
+    [coder encodeObject:self.title forKey:@"title"];
+    [coder encodeObject:self.datetime forKey:@"datetime"];
+    
+    [coder encodeObject:@(self.imagesCount) forKey:@"imagesCount"];
+    [coder encodeObject:@(self.views) forKey:@"views"];
+    [coder encodeObject:@(self.coverWidth) forKey:@"coverWidth"];
+    [coder encodeObject:@(self.coverHeight) forKey:@"coverHeight"];
+    [coder encodeObject:@(self.layout) forKey:@"layout"];
+    [coder encodeObject:@(self.imagesCount) forKey:@"images"];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    
+    IMGBasicAlbum * copy = [[IMGBasicAlbum alloc] init];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setAlbumID:[self.albumID copyWithZone:zone]];
+        [copy setCoverID:[self.coverID copyWithZone:zone]];
+        [copy setAlbumDescription:[self.albumDescription copyWithZone:zone]];
+        [copy setUrl:[self.url copyWithZone:zone]];
+        [copy setDatetime:[self.datetime copyWithZone:zone]];
+        [copy setTitle:[self.title copyWithZone:zone]];
+        [copy setAccountURL:[self.accountURL copyWithZone:zone]];
+        [copy setPrivacy:[self.privacy copyWithZone:zone]];
+        [copy setImages:[self.images copyWithZone:zone]];
+        
+        // Set primitives
+        [copy setCoverWidth:self.coverWidth];
+        [copy setCoverHeight:self.coverHeight];
+        [copy setViews:self.views];
+        [copy setLayout:self.layout];
+        [copy setImagesCount:self.imagesCount];
+    }
+    
+    return copy;
 }
 
 @end

@@ -274,7 +274,7 @@
         IMGAlbum * first = [albums firstObject];
         expect(first).beInstanceOf([IMGAlbum class]);
         expect(first.albumID).beTruthy();
-        expect(first.link).beTruthy();
+        expect(first.url).beTruthy();
         
         isSuccess = YES;
         
@@ -292,7 +292,7 @@
         
         expect(album).beInstanceOf([IMGAlbum class]);
         expect(album.albumID).beTruthy();
-        expect(album.link).beTruthy();
+        expect(album.url).beTruthy();
         expect(album.deletehash).beTruthy();
         
         isSuccess = YES;

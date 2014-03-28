@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
  */
 @property (nonatomic, readonly) NSInteger coverHeight;
 /**
- account username of album creator, not a URL biut named lIMGe this anyway. nil if anonymous
+ account username of album creator, not a URL but named like this anyway. nil if anonymous
  */
 @property (nonatomic, readonly, copy) NSString *accountURL;
 /**
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  Type of layout for album
  */
-@property (nonatomic) IMGAlbumLayout layout;
+@property (nonatomic, readonly) IMGAlbumLayout layout;
 /**
  Number of views for album
  */
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  URL for album link
  */
-@property (nonatomic, readonly) NSURL *link;
+@property (nonatomic, readonly) NSURL *url;
 /**
  Number of images in album
  */
