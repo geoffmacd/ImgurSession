@@ -30,4 +30,17 @@
     return [NSString stringWithFormat: @"%@ ; deletehash: %@",[super description], self.deletehash];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGAlbum class]]) {
+        return NO;
+    }
+    
+    return ([[object albumID] isEqualToString:self.albumID]);
+}
+
 @end

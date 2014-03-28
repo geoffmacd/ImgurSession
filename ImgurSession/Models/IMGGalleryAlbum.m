@@ -35,9 +35,22 @@
 
 #pragma mark - Describe
 
-- (NSString *)description
-{
+- (NSString *)description{
+    
     return [NSString stringWithFormat: @"%@; ups: %ld; downs: %ld; score: %ld; vote: %ld", [super description], (long)self.ups, (long)self.downs, (long)self.score, (long)self.vote];
+}
+
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGGalleryAlbum class]]) {
+        return NO;
+    }
+    
+    return ([[object albumID] isEqualToString:self.albumID]);
 }
 
 #pragma mark - IMGGalleryObjectProtocol

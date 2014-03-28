@@ -54,5 +54,18 @@
     return [NSString stringWithFormat:@"%@ ; notifyId: \"%@\"; accountId: %ld; viewed: %@;", [super description], self.notificationId, (long)self.accountId, (self.isViewed ? @"YES" : @"NO")];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGNotification class]]) {
+        return NO;
+    }
+    
+    return ([[object notificationId] isEqualToString:self.notificationId]);
+}
+
 
 @end

@@ -69,9 +69,16 @@
  An array of trophies that the user has.
  */
 @property (readonly,nonatomic, copy) NSArray * trophies;
+/**
+ Username for gallery profile
+ */
+@property (readonly,nonatomic, copy) NSString * userName;
 
 
 
-
+/**
+ Custom init with username
+ */
+- (instancetype)initWithUser:(NSString*)username JSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
 
 @end

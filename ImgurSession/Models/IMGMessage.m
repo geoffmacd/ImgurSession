@@ -33,6 +33,17 @@
     return [NSString stringWithFormat:@"%@ ; subject: \"%@\"; author: \"%@\"; message: %@;", [super description], self.subject, self.fromUsername, self.body];
 }
 
-
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGMessage class]]) {
+        return NO;
+    }
+    
+    return ([[object messageId] isEqualToString:self.messageId]);
+}
 
 @end

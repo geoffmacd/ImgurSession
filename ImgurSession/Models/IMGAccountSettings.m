@@ -75,10 +75,33 @@
     return [self trackModels];
 }
 
+- (instancetype)initWithJSONObject:(NSDictionary *)jsonData withName:(NSString*)username error:(NSError * __autoreleasing *)error{
+    
+    self = [self initWithJSONObject:jsonData error:error];
+    
+    if(self)
+        _username = username;
+    
+    return self;
+}
+
 #pragma mark - Describe
 
 - (NSString *)description{
     return [NSString stringWithFormat: @"%@; email: \"%@\"; high quality: \"%@\"; album_privact: \"%@\"",  [super description], self.email, (self.highQuality ? @"YES" : @"NO"), [IMGBasicAlbum strForPrivacy:self.albumPrivacy]];
+}
+
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGAccountSettings class]]) {
+        return NO;
+    }
+    
+    return ([[object username] isEqualToString:self.username]);
 }
 
 #pragma mark - NSCoding

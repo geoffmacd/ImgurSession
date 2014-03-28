@@ -59,6 +59,18 @@
     return [NSString stringWithFormat:@"%@  author: \"%@\"; last message: %@; count: %lu;", [super description], self.fromUsername, self.lastMessage, self.messageCount];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGConversation class]]) {
+        return NO;
+    }
+    
+    return ([object conversationID] == self.conversationID);
+}
 
 
 @end

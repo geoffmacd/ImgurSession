@@ -27,4 +27,17 @@
     return self;
 }
 
+
+- (id)initWithCoder:(NSCoder *)decoder {
+ 
+    if(self = [super init]){
+        
+    }
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+}
+
 @end

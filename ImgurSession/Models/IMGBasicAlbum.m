@@ -141,6 +141,18 @@
     return [NSString stringWithFormat: @"%@; albumId:  \"%@\"; title: \"%@\"; datetime: %@; cover: %@; accountURL: \"%@\"; privacy: %@; layout: %@; views: %ld; link: %@; imagesCount: %ld",  [super description], self.albumID, self.title,  self.datetime, self.coverID, self.accountURL, self.privacy, [IMGBasicAlbum strForLayout:self.layout], (long)self.views, self.url, (long)self.imagesCount];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGBasicAlbum class]]) {
+        return NO;
+    }
+    return ([[object albumID] isEqualToString:self.albumID]);
+}
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -160,7 +172,7 @@
     NSDate *datetime = [decoder decodeObjectForKey:@"datetime"];
     NSArray * images = [decoder decodeObjectForKey:@"images"];
     
-    if (self = [super init]) {
+    if (self = [super initWithCoder:decoder]) {
         _albumID = albumID;
         _albumDescription = albumDescription;
         _coverHeight = height;

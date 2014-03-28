@@ -52,6 +52,18 @@
     return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %.2f; created: %@", [super description], (unsigned long)self.accountID, self.url, self.bio, self.reputation, self.created];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGAccount class]]) {
+        return NO;
+    }
+    
+    return ([object accountID] == self.accountID);
+}
 
 #pragma mark - NSCoding
 
@@ -64,7 +76,7 @@
     float reputation = [[decoder decodeObjectForKey:@"reputation"] floatValue];
     NSDate *created = [decoder decodeObjectForKey:@"created"];
     
-    if (self = [super init]) {
+    if (self = [super initWithCoder:decoder]) {
         _accountID = accountID;
         _bio = bio;
         _username = username;

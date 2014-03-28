@@ -9,6 +9,7 @@
 #import "IMGGalleryProfile.h"
 
 
+#pragma mark - IMGGalleryTrophy
 
 @implementation IMGGalleryTrophy
 
@@ -30,17 +31,20 @@
 
 @end
 
-@implementation IMGGalleryProfile
+#pragma mark - IMGGalleryProfile
 
+
+@implementation IMGGalleryProfile
 
 #pragma mark - Init With Json
 
-- (instancetype)initWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
+- (instancetype)initWithUser:(NSString*)username JSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
     
     if(self = [super init]) {
         _totalComments = [jsonData[@"total_gallery_comments"] integerValue];
         _totalLikes = [jsonData[@"total_gallery_likes"] integerValue];
         _totalSubmissions = [jsonData[@"total_gallery_submissions"] integerValue];
+        _userName = username;
         
         //enumerate all blocked users
         NSMutableArray * trophies = [NSMutableArray new];
@@ -60,6 +64,18 @@
     return [NSString stringWithFormat:@"%@; comments: %ld; likes: %ld; submissions: %ld; trophies: %ld;",  [super description],(long)self.totalComments, (long)self.totalLikes, (long)self.totalSubmissions, (long)[self.trophies count]];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGGalleryProfile class]]) {
+        return NO;
+    }
+        
+    return ([[object userName] isEqualToString:self.userName]);
+}
 
 
 @end

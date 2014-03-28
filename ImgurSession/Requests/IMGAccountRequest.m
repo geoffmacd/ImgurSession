@@ -210,7 +210,7 @@
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSError *JSONError = nil;
-        IMGGalleryProfile *profile = [[IMGGalleryProfile alloc] initWithJSONObject:responseObject error:&JSONError];
+        IMGGalleryProfile *profile = [[IMGGalleryProfile alloc] initWithUser:username JSONObject:responseObject error:&JSONError];
         
         if(!JSONError && profile) {
             if(success)

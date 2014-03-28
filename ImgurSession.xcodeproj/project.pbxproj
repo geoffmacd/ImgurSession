@@ -591,10 +591,10 @@
 		C30933CA18CA1FFE009D9C57 /* Album */ = {
 			isa = PBXGroup;
 			children = (
+				2407479418D62AE200B92063 /* IMGAlbum.h */,
+				2407479318D62AE200B92063 /* IMGAlbum.m */,
 				249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */,
 				249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */,
-				2407479318D62AE200B92063 /* IMGAlbum.m */,
-				2407479418D62AE200B92063 /* IMGAlbum.h */,
 			);
 			path = Album;
 			sourceTree = "<group>";

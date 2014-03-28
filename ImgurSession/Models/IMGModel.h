@@ -9,7 +9,7 @@
 
 
 
-@interface IMGModel : NSObject
+@interface IMGModel : NSObject <NSCoding>
 
 /**
  Common initializer for JSON HTTP response which processes the "data" JSON object into model object class

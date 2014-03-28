@@ -72,6 +72,14 @@
  Array of blocked users with IMGBLockedUser model object.
  */
 @property (nonatomic, readonly, copy) NSArray *blockedUsers;
+/**
+ Username string
+ */
+@property (nonatomic, readonly, copy) NSString *username;
 
+/**
+ Custom init with username
+ */
+- (instancetype)initWithJSONObject:(NSDictionary *)jsonData withName:(NSString*)username error:(NSError * __autoreleasing *)error;
 
 @end

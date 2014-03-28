@@ -62,6 +62,19 @@
             [super description],  self.imageID, self.title, self.datetime, self.type, self.animated, (long)self.width, (long)self.height, (long)self.size, (long)self.views, (long)self.bandwidth];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGImage class]]) {
+        return NO;
+    }
+    
+    return ([[object imageID] isEqualToString:self.imageID]);
+}
+
 #pragma mark - Display
 
 - (NSURL *)URLWithSize:(IMGSize)size{
@@ -123,7 +136,7 @@
     NSDate *datetime = [decoder decodeObjectForKey:@"datetime"];
     BOOL animated  = [[decoder decodeObjectForKey:@"animated"] boolValue];
     
-    if (self = [super init]) {
+    if (self = [super initWithCoder:decoder]) {
         _imageID = imageID;
         _imageDescription = imageDescription;
         _animated = animated;

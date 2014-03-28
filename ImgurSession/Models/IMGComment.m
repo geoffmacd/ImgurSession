@@ -41,6 +41,18 @@
     return [NSString stringWithFormat:@"%@; caption: \"%@\"; author: \"%@\"; authorId: %ld; imageId: %@;",  [super description], self.caption, self.author, (long)self.authorId, self.imageId];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGComment class]]) {
+        return NO;
+    }
+    
+    return ([object commentId] == self.commentId);
+}
 
 
 @end

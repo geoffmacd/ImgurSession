@@ -43,6 +43,18 @@
             [super description], self.accountURL, (long)self.ups, (long)self.downs, (long)self.score, (long)self.vote];
 }
 
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGGalleryImage class]]) {
+        return NO;
+    }
+    return ([[object imageID] isEqualToString:self.imageID]);
+}
+
 #pragma mark - IMGGalleryObjectProtocol
 
 -(BOOL)isAlbum{
