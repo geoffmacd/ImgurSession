@@ -12,7 +12,7 @@
 /**
  Model object class to represent albums not posted to the gallery. https://api.imgur.com/models/album   
  */
-@interface IMGAlbum : IMGBasicAlbum
+@interface IMGAlbum : IMGBasicAlbum <NSCoding,NSCopying>
 
 /**
  Delete hash string

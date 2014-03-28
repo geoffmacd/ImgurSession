@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
 /**
  Model object class to represent common denominator properties to gallery and user albums. https://api.imgur.com/models/album
  */
-@interface IMGBasicAlbum : IMGModel
+@interface IMGBasicAlbum : IMGModel <NSCopying,NSCoding>
 
 /**
  Album ID

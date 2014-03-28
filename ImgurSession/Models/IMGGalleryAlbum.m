@@ -8,6 +8,18 @@
 
 #import "IMGGalleryAlbum.h"
 
+@interface IMGGalleryAlbum ()
+
+@property (readwrite, nonatomic) IMGVoteType vote;
+@property (readwrite, nonatomic) NSString *section;
+@property (readwrite, nonatomic) NSInteger ups;
+@property (readwrite, nonatomic) NSInteger downs;
+@property (readwrite, nonatomic) NSInteger score;
+@property (readwrite, nonatomic) BOOL favorite;
+@property (readwrite, nonatomic) BOOL nsfw;
+
+@end
+
 @implementation IMGGalleryAlbum;
 
 #pragma mark - Init With Json
@@ -90,6 +102,65 @@
         NSLog(@"No cover image found for album");
     
     return cover;
+}
+
+
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSString * section = [decoder decodeObjectForKey:@"section"];
+    IMGVoteType vote = [[decoder decodeObjectForKey:@"vote"] integerValue];
+    NSInteger ups = [[decoder decodeObjectForKey:@"ups"] integerValue];
+    NSInteger downs = [[decoder decodeObjectForKey:@"downs"] integerValue];
+    NSInteger score = [[decoder decodeObjectForKey:@"score"] integerValue];
+    BOOL favorite = [[decoder decodeObjectForKey:@"favorite"] boolValue];
+    BOOL nsfw = [[decoder decodeObjectForKey:@"nsfw"] boolValue];
+    
+    if (self = [super initWithCoder:decoder]) {
+        _vote = vote;
+        _section = section;
+        _ups = ups;
+        _downs = downs;
+        _score =  score;
+        _favorite = favorite;
+        _nsfw = nsfw;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:self.section forKey:@"section"];
+
+    [coder encodeObject:@(self.vote) forKey:@"vote"];
+    [coder encodeObject:@(self.ups) forKey:@"ups"];
+    [coder encodeObject:@(self.downs) forKey:@"downs"];
+    [coder encodeObject:@(self.score) forKey:@"score"];
+    [coder encodeObject:@(self.favorite) forKey:@"favorite"];
+    [coder encodeObject:@(self.nsfw) forKey:@"nsfw"];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    
+    IMGGalleryAlbum * copy = [super copyWithZone:zone];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setSection:[self.section copyWithZone:zone]];
+        [copy setVote:self.vote];
+        [copy setUps:self.ups];
+        [copy setDowns:self.downs];
+        [copy setScore:self.score];
+        [copy setNsfw:self.nsfw];
+        [copy setFavorite:self.favorite];
+    }
+    
+    return copy;
 }
 
 @end

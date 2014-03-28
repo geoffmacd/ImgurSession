@@ -8,6 +8,17 @@
 
 #import "IMGGalleryImage.h"
 
+@interface IMGGalleryImage ()
+
+@property (readwrite, nonatomic) IMGVoteType vote;
+@property (readwrite, nonatomic) NSString *accountURL;
+@property (readwrite, nonatomic) NSInteger ups;
+@property (readwrite, nonatomic) NSInteger downs;
+@property (readwrite, nonatomic) NSInteger score;
+@property (readwrite, nonatomic) BOOL favorite;
+@property (readwrite, nonatomic) BOOL nsfw;
+
+@end
 
 @implementation IMGGalleryImage;
 
@@ -77,6 +88,64 @@
     
     //for gallery image, the image is the cover image
     return self;
+}
+
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSString * accountURL = [decoder decodeObjectForKey:@"accountURL"];
+    IMGVoteType vote = [[decoder decodeObjectForKey:@"vote"] integerValue];
+    NSInteger ups = [[decoder decodeObjectForKey:@"ups"] integerValue];
+    NSInteger downs = [[decoder decodeObjectForKey:@"downs"] integerValue];
+    NSInteger score = [[decoder decodeObjectForKey:@"score"] integerValue];
+    BOOL favorite = [[decoder decodeObjectForKey:@"favorite"] boolValue];
+    BOOL nsfw = [[decoder decodeObjectForKey:@"nsfw"] boolValue];
+    
+    if (self = [super initWithCoder:decoder]) {
+        _vote = vote;
+        _accountURL = accountURL;
+        _ups = ups;
+        _downs = downs;
+        _score =  score;
+        _favorite = favorite;
+        _nsfw = nsfw;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:self.accountURL forKey:@"accountURL"];
+    
+    [coder encodeObject:@(self.vote) forKey:@"vote"];
+    [coder encodeObject:@(self.ups) forKey:@"ups"];
+    [coder encodeObject:@(self.downs) forKey:@"downs"];
+    [coder encodeObject:@(self.score) forKey:@"score"];
+    [coder encodeObject:@(self.favorite) forKey:@"favorite"];
+    [coder encodeObject:@(self.nsfw) forKey:@"nsfw"];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    
+    IMGGalleryImage * copy = [super copyWithZone:zone];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setAccountURL:[self.accountURL copyWithZone:zone]];
+        [copy setVote:self.vote];
+        [copy setUps:self.ups];
+        [copy setDowns:self.downs];
+        [copy setScore:self.score];
+        [copy setNsfw:self.nsfw];
+        [copy setFavorite:self.favorite];
+    }
+    
+    return copy;
 }
 
 @end

@@ -13,6 +13,7 @@
 
 @interface IMGAccountSettings ()
 @property (readwrite) NSString *email;
+@property (readwrite) NSString *username;
 @property (readwrite) IMGAlbumPrivacy albumPrivacy;
 @property (readwrite) BOOL publicImages;
 @property (readwrite) BOOL highQuality;
@@ -110,6 +111,7 @@
     
     IMGAlbumPrivacy albumPrivacy = [[decoder decodeObjectForKey:@"albumPrivacy"] integerValue];
     NSString * email = [decoder decodeObjectForKey:@"email"];
+    NSString * username = [decoder decodeObjectForKey:@"username"];
     NSDate * proExpiration = [decoder decodeObjectForKey:@"proExpiration"];
     
     BOOL publicImages = [[decoder decodeObjectForKey:@"publicImages"] boolValue];
@@ -122,6 +124,7 @@
     
     if (self = [super init]) {
         _email = email;
+        _username = username;
         _albumPrivacy = albumPrivacy;
         _proExpiration = proExpiration;
         _blockedUsers = blockUsers;
@@ -137,8 +140,12 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
     [coder encodeObject:@(self.albumPrivacy) forKey:@"albumPrivacy"];
     [coder encodeObject:self.email forKey:@"email"];
+    [coder encodeObject:self.username forKey:@"username"];
     [coder encodeObject:self.proExpiration forKey:@"proExpiration"];
     [coder encodeObject:self.blockedUsers forKey:@"blockedUsers"];
     [coder encodeObject:self.activeEmails forKey:@"activeEmails"];
@@ -161,6 +168,7 @@
         [copy setBlockedUsers:[self.blockedUsers copyWithZone:zone]];
         [copy setActiveEmails:[self.activeEmails copyWithZone:zone]];
         [copy setProExpiration:self.proExpiration];
+        [copy setUsername:self.username];
         
         // Set primitives
         [copy setAcceptedGalleryTerms:self.acceptedGalleryTerms];

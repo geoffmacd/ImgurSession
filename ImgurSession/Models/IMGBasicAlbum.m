@@ -193,6 +193,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     
+    [super encodeWithCoder:coder];
+    
     [coder encodeObject:self.albumID forKey:@"albumID"];
     [coder encodeObject:self.coverID forKey:@"coverID"];
     [coder encodeObject:self.url forKey:@"url"];

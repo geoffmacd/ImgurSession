@@ -88,6 +88,9 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
     [coder encodeObject:@(self.accountID) forKey:@"acccountID"];
     [coder encodeObject:self.username forKey:@"username"];
     [coder encodeObject:[self.url absoluteString] forKey:@"url"];

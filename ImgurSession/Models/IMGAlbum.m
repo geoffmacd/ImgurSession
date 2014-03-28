@@ -9,6 +9,12 @@
 #import "IMGAlbum.h"
 #import "IMGImage.h"
 
+@interface IMGAlbum ()
+
+@property (readwrite,nonatomic) NSString *deletehash;
+
+@end
+
 @implementation IMGAlbum;
 
 #pragma mark - Init With Json
@@ -43,4 +49,36 @@
     return ([[object albumID] isEqualToString:self.albumID]);
 }
 
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSString * deletehash = [decoder decodeObjectForKey:@"deletehash"];
+    
+    if (self = [super initWithCoder:decoder]) {
+        _deletehash = deletehash;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:self.deletehash forKey:@"deletehash"];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    
+    IMGAlbum * copy = [super copyWithZone:zone];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setDeletehash:[self.deletehash copyWithZone:zone]];
+    }
+    
+    return copy;
+}
 @end

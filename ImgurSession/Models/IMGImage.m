@@ -157,6 +157,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     
+    [super encodeWithCoder:coder];
+    
     [coder encodeObject:self.imageID forKey:@"imageID"];
     [coder encodeObject:self.url forKey:@"url"];
     [coder encodeObject:self.type forKey:@"type"];
