@@ -65,6 +65,15 @@
     [IMGGalleryRequest imageWithID:@"mOqejNf" success:^(IMGGalleryImage *image) {
         
         expect(image.imageID).beTruthy();
+        
+        //test copy
+        IMGGalleryImage * copy = [image copy];
+        expect(image.imageID).equal(copy.imageID);
+        expect(image.title).equal(copy.title);
+        expect(image.ups).equal(copy.ups);
+        expect(image.accountURL).equal(copy.accountURL);
+        expect(image).equal(copy);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -80,6 +89,13 @@
     [IMGImageRequest imageWithID:@"mOqejNf" success:^(IMGImage *image) {
         
         expect(image.imageID).beTruthy();
+        
+        //test copy
+        IMGImage * copy = [image copy];
+        expect(image.imageID).equal(copy.imageID);
+        expect(image.title).equal(copy.title);
+        expect(image).equal(copy);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -96,6 +112,13 @@
     [IMGGalleryRequest albumWithID:@"HtAOg" success:^(IMGGalleryAlbum *album) {
         
         expect(album.albumID).beTruthy();
+        
+        //test copy
+        IMGGalleryAlbum * copy = [album copy];
+        expect(album.albumID).equal(copy.albumID);
+        expect(album.albumDescription).equal(copy.albumDescription);
+        expect(album).equal(copy);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -111,6 +134,13 @@
     [IMGAlbumRequest albumWithID:@"HtAOg" success:^(IMGAlbum *album) {
         
         expect(album.albumID).beTruthy();
+        
+        //test copy
+        IMGAlbum * copy = [album copy];
+        expect(album.albumID).equal(copy.albumID);
+        expect(album.albumDescription).equal(copy.albumDescription);
+        expect(album).equal(copy);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -120,7 +150,7 @@
 
 - (void)testUsersAccount{
     
-    __block IMGAccount * acc;
+    __block BOOL isSuccess;
     [self stubWithFile:@"geoffsaccount.json"];
     
     [IMGAccountRequest accountWithUser:imgurUnitTestParams[@"recipientId"]  success:^(IMGAccount *account) {
@@ -128,11 +158,18 @@
         expect(account.bio).beTruthy();
         expect(account.accountID).beTruthy();
         expect(account.username).beTruthy();
-        acc = account;
+        
+        //test copy
+        IMGAccount * copy = [account copy];
+        expect(account.accountID).equal(copy.accountID);
+        expect(account.username).equal(copy.username);
+        expect(account).equal(copy);
+        
+        isSuccess = YES;
         
     } failure:failBlock];
     
-    expect(acc).willNot.beNil();
+    expect(isSuccess).will.beTruthy();
 }
 
 - (void)testUsersComments{

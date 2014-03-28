@@ -180,7 +180,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     
-    IMGImage * copy = [[IMGImage alloc] init];
+    IMGImage * copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
         // Copy NSObject subclasses

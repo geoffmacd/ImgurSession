@@ -147,7 +147,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     
-    IMGGalleryAlbum * copy = [super copyWithZone:zone];
+    IMGGalleryAlbum *  copy = [super copyWithZone:zone];
     
     if (copy) {
         // Copy NSObject subclasses

@@ -160,7 +160,7 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     
-    id copy = [[[self class] alloc] init];
+    IMGAccountSettings * copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
         // Copy NSObject subclasses

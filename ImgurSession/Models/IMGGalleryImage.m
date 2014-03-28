@@ -132,7 +132,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     
-    IMGGalleryImage * copy = [super copyWithZone:zone];
+    IMGGalleryImage *  copy = [super copyWithZone:zone];
     
     if (copy) {
         // Copy NSObject subclasses

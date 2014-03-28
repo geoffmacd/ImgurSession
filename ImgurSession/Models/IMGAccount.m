@@ -103,7 +103,7 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     
-    id copy = [[[self class] alloc] init];
+    IMGAccount * copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
         // Copy NSObject subclasses

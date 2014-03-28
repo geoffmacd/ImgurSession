@@ -216,7 +216,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     
-    IMGBasicAlbum * copy = [[IMGBasicAlbum alloc] init];
+    IMGBasicAlbum * copy = [[[self class] allocWithZone:zone] init];
     
     if (copy) {
         // Copy NSObject subclasses
