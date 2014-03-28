@@ -164,7 +164,7 @@
     NSUInteger imagesCount = [[decoder decodeObjectForKey:@"imagesCount"] integerValue];
     NSString * albumID = [decoder decodeObjectForKey:@"albumID"];
     NSString * coverID = [decoder decodeObjectForKey:@"coverID"];
-    NSURL * url = [NSURL URLWithString:[decoder decodeObjectForKey:@"url"]];
+    NSURL * url = [decoder decodeObjectForKey:@"url"];
     NSString * privacy = [decoder decodeObjectForKey:@"privacy"];
     NSString * accountURL = [decoder decodeObjectForKey:@"accountURL"];
     NSString * title = [decoder decodeObjectForKey:@"title"];

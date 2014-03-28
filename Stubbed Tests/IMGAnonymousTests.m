@@ -74,6 +74,15 @@
         expect(image.accountURL).equal(copy.accountURL);
         expect(image).equal(copy);
         
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        expect(image.imageID).equal(copy.imageID);
+        expect(image.title).equal(copy.title);
+        expect(image.ups).equal(copy.ups);
+        expect(image.accountURL).equal(copy.accountURL);
+        expect(image).equal(copy);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -92,6 +101,13 @@
         
         //test copy
         IMGImage * copy = [image copy];
+        expect(image.imageID).equal(copy.imageID);
+        expect(image.title).equal(copy.title);
+        expect(image).equal(copy);
+        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
         expect(image.imageID).equal(copy.imageID);
         expect(image.title).equal(copy.title);
         expect(image).equal(copy);
@@ -119,6 +135,13 @@
         expect(album.albumDescription).equal(copy.albumDescription);
         expect(album).equal(copy);
         
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        expect(album.albumID).equal(copy.albumID);
+        expect(album.albumDescription).equal(copy.albumDescription);
+        expect(album).equal(copy);
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -137,6 +160,13 @@
         
         //test copy
         IMGAlbum * copy = [album copy];
+        expect(album.albumID).equal(copy.albumID);
+        expect(album.albumDescription).equal(copy.albumDescription);
+        expect(album).equal(copy);
+        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
         expect(album.albumID).equal(copy.albumID);
         expect(album.albumDescription).equal(copy.albumDescription);
         expect(album).equal(copy);
@@ -161,6 +191,13 @@
         
         //test copy
         IMGAccount * copy = [account copy];
+        expect(account.accountID).equal(copy.accountID);
+        expect(account.username).equal(copy.username);
+        expect(account).equal(copy);
+        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
         expect(account.accountID).equal(copy.accountID);
         expect(account.username).equal(copy.username);
         expect(account).equal(copy);

@@ -71,7 +71,7 @@
     
     NSUInteger accountID = [[decoder decodeObjectForKey:@"accountID"] integerValue];
     NSString * username = [decoder decodeObjectForKey:@"username"];
-    NSURL * url = [NSURL URLWithString:[decoder decodeObjectForKey:@"url"]];
+    NSURL * url = [decoder decodeObjectForKey:@"url"];
     NSString * bio = [decoder decodeObjectForKey:@"bio"];
     float reputation = [[decoder decodeObjectForKey:@"reputation"] floatValue];
     NSDate *created = [decoder decodeObjectForKey:@"created"];
@@ -93,7 +93,7 @@
     
     [coder encodeObject:@(self.accountID) forKey:@"acccountID"];
     [coder encodeObject:self.username forKey:@"username"];
-    [coder encodeObject:[self.url absoluteString] forKey:@"url"];
+    [coder encodeObject:self.url  forKey:@"url"];
     [coder encodeObject:self.bio forKey:@"bio"];
     [coder encodeObject:@(self.reputation) forKey:@"reputation"];
     [coder encodeObject:self.created forKey:@"created"];
