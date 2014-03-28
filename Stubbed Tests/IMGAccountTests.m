@@ -167,7 +167,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"mycommentcount.json"];
     
-    [IMGAccountRequest accountCommentCount:@"me" success:^(NSUInteger numcomments) {
+    [IMGAccountRequest accountCommentCount:@"me" success:^(NSInteger numcomments) {
         
         expect(numcomments).equal(1);
         isSuccess = YES;
@@ -236,7 +236,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"myimagecount.json"];
     
-    [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
+    [IMGAccountRequest accountImageCount:@"me" success:^(NSInteger num) {
         
         expect(num).equal(1);
         
@@ -307,7 +307,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"myalbumcount.json"];
     
-    [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSUInteger num) {
+    [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSInteger num) {
         
         expect(num).equal(1);
         

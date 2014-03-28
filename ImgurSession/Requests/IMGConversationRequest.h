@@ -24,7 +24,7 @@
 /**
  Get information about a specific conversation. Includes messages.
  */
-+ (void)conversationWithMessageID:(NSUInteger)messageID success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure;
++ (void)conversationWithMessageID:(NSInteger)messageID success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Create
 /**
@@ -38,7 +38,7 @@
  @param commentId comment id to delete
  @return signal with request
  */
-+ (void)deleteConversation:(NSUInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)deleteConversation:(NSInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Report
 /**

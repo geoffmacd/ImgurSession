@@ -157,11 +157,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     
-    NSUInteger width = [[decoder decodeObjectForKey:@"coverWidth"] integerValue];
-    NSUInteger height = [[decoder decodeObjectForKey:@"coverHeight"] integerValue];
-    NSUInteger views = [[decoder decodeObjectForKey:@"views"] integerValue];
+    NSInteger width = [[decoder decodeObjectForKey:@"coverWidth"] integerValue];
+    NSInteger height = [[decoder decodeObjectForKey:@"coverHeight"] integerValue];
+    NSInteger views = [[decoder decodeObjectForKey:@"views"] integerValue];
     IMGAlbumLayout layout = [[decoder decodeObjectForKey:@"layout"] integerValue];
-    NSUInteger imagesCount = [[decoder decodeObjectForKey:@"imagesCount"] integerValue];
+    NSInteger imagesCount = [[decoder decodeObjectForKey:@"imagesCount"] integerValue];
     NSString * albumID = [decoder decodeObjectForKey:@"albumID"];
     NSString * coverID = [decoder decodeObjectForKey:@"coverID"];
     NSURL * url = [decoder decodeObjectForKey:@"url"];

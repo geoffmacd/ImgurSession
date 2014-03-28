@@ -9,14 +9,14 @@
 #import "IMGModel.h"
 
 
-typedef NS_ENUM(NSUInteger, IMGAlbumPrivacy){
+typedef NS_ENUM(NSInteger, IMGAlbumPrivacy){
     IMGAlbumDefault = 0,
     IMGAlbumPublic = 0,
     IMGAlbumHidden,
     IMGAlbumSecret
 };
 
-typedef NS_ENUM(NSUInteger, IMGAlbumLayout){
+typedef NS_ENUM(NSInteger, IMGAlbumLayout){
     IMGDefaultLayout = 0,
     IMGBlogLayout = 0,
     IMGGridLayout,

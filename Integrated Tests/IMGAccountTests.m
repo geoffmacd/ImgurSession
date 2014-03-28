@@ -127,7 +127,7 @@
 
                 [IMGAccountRequest accountCommentsWithUser:@"me" success:^(NSArray * comments) {
                     
-                    [IMGAccountRequest accountCommentCount:@"me" success:^(NSUInteger numcomments) {
+                    [IMGAccountRequest accountCommentCount:@"me" success:^(NSInteger numcomments) {
 
                         expect([comments count] == numcomments ).to.beTruthy();
                         isSuccess = YES;
@@ -154,7 +154,7 @@
                 
                 [IMGAccountRequest accountImagesWithUser:@"me" withPage:0 success:^(NSArray * images) {
                         
-                    [IMGAccountRequest accountImageCount:@"me" success:^(NSUInteger num) {
+                    [IMGAccountRequest accountImageCount:@"me" success:^(NSInteger num) {
                         
                         expect(num).beGreaterThan(0);
                         isSuccess = YES;
@@ -181,7 +181,7 @@
                 
                 [IMGAccountRequest accountAlbumsWithUser:@"me" withPage:0 success:^(NSArray * albums) {
                     
-                    [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSUInteger num) {
+                    [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSInteger num) {
                         
                         expect(num).beGreaterThan(0);
                         isSuccess = YES;
@@ -204,7 +204,7 @@
     [self postTestImage:^(IMGImage * image, void(^success)()) {
         
         
-        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSUInteger commentId) {
+        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSInteger commentId) {
                 
             [IMGAccountRequest accountDeleteCommentWithID:commentId success:^{
                 

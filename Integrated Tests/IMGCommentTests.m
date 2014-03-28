@@ -25,9 +25,9 @@
     
     [self postTestImage:^(IMGImage * image, void(^success)()){
         
-        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSUInteger commentId) {
+        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSInteger commentId) {
             
-            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withCommentID:commentId success:^(NSUInteger replyId) {
+            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withCommentID:commentId success:^(NSInteger replyId) {
                 
                 
                 [IMGCommentRequest deleteCommentWithID:replyId success:^() {

@@ -16,7 +16,7 @@
 /**
  Comment ID
  */
-@property (readonly,nonatomic) NSUInteger commentId;
+@property (readonly,nonatomic) NSInteger commentId;
 /**
  Image ID comment is associated with
  */
@@ -60,7 +60,7 @@
 /**
  Parent comment ID, nil if no parent
  */
-@property (readonly,nonatomic) NSUInteger parentId;
+@property (readonly,nonatomic) NSInteger parentId;
 /**
  Is comment deleted? Still exists on server
  */

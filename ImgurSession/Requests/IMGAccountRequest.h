@@ -93,7 +93,7 @@
 /**
  Return the total number of albums associated with the account.
  */
-+ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
++ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
 /**
  Delete an Album with a given id.
  */
@@ -118,7 +118,7 @@
 /**
  Returns the total number of images associated with the account.
  */
-+ (void)accountImageCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
++ (void)accountImageCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
 /**
  Deletes an Image. This requires a delete hash rather than an ID.
  */
@@ -138,15 +138,15 @@
 /**
  Return information about a specific comment. This endpoint works the same as the Comment Endpoint. You can use any of the additional actions that the comment endpoint allows on this end point.
  */
-+ (void)accountCommentWithID:(NSUInteger)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentWithID:(NSInteger)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
  Return a count of all of the comments associated with the current account.
  */
-+ (void)accountCommentCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
 /**
  Delete a comment from the current account.
  */
-+ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Replies associated with account

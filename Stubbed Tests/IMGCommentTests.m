@@ -23,7 +23,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"postcomment.json"];
         
-    [IMGCommentRequest submitComment:@"test comment" withImageID:@"grsgdf" withParentID:0 success:^(NSUInteger commentId) {
+    [IMGCommentRequest submitComment:@"test comment" withImageID:@"grsgdf" withParentID:0 success:^(NSInteger commentId) {
         
         expect(commentId).beGreaterThan(0);
         isSuccess = YES;
@@ -38,7 +38,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"replytocomment.json"];
     
-    [IMGCommentRequest replyToComment:@"test reply" withImageID:@"sdfsdf" withCommentID:4354363476 success:^(NSUInteger replyId) {
+    [IMGCommentRequest replyToComment:@"test reply" withImageID:@"sdfsdf" withCommentID:4354363476 success:^(NSInteger replyId) {
         
         expect(replyId).beGreaterThan(0);
         isSuccess = YES;

@@ -44,7 +44,7 @@
     } failure:failure];
 }
 
-+ (void)conversationWithMessageID:(NSUInteger)messageId success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure{
++ (void)conversationWithMessageID:(NSInteger)messageId success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure{
     NSString * path = [self pathWithId:[NSString stringWithFormat:@"%lu", messageId]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -81,7 +81,7 @@
 
 #pragma mark - Delete
 
-+ (void)deleteConversation:(NSUInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure{
++ (void)deleteConversation:(NSInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", convoID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

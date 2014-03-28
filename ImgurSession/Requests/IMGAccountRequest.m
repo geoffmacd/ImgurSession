@@ -269,7 +269,7 @@
     
 }
 
-+ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
++ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"albums/count"];
 
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -340,7 +340,7 @@
     } failure:failure];
 }
 
-+ (void)accountImageCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
++ (void)accountImageCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:username withOption:@"images/count"];
    
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -407,12 +407,12 @@
     } failure:failure];
 }
 
-+ (void)accountCommentWithID:(NSUInteger)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)accountCommentWithID:(NSInteger)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
     
     [IMGCommentRequest commentWithID:commentID withReplies:NO success:success failure:failure];
 }
 
-+ (void)accountCommentCount:(NSString*)username success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
++ (void)accountCommentCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:username withOption:@"comments/count"];
     
@@ -426,7 +426,7 @@
     } failure:failure];
 }
 
-+ (void)accountDeleteCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
++ (void)accountDeleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithId:@"me" withOption:@"comment" withId2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     

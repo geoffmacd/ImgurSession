@@ -296,7 +296,7 @@
     } failure:failure];
 }
 
-+ (void)commentWithID:(NSUInteger)commentID galleryID:(NSString *)galleryObjectID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)commentWithID:(NSInteger)commentID galleryID:(NSString *)galleryObjectID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:galleryObjectID withOption:@"comment" withId2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -321,7 +321,7 @@
     [self submitComment:caption galleryID:galleryObjectID parentComment:0 success:success failure:failure];
 }
 
-+ (void)submitComment:(NSString*)caption galleryID:(NSString *)galleryObjectID parentComment:(NSUInteger)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)submitComment:(NSString*)caption galleryID:(NSString *)galleryObjectID parentComment:(NSInteger)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
     
     NSString *path;
     if(parentCommentID)
@@ -347,11 +347,11 @@
     } failure:failure];
 }
 
-+ (void)replyToComment:(NSString*)caption galleryID:(NSString *)galleryObjectID parentComment:(NSUInteger)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)replyToComment:(NSString*)caption galleryID:(NSString *)galleryObjectID parentComment:(NSInteger)parentCommentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
     [self submitComment:caption galleryID:galleryObjectID parentComment:parentCommentID success:success failure:failure];
 }
 
-+ (void)deleteCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
++ (void)deleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

@@ -121,11 +121,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     
-    NSUInteger width = [[decoder decodeObjectForKey:@"width"] integerValue];
-    NSUInteger height = [[decoder decodeObjectForKey:@"height"] integerValue];
-    NSUInteger views = [[decoder decodeObjectForKey:@"views"] integerValue];
-    NSUInteger size = [[decoder decodeObjectForKey:@"size"] integerValue];
-    NSUInteger bandwidth = [[decoder decodeObjectForKey:@"bandwidth"] integerValue];
+    NSInteger width = [[decoder decodeObjectForKey:@"width"] integerValue];
+    NSInteger height = [[decoder decodeObjectForKey:@"height"] integerValue];
+    NSInteger views = [[decoder decodeObjectForKey:@"views"] integerValue];
+    NSInteger size = [[decoder decodeObjectForKey:@"size"] integerValue];
+    NSInteger bandwidth = [[decoder decodeObjectForKey:@"bandwidth"] integerValue];
     NSString * imageID = [decoder decodeObjectForKey:@"imageID"];
     NSString * url = [decoder decodeObjectForKey:@"url"];
     NSString * deletehash = [decoder decodeObjectForKey:@"deletehash"];

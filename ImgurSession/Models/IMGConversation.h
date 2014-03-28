@@ -17,7 +17,7 @@
 /**
  Message ID
  */
-@property (readonly,nonatomic) NSUInteger conversationID;
+@property (readonly,nonatomic) NSInteger conversationID;
 /**
  Username who sent the message
  */

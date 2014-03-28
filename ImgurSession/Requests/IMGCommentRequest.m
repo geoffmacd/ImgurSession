@@ -20,7 +20,7 @@
 
 #pragma mark - Load
 
-+ (void)commentWithID:(NSUInteger)commentID withReplies:(BOOL)replies success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)commentWithID:(NSInteger)commentID withReplies:(BOOL)replies success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     if(replies)
@@ -50,7 +50,7 @@
 
 #pragma mark - Create
 
-+ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageId withParentID:(NSUInteger)parentId success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
++ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageId withParentID:(NSInteger)parentId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:imageId];
     
     NSDictionary * params;
@@ -74,7 +74,7 @@
     } failure:failure];
 }
 
-+ (void)replyToComment:(NSString*)caption withImageID:(NSString*)imageId withCommentID:(NSUInteger)parentCommentId success:(void (^)(NSUInteger))success failure:(void (^)(NSError *))failure{
++ (void)replyToComment:(NSString*)caption withImageID:(NSString*)imageId withCommentID:(NSInteger)parentCommentId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%ld",(long)parentCommentId]];
     
     NSDictionary * params = @{@"image_id":imageId,@"comment":caption};
@@ -94,7 +94,7 @@
 
 #pragma mark - Delete
 
-+ (void)deleteCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
++ (void)deleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -106,7 +106,7 @@
 
 #pragma mark - Vote
 
-+ (void)voteCommentWithID:(NSUInteger)commentID withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure{
++ (void)voteCommentWithID:(NSInteger)commentID withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"vote" withId2:vote];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -120,7 +120,7 @@
 
 #pragma mark - Report
 
-+ (void)reportCommentWithID:(NSUInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
++ (void)reportCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"vote/report"];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

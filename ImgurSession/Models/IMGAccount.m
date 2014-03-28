@@ -16,7 +16,7 @@
 @interface IMGAccount ()
 @property (readwrite) NSString *username;
 @property (readwrite) NSString *bio;
-@property (readwrite) NSUInteger accountID;
+@property (readwrite) NSInteger accountID;
 @property (readwrite) NSURL *url;
 @property (readwrite) float reputation;
 @property (readwrite) NSDate *created;
@@ -69,7 +69,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     
-    NSUInteger accountID = [[decoder decodeObjectForKey:@"accountID"] integerValue];
+    NSInteger accountID = [[decoder decodeObjectForKey:@"accountID"] integerValue];
     NSString * username = [decoder decodeObjectForKey:@"username"];
     NSURL * url = [decoder decodeObjectForKey:@"url"];
     NSString * bio = [decoder decodeObjectForKey:@"bio"];
@@ -91,7 +91,7 @@
     
     [super encodeWithCoder:coder];
     
-    [coder encodeObject:@(self.accountID) forKey:@"acccountID"];
+    [coder encodeObject:@(self.accountID) forKey:@"accountID"];
     [coder encodeObject:self.username forKey:@"username"];
     [coder encodeObject:self.url  forKey:@"url"];
     [coder encodeObject:self.bio forKey:@"bio"];

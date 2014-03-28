@@ -16,7 +16,7 @@
 /**
  Account ID
  */
-@property (nonatomic, readonly) NSUInteger accountID;
+@property (nonatomic, readonly) NSInteger accountID;
 /**
  Username string
  */
