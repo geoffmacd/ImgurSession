@@ -10,14 +10,17 @@
 
 
 //add read-write prop
-@interface IMGSession ()
+@interface IMGSession (TestSession)
 
 @property (readwrite, nonatomic,copy) NSString *clientID;
 @property (readwrite, nonatomic, copy) NSString *secret;
 @property (readwrite, nonatomic, copy) NSString *refreshToken;
 @property (readwrite, nonatomic, copy) NSString *accessToken;
 @property (readwrite, nonatomic) IMGAuthType lastAuthType;
+
 @end
+
+
 
 @implementation IMGIntegratedTestCase
 

@@ -44,6 +44,16 @@
     }];
 }
 
+-(void)stubWithFile:(NSString *)filename withStatusCode:(int)status {
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return YES;
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        // Stub it with our "wsresponse.json" stub file
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(filename,nil)
+                                                statusCode:status headers:@{@"Content-Type":@"text/json"}];
+    }];
+}
 #pragma mark - IMGSessionDelegate Delegate methods
 
 -(void)imgurSessionNeedsExternalWebview:(NSURL *)url{

@@ -60,6 +60,7 @@
             self.isAnonymous = YES;
             [self setAnonmyousAuthenticationWithID:clientID];
         }
+        
         self.clientID = clientID;
         //default
         self.warnRateLimit = 100;
@@ -243,13 +244,6 @@
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;    
     [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
-}
-
--(void)setGarbageAuth{
-    
-    //change the serializer to include this authorization header
-    AFHTTPRequestSerializer * serializer = self.requestSerializer;
-    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", @"garbage"] forHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - Rate Limit Tracking

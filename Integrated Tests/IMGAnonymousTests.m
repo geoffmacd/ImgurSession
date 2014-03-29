@@ -12,8 +12,41 @@
 
 @end
 
+//add read-write prop
+@interface IMGSession (TestSession)
+
+@property (readwrite, nonatomic,copy) NSString *clientID;
+@property (readwrite, nonatomic, copy) NSString *secret;
+@property (readwrite, nonatomic, copy) NSString *refreshToken;
+@property (readwrite, nonatomic, copy) NSString *accessToken;
+@property (readwrite, nonatomic) IMGAuthType lastAuthType;
+
+@end
 
 @implementation IMGAnonymousTests
+
+- (void)testGalleryWithBadClientAuthentication{
+    
+    __block BOOL isSuccess;
+    
+    //client id is all that necessary for this header
+    [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Client-ID %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
+    
+    [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
+        
+        //fail, should not attempt refresh
+        expect(0).beTruthy();
+        
+        isSuccess = YES;
+        
+    } failure:^(NSError * error) {
+        
+        isSuccess = YES;
+    }];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 
 - (void)testGalleryHot{
     

@@ -15,12 +15,49 @@
 
 @implementation IMGAnonymousTests
 
+- (void)testGalleryWithBadClientAuthentication{
+    
+    __block BOOL isSuccess;
+    
+    [self stubWithFile:@"badhotgalleryrequest-noauthenticiation.json" withStatusCode:403];
+    
+    [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
+        
+        //should not be successful
+        expect(0).beTruthy();
+        
+        isSuccess = YES;
+        
+    } failure:^(NSError * error) {
+        
+        expect([error.domain isEqualToString:AFNetworkingErrorDomain]);
+        
+        isSuccess = YES;
+    }];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 - (void)testGalleryHot{
     
     __block BOOL isSuccess;
     [self stubWithFile:@"hotgalleryanon.json"];
     
     [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
+        
+        
+        expect(images).haveCountOf(183);
+        
+        IMGGalleryAlbum * album = images[2];
+        IMGGalleryImage * image = images[0];
+        
+        expect(album.albumID).beTruthy();
+        expect(album.views).beTruthy();
+        expect(album.ups).beTruthy();
+        
+        expect(image.imageID).beTruthy();
+        expect(image.views).beTruthy();
+        expect(image.ups).beTruthy();
         
         isSuccess = YES;
         
@@ -36,6 +73,50 @@
     
     [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
         
+        expect(images).haveCountOf(183);
+        
+        IMGGalleryAlbum * album = images[2];
+        IMGGalleryImage * image = images[0];
+        
+        expect(album.albumID).beTruthy();
+        expect(album.views).beTruthy();
+        expect(album.ups).beTruthy();
+        
+        expect(image.imageID).beTruthy();
+        expect(image.views).beTruthy();
+        expect(image.ups).beTruthy();
+        
+        //test copy
+        IMGGalleryAlbum * copy = [album copy];
+        expect(album.albumID).equal(copy.albumID);
+        expect(album.albumDescription).equal(copy.albumDescription);
+        expect(album).equal(copy);
+        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        expect(album.albumID).equal(copy.albumID);
+        expect(album.albumDescription).equal(copy.albumDescription);
+        expect(album).equal(copy);
+        
+        //test copy
+        IMGGalleryImage * copyImage = [image copy];
+        expect(image.imageID).equal(copyImage.imageID);
+        expect(image.title).equal(copyImage.title);
+        expect(image.ups).equal(copyImage.ups);
+        expect(image.accountURL).equal(copyImage.accountURL);
+        expect(image).equal(copyImage);
+        
+        data = [NSKeyedArchiver archivedDataWithRootObject:copyImage];
+        copyImage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        expect(image.imageID).equal(copyImage.imageID);
+        expect(image.title).equal(copyImage.title);
+        expect(image.ups).equal(copyImage.ups);
+        expect(image.accountURL).equal(copyImage.accountURL);
+        expect(image).equal(copyImage);
+        
+        
         isSuccess = YES;
         
     } failure:failBlock];
@@ -49,6 +130,19 @@
     [self stubWithFile:@"usersubgalleryanon.json"];
     
     [IMGGalleryRequest userGalleryPage:0 withViralSort:YES showViral:YES success:^(NSArray * images) {
+        
+        expect(images).haveCountOf(183);
+        
+        IMGGalleryAlbum * album = images[2];
+        IMGGalleryImage * image = images[0];
+        
+        expect(album.albumID).beTruthy();
+        expect(album.views).beTruthy();
+        expect(album.ups).beTruthy();
+        
+        expect(image.imageID).beTruthy();
+        expect(image.views).beTruthy();
+        expect(image.ups).beTruthy();
         
         isSuccess = YES;
         
@@ -217,8 +311,11 @@
     [IMGAccountRequest accountCommentsWithUser:imgurUnitTestParams[@"recipientId"] success:^(NSArray * comments) {
         
         expect(comments).haveCountOf(1);
+        
         IMGComment * first = [comments firstObject];
         expect(first.commentId).beTruthy();
+        expect(first.caption).beTruthy();
+        
         isSuccess = YES;
         
     } failure:failBlock];

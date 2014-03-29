@@ -27,5 +27,10 @@
  Stub reponse for next request
  */
 -(void)stubWithFile:(NSString * )filename;
+/**
+ Stub reponse for next request with status code option
+ */
+-(void)stubWithFile:(NSString *)filename withStatusCode:(int)status;
+
 
 @end
