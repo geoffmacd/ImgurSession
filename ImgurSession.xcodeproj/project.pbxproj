@@ -74,7 +74,7 @@
 		C30933E518CA204C009D9C57 /* IMGSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C30933E418CA204C009D9C57 /* IMGSession.m */; };
 		C3102D1518D8D5FF007A75C4 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
 		C3102D1618D8D600007A75C4 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
-		C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D1818D9FF82007A75C4 /* ImgurSession.h */; };
+		C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D1818D9FF82007A75C4 /* ImgurSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3102D1E18DA3892007A75C4 /* IMGGalleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1D18DA3892007A75C4 /* IMGGalleryTests.m */; };
 		C3102D1F18DA3895007A75C4 /* IMGGalleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1D18DA3892007A75C4 /* IMGGalleryTests.m */; };
 		C3102D2218DB3F71007A75C4 /* IMGCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2118DB3F71007A75C4 /* IMGCommentTests.m */; };
@@ -87,6 +87,44 @@
 		C3102D3018DB835A007A75C4 /* IMGNotificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */; };
 		C319F7D418D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
 		C319F7D518D0DB3F00C5E880 /* IMGComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C319F7D318D0DB3F00C5E880 /* IMGComment.m */; };
+		C32880FC18EA0AF200B080CF /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880E918EA0AF100B080CF /* AFHTTPRequestOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C32880FD18EA0AF200B080CF /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EA18EA0AF100B080CF /* AFHTTPRequestOperationManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C32880FE18EA0AF200B080CF /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EB18EA0AF100B080CF /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C32880FF18EA0AF200B080CF /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EC18EA0AF100B080CF /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810018EA0AF200B080CF /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880ED18EA0AF100B080CF /* AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810118EA0AF200B080CF /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EE18EA0AF100B080CF /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810218EA0AF200B080CF /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EF18EA0AF100B080CF /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810318EA0AF200B080CF /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F018EA0AF100B080CF /* AFURLConnectionOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810418EA0AF200B080CF /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F118EA0AF100B080CF /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810518EA0AF200B080CF /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F218EA0AF100B080CF /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810618EA0AF200B080CF /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F318EA0AF100B080CF /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810718EA0AF200B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F418EA0AF100B080CF /* UIActivityIndicatorView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810818EA0AF200B080CF /* UIAlertView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F518EA0AF100B080CF /* UIAlertView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810918EA0AF200B080CF /* UIButton+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F618EA0AF100B080CF /* UIButton+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810A18EA0AF200B080CF /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F718EA0AF100B080CF /* UIImageView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810B18EA0AF200B080CF /* UIKit+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F818EA0AF100B080CF /* UIKit+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810C18EA0AF200B080CF /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810D18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810E18EA0AF200B080CF /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328810F18EA0DFF00B080CF /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880E918EA0AF100B080CF /* AFHTTPRequestOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811018EA0DFF00B080CF /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EA18EA0AF100B080CF /* AFHTTPRequestOperationManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811118EA0DFF00B080CF /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EB18EA0AF100B080CF /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811218EA0DFF00B080CF /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EC18EA0AF100B080CF /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811318EA0DFF00B080CF /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880ED18EA0AF100B080CF /* AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811418EA0DFF00B080CF /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EE18EA0AF100B080CF /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811518EA0DFF00B080CF /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880EF18EA0AF100B080CF /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811618EA0DFF00B080CF /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F018EA0AF100B080CF /* AFURLConnectionOperation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811718EA0DFF00B080CF /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F118EA0AF100B080CF /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811818EA0DFF00B080CF /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F218EA0AF100B080CF /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811918EA0DFF00B080CF /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F318EA0AF100B080CF /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811A18EA0DFF00B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F418EA0AF100B080CF /* UIActivityIndicatorView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811B18EA0DFF00B080CF /* UIAlertView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F518EA0AF100B080CF /* UIAlertView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811C18EA0DFF00B080CF /* UIButton+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F618EA0AF100B080CF /* UIButton+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811D18EA0DFF00B080CF /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F718EA0AF100B080CF /* UIImageView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811E18EA0DFF00B080CF /* UIKit+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F818EA0AF100B080CF /* UIKit+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328811F18EA0DFF00B080CF /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328812018EA0DFF00B080CF /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C328812118EA0DFF00B080CF /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C355E5CF18CA80A100D5CEA5 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
 		C36C00F318CA7611004576A5 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C36C010E18CA7A7F004576A5 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
@@ -147,6 +185,55 @@
 		C3F1B42718E369B6004ED254 /* image.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41E18E369B6004ED254 /* image.json */; };
 		C3F1B42818E369B6004ED254 /* topgalleryanon.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B41F18E369B6004ED254 /* topgalleryanon.json */; };
 		C3F1B42918E369B6004ED254 /* usersubgalleryanon.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B42018E369B6004ED254 /* usersubgalleryanon.json */; };
+		C3F1B42A18E9B72C004ED254 /* IMGSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C30933E318CA204C009D9C57 /* IMGSession.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B42B18E9B72C004ED254 /* IMGModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407478718D5488100B92063 /* IMGModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B42C18E9B72C004ED254 /* IMGAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407479918D62AF700B92063 /* IMGAccount.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B42D18E9B72C004ED254 /* IMGAccountSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407479A18D62AF700B92063 /* IMGAccountSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B42E18E9B72C004ED254 /* IMGAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407479418D62AE200B92063 /* IMGAlbum.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B42F18E9B72C004ED254 /* IMGBasicAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43018E9B72C004ED254 /* IMGComment.h in Headers */ = {isa = PBXBuildFile; fileRef = C319F7D218D0DB3F00C5E880 /* IMGComment.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43118E9B72C004ED254 /* IMGGalleryAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407478E18D62AD100B92063 /* IMGGalleryAlbum.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43218E9B72C004ED254 /* IMGGalleryImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407478D18D62AD100B92063 /* IMGGalleryImage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43318E9B72C004ED254 /* IMGGalleryProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407475C18D4FA0300B92063 /* IMGGalleryProfile.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43418E9B72C004ED254 /* IMGImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747A018D62B0700B92063 /* IMGImage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43518E9B72C004ED254 /* IMGMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407475718D4F77E00B92063 /* IMGMessage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43618E9B72D004ED254 /* IMGConversation.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D2818DB78DE007A75C4 /* IMGConversation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43718E9B72D004ED254 /* IMGNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407475218D4F3FC00B92063 /* IMGNotification.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43818E9B72D004ED254 /* IMGVote.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407474D18D4F31600B92063 /* IMGVote.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43918E9B72D004ED254 /* IMGEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747AD18D62B1B00B92063 /* IMGEndpoint.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43A18E9B72D004ED254 /* IMGResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B418D62B1B00B92063 /* IMGResponseSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43B18E9B72D004ED254 /* IMGAccountRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747A918D62B1B00B92063 /* IMGAccountRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43C18E9B72D004ED254 /* IMGAlbumRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747AF18D62B1B00B92063 /* IMGAlbumRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43D18E9B72D004ED254 /* IMGCommentRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B018D62B1B00B92063 /* IMGCommentRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43E18E9B72D004ED254 /* IMGConversationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B318D62B1B00B92063 /* IMGConversationRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B43F18E9B72D004ED254 /* IMGGalleryRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B118D62B1B00B92063 /* IMGGalleryRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B44018E9B72D004ED254 /* IMGImageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747AE18D62B1B00B92063 /* IMGImageRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B44118E9B72D004ED254 /* IMGNotificationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B218D62B1B00B92063 /* IMGNotificationRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B48C18E9BD68004ED254 /* ImgurSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D1818D9FF82007A75C4 /* ImgurSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3F1B48D18E9BD68004ED254 /* IMGSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C30933E318CA204C009D9C57 /* IMGSession.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B48E18E9BD68004ED254 /* IMGModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407478718D5488100B92063 /* IMGModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B48F18E9BD68004ED254 /* IMGAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407479918D62AF700B92063 /* IMGAccount.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49018E9BD68004ED254 /* IMGAccountSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407479A18D62AF700B92063 /* IMGAccountSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49118E9BD68004ED254 /* IMGAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407479418D62AE200B92063 /* IMGAlbum.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49218E9BD68004ED254 /* IMGBasicAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49318E9BD68004ED254 /* IMGComment.h in Headers */ = {isa = PBXBuildFile; fileRef = C319F7D218D0DB3F00C5E880 /* IMGComment.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49418E9BD68004ED254 /* IMGGalleryAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407478E18D62AD100B92063 /* IMGGalleryAlbum.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49518E9BD68004ED254 /* IMGGalleryImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407478D18D62AD100B92063 /* IMGGalleryImage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49618E9BD68004ED254 /* IMGGalleryProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407475C18D4FA0300B92063 /* IMGGalleryProfile.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49718E9BD68004ED254 /* IMGImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747A018D62B0700B92063 /* IMGImage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49818E9BD68004ED254 /* IMGMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407475718D4F77E00B92063 /* IMGMessage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49918E9BD68004ED254 /* IMGConversation.h in Headers */ = {isa = PBXBuildFile; fileRef = C3102D2818DB78DE007A75C4 /* IMGConversation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49A18E9BD68004ED254 /* IMGNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407475218D4F3FC00B92063 /* IMGNotification.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49B18E9BD68004ED254 /* IMGVote.h in Headers */ = {isa = PBXBuildFile; fileRef = 2407474D18D4F31600B92063 /* IMGVote.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49C18E9BD68004ED254 /* IMGEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747AD18D62B1B00B92063 /* IMGEndpoint.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49D18E9BD68004ED254 /* IMGResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B418D62B1B00B92063 /* IMGResponseSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49E18E9BD68004ED254 /* IMGAccountRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747A918D62B1B00B92063 /* IMGAccountRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B49F18E9BD68004ED254 /* IMGAlbumRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747AF18D62B1B00B92063 /* IMGAlbumRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B4A018E9BD68004ED254 /* IMGCommentRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B018D62B1B00B92063 /* IMGCommentRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B4A118E9BD68004ED254 /* IMGConversationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B318D62B1B00B92063 /* IMGConversationRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B4A218E9BD69004ED254 /* IMGGalleryRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B118D62B1B00B92063 /* IMGGalleryRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B4A318E9BD69004ED254 /* IMGImageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747AE18D62B1B00B92063 /* IMGImageRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3F1B4A418E9BD69004ED254 /* IMGNotificationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 240747B218D62B1B00B92063 /* IMGNotificationRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,19 +266,6 @@
 			remoteInfo = ImgurSessionOSX;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		C309339318CA1F87009D9C57 /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAnonTests.xcconfig"; path = "Pods/Pods-OSXIntegratedAnonTests.xcconfig"; sourceTree = "<group>"; };
@@ -279,6 +353,25 @@
 		C3102D2E18DB835A007A75C4 /* IMGNotificationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGNotificationTests.m; sourceTree = "<group>"; };
 		C319F7D218D0DB3F00C5E880 /* IMGComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IMGComment.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C319F7D318D0DB3F00C5E880 /* IMGComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGComment.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C32880E918EA0AF100B080CF /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		C32880EA18EA0AF100B080CF /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = Pods/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		C32880EB18EA0AF100B080CF /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = Pods/AFNetworking/AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		C32880EC18EA0AF100B080CF /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = "Pods/AFNetworking/UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h"; sourceTree = "<group>"; };
+		C32880ED18EA0AF100B080CF /* AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = Pods/AFNetworking/AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
+		C32880EE18EA0AF100B080CF /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = Pods/AFNetworking/AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		C32880EF18EA0AF100B080CF /* AFSecurityPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = Pods/AFNetworking/AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
+		C32880F018EA0AF100B080CF /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = Pods/AFNetworking/AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		C32880F118EA0AF100B080CF /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = Pods/AFNetworking/AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		C32880F218EA0AF100B080CF /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = Pods/AFNetworking/AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		C32880F318EA0AF100B080CF /* AFURLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = Pods/AFNetworking/AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
+		C32880F418EA0AF100B080CF /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		C32880F518EA0AF100B080CF /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
+		C32880F618EA0AF100B080CF /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIButton+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		C32880F718EA0AF100B080CF /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		C32880F818EA0AF100B080CF /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIKit+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIKit+AFNetworking.h"; sourceTree = "<group>"; };
+		C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
+		C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
+		C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		C36C00E618CA7472004576A5 /* ImgurSession Tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ImgurSession Tests-Prefix.pch"; path = "Resources/ImgurSession Tests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSession Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -505,6 +598,25 @@
 		C309338C18CA1F87009D9C57 = {
 			isa = PBXGroup;
 			children = (
+				C32880E918EA0AF100B080CF /* AFHTTPRequestOperation.h */,
+				C32880EA18EA0AF100B080CF /* AFHTTPRequestOperationManager.h */,
+				C32880EB18EA0AF100B080CF /* AFHTTPSessionManager.h */,
+				C32880EC18EA0AF100B080CF /* AFNetworkActivityIndicatorManager.h */,
+				C32880ED18EA0AF100B080CF /* AFNetworking.h */,
+				C32880EE18EA0AF100B080CF /* AFNetworkReachabilityManager.h */,
+				C32880EF18EA0AF100B080CF /* AFSecurityPolicy.h */,
+				C32880F018EA0AF100B080CF /* AFURLConnectionOperation.h */,
+				C32880F118EA0AF100B080CF /* AFURLRequestSerialization.h */,
+				C32880F218EA0AF100B080CF /* AFURLResponseSerialization.h */,
+				C32880F318EA0AF100B080CF /* AFURLSessionManager.h */,
+				C32880F418EA0AF100B080CF /* UIActivityIndicatorView+AFNetworking.h */,
+				C32880F518EA0AF100B080CF /* UIAlertView+AFNetworking.h */,
+				C32880F618EA0AF100B080CF /* UIButton+AFNetworking.h */,
+				C32880F718EA0AF100B080CF /* UIImageView+AFNetworking.h */,
+				C32880F818EA0AF100B080CF /* UIKit+AFNetworking.h */,
+				C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */,
+				C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */,
+				C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */,
 				C309339A18CA1F87009D9C57 /* ImgurSession */,
 				C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */,
 				C3F1B33F18E1FE63004ED254 /* Integrated Tests */,
@@ -781,6 +893,100 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */,
+				C328810F18EA0DFF00B080CF /* AFHTTPRequestOperation.h in Headers */,
+				C328811018EA0DFF00B080CF /* AFHTTPRequestOperationManager.h in Headers */,
+				C328811118EA0DFF00B080CF /* AFHTTPSessionManager.h in Headers */,
+				C328811218EA0DFF00B080CF /* AFNetworkActivityIndicatorManager.h in Headers */,
+				C328811318EA0DFF00B080CF /* AFNetworking.h in Headers */,
+				C328811418EA0DFF00B080CF /* AFNetworkReachabilityManager.h in Headers */,
+				C328811518EA0DFF00B080CF /* AFSecurityPolicy.h in Headers */,
+				C328811618EA0DFF00B080CF /* AFURLConnectionOperation.h in Headers */,
+				C328811718EA0DFF00B080CF /* AFURLRequestSerialization.h in Headers */,
+				C328811818EA0DFF00B080CF /* AFURLResponseSerialization.h in Headers */,
+				C328811918EA0DFF00B080CF /* AFURLSessionManager.h in Headers */,
+				C328811A18EA0DFF00B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */,
+				C328811B18EA0DFF00B080CF /* UIAlertView+AFNetworking.h in Headers */,
+				C328811C18EA0DFF00B080CF /* UIButton+AFNetworking.h in Headers */,
+				C328811D18EA0DFF00B080CF /* UIImageView+AFNetworking.h in Headers */,
+				C328811E18EA0DFF00B080CF /* UIKit+AFNetworking.h in Headers */,
+				C328811F18EA0DFF00B080CF /* UIProgressView+AFNetworking.h in Headers */,
+				C328812018EA0DFF00B080CF /* UIRefreshControl+AFNetworking.h in Headers */,
+				C328812118EA0DFF00B080CF /* UIWebView+AFNetworking.h in Headers */,
+				C3F1B42B18E9B72C004ED254 /* IMGModel.h in Headers */,
+				C3F1B43918E9B72D004ED254 /* IMGEndpoint.h in Headers */,
+				C3F1B43A18E9B72D004ED254 /* IMGResponseSerializer.h in Headers */,
+				C3F1B42A18E9B72C004ED254 /* IMGSession.h in Headers */,
+				C3F1B42C18E9B72C004ED254 /* IMGAccount.h in Headers */,
+				C3F1B42D18E9B72C004ED254 /* IMGAccountSettings.h in Headers */,
+				C3F1B42E18E9B72C004ED254 /* IMGAlbum.h in Headers */,
+				C3F1B42F18E9B72C004ED254 /* IMGBasicAlbum.h in Headers */,
+				C3F1B43018E9B72C004ED254 /* IMGComment.h in Headers */,
+				C3F1B43118E9B72C004ED254 /* IMGGalleryAlbum.h in Headers */,
+				C3F1B43218E9B72C004ED254 /* IMGGalleryImage.h in Headers */,
+				C3F1B43318E9B72C004ED254 /* IMGGalleryProfile.h in Headers */,
+				C3F1B43418E9B72C004ED254 /* IMGImage.h in Headers */,
+				C3F1B43518E9B72C004ED254 /* IMGMessage.h in Headers */,
+				C3F1B43618E9B72D004ED254 /* IMGConversation.h in Headers */,
+				C3F1B43718E9B72D004ED254 /* IMGNotification.h in Headers */,
+				C3F1B43818E9B72D004ED254 /* IMGVote.h in Headers */,
+				C3F1B43B18E9B72D004ED254 /* IMGAccountRequest.h in Headers */,
+				C3F1B43C18E9B72D004ED254 /* IMGAlbumRequest.h in Headers */,
+				C3F1B43D18E9B72D004ED254 /* IMGCommentRequest.h in Headers */,
+				C3F1B43E18E9B72D004ED254 /* IMGConversationRequest.h in Headers */,
+				C3F1B43F18E9B72D004ED254 /* IMGGalleryRequest.h in Headers */,
+				C3F1B44018E9B72D004ED254 /* IMGImageRequest.h in Headers */,
+				C3F1B44118E9B72D004ED254 /* IMGNotificationRequest.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3F1B48B18E9BD4C004ED254 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3F1B48C18E9BD68004ED254 /* ImgurSession.h in Headers */,
+				C32880FC18EA0AF200B080CF /* AFHTTPRequestOperation.h in Headers */,
+				C32880FD18EA0AF200B080CF /* AFHTTPRequestOperationManager.h in Headers */,
+				C32880FE18EA0AF200B080CF /* AFHTTPSessionManager.h in Headers */,
+				C32880FF18EA0AF200B080CF /* AFNetworkActivityIndicatorManager.h in Headers */,
+				C328810018EA0AF200B080CF /* AFNetworking.h in Headers */,
+				C328810118EA0AF200B080CF /* AFNetworkReachabilityManager.h in Headers */,
+				C328810218EA0AF200B080CF /* AFSecurityPolicy.h in Headers */,
+				C328810318EA0AF200B080CF /* AFURLConnectionOperation.h in Headers */,
+				C328810418EA0AF200B080CF /* AFURLRequestSerialization.h in Headers */,
+				C328810518EA0AF200B080CF /* AFURLResponseSerialization.h in Headers */,
+				C328810618EA0AF200B080CF /* AFURLSessionManager.h in Headers */,
+				C328810718EA0AF200B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */,
+				C328810818EA0AF200B080CF /* UIAlertView+AFNetworking.h in Headers */,
+				C328810918EA0AF200B080CF /* UIButton+AFNetworking.h in Headers */,
+				C328810A18EA0AF200B080CF /* UIImageView+AFNetworking.h in Headers */,
+				C328810B18EA0AF200B080CF /* UIKit+AFNetworking.h in Headers */,
+				C328810C18EA0AF200B080CF /* UIProgressView+AFNetworking.h in Headers */,
+				C328810D18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h in Headers */,
+				C328810E18EA0AF200B080CF /* UIWebView+AFNetworking.h in Headers */,
+				C3F1B48E18E9BD68004ED254 /* IMGModel.h in Headers */,
+				C3F1B49C18E9BD68004ED254 /* IMGEndpoint.h in Headers */,
+				C3F1B49D18E9BD68004ED254 /* IMGResponseSerializer.h in Headers */,
+				C3F1B48D18E9BD68004ED254 /* IMGSession.h in Headers */,
+				C3F1B48F18E9BD68004ED254 /* IMGAccount.h in Headers */,
+				C3F1B49018E9BD68004ED254 /* IMGAccountSettings.h in Headers */,
+				C3F1B49118E9BD68004ED254 /* IMGAlbum.h in Headers */,
+				C3F1B49218E9BD68004ED254 /* IMGBasicAlbum.h in Headers */,
+				C3F1B49318E9BD68004ED254 /* IMGComment.h in Headers */,
+				C3F1B49418E9BD68004ED254 /* IMGGalleryAlbum.h in Headers */,
+				C3F1B49518E9BD68004ED254 /* IMGGalleryImage.h in Headers */,
+				C3F1B49618E9BD68004ED254 /* IMGGalleryProfile.h in Headers */,
+				C3F1B49718E9BD68004ED254 /* IMGImage.h in Headers */,
+				C3F1B49818E9BD68004ED254 /* IMGMessage.h in Headers */,
+				C3F1B49918E9BD68004ED254 /* IMGConversation.h in Headers */,
+				C3F1B49A18E9BD68004ED254 /* IMGNotification.h in Headers */,
+				C3F1B49B18E9BD68004ED254 /* IMGVote.h in Headers */,
+				C3F1B49E18E9BD68004ED254 /* IMGAccountRequest.h in Headers */,
+				C3F1B49F18E9BD68004ED254 /* IMGAlbumRequest.h in Headers */,
+				C3F1B4A018E9BD68004ED254 /* IMGCommentRequest.h in Headers */,
+				C3F1B4A118E9BD68004ED254 /* IMGConversationRequest.h in Headers */,
+				C3F1B4A218E9BD69004ED254 /* IMGGalleryRequest.h in Headers */,
+				C3F1B4A318E9BD69004ED254 /* IMGImageRequest.h in Headers */,
+				C3F1B4A418E9BD69004ED254 /* IMGNotificationRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +1061,7 @@
 				C309339118CA1F87009D9C57 /* Sources */,
 				C309339218CA1F87009D9C57 /* Frameworks */,
 				6DC15E212CEF4D17B2A9DDE9 /* Copy Pods Resources */,
-				C309339318CA1F87009D9C57 /* Copy Files */,
+				C3F1B48B18E9BD4C004ED254 /* Headers */,
 			);
 			buildRules = (
 			);
