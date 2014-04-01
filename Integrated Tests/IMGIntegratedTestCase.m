@@ -133,7 +133,7 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Description" linkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         
@@ -171,7 +171,7 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Description" linkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         
@@ -198,7 +198,7 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Image Description" linkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         
@@ -246,7 +246,7 @@
     
     __block BOOL deleteSuccess = NO;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Image Description" andLinkToAlbumWithID:nil success:^(IMGImage *image) {
+    [IMGImageRequest uploadImageWithFileURL:testfileURL title:imgurUnitTestParams[@"title"] description:@"Test Image Description" linkToAlbumWithID:nil success:^(IMGImage *image) {
         
         expect(image).notTo.beNil();
         

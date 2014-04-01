@@ -145,7 +145,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //keep track of multiple file uploads with semaphore
-        dispatch_semaphore_t sema = dispatch_semaphore_create([files count]);
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
         //return images
         __block NSMutableArray * images = [NSMutableArray new];
         
@@ -154,9 +154,9 @@
             //expects titles and files and descriptions
             NSParameterAssert(file[@"title"]);
             NSParameterAssert(file[@"description"]);
-            NSParameterAssert(file[@"imageURL"]);
+            NSParameterAssert(file[@"fileURL"]);
             
-            [self uploadImageWithFileURL:file[@"title"] title:file[@"title"] description:file[@"title"] linkToAlbumWithID:albumID success:^(IMGImage *image) {
+            [self uploadImageWithFileURL:file[@"fileURL"] title:file[@"title"] description:file[@"description"] linkToAlbumWithID:albumID success:^(IMGImage *image) {
                 
                 [images addObject:image];
                 
@@ -169,11 +169,10 @@
         }
         
         //waits until above is completed
-        if(dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER)){
-            //fails if return is non-zero
-            if(failure)
-                failure([NSError errorWithDomain:@"ImgurSession" code:14 userInfo:nil]);
-        } else if(success){
+        for(NSDictionary * file in files)
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+
+        if(success){
             success([NSArray arrayWithArray:images]);
         }
     });

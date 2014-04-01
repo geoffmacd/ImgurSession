@@ -115,6 +115,37 @@
     expect(isSuccess).will.beTruthy();
 }
 
+- (void)testPostAnonymousImage{
+    
+    __block BOOL isSuccess;
+    
+    [IMGImageRequest uploadImageWithFileURL:testfileURL success:^(IMGImage *image) {
+        
+        expect(image.imageID).beTruthy();
+        isSuccess = YES;
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+- (void)testPostAnonymousImages{
+    
+    __block BOOL isSuccess;
+    
+    NSArray * files = @[@{@"fileURL":testfileURL,@"title":@"kitties", @"description":@""},
+                        @{@"fileURL":testfileURL,@"title":@"kitties 2", @"description":@""}
+                        ];
+    
+    [IMGImageRequest uploadImages:files success:^(NSArray *array) {
+        
+        IMGImage * image = [array firstObject];
+        expect(image.imageID).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
 
 - (void)testGalleryAlbum{
     
