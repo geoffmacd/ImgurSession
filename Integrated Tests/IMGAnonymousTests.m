@@ -128,6 +128,30 @@
     expect(isSuccess).will.beTruthy();
 }
 
+- (void)testPostThenDeleteAnonymousAlbum{
+    
+    __block BOOL isSuccess;
+    
+    [IMGImageRequest uploadImageWithFileURL:testfileURL success:^(IMGImage *image) {
+        
+        expect(image.imageID).beTruthy();
+        
+        [IMGAlbumRequest createAlbumWithTitle:@"Test kitty" description:@"blah" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGBlogLayout cover:image.imageID success:^(IMGAlbum *album) {
+
+            expect(album.albumID).beTruthy();
+            
+            [IMGAlbumRequest deleteAlbumWithID:album.deletehash success:^{
+                
+                
+                isSuccess = YES;
+                
+            } failure:failBlock];
+        } failure:failBlock];
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 - (void)testPostAnonymousImages{
     
     __block BOOL isSuccess;
