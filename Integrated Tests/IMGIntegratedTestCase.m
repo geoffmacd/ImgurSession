@@ -18,6 +18,9 @@
 @property (readwrite, nonatomic, copy) NSString *accessToken;
 @property (readwrite, nonatomic) IMGAuthType lastAuthType;
 
+
+-(void)setAnonmyousAuthenticationWithID:(NSString*)clientID;
+
 @end
 
 
@@ -46,6 +49,8 @@
     if(anon){
         [IMGSession sharedInstanceWithClientID:clientID secret:nil];
         
+        //make sure auth is correct after bad authentication tests
+        [[IMGSession sharedInstance] setAnonmyousAuthenticationWithID:clientID];
     } else {
         //Lazy init, may already exist
         IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
