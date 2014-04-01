@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C328812618EB1AFD00B080CF /* UniversalLib */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C328812718EB1AFD00B080CF /* Build configuration list for PBXAggregateTarget "UniversalLib" */;
+			buildPhases = (
+				C328812A18EB1B1500B080CF /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = UniversalLib;
+			productName = UniversalLib;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		022E51D618CE4F15810C28EE /* libPods-OSXAuthenticatedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2155B9E8F1254B7783782111 /* libPods-OSXAuthenticatedTests.a */; };
 		1A559323052940B29978A00B /* libPods-ImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */; };
@@ -598,25 +612,7 @@
 		C309338C18CA1F87009D9C57 = {
 			isa = PBXGroup;
 			children = (
-				C32880E918EA0AF100B080CF /* AFHTTPRequestOperation.h */,
-				C32880EA18EA0AF100B080CF /* AFHTTPRequestOperationManager.h */,
-				C32880EB18EA0AF100B080CF /* AFHTTPSessionManager.h */,
-				C32880EC18EA0AF100B080CF /* AFNetworkActivityIndicatorManager.h */,
-				C32880ED18EA0AF100B080CF /* AFNetworking.h */,
-				C32880EE18EA0AF100B080CF /* AFNetworkReachabilityManager.h */,
-				C32880EF18EA0AF100B080CF /* AFSecurityPolicy.h */,
-				C32880F018EA0AF100B080CF /* AFURLConnectionOperation.h */,
-				C32880F118EA0AF100B080CF /* AFURLRequestSerialization.h */,
-				C32880F218EA0AF100B080CF /* AFURLResponseSerialization.h */,
-				C32880F318EA0AF100B080CF /* AFURLSessionManager.h */,
-				C32880F418EA0AF100B080CF /* UIActivityIndicatorView+AFNetworking.h */,
-				C32880F518EA0AF100B080CF /* UIAlertView+AFNetworking.h */,
-				C32880F618EA0AF100B080CF /* UIButton+AFNetworking.h */,
-				C32880F718EA0AF100B080CF /* UIImageView+AFNetworking.h */,
-				C32880F818EA0AF100B080CF /* UIKit+AFNetworking.h */,
-				C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */,
-				C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */,
-				C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */,
+				C328812F18EB42FD00B080CF /* AFNetworking Headers */,
 				C309339A18CA1F87009D9C57 /* ImgurSession */,
 				C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */,
 				C3F1B33F18E1FE63004ED254 /* Integrated Tests */,
@@ -757,6 +753,32 @@
 				C319F7D318D0DB3F00C5E880 /* IMGComment.m */,
 			);
 			name = Comment;
+			sourceTree = "<group>";
+		};
+		C328812F18EB42FD00B080CF /* AFNetworking Headers */ = {
+			isa = PBXGroup;
+			children = (
+				C32880E918EA0AF100B080CF /* AFHTTPRequestOperation.h */,
+				C32880EA18EA0AF100B080CF /* AFHTTPRequestOperationManager.h */,
+				C32880EB18EA0AF100B080CF /* AFHTTPSessionManager.h */,
+				C32880EC18EA0AF100B080CF /* AFNetworkActivityIndicatorManager.h */,
+				C32880ED18EA0AF100B080CF /* AFNetworking.h */,
+				C32880EE18EA0AF100B080CF /* AFNetworkReachabilityManager.h */,
+				C32880EF18EA0AF100B080CF /* AFSecurityPolicy.h */,
+				C32880F018EA0AF100B080CF /* AFURLConnectionOperation.h */,
+				C32880F118EA0AF100B080CF /* AFURLRequestSerialization.h */,
+				C32880F218EA0AF100B080CF /* AFURLResponseSerialization.h */,
+				C32880F318EA0AF100B080CF /* AFURLSessionManager.h */,
+				C32880F418EA0AF100B080CF /* UIActivityIndicatorView+AFNetworking.h */,
+				C32880F518EA0AF100B080CF /* UIAlertView+AFNetworking.h */,
+				C32880F618EA0AF100B080CF /* UIButton+AFNetworking.h */,
+				C32880F718EA0AF100B080CF /* UIImageView+AFNetworking.h */,
+				C32880F818EA0AF100B080CF /* UIKit+AFNetworking.h */,
+				C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */,
+				C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */,
+				C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */,
+			);
+			name = "AFNetworking Headers";
 			sourceTree = "<group>";
 		};
 		C397090E18E0B45B001DA560 /* Responses */ = {
@@ -1140,10 +1162,19 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = GeoffMacDonald;
 				TargetAttributes = {
+					243CCD9518DD32EF00B4FBC6 = {
+						TestTargetID = 24B4CB7818CAB7B300EC8E4A;
+					};
 					24B4CB8818CAB7B300EC8E4A = {
 						TestTargetID = 24B4CB7818CAB7B300EC8E4A;
 					};
+					C3CDA2DB18CA66DA003B7F96 = {
+						TestTargetID = 24B4CB7818CAB7B300EC8E4A;
+					};
 					C3F1B36618E2041C004ED254 = {
+						TestTargetID = 24B4CB7818CAB7B300EC8E4A;
+					};
+					C3F1B37A18E2042C004ED254 = {
 						TestTargetID = 24B4CB7818CAB7B300EC8E4A;
 					};
 				};
@@ -1167,6 +1198,7 @@
 				C3F1B36618E2041C004ED254 /* OSXIntegratedAuthenticatedTests */,
 				243CCD9518DD32EF00B4FBC6 /* OSXAnonTests */,
 				C3F1B37A18E2042C004ED254 /* OSXIntegratedAnonTests */,
+				C328812618EB1AFD00B080CF /* UniversalLib */,
 			);
 		};
 /* End PBXProject section */
@@ -1429,6 +1461,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		C328812A18EB1B1500B080CF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target ImgurSession ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target ImgurSession -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n";
 		};
 		CB27B87B3E594738AD2415B4 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1868,10 +1913,25 @@
 			};
 			name = Release;
 		};
+		C328812818EB1AFD00B080CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C328812918EB1AFD00B080CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C3CDA2EC18CA66DA003B7F96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1885,6 +1945,7 @@
 				);
 				INFOPLIST_FILE = "Resources/Authenticated Test Config.plist";
 				PRODUCT_NAME = "ImgurSession Tests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1893,6 +1954,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1902,6 +1964,7 @@
 				GCC_PREFIX_HEADER = "Resources/ImgurSession Tests-Prefix.pch";
 				INFOPLIST_FILE = "Resources/Authenticated Test Config.plist";
 				PRODUCT_NAME = "ImgurSession Tests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -1927,6 +1990,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1949,6 +2013,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -1974,6 +2039,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1996,6 +2062,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -2047,6 +2114,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C328812718EB1AFD00B080CF /* Build configuration list for PBXAggregateTarget "UniversalLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C328812818EB1AFD00B080CF /* Debug */,
+				C328812918EB1AFD00B080CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C3CDA2EB18CA66DA003B7F96 /* Build configuration list for PBXNativeTarget "iOSAuthenticatedTests" */ = {
 			isa = XCConfigurationList;

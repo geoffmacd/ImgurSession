@@ -44,10 +44,11 @@
 #pragma mark - Upload one image
 
 + (void)uploadImageWithFileURL:(NSURL *)fileURL success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
-    return [self uploadImageWithFileURL:fileURL title:nil description:nil andLinkToAlbumWithID:nil success:success failure:failure];
+    
+    [self uploadImageWithFileURL:fileURL title:nil description:nil linkToAlbumWithID:nil success:success failure:failure];
 }
 
-+ (void)uploadImageWithFileURL:(NSURL *)fileURL title:(NSString *)title description:(NSString *)description andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithFileURL:(NSURL *)fileURL title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
     //upload file from binary data
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -95,10 +96,10 @@
 }
 
 + (void)uploadImageWithURL:(NSURL *)url success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
-    return [self uploadImageWithURL:url title:nil description:nil andLinkToAlbumWithID:nil success:success failure:failure];
+    return [self uploadImageWithURL:url title:nil description:nil linkToAlbumWithID:nil success:success failure:failure];
 }
 
-+ (void)uploadImageWithURL:(NSURL *)url title:(NSString *)title description:(NSString *)description andLinkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithURL:(NSURL *)url title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
     //just upload with a url
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -127,6 +128,55 @@
                 failure(JSONError);
         }
     } failure:failure];
+}
+
+#pragma mark - Upload multiple images
+
++(void)uploadImages:(NSArray*)files success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    [self uploadImages:files toAlbumWithID:nil success:success failure:failure];
+}
+
++(void)uploadImages:(NSArray*)files toAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    NSParameterAssert(files);
+    
+    //async invocation
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //keep track of multiple file uploads with semaphore
+        dispatch_semaphore_t sema = dispatch_semaphore_create([files count]);
+        //return images
+        __block NSMutableArray * images = [NSMutableArray new];
+        
+        for(NSDictionary * file in files){
+            
+            //expects titles and files and descriptions
+            NSParameterAssert(file[@"title"]);
+            NSParameterAssert(file[@"description"]);
+            NSParameterAssert(file[@"imageURL"]);
+            
+            [self uploadImageWithFileURL:file[@"title"] title:file[@"title"] description:file[@"title"] linkToAlbumWithID:albumID success:^(IMGImage *image) {
+                
+                [images addObject:image];
+                
+                dispatch_semaphore_signal(sema);
+                
+            } failure:^(NSError *error) {
+                
+                dispatch_semaphore_signal(sema);
+            }];
+        }
+        
+        //waits until above is completed
+        if(dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER)){
+            //fails if return is non-zero
+            if(failure)
+                failure([NSError errorWithDomain:@"ImgurSession" code:14 userInfo:nil]);
+        } else if(success){
+            success([NSArray arrayWithArray:images]);
+        }
+    });
 }
 
 #pragma mark - Delete
