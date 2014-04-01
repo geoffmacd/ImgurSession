@@ -10,15 +10,15 @@
 
 
 typedef NS_ENUM(NSInteger, IMGAlbumPrivacy){
-    IMGAlbumDefault = 0,
-    IMGAlbumPublic = 0,
+    IMGAlbumDefault = 1,
+    IMGAlbumPublic = 1,
     IMGAlbumHidden,
     IMGAlbumSecret
 };
 
 typedef NS_ENUM(NSInteger, IMGAlbumLayout){
-    IMGDefaultLayout = 0,
-    IMGBlogLayout = 0,
+    IMGDefaultLayout = 1,
+    IMGBlogLayout = 1,
     IMGGridLayout,
     IMGHorizontalLayout,
     IMGVerticalLayout
