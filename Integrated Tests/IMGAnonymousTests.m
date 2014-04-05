@@ -231,4 +231,19 @@
     expect(isSuccess).will.beTruthy();
 }
 
+- (void)testGalleryComments{
+    
+    __block BOOL isSuccess;
+    
+    [IMGGalleryRequest commentsWithGalleryID:@"1I5nqe0" withSort:IMGGalleryCommentSortBest success:^(NSArray * comments) {
+        
+        IMGComment * first = [comments firstObject];
+        expect(first.commentId).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 @end

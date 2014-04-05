@@ -104,6 +104,11 @@
     return cover;
 }
 
+-(NSString *)objectID{
+    
+    return self.albumID;
+    
+}
 
 #pragma mark - NSCoding
 

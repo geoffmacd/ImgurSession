@@ -90,6 +90,17 @@
     return self;
 }
 
+-(NSString *)coverID{
+    
+    //for gallery image, the image is the cover image
+    return self.imageID;
+}
+
+-(NSString *)objectID{
+    
+    return self.imageID;
+}
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {

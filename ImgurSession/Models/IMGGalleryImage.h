@@ -36,6 +36,22 @@
  The user's vote for the object, if authenticated
  */
 -(IMGVoteType)usersVote;
+/**
+ ID for the gallery object
+ */
+-(NSString*)objectID;
+/**
+ Title of object
+ */
+-(NSString*)title;
+/**
+ ID of cover Image
+ */
+-(NSString*)coverID;
+/**
+ Score
+ */
+-(NSInteger)score;
 
 @end
 

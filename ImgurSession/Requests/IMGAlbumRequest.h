@@ -30,7 +30,7 @@
 /**
  Create an album with an array of imageIDs which currently exist
  */
-+ (void)createAlbumWithTitle:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
++ (void)createAlbumWithTitle:(NSString *)title imageIDs:(NSArray *)imageIDs success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
 + (void)createAlbumWithTitle:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(NSString *)coverID success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Update
