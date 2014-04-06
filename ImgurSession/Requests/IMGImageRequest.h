@@ -51,4 +51,10 @@
  */
 + (void)deleteImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
+#pragma mark - Favourtie
+/**
+ Fav an album. Must be signed in.
+ */
++(void)favouriteImageWithID:(NSString*)imageID  success:(void (^)())success failure:(void (^)(NSError *error))failure;
+
 @end

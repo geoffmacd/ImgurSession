@@ -35,7 +35,7 @@
  */
 + (void)accountGalleryFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
- Returns the current user's favorited images
+ Returns the current user's favorited images when signed in
  @return signal with request
  */
 + (void)accountFavouritesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;

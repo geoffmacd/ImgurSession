@@ -191,4 +191,15 @@
     } failure:failure];
 }
 
+#pragma mark - Favourite
+
++(void)favouriteImageWithID:(NSString*)imageID  success:(void (^)())success failure:(void (^)(NSError *error))failure{
+    NSString *path = [self pathWithId:imageID withOption:@"favorite"];
+    
+    [[IMGSession sharedInstance] POST:path parameters:Nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if(success)
+            success();
+    } failure:failure];
+}
 @end
