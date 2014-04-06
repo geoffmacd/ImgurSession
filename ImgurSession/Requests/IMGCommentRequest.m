@@ -43,9 +43,26 @@
     } failure:failure];
 }
 
-+ (void)repliesWithComment:(IMGComment*)comment success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)repliesWithCommentID:(NSString*)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    return [self commentWithID:comment.commentId withReplies:YES success:success failure:failure];
+    NSString *path = [self pathWithId:commentID withOption:@"replies"];
+    
+    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray * jsonArray = responseObject;
+        NSMutableArray * comments = [NSMutableArray new];
+        
+        for(NSDictionary * json in jsonArray){
+            
+            NSError *JSONError = nil;
+            IMGComment * comment = [[IMGComment alloc] initWithJSONObject:json error:&JSONError];
+            if(!JSONError && comment)
+                [comments addObject:comment];
+        }
+        if(success)
+            success([NSArray arrayWithArray:comments]);
+        
+    } failure:failure];
 }
 
 #pragma mark - Create

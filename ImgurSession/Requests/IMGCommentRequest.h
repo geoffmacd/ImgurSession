@@ -23,10 +23,11 @@
  */
 + (void)commentWithID:(NSInteger)commentId withReplies:(BOOL)replies success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
 /**
+ Fetch replies to a comment
  @param comment IMGComment object to fetch replies for
  @return signal with request
  */
-+ (void)repliesWithComment:(IMGComment*)comment success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)repliesWithComment:(NSString*)comment success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Create
 /**
