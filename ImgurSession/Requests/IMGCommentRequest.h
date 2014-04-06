@@ -27,7 +27,7 @@
  @param comment IMGComment object to fetch replies for
  @return signal with request
  */
-+ (void)repliesWithComment:(NSString*)comment success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)repliesWithCommentID:(NSInteger)comment success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Create
 /**

@@ -43,9 +43,9 @@
     } failure:failure];
 }
 
-+ (void)repliesWithCommentID:(NSString*)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)repliesWithCommentID:(NSInteger)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:commentID withOption:@"replies"];
+    NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"replies"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
