@@ -49,7 +49,7 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSArray * jsonArray = responseObject;
+        NSArray * jsonArray = responseObject[@"children"];
         NSMutableArray * comments = [NSMutableArray new];
         
         for(NSDictionary * json in jsonArray){

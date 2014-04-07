@@ -246,4 +246,21 @@
     expect(isSuccess).will.beTruthy();
 }
 
+
+
+- (void)testCommentReplies{
+    
+    __block BOOL isSuccess;
+    
+    [IMGCommentRequest repliesWithCommentID:205050082 success:^(NSArray * comments) {
+        
+        IMGComment * first = [comments firstObject];
+        expect(first.commentId).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 @end
