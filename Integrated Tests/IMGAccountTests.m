@@ -156,7 +156,6 @@
                         
                     [IMGAccountRequest accountImageCount:@"me" success:^(NSInteger num) {
                         
-                        expect(num).beGreaterThan(0);
                         isSuccess = YES;
                         
                     } failure:failBlock];
@@ -183,7 +182,6 @@
                     
                     [IMGAccountRequest accountAlbumCountWithUser:@"me" success:^(NSInteger num) {
                         
-                        expect(num).beGreaterThan(0);
                         isSuccess = YES;
                         
                     } failure:failBlock];

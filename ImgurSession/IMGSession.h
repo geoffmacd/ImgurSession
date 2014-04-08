@@ -40,7 +40,8 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
  State of authentication
  */
 typedef NS_ENUM(NSInteger, IMGAuthState){
-    IMGAuthStateNone,
+    IMGAuthStateNone = 0,
+    IMGAuthStateBad = 0,
     IMGAuthStateAuthenticated,
     IMGAuthStateExpired
 };

@@ -115,6 +115,18 @@
     });
 }
 
+-(void)refreshTokenBad{
+    //refresh token is no longer working, probably banned from API
+    self.refreshToken = nil;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
+            [_delegate imgurSessionAuthStateChanged:IMGAuthStateBad];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
+    });
+}
+
 -(IMGAuthState)sessionAuthState{
     
     if(!self.refreshToken)
@@ -168,12 +180,18 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
                 });
             }
-
             
             if(success)
                 success(_refreshToken);
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            //not working anymore
+            NSHTTPURLResponse * resp = (NSHTTPURLResponse *)task.response;
+            
+            //in my experience, banned
+            if(resp.statusCode == 400)
+                [self refreshTokenBad];
             
             NSLog(@"%@", [error description]);
             if(failure)
@@ -377,6 +395,7 @@
             }];
         } else {
             
+            
             if(failure)
                 failure(error);
             NSLog(@"failed : %@", [error localizedDescription]);
@@ -387,7 +406,7 @@
 -(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure{
     
     return [super GET:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        
+
         if(success)
             success(task,responseObject);
         
@@ -407,6 +426,8 @@
                 NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
             }];
         } else {
+            
+            
         
             if(failure)
                 failure(error);
