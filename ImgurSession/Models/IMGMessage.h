@@ -12,7 +12,7 @@
 /**
  Model object class to represent messages. https://api.imgur.com/models/message
  */
-@interface IMGMessage : IMGModel
+@interface IMGMessage : IMGModel  <NSCopying,NSCoding>
 
 /**
  Message ID
