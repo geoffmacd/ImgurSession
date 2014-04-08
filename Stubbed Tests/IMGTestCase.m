@@ -25,6 +25,9 @@
     
     //failure block
     failBlock = ^(NSError * error) {
+        
+        NSLog(@"Error : %@", [error localizedDescription]);
+        
         XCTAssert(nil, @"FAIL");
     };
 }

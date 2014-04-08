@@ -47,6 +47,16 @@
     
     if(self = [super init]) {
         
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"email"] || !jsonData[@"album_privacy"] || !jsonData[@"accepted_gallery_terms"]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+        
         _email = jsonData[@"email"];
         _albumPrivacy = [IMGBasicAlbum privacyForStr:jsonData[@"album_privacy"]];
         _publicImages = [jsonData[@"public_images"] integerValue];
@@ -69,7 +79,8 @@
         NSMutableArray * blockedUsers = [NSMutableArray new];
         for(NSDictionary * user in jsonData[@"blocked_users"]){
             IMGBlockedUser * blocked = [[IMGBlockedUser alloc] initWithJSONObject:user error:nil];
-            [blockedUsers addObject:blocked];
+            if(blocked)
+                [blockedUsers addObject:blocked];
         }
         _blockedUsers = [NSArray arrayWithArray:blockedUsers];
     }

@@ -16,18 +16,28 @@
     
     if(self = [super init]) {
         
-        _commentId = [jsonData[@"id"] integerValue];
-        _imageId = jsonData[@"image_id"];
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"id"] || !jsonData[@"image_id"] || !jsonData[@"comment"]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+        
+        _commentID = [jsonData[@"id"] integerValue];
+        _imageID = jsonData[@"image_id"];
         _caption = jsonData[@"comment"];
         _author = jsonData[@"author"];
-        _authorId = [jsonData[@"author_id"] integerValue];
+        _authorID = [jsonData[@"author_id"] integerValue];
         _onAlbum = [jsonData[@"on_album"] boolValue];
         _albumCover = jsonData[@"album_cover"];
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];
-        _points = [jsonData[@"points"] floatValue];
+        _points = [jsonData[@"points"] integerValue];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
-        _parentId = [jsonData[@"parent_id"] integerValue];
+        _parentID = [jsonData[@"parent_id"] integerValue];
         _deleted = [jsonData[@"deleted"] boolValue];
         
         _children = jsonData[@"children"];
@@ -38,7 +48,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@; caption: \"%@\"; author: \"%@\"; authorId: %ld; imageId: %@;",  [super description], self.caption, self.author, (long)self.authorId, self.imageId];
+    return [NSString stringWithFormat:@"%@; caption: \"%@\"; author: \"%@\"; authorId: %ld; imageId: %@;",  [super description], self.caption, self.author, (long)self.authorID, self.imageID];
 }
 
 -(BOOL)isEqual:(id)object{
@@ -51,7 +61,7 @@
         return NO;
     }
     
-    return ([object commentId] == self.commentId);
+    return ([object commentID] == self.commentID);
 }
 
 

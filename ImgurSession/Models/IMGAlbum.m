@@ -24,6 +24,12 @@
     
     if(self && !*error) {
         
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        }
+        
         _deletehash = jsonData[@"deletehash"];
     }
     return [self trackModels];

@@ -35,6 +35,17 @@
 - (instancetype)initWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
     
     if(self = [super init]) {
+        
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"id"] || !jsonData[@"title"] || !jsonData[@"link"] || !jsonData[@"cover"]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+        
         _albumID = jsonData[@"id"];
         _title = jsonData[@"title"];
         _albumDescription = jsonData[@"description"];

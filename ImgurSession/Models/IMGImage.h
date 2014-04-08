@@ -8,6 +8,7 @@
 
 #import "IMGModel.h"    
 
+
 /*
  There are 6 total thumbnails that an image can be resized to. Each one is accessable by appending a single character suffix to the end of the image id, and before the file extension. The thumbnails are:
  
@@ -90,7 +91,7 @@ typedef NS_ENUM(NSInteger, IMGSize) {
 /**
  URL to actual image file. Use URLWithSize to retrieve various image sizes.
  */
-@property (nonatomic, readonly, copy) NSString *url;
+@property (nonatomic, readonly, copy) NSURL *url;
 
 
 #pragma mark - Display

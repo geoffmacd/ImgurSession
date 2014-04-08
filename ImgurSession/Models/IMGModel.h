@@ -7,6 +7,10 @@
 //
 
 
+//error codes
+#define IMGErrorMalformedResponseFormat         0   //Response data is in wrong format
+#define IMGErrorResponseMissingParameters       1   //some critical fields are not in response
+#define IMGErrorDomain                          @"com.imgursession"
 
 
 @interface IMGModel : NSObject <NSCoding>

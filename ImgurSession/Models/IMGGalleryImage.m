@@ -30,13 +30,20 @@
     
     if(self && !*error) {
         
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        }
+        
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];
         _score = [jsonData[@"score"] integerValue];
+        _accountURL = jsonData[@"account_url"];
         if(![jsonData[@"vote"] isKindOfClass:[NSNull class]])
             _vote = [IMGVote voteForStr:jsonData[@"vote"]];
-        
-        _accountURL = jsonData[@"account_url"];
+        else
+            _vote = IMGNeutralVote;
         if(![jsonData[@"nsfw"] isKindOfClass:[NSNull class]])
             _nsfw = [jsonData[@"nsfw"] boolValue];
         if(![jsonData[@"favorite"] isKindOfClass:[NSNull class]])

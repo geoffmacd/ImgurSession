@@ -35,6 +35,16 @@
     
     if(self = [super init]) {
         
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"id"] || !jsonData[@"url"] || !jsonData[@"bio"]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+        
         _username = username;
         _accountID = [jsonData[@"id"] integerValue];
         _url = [NSURL URLWithString:jsonData[@"url"]];

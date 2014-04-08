@@ -16,11 +16,11 @@
 /**
  Comment ID
  */
-@property (readonly,nonatomic) NSInteger commentId;
+@property (readonly,nonatomic) NSInteger commentID;
 /**
  Image ID comment is associated with
  */
-@property (readonly,nonatomic, copy) NSString * imageId;
+@property (readonly,nonatomic, copy) NSString * imageID;
 /**
  Actual comment string
  */
@@ -32,7 +32,7 @@
 /**
  Authors account id
  */
-@property (readonly,nonatomic) NSInteger authorId;
+@property (readonly,nonatomic) NSInteger authorID;
 /**
  Comment on an album, not image
  */
@@ -52,7 +52,7 @@
 /**
  sum of up-votes minus down-votes
  */
-@property (readonly,nonatomic) CGFloat points;
+@property (readonly,nonatomic) NSInteger points;
 /**
  timestamp of creation of comment
  */
@@ -60,7 +60,7 @@
 /**
  Parent comment ID, nil if no parent
  */
-@property (readonly,nonatomic) NSInteger parentId;
+@property (readonly,nonatomic) NSInteger parentID;
 /**
  Is comment deleted? Still exists on server
  */

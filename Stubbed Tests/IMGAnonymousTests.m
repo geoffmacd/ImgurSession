@@ -313,7 +313,7 @@
         expect(comments).haveCountOf(1);
         
         IMGComment * first = [comments firstObject];
-        expect(first.commentId).beTruthy();
+        expect(first.commentID).beTruthy();
         expect(first.caption).beTruthy();
         
         isSuccess = YES;

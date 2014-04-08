@@ -23,7 +23,7 @@
 @property (readwrite,nonatomic) NSInteger bandwidth;
 @property (readwrite,nonatomic) NSString *deletehash;
 @property (readwrite,nonatomic) NSString *section;
-@property (readwrite,nonatomic) NSString *url;
+@property (readwrite,nonatomic) NSURL *url;
 
 @end
 
@@ -35,6 +35,16 @@
     
     if(self = [super init]) {
         
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"id"] || !jsonData[@"title"] || !jsonData[@"link"] || !jsonData[@"animated"]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+        
         _imageID = jsonData[@"id"];
         _title = jsonData[@"title"];
         _imageDescription = jsonData[@"description"];
@@ -43,13 +53,15 @@
         _section = jsonData[@"section"];
         if(![jsonData[@"animated"] isKindOfClass:[NSNull class]])
             _animated = [jsonData[@"animated"] boolValue];
+        else
+            _animated = NO;
         _width = [jsonData[@"width"] floatValue];
         _height = [jsonData[@"height"] floatValue];
         _size = [jsonData[@"size"] integerValue];
         _views = [jsonData[@"views"] integerValue];
         _bandwidth = [jsonData[@"bandwidth"] integerValue];
         _deletehash = jsonData[@"deletehash"];
-        _url = jsonData[@"link"];
+        _url = [NSURL URLWithString:jsonData[@"link"]];
     }   
     return [self trackModels];
 }
@@ -79,7 +91,7 @@
 
 - (NSURL *)URLWithSize:(IMGSize)size{
     
-    NSString *path = [self.url stringByDeletingPathExtension];
+    NSString *path = [[self.url absoluteString] stringByDeletingPathExtension];
     NSString *extension = [self.url pathExtension];
     NSString *stringURL;
     
@@ -127,7 +139,7 @@
     NSInteger size = [[decoder decodeObjectForKey:@"size"] integerValue];
     NSInteger bandwidth = [[decoder decodeObjectForKey:@"bandwidth"] integerValue];
     NSString * imageID = [decoder decodeObjectForKey:@"imageID"];
-    NSString * url = [decoder decodeObjectForKey:@"url"];
+    NSURL * url = [decoder decodeObjectForKey:@"url"];
     NSString * deletehash = [decoder decodeObjectForKey:@"deletehash"];
     NSString * title = [decoder decodeObjectForKey:@"title"];
     NSString * imageDescription = [decoder decodeObjectForKey:@"imageDescription"];

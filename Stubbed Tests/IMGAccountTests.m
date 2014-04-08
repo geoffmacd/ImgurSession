@@ -137,7 +137,7 @@
         IMGComment * first = [comments firstObject];
         expect(first).beInstanceOf([IMGComment class]);
         expect(first.caption).beTruthy();
-        expect(first.imageId).beTruthy();
+        expect(first.imageID).beTruthy();
         
         isSuccess = YES;
 
@@ -154,7 +154,7 @@
     [IMGAccountRequest accountCommentWithID:15325 success:^(IMGComment * firstComment) {
         
         expect(firstComment.caption).beTruthy();
-        expect(firstComment.imageId).beTruthy();
+        expect(firstComment.imageID).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];

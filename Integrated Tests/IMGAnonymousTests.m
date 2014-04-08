@@ -223,7 +223,7 @@
         
         expect(comments).haveCountOf(1);
         IMGComment * first = [comments firstObject];
-        expect(first.commentId).beTruthy();
+        expect(first.commentID).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];
@@ -238,7 +238,7 @@
     [IMGGalleryRequest commentsWithGalleryID:@"1I5nqe0" withSort:IMGGalleryCommentSortBest success:^(NSArray * comments) {
         
         IMGComment * first = [comments firstObject];
-        expect(first.commentId).beTruthy();
+        expect(first.commentID).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];
@@ -255,7 +255,7 @@
     [IMGCommentRequest repliesWithCommentID:205050082 success:^(NSArray * comments) {
         
         IMGComment * first = [comments firstObject];
-        expect(first.commentId).beTruthy();
+        expect(first.commentID).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];

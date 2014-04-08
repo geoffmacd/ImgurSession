@@ -8,6 +8,8 @@
 
 #import "IMGGalleryProfile.h"
 
+#import "IMGSession.h"
+
 
 #pragma mark - IMGGalleryTrophy
 
@@ -41,6 +43,17 @@
 - (instancetype)initWithUser:(NSString*)username JSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
     
     if(self = [super init]) {
+        
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"score"] || !jsonData[@"ups"] || !jsonData[@"down"]){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+        
         _totalComments = [jsonData[@"total_gallery_comments"] integerValue];
         _totalLikes = [jsonData[@"total_gallery_likes"] integerValue];
         _totalSubmissions = [jsonData[@"total_gallery_submissions"] integerValue];
