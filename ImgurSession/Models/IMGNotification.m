@@ -12,6 +12,17 @@
 #import "IMGMessage.h"
 #import "IMGConversation.h"
 
+@interface IMGNotification ()
+
+@property (readwrite,nonatomic) NSString *notificationID;
+@property (readwrite,nonatomic) NSInteger accountID;
+@property (readwrite,nonatomic) IMGComment * reply;
+@property (readwrite,nonatomic) IMGConversation * conversation;
+@property (readwrite,nonatomic) BOOL isViewed;
+@property (readwrite,nonatomic) BOOL isReply;
+
+@end
+
 @implementation IMGNotification
 
 - (instancetype)initReplyNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
@@ -67,5 +78,63 @@
     return ([[object notificationID] isEqualToString:self.notificationID]);
 }
 
+
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSInteger accountID = [[decoder decodeObjectForKey:@"accountID"] integerValue];
+    NSString * notificationID = [decoder decodeObjectForKey:@"notificationID"];
+    
+    IMGComment * reply= [decoder decodeObjectForKey:@"reply"];
+    IMGConversation * conversation = [decoder decodeObjectForKey:@"conversation"];
+    BOOL isViewed = [[decoder decodeObjectForKey:@"isViewed"] boolValue];
+    BOOL isReply = [[decoder decodeObjectForKey:@"isReply"] boolValue];
+    
+    if (self = [super initWithCoder:decoder]) {
+        _accountID = accountID;
+        _notificationID = notificationID;
+        
+        _reply = reply;
+        _conversation = conversation;
+        _isViewed = isViewed;
+        _isReply = isReply;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:self.notificationID forKey:@"notificationID"];
+    [coder encodeObject:self.conversation forKey:@"conversation"];
+    [coder encodeObject:self.reply forKey:@"reply"];
+    
+    [coder encodeObject:@(self.accountID) forKey:@"accountID"];
+    [coder encodeObject:@(self.isViewed) forKey:@"isViewed"];
+    [coder encodeObject:@(self.isReply) forKey:@"isReply"];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    
+    IMGNotification * copy = [[[self class] allocWithZone:zone] init];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setNotificationID:[self.notificationID copyWithZone:zone]];
+        [copy setReply:[self.reply copyWithZone:zone]];
+        [copy setConversation:[self.conversation copyWithZone:zone]];
+        
+        // Set primitives
+        [copy setAccountID:self.accountID];
+        [copy setIsReply:self.isReply];
+        [copy setIsViewed:self.isViewed];
+    }
+    
+    return copy;
+}
 
 @end

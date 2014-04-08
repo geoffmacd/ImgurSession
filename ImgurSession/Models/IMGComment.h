@@ -11,7 +11,8 @@
 /**
  Model object class to represent comments on images, albums, and comments. https://api.imgur.com/models/comment
  */
-@interface IMGComment : IMGModel
+@interface IMGComment : IMGModel <NSCopying,NSCoding>
+
 
 /**
  Comment ID

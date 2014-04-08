@@ -13,7 +13,7 @@
 /**
  Model object class to represent user notifications. https://api.imgur.com/models/notifications
  */
-@interface IMGNotification : IMGModel
+@interface IMGNotification : IMGModel  <NSCopying,NSCoding>
 
 /**
  notification ID

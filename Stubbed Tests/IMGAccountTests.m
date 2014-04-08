@@ -139,6 +139,20 @@
         expect(first.caption).beTruthy();
         expect(first.imageID).beTruthy();
         
+        IMGComment * copy = [first copy];
+        expect(first.caption).equal(copy.caption);
+        expect([first.imageID isEqualToString:copy.imageID]).beTruthy();
+        expect(first.commentID == copy.commentID).beTruthy();
+        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        expect(first.caption).equal(copy.caption);
+        expect([first.imageID isEqualToString:copy.imageID]).beTruthy();
+        expect(first.commentID == copy.commentID).beTruthy();
+        expect(copy).equal(first);
+        
+        
         isSuccess = YES;
 
     } failure:failBlock];

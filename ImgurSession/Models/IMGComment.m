@@ -8,6 +8,25 @@
 
 #import "IMGComment.h"
 
+@interface IMGComment ()
+
+@property (readwrite,nonatomic) NSInteger commentID;
+@property (readwrite,nonatomic) NSString *imageID;
+@property (readwrite,nonatomic) NSString *caption;
+@property (readwrite,nonatomic) NSString *author;
+@property (readwrite,nonatomic) NSInteger authorID;
+@property (readwrite,nonatomic) BOOL onAlbum;
+@property (readwrite,nonatomic) NSString *albumCover;
+@property (readwrite,nonatomic) NSInteger ups;
+@property (readwrite,nonatomic) NSInteger downs;
+@property (readwrite,nonatomic) NSInteger points;
+@property (readwrite,nonatomic) NSDate * datetime;
+@property (readwrite,nonatomic) NSInteger parentID;
+@property (readwrite,nonatomic) BOOL deleted;
+@property (readwrite,nonatomic) NSArray * children;
+
+@end
+
 @implementation IMGComment
 
 #pragma mark - Init With Json
@@ -65,4 +84,96 @@
 }
 
 
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSInteger commentID = [[decoder decodeObjectForKey:@"commentID"] integerValue];
+    NSInteger authorID = [[decoder decodeObjectForKey:@"authorID"] integerValue];
+    NSInteger ups = [[decoder decodeObjectForKey:@"ups"] integerValue];
+    NSInteger downs = [[decoder decodeObjectForKey:@"downs"] integerValue];
+    NSInteger points = [[decoder decodeObjectForKey:@"points"] integerValue];
+    NSInteger parentID = [[decoder decodeObjectForKey:@"parentID"] integerValue];
+    BOOL onAlbum = [[decoder decodeObjectForKey:@"onAlbum"] boolValue];
+    BOOL deleted = [[decoder decodeObjectForKey:@"deleted"] boolValue];
+    
+    NSString * imageID = [decoder decodeObjectForKey:@"imageID"];
+    NSString * caption = [decoder decodeObjectForKey:@"caption"];
+    NSString * author = [decoder decodeObjectForKey:@"author"];
+    NSString * albumCover = [decoder decodeObjectForKey:@"albumCover"];
+    
+    NSDate * datetime = [decoder decodeObjectForKey:@"datetime"];
+    NSArray * children = [decoder decodeObjectForKey:@"children"];
+    
+    if (self = [super initWithCoder:decoder]) {
+        _commentID = commentID;
+        _authorID = authorID;
+        _ups = ups;
+        _downs = downs;
+        _points = points;
+        _parentID = parentID;
+        _onAlbum = onAlbum;
+        _deleted = deleted;
+        
+        _imageID = imageID;
+        _caption = caption;
+        _author = author;
+        _albumCover = albumCover;
+        
+        _datetime = datetime;
+        _children = children;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:self.imageID forKey:@"imageID"];
+    [coder encodeObject:self.caption forKey:@"caption"];
+    [coder encodeObject:self.author forKey:@"author"];
+    [coder encodeObject:self.albumCover forKey:@"albumCover"];
+    
+    [coder encodeObject:self.datetime forKey:@"datetime"];
+    [coder encodeObject:self.children forKey:@"children"];
+    
+    [coder encodeObject:@(self.commentID) forKey:@"commentID"];
+    [coder encodeObject:@(self.authorID) forKey:@"authorID"];
+    [coder encodeObject:@(self.ups) forKey:@"ups"];
+    [coder encodeObject:@(self.downs) forKey:@"downs"];
+    [coder encodeObject:@(self.points) forKey:@"points"];
+    [coder encodeObject:@(self.parentID) forKey:@"parentID"];
+    [coder encodeObject:@(self.onAlbum) forKey:@"onAlbum"];
+    [coder encodeObject:@(self.deleted) forKey:@"deleted"];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    
+    IMGComment * copy = [[[self class] allocWithZone:zone] init];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setImageID:[self.imageID copyWithZone:zone]];
+        [copy setCaption:[self.caption copyWithZone:zone]];
+        [copy setAuthor:[self.author copyWithZone:zone]];
+        [copy setAlbumCover:[self.albumCover copyWithZone:zone]];
+        [copy setDatetime:[self.datetime copyWithZone:zone]];
+        [copy setChildren:[self.children copyWithZone:zone]];
+        
+        // Set primitives
+        [copy setCommentID:self.commentID];
+        [copy setAuthorID:self.authorID];
+        [copy setUps:self.ups];
+        [copy setDowns:self.downs];
+        [copy setPoints:self.points];
+        [copy setParentID:self.parentID];
+        [copy setOnAlbum:self.onAlbum];
+        [copy setDeleted:self.deleted];
+    }
+    
+    return copy;
+}
 @end
