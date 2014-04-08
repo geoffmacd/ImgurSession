@@ -23,18 +23,18 @@
 /**
  @return full path to this endpoint appended by /id1
  */
-+(NSString*)pathWithId:(NSString*)id1;
++(NSString*)pathWithID:(NSString*)id1;
 /**
  @return full path to this endpoint appended by /id1/option
  */
-+(NSString*)pathWithId:(NSString*)id1 withOption:(NSString*)option;
++(NSString*)pathWithID:(NSString*)id1 withOption:(NSString*)option;
 /**
  @return full path to this endpoint appended by /option/id2
  */
-+(NSString*)pathWithOption:(NSString*)option withId2:(NSString*)id2;
++(NSString*)pathWithOption:(NSString*)option withID2:(NSString*)id2;
 /**
  @return full path to this endpoint appended by /id1/option/id2
  */
-+(NSString*)pathWithId:(NSString*)id1 withOption:(NSString*)option withId2:(NSString*)id2;
++(NSString*)pathWithID:(NSString*)id1 withOption:(NSString*)option withID2:(NSString*)id2;
 
 @end

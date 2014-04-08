@@ -18,8 +18,8 @@
     
     if(self = [super init]) {
         
-        _notificationId = jsonData[@"id"];
-        _accountId = [jsonData[@"account_id"] integerValue];
+        _notificationID = jsonData[@"id"];
+        _accountID = [jsonData[@"account_id"] integerValue];
         _isViewed = [jsonData[@"viewed"] boolValue];
         _isReply = YES;
         
@@ -35,8 +35,8 @@
     
     if(self = [super init]) {
         
-        _notificationId = jsonData[@"id"];
-        _accountId = [jsonData[@"account_id"] integerValue];
+        _notificationID = jsonData[@"id"];
+        _accountID = [jsonData[@"account_id"] integerValue];
         _isViewed = [jsonData[@"viewed"] boolValue];
         _isReply = NO;
         
@@ -51,7 +51,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@ ; notifyId: \"%@\"; accountId: %ld; viewed: %@;", [super description], self.notificationId, (long)self.accountId, (self.isViewed ? @"YES" : @"NO")];
+    return [NSString stringWithFormat:@"%@ ; notifyId: \"%@\"; accountId: %ld; viewed: %@;", [super description], self.notificationID, (long)self.accountID, (self.isViewed ? @"YES" : @"NO")];
 }
 
 -(BOOL)isEqual:(id)object{
@@ -64,7 +64,7 @@
         return NO;
     }
     
-    return ([[object notificationId] isEqualToString:self.notificationId]);
+    return ([[object notificationID] isEqualToString:self.notificationID]);
 }
 
 

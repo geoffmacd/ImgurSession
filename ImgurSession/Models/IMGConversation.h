@@ -25,7 +25,7 @@
 /**
  Authors account id
  */
-@property (readonly,nonatomic) NSInteger authorId;
+@property (readonly,nonatomic) NSInteger authorID;
 /**
  message subject
  */

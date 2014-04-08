@@ -30,16 +30,16 @@
 /**
  Create an album with an array of imageIDs which currently exist
  */
-+ (void)createAlbumWithTitle:(NSString *)title imageIDs:(NSArray *)imageIDs success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
-+ (void)createAlbumWithTitle:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(NSString *)coverID success:(void (^)(IMGAlbum *album))success failure:(void (^)(NSError *error))failure;
++ (void)createAlbumWithTitle:(NSString *)title imageIDs:(NSArray *)imageIDs success:(void (^)(NSString * albumID, NSString *albumDeleteHash))success failure:(void (^)(NSError *error))failure;
++ (void)createAlbumWithTitle:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(NSString *)coverID success:(void (^)(NSString * , NSString * albumDeleteHash))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Update
 
 /**
  Update an existing album with ID and optional params
  */
-+ (void)updateAlbumWithID:(NSString*)albumID imageIDs:(NSArray *)imageIDs success:(void (^)(IMGAlbum *))success failure:(void (^)(NSError *))failure;
-+ (void)updateAlbumWithID:(NSString*)albumID title:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(NSString *)coverID success:(void (^)(IMGAlbum *))success failure:(void (^)(NSError *))failure;
++ (void)updateAlbumWithID:(NSString*)albumID imageIDs:(NSArray *)imageIDs success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)updateAlbumWithID:(NSString*)albumID title:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(NSString *)coverID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Delete
 

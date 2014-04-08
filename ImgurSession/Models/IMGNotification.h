@@ -18,11 +18,11 @@
 /**
  notification ID
  */
-@property (readonly,nonatomic, copy) NSString * notificationId;
+@property (readonly,nonatomic, copy) NSString * notificationID;
 /**
  Account ID notification is associated with
  */
-@property (readonly,nonatomic) NSInteger accountId;
+@property (readonly,nonatomic) NSInteger accountID;
 /**
  Has notification been viewed yet?
  */

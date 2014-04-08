@@ -58,7 +58,7 @@
 }
 
 + (void)notificationWithID:(NSString*)notificationId success:(void (^)(IMGNotification *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:notificationId];
+    NSString *path = [self pathWithID:notificationId];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -90,7 +90,7 @@
 #pragma mark - Delete
 
 + (void)notificationViewed:(NSString *)notificationId success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:notificationId];
+    NSString *path = [self pathWithID:notificationId];
     
     //PUT or POST or DELETE
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

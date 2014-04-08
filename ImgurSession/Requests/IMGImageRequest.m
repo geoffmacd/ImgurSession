@@ -22,7 +22,7 @@
 #pragma mark - Load
 
 + (void)imageWithID:(NSString *)imageID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:imageID];
+    NSString *path = [self pathWithID:imageID];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -169,8 +169,10 @@
         }
         
         //waits until above is completed
-        for(NSDictionary * file in files)
+        [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            //for each
             dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        }];
 
         if(success){
             success([NSArray arrayWithArray:images]);
@@ -181,7 +183,7 @@
 #pragma mark - Delete
 
 + (void)deleteImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:imageID];
+    NSString *path = [self pathWithID:imageID];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -194,7 +196,7 @@
 #pragma mark - Favourite
 
 +(void)favouriteImageWithID:(NSString*)imageID  success:(void (^)())success failure:(void (^)(NSError *error))failure{
-    NSString *path = [self pathWithId:imageID withOption:@"favorite"];
+    NSString *path = [self pathWithID:imageID withOption:@"favorite"];
     
     [[IMGSession sharedInstance] POST:path parameters:Nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

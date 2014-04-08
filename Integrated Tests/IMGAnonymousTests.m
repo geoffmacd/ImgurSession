@@ -136,11 +136,11 @@
         
         expect(image.imageID).beTruthy();
         
-        [IMGAlbumRequest createAlbumWithTitle:@"Test kitty" description:@"blah" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGBlogLayout cover:image.imageID success:^(IMGAlbum *album) {
+        [IMGAlbumRequest createAlbumWithTitle:@"Test kitty" description:@"blah" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGBlogLayout cover:image.imageID success:^(NSString * albumID, NSString * deletehash) {
 
-            expect(album.albumID).beTruthy();
+            expect(albumID).beTruthy();
             
-            [IMGAlbumRequest deleteAlbumWithID:album.deletehash success:^{
+            [IMGAlbumRequest deleteAlbumWithID:deletehash success:^{
                 
                 
                 isSuccess = YES;

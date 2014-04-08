@@ -45,7 +45,7 @@
 }
 
 + (void)conversationWithMessageID:(NSInteger)messageId success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure{
-    NSString * path = [self pathWithId:[NSString stringWithFormat:@"%lu", messageId]];
+    NSString * path = [self pathWithID:[NSString stringWithFormat:@"%lu", messageId]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -68,7 +68,7 @@
 
 
 + (void)createMessageWithRecipient:(NSString*)recipient withBody:(NSString*)body success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:recipient];
+    NSString *path = [self pathWithID:recipient];
     NSDictionary * params = @{@"recipient":recipient,@"body":body};
     
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -82,7 +82,7 @@
 #pragma mark - Delete
 
 + (void)deleteConversation:(NSInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", convoID]];
+    NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", convoID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -95,7 +95,7 @@
 #pragma mark - Report
 
 + (void)reportSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithOption:@"report" withId2:username];
+    NSString *path = [self pathWithOption:@"report" withID2:username];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -108,7 +108,7 @@
 #pragma mark - Block
 
 + (void)blockSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithOption:@"block" withId2:username];
+    NSString *path = [self pathWithOption:@"block" withID2:username];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

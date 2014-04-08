@@ -19,7 +19,7 @@
         
         _conversationID = [jsonData[@"id"] integerValue];
         _fromUsername = jsonData[@"with_account"];
-        _authorId = [jsonData[@"with_account_id"] integerValue];
+        _authorID = [jsonData[@"with_account_id"] integerValue];
         _lastMessage = jsonData[@"last_message_preview"];
         _messageCount = [jsonData[@"message_count"] integerValue];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
@@ -45,7 +45,7 @@
         
         _conversationID = [jsonData[@"id"] integerValue];
         _fromUsername = jsonData[@"from"];
-        _authorId = [jsonData[@"with_account"] integerValue];
+        _authorID = [jsonData[@"with_account"] integerValue];
         _lastMessage = jsonData[@"last_message"];
         _messageCount = [jsonData[@"message_num"] integerValue];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];

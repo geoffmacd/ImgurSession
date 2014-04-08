@@ -40,7 +40,7 @@
         if(first){
         
             //mark first one as viewed
-            [IMGNotificationRequest notificationViewed:first.notificationId success:^{
+            [IMGNotificationRequest notificationViewed:first.notificationID success:^{
                 
                 isSuccess = YES;
                 

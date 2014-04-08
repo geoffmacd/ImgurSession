@@ -18,7 +18,7 @@
 - (instancetype)initWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{
     
     if(self = [super init]) {
-        _trophyId = jsonData[@"id"];
+        _trophyID = jsonData[@"id"];
         _name = jsonData[@"name"];
         _type = jsonData[@"name_clean"];
         _profileDescription = jsonData[@"description"];

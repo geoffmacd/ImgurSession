@@ -31,7 +31,7 @@
 - (instancetype)initWithJSONObject:(NSDictionary *)jsonData error:(NSError * __autoreleasing *)error{
     
     if(self = [super init]) {
-        _blockedId = jsonData[@"blocked_id"];
+        _blockedID = jsonData[@"blocked_id"];
         _blockedURL = [NSURL URLWithString:jsonData[@"blocked_url"]];
     }
     return [self trackModels];

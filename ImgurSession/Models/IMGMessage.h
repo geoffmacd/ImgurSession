@@ -17,7 +17,7 @@
 /**
  Message ID
  */
-@property (readonly,nonatomic, copy) NSString * messageId;
+@property (readonly,nonatomic, copy) NSString * messageID;
 /**
  Username who sent the message
  */
@@ -25,7 +25,7 @@
 /**
  Authors account id
  */
-@property (readonly,nonatomic) NSInteger authorId;
+@property (readonly,nonatomic) NSInteger authorID;
 /**
  message subject
  */

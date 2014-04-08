@@ -22,27 +22,27 @@
     return [NSString stringWithFormat:@"%@/%@", IMGAPIVersion, [self pathComponent]];
 }
 
-+(NSString*)pathWithId:(NSString*)id1 {
++(NSString*)pathWithID:(NSString*)id1 {
     NSParameterAssert(id1);
     
     return [NSString stringWithFormat:@"%@/%@/%@", IMGAPIVersion, [self pathComponent], id1];
 }
 
-+(NSString*)pathWithId:(NSString*)id1 withOption:(NSString*)option{
++(NSString*)pathWithID:(NSString*)id1 withOption:(NSString*)option{
     NSParameterAssert(id1);
     NSParameterAssert(option);
     
     return [NSString stringWithFormat:@"%@/%@/%@/%@", IMGAPIVersion, [self pathComponent], id1, option];
 }
 
-+(NSString*)pathWithOption:(NSString*)option withId2:(NSString*)id2{
++(NSString*)pathWithOption:(NSString*)option withID2:(NSString*)id2{
     NSParameterAssert(id2);
     NSParameterAssert(option);
     
     return [NSString stringWithFormat:@"%@/%@/%@/%@", IMGAPIVersion, [self pathComponent], option, id2];
 }
 
-+(NSString*)pathWithId:(NSString*)id1 withOption:(NSString*)option withId2:(NSString*)id2{
++(NSString*)pathWithID:(NSString*)id1 withOption:(NSString*)option withID2:(NSString*)id2{
     NSParameterAssert(id1);
     NSParameterAssert(option);
     NSParameterAssert(id2);

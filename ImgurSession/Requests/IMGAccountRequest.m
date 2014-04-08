@@ -30,7 +30,7 @@
 #pragma mark - Load
 
 + (void)accountWithUser:(NSString *)username success:(void (^)(IMGAccount *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username];
+    NSString *path = [self pathWithID:username];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -51,7 +51,7 @@
 #pragma mark - Favourites
 
 + (void)accountGalleryFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"gallery_favorites"];
+    NSString *path = [self pathWithID:username withOption:@"gallery_favorites"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -75,7 +75,7 @@
 }
 
 + (void)accountFavouritesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:@"me" withOption:@"favorites"];
+    NSString *path = [self pathWithID:@"me" withOption:@"favorites"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -110,7 +110,7 @@
 }
 
 + (void)accountSubmissionsWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"submissions" withId2:[NSString stringWithFormat:@"%ld",(long)page]];
+    NSString *path = [self pathWithID:username withOption:@"submissions" withID2:[NSString stringWithFormat:@"%ld",(long)page]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -149,7 +149,7 @@
 
 + (void)accountSettings:(void (^)(IMGAccountSettings *settings))success failure:(void (^)(NSError *error))failure{
     //only allows settings for current account after login
-    NSString *path = [self pathWithId:@"me" withOption:@"settings"];
+    NSString *path = [self pathWithID:@"me" withOption:@"settings"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -172,7 +172,7 @@
 
 + (void)changeAccountWithBio:(NSString*)bio success:(void (^)())success failure:(void (^)(NSError *error))failure{
     //only allows settings for current account after login
-    NSString *path = [self pathWithId:@"me" withOption:@"settings"];
+    NSString *path = [self pathWithID:@"me" withOption:@"settings"];
     
     NSDictionary * params = @{@"bio":bio};
     
@@ -187,7 +187,7 @@
 
 + (void)changeAccountWithBio:(NSString*)bio messagingEnabled:(BOOL)msgEnabled publicImages:(BOOL)publicImages albumPrivacy:(IMGAlbumPrivacy)privacy acceptedGalleryTerms:(BOOL)galTerms success:(void (^)())success failure:(void (^)(NSError *error))failure{
     //only allows settings for current account after login
-    NSString *path = [self pathWithId:@"me" withOption:@"settings"];
+    NSString *path = [self pathWithID:@"me" withOption:@"settings"];
     
     NSDictionary * params = @{@"bio":bio,@"public_images":[NSNumber numberWithBool:publicImages],@"messaging_enabled":[NSNumber numberWithBool:msgEnabled],@"album_privacy":[IMGBasicAlbum strForPrivacy:privacy],@"accepted_gallery_terms":[NSNumber numberWithBool:galTerms]};
     
@@ -205,7 +205,7 @@
 
 + (void)accountGalleryProfileWithUser:(NSString *)username success:(void (^)(IMGGalleryProfile *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"gallery_profile"];
+    NSString *path = [self pathWithID:username withOption:@"gallery_profile"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -228,7 +228,7 @@
 
 + (void)accountAlbumsWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"albums" withId2:[NSString stringWithFormat:@"%ld",(long)page]];
+    NSString *path = [self pathWithID:username withOption:@"albums" withID2:[NSString stringWithFormat:@"%ld",(long)page]];
 
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -256,7 +256,7 @@
 }
 
 + (void)accountAlbumIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"albums/ids"];
+    NSString *path = [self pathWithID:username withOption:@"albums/ids"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -270,7 +270,7 @@
 }
 
 + (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"albums/count"];
+    NSString *path = [self pathWithID:username withOption:@"albums/count"];
 
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -284,7 +284,7 @@
 
 + (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)())success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:@"me" withOption:@"albums" withId2:albumID];
+    NSString *path = [self pathWithID:@"me" withOption:@"albums" withID2:albumID];
 
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -300,7 +300,7 @@
 
 + (void)accountImagesWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"images" withId2:[NSString stringWithFormat:@"%ld",(long)page]];
+    NSString *path = [self pathWithID:username withOption:@"images" withID2:[NSString stringWithFormat:@"%ld",(long)page]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -329,7 +329,7 @@
 }
 
 + (void)accountImageIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"images/ids"];
+    NSString *path = [self pathWithID:username withOption:@"images/ids"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -341,7 +341,7 @@
 }
 
 + (void)accountImageCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:username withOption:@"images/count"];
+    NSString *path = [self pathWithID:username withOption:@"images/count"];
    
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -353,7 +353,7 @@
 }
 
 + (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:@"me" withOption:@"image" withId2:deleteHash];
+    NSString *path = [self pathWithID:@"me" withOption:@"image" withID2:deleteHash];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
     
@@ -369,7 +369,7 @@
 
 + (void)accountCommentsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"comments"];
+    NSString *path = [self pathWithID:username withOption:@"comments"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -394,7 +394,7 @@
 
 + (void)accountCommentIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"comments/ids"];
+    NSString *path = [self pathWithID:username withOption:@"comments/ids"];
     
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -414,7 +414,7 @@
 
 + (void)accountCommentCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:username withOption:@"comments/count"];
+    NSString *path = [self pathWithID:username withOption:@"comments/count"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -428,7 +428,7 @@
 
 + (void)accountDeleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:@"me" withOption:@"comment" withId2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
+    NSString *path = [self pathWithID:@"me" withOption:@"comment" withID2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -449,7 +449,7 @@
 
 + (void)accountRepliesWithFresh:(BOOL)freshOnly success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:@"me" withOption:@"notifications/replies"];
+    NSString *path = [self pathWithID:@"me" withOption:@"notifications/replies"];
     
     NSDictionary * params = @{@"new":[NSNumber numberWithBool:freshOnly]};
     

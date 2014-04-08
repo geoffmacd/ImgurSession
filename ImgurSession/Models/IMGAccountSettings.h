@@ -19,7 +19,7 @@
 /**
  Blocked users Id
  */
-@property (nonatomic, readonly, copy) NSString *blockedId;
+@property (nonatomic, readonly, copy) NSString *blockedID;
 /**
  Blocked users URL for account page
  */

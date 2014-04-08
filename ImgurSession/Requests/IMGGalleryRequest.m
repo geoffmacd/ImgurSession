@@ -117,7 +117,7 @@
 #pragma mark - Load Gallery objects
 
 +(void)imageWithID:(NSString *)imageID success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithOption:@"image" withId2:imageID];
+    NSString *path = [self pathWithOption:@"image" withID2:imageID];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -137,7 +137,7 @@
 }
 
 + (void)albumWithID:(NSString *)albumID success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithOption:@"album" withId2:albumID];
+    NSString *path = [self pathWithOption:@"album" withID2:albumID];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -162,7 +162,7 @@
 }
 
 + (void)submitImageWithID:(NSString *)imageID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithOption:@"image" withId2:imageID];
+    NSString *path = [self pathWithOption:@"image" withID2:imageID];
     
     NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
     
@@ -179,7 +179,7 @@
 }
 
 + (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title terms:(BOOL)terms success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithOption:@"album" withId2:albumID];
+    NSString *path = [self pathWithOption:@"album" withID2:albumID];
     
     NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
     
@@ -193,7 +193,7 @@
 #pragma mark - Remove Gallery objects
 
 + (void)removeImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:imageID];
+    NSString *path = [self pathWithID:imageID];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -204,7 +204,7 @@
 }
 
 + (void)removeAlbumWithID:(NSString *)albumID success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:albumID];
+    NSString *path = [self pathWithID:albumID];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
 
@@ -216,7 +216,7 @@
 #pragma mark - Voting/Reporting
 
 + (void)reportWithID:(NSString *)galleryObjectID success:(void (^)())success failure:(void (^)(NSError *error))failure{
-    NSString *path = [self pathWithId:galleryObjectID withOption:@"report"];
+    NSString *path = [self pathWithID:galleryObjectID withOption:@"report"];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -226,7 +226,7 @@
 }
 
 + (void)voteWithID:(NSString *)galleryObjectID withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *error))failure{
-    NSString *path = [self pathWithId:galleryObjectID withOption:@"vote" withId2:[IMGVote strForVote:vote]];
+    NSString *path = [self pathWithID:galleryObjectID withOption:@"vote" withID2:[IMGVote strForVote:vote]];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -236,7 +236,7 @@
 }
 
 + (void)voteResultsWithID:(NSString *)galleryObjectID success:(void (^)(IMGVote *))success failure:(void (^)(NSError *error))failure{
-    NSString *path = [self pathWithId:galleryObjectID withOption:@"votes"];
+    NSString *path = [self pathWithID:galleryObjectID withOption:@"votes"];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -275,7 +275,7 @@
             sortStr = @"best";
             break;
     }
-    NSString *path = [self pathWithId:galleryObjectID withOption:@"comments" withId2:sortStr];
+    NSString *path = [self pathWithID:galleryObjectID withOption:@"comments" withID2:sortStr];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -297,7 +297,7 @@
 
 + (void)commentIDsWithGalleryID:(NSString *)galleryObjectID withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:galleryObjectID withOption:@"comments/ids"];
+    NSString *path = [self pathWithID:galleryObjectID withOption:@"comments/ids"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -309,7 +309,7 @@
 }
 
 + (void)commentWithID:(NSInteger)commentID galleryID:(NSString *)galleryObjectID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:galleryObjectID withOption:@"comment" withId2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
+    NSString *path = [self pathWithID:galleryObjectID withOption:@"comment" withID2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -337,9 +337,9 @@
     
     NSString *path;
     if(parentCommentID)
-        path = [self pathWithId:galleryObjectID withOption:@"comment"];
+        path = [self pathWithID:galleryObjectID withOption:@"comment"];
     else
-        path = [self pathWithId:galleryObjectID withOption:@"comment" withId2:[NSString stringWithFormat:@"%lu", (unsigned long)parentCommentID]];
+        path = [self pathWithID:galleryObjectID withOption:@"comment" withID2:[NSString stringWithFormat:@"%lu", (unsigned long)parentCommentID]];
     
     NSDictionary * params = @{@"comment":caption};
     
@@ -364,7 +364,7 @@
 }
 
 + (void)deleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
+    NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -376,7 +376,7 @@
 
 + (void)commentCountWithGalleryID:(NSString *)galleryObjectID success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     
-    NSString *path = [self pathWithId:galleryObjectID withOption:@"comments/count"];
+    NSString *path = [self pathWithID:galleryObjectID withOption:@"comments/count"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

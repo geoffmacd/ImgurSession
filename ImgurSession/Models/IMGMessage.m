@@ -16,9 +16,9 @@
     
     if(self = [super init]) {
         
-        _messageId = jsonData[@"id"];
+        _messageID = jsonData[@"id"];
         _fromUsername = jsonData[@"from"];
-        _authorId = [jsonData[@"sender_id"] integerValue];
+        _authorID = [jsonData[@"sender_id"] integerValue];
         _subject = jsonData[@"subject"];
         _body = jsonData[@"body"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
@@ -43,7 +43,7 @@
         return NO;
     }
     
-    return ([[object messageId] isEqualToString:self.messageId]);
+    return ([[object messageID] isEqualToString:self.messageID]);
 }
 
 @end

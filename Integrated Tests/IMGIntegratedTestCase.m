@@ -204,21 +204,21 @@
         
         expect(image).notTo.beNil();
         
-        [IMGAlbumRequest createAlbumWithTitle:imgurUnitTestParams[@"title"] description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+        [IMGAlbumRequest createAlbumWithTitle:imgurUnitTestParams[@"title"] description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(NSString *albumID, NSString * albumDeletehash) {
             
-            expect(album).notTo.beNil();
+            expect(albumID).notTo.beNil();
             
-            [IMGGalleryRequest submitAlbumWithID:album.albumID title:imgurUnitTestParams[@"title"] terms:YES success:^(){
+            [IMGGalleryRequest submitAlbumWithID:albumID title:imgurUnitTestParams[@"title"] terms:YES success:^(){
                 
-                [IMGGalleryRequest albumWithID:album.albumID success:^(IMGGalleryAlbum *galAlbum) {
+                [IMGGalleryRequest albumWithID:albumID success:^(IMGGalleryAlbum *galAlbum) {
                     
                     if(success)
                         success(galAlbum, ^{
                             
                             //remove from gallery and delete image
-                            [IMGGalleryRequest removeAlbumWithID:album.albumID success:^(NSString *albumID) {
+                            [IMGGalleryRequest removeAlbumWithID:albumID success:^(NSString *albumID) {
                                 
-                                [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^(NSString *albumID) {
+                                [IMGAlbumRequest deleteAlbumWithID:albumID success:^(NSString *albumID) {
                                     
                                     [IMGImageRequest deleteImageWithID:image.imageID success:^() {
                                         
@@ -252,24 +252,28 @@
         
         expect(image).notTo.beNil();
         
-        [IMGAlbumRequest createAlbumWithTitle:imgurUnitTestParams[@"title"] description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image success:^(IMGAlbum *album) {
+        [IMGAlbumRequest createAlbumWithTitle:imgurUnitTestParams[@"title"] description:@"Test Album Description" imageIDs:@[image.imageID] privacy:IMGAlbumPublic layout:IMGHorizontalLayout cover:image.imageID success:^(NSString * albumID, NSString * deletehash) {
             
-            expect(album).notTo.beNil();
+            expect(albumID).notTo.beNil();
             
-            if(success)
-                success(album, ^{
-                    
-                    [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^() {
+            [IMGAlbumRequest albumWithID:albumID success:^(IMGAlbum *album) {
+                
+                if(success)
+                    success(album, ^{
                         
-                        [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                        [IMGAlbumRequest deleteAlbumWithID:album.albumID success:^() {
                             
-                            deleteSuccess = YES;
+                            [IMGImageRequest deleteImageWithID:image.imageID success:^() {
+                                
+                                deleteSuccess = YES;
+                                
+                            } failure:failBlock];
                             
                         } failure:failBlock];
-                        
-                    } failure:failBlock];
-                });
-            
+                    });
+                
+            } failure:failBlock];
+        
         } failure:failBlock];
         
     } failure:failBlock];

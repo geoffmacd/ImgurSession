@@ -14,7 +14,7 @@
 /**
  Trophy ID
  */
-@property (readonly,nonatomic, copy) NSString * trophyId;
+@property (readonly,nonatomic, copy) NSString * trophyID;
 /**
  The name of the trophy
  */

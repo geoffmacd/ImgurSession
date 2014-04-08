@@ -26,8 +26,8 @@
         expect(notifications).haveCountOf(1);
         IMGNotification * first = [notifications firstObject];
         expect(first).beInstanceOf([IMGNotification class]);
-        expect(first.notificationId).beTruthy();
-        expect(first.accountId).beTruthy();
+        expect(first.notificationID).beTruthy();
+        expect(first.accountID).beTruthy();
         
         isSuccess = YES;
         
@@ -61,8 +61,8 @@
         expect(notifications).haveCountOf(1);
         IMGNotification * first = [notifications firstObject];
         expect(first).beInstanceOf([IMGNotification class]);
-        expect(first.notificationId).beTruthy();
-        expect(first.accountId).beTruthy();
+        expect(first.notificationID).beTruthy();
+        expect(first.accountID).beTruthy();
         
         isSuccess = YES;
         
