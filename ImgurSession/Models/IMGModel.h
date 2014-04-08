@@ -8,9 +8,12 @@
 
 
 //error codes
+#define IMGErrorDomain                          @"com.imgursession"
+
 #define IMGErrorMalformedResponseFormat         0   //Response data is in wrong format
 #define IMGErrorResponseMissingParameters       1   //some critical fields are not in response
-#define IMGErrorDomain                          @"com.imgursession"
+#define IMGErrorRequiresUserAuthentication      401   //for when anonymous sessions attempt calls only logged in users can perform
+#define IMGErrorUserRateLimitExceeded           429   //user rate limit hit
 
 
 @interface IMGModel : NSObject <NSCoding>

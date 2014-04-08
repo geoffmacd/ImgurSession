@@ -138,6 +138,12 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  */
 + (void)commentsWithGalleryID:(NSString *)galleryObjectID withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
+ Retrieves all comments and their children for gallery object
+ @param galleryObjectId    ID string of gallery object to retrieve comments from
+ @param commentSort    sort comments by best, hot or new
+ */
++ (void)allCommentsWithGalleryID:(NSString *)galleryObjectID withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
+/**
  Retrieves comment IDS from gallery object
  @param galleryObjectId    ID string of gallery object to retrieve comments from
  @param commentSort    sort comments by best, hot or new

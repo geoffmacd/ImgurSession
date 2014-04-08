@@ -9,6 +9,8 @@
 #import "IMGResponseSerializer.h"
 
 #import "IMGSession.h"
+#import "IMGModel.h"
+
 
 @implementation IMGResponseSerializer
 
@@ -23,7 +25,7 @@
     //should be a json result with basic model, relevant json is the "data" key
     NSDictionary * jsonResult = [super responseObjectForResponse:response data:data error:error];
     
-    if(!*error){
+    if(!*error && httpRes.statusCode == 200){
         
         //let response continue processing by ImgurSession completion blocks
         if(jsonResult[@"data"]){
@@ -35,6 +37,8 @@
                 //successful requests
                 //pass back only "data" for simplicity
                 return jsonResult[@"data"];
+            } else {
+                NSAssert(NO, @"Server reporting unsuccessful attempt without bad status code");
             }
         }
         
@@ -44,18 +48,56 @@
     } else {
         //unacceptable status code or decoding error
         
-        if([httpRes statusCode] == 403){
-            //forbidden request, may need to sign in with access token
+        if([httpRes statusCode] == 400){
+            //request malformed
             
             if(jsonResult[@"data"][@"error"]){
                 
-                NSLog(@"%@ for request - %@", jsonResult[@"data"][@"error"], jsonResult[@"data"][@"request"]);
+                *error = [NSError errorWithDomain:IMGErrorDomain code:400 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
+                return nil;
+            }
+        } else if([httpRes statusCode] == 401){
+            //session needs login for this action
+            
+            if(jsonResult[@"data"][@"error"]){
+                
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
+                return nil;
+            }
+        } else if([httpRes statusCode] == 403){
+            //forbidden request, may need to refresh access token with refresh token, performed in IMGSession once before failing
+            
+            if(jsonResult[@"data"][@"error"]){
+                
+                *error = [NSError errorWithDomain:IMGErrorDomain code:403 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
+                return nil;
+            }
+        } else if([httpRes statusCode] == 404){
+            //user rate limiting
+            
+            if(jsonResult[@"data"][@"error"]){
+                
+                *error = [NSError errorWithDomain:IMGErrorDomain code:404 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
+                return nil;
+            }
+        } else if([httpRes statusCode] == 429){
+            //user rate limiting
+            
+            if(jsonResult[@"data"][@"error"]){
+                
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorUserRateLimitExceeded userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
+                return nil;
+            }
+        } else if([httpRes statusCode] == 500){
+            //server error
+            
+            if(jsonResult[@"data"][@"error"]){
+                
+                *error = [NSError errorWithDomain:IMGErrorDomain code:500 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
                 return nil;
             }
         }
     }
-    
-    NSLog(@"%@", [*error localizedDescription]);
     return nil;
 }
 @end
