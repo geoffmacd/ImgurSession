@@ -54,7 +54,6 @@
             if(jsonResult[@"data"][@"error"]){
                 
                 *error = [NSError errorWithDomain:IMGErrorDomain code:400 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
-                return nil;
             }
         } else if([httpRes statusCode] == 401){
             //session needs login for this action
@@ -62,7 +61,6 @@
             if(jsonResult[@"data"][@"error"]){
                 
                 *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
-                return nil;
             }
         } else if([httpRes statusCode] == 403){
             //forbidden request, may need to refresh access token with refresh token, performed in IMGSession once before failing
@@ -70,15 +68,14 @@
             if(jsonResult[@"data"][@"error"]){
                 
                 *error = [NSError errorWithDomain:IMGErrorDomain code:403 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
-                return nil;
             }
+            return nil;
         } else if([httpRes statusCode] == 404){
             //user rate limiting
             
             if(jsonResult[@"data"][@"error"]){
                 
                 *error = [NSError errorWithDomain:IMGErrorDomain code:404 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
-                return nil;
             }
         } else if([httpRes statusCode] == 429){
             //user rate limiting
@@ -86,7 +83,6 @@
             if(jsonResult[@"data"][@"error"]){
                 
                 *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorUserRateLimitExceeded userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
-                return nil;
             }
         } else if([httpRes statusCode] == 500){
             //server error
@@ -94,7 +90,6 @@
             if(jsonResult[@"data"][@"error"]){
                 
                 *error = [NSError errorWithDomain:IMGErrorDomain code:500 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
-                return nil;
             }
         }
     }
