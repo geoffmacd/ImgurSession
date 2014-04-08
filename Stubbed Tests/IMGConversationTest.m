@@ -28,6 +28,21 @@
         expect(first.lastMessage).beTruthy();
         expect(first.conversationID).beTruthy();
         
+        IMGConversation * copy = [first copy];
+        expect(first.lastMessage).equal(copy.lastMessage);
+        expect(first.conversationID == copy.conversationID).beTruthy();
+        expect(first.authorID == copy.authorID).beTruthy();
+        expect(first.messages == copy.messages).beTruthy();
+        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
+        copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        expect(first.lastMessage).equal(copy.lastMessage);
+        expect(first.conversationID == copy.conversationID).beTruthy();
+        expect(first.authorID == copy.authorID).beTruthy();
+        expect(first.messages == copy.messages).beTruthy();
+        expect(copy).equal(first);
+        
         isSuccess = YES;
         
     } failure:failBlock];

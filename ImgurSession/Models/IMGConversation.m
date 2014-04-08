@@ -9,6 +9,18 @@
 #import "IMGConversation.h"
 #import "IMGMessage.h"
 
+@interface IMGConversation ()
+
+@property (readwrite,nonatomic) NSArray *messages;
+@property (readwrite,nonatomic) NSString *fromUsername;
+@property (readwrite,nonatomic) NSString *lastMessage;
+@property (readwrite,nonatomic) NSDate *datetime;
+@property (readwrite,nonatomic) NSInteger conversationID;
+@property (readwrite,nonatomic) NSInteger authorID;
+@property (readwrite,nonatomic) NSInteger messageCount;
+
+@end
+
 @implementation IMGConversation
 
 #pragma mark - Init With Json
@@ -72,5 +84,64 @@
     return ([object conversationID] == self.conversationID);
 }
 
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    
+    NSInteger conversationID = [[decoder decodeObjectForKey:@"conversationID"] integerValue];
+    NSInteger authorID = [[decoder decodeObjectForKey:@"authorID"] integerValue];
+    NSInteger messageCount = [[decoder decodeObjectForKey:@"messageCount"] integerValue];
+    NSString * fromUsername = [decoder decodeObjectForKey:@"fromUsername"];
+    NSString * lastMessage = [decoder decodeObjectForKey:@"lastMessage"];
+    NSDate *datetime = [decoder decodeObjectForKey:@"datetime"];
+    NSArray *messages = [decoder decodeObjectForKey:@"messages"];
+    
+    if (self = [super initWithCoder:decoder]) {
+        _conversationID = conversationID;
+        _fromUsername = fromUsername;
+        _authorID = authorID;
+        _lastMessage = lastMessage;
+        _datetime = datetime;
+        _messageCount = messageCount;
+        _messages = messages;
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:self.messages forKey:@"messages"];
+    [coder encodeObject:self.fromUsername forKey:@"fromUsername"];
+    [coder encodeObject:self.lastMessage forKey:@"lastMessage"];
+    [coder encodeObject:self.datetime forKey:@"datetime"];
+    
+    [coder encodeObject:@(self.conversationID) forKey:@"conversationID"];
+    [coder encodeObject:@(self.authorID) forKey:@"authorID"];
+    [coder encodeObject:@(self.messageCount) forKey:@"messageCount"];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    
+    IMGConversation * copy = [[[self class] allocWithZone:zone] init];
+    
+    if (copy) {
+        // Copy NSObject subclasses
+        [copy setFromUsername:[self.fromUsername copyWithZone:zone]];
+        [copy setLastMessage:[self.lastMessage copyWithZone:zone]];
+        [copy setMessages:[self.messages copyWithZone:zone]];
+        [copy setDatetime:[self.datetime copyWithZone:zone]];
+        
+        // Set primitives
+        [copy setAuthorID:self.authorID];
+        [copy setConversationID:self.conversationID];
+        [copy setMessageCount:self.messageCount];
+    }
+    
+    return copy;
+}
 
 @end

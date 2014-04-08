@@ -11,7 +11,7 @@
 /**
  Model object class to represent conversation. Not listed on API docs
  */
-@interface IMGConversation : IMGModel
+@interface IMGConversation : IMGModel  <NSCopying,NSCoding>
 
 
 /**
