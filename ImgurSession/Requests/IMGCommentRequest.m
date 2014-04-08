@@ -123,8 +123,8 @@
 
 #pragma mark - Vote
 
-+ (void)voteCommentWithID:(NSInteger)commentID withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"vote" withId2:vote];
++ (void)voteCommentWithID:(NSInteger)commentID withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithId:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"vote" withId2:[IMGVote strForVote:vote]];
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

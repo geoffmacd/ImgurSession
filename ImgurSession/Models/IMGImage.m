@@ -16,8 +16,8 @@
 @property (readwrite,nonatomic) NSDate *datetime;
 @property (readwrite,nonatomic) NSString *type;
 @property (readwrite,nonatomic) BOOL animated;
-@property (readwrite,nonatomic) NSInteger width;
-@property (readwrite,nonatomic) NSInteger height;
+@property (readwrite,nonatomic) CGFloat width;
+@property (readwrite,nonatomic) CGFloat height;
 @property (readwrite,nonatomic) NSInteger size;
 @property (readwrite,nonatomic) NSInteger views;
 @property (readwrite,nonatomic) NSInteger bandwidth;
@@ -43,8 +43,8 @@
         _section = jsonData[@"section"];
         if(![jsonData[@"animated"] isKindOfClass:[NSNull class]])
             _animated = [jsonData[@"animated"] boolValue];
-        _width = [jsonData[@"width"] integerValue];
-        _height = [jsonData[@"height"] integerValue];
+        _width = [jsonData[@"width"] floatValue];
+        _height = [jsonData[@"height"] floatValue];
         _size = [jsonData[@"size"] integerValue];
         _views = [jsonData[@"views"] integerValue];
         _bandwidth = [jsonData[@"bandwidth"] integerValue];
@@ -121,8 +121,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     
-    NSInteger width = [[decoder decodeObjectForKey:@"width"] integerValue];
-    NSInteger height = [[decoder decodeObjectForKey:@"height"] integerValue];
+    CGFloat width = [[decoder decodeObjectForKey:@"width"] floatValue];
+    CGFloat height = [[decoder decodeObjectForKey:@"height"] floatValue];
     NSInteger views = [[decoder decodeObjectForKey:@"views"] integerValue];
     NSInteger size = [[decoder decodeObjectForKey:@"size"] integerValue];
     NSInteger bandwidth = [[decoder decodeObjectForKey:@"bandwidth"] integerValue];

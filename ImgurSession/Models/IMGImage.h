@@ -62,11 +62,11 @@ typedef NS_ENUM(NSInteger, IMGSize) {
 /**
  Image width in px
  */
-@property (nonatomic, readonly) NSInteger width;
+@property (nonatomic, readonly) CGFloat width;
 /**
  Image height in px
  */
-@property (nonatomic, readonly) NSInteger height;
+@property (nonatomic, readonly) CGFloat height;
 /**
  Image size in bytes
  */

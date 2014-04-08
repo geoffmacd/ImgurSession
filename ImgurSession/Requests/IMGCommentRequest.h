@@ -7,6 +7,7 @@
 //
 
 #import "IMGEndpoint.h"
+#import "IMGVote.h"
 
 @class IMGComment;
 
@@ -54,7 +55,7 @@
  @param commentId comment id to vote on
  @param vote vote to give comment
  */
-+ (void)voteCommentWithID:(NSInteger)commentID withVote:(NSString*)vote success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)voteCommentWithID:(NSInteger)commentID withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Report
 /**

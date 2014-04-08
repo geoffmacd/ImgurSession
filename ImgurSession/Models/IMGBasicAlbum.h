@@ -52,11 +52,11 @@ typedef NS_ENUM(NSInteger, IMGAlbumLayout){
 /**
  Cover image width in px
  */
-@property (nonatomic, readonly) NSInteger coverWidth;
+@property (nonatomic, readonly) CGFloat coverWidth;
 /**
  Cover image height in px
  */
-@property (nonatomic, readonly) NSInteger coverHeight;
+@property (nonatomic, readonly) CGFloat coverHeight;
 /**
  account username of album creator, not a URL but named like this anyway. nil if anonymous
  */

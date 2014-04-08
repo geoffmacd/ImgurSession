@@ -16,8 +16,8 @@
 @property (readwrite,nonatomic) NSString *albumDescription;
 @property (readwrite,nonatomic) NSDate *datetime;
 @property (readwrite,nonatomic) NSString *coverID;
-@property (readwrite,nonatomic) NSInteger coverWidth;
-@property (readwrite,nonatomic) NSInteger coverHeight;
+@property (readwrite,nonatomic) CGFloat coverWidth;
+@property (readwrite,nonatomic) CGFloat coverHeight;
 @property (readwrite,nonatomic) NSString *accountURL;
 @property (readwrite,nonatomic) NSString *privacy;
 @property (readwrite,nonatomic) IMGAlbumLayout layout;
@@ -41,8 +41,8 @@
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _coverID = jsonData[@"cover"];
         if(_coverID && ![_coverID isKindOfClass:[NSNull class]]){
-            _coverHeight = [jsonData[@"cover_height"] integerValue];
-            _coverWidth = [jsonData[@"cover_width"] integerValue];
+            _coverHeight = [jsonData[@"cover_height"] floatValue];
+            _coverWidth = [jsonData[@"cover_width"] floatValue];
         }
         _accountURL = jsonData[@"account_url"];
         _privacy = jsonData[@"privacy"];
@@ -157,8 +157,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     
-    NSInteger width = [[decoder decodeObjectForKey:@"coverWidth"] integerValue];
-    NSInteger height = [[decoder decodeObjectForKey:@"coverHeight"] integerValue];
+    CGFloat width = [[decoder decodeObjectForKey:@"coverWidth"] floatValue];
+    CGFloat height = [[decoder decodeObjectForKey:@"coverHeight"] floatValue];
     NSInteger views = [[decoder decodeObjectForKey:@"views"] integerValue];
     IMGAlbumLayout layout = [[decoder decodeObjectForKey:@"layout"] integerValue];
     NSInteger imagesCount = [[decoder decodeObjectForKey:@"imagesCount"] integerValue];
