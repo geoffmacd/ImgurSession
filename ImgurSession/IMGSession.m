@@ -317,26 +317,14 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        
-        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403 && !self.isAnonymous){
-            [self refreshAuthentication:^(NSString * refreshToken) {
-                
-                NSLog(@"continuing request after auth failed: %@", URLString);
-                [self PUT:URLString parameters:parameters success:success failure:failure];
-                
-            } failure:^(NSError *error) {
-                
-                if(failure)
-                    failure(error);
-                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
-            }];
-        } else {
+        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
+            //retry
+            [self PUT:URLString parameters:parameters success:success failure:failure];
             
+        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
-            NSLog(@"failed : %@", [error localizedDescription]);
-        }
+        }];
     }];
 }
 
@@ -348,26 +336,14 @@
             success(task,responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403 && !self.isAnonymous){
-            [self refreshAuthentication:^(NSString * refreshToken) {
-                
-                NSLog(@"continuing request after auth failed: %@", URLString);
-                [self DELETE:URLString parameters:parameters success:success failure:failure];
-                
-            } failure:^(NSError *error) {
-                
-                if(failure)
-                    failure(error);
-                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
-            }];
-        } else {
+        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
+            //retry
+            [self DELETE:URLString parameters:parameters success:success failure:failure];
             
+        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
-            NSLog(@"failed : %@", [error localizedDescription]);
-        }
+        }];
     }];
 }
 
@@ -380,26 +356,14 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403 && !self.isAnonymous){
-            [self refreshAuthentication:^(NSString * refreshToken) {
-                
-                NSLog(@"continuing request after auth failed: %@", URLString);
-                [self POST:URLString parameters:parameters success:success failure:failure];
-                
-            } failure:^(NSError *error) {
-                
-                if(failure)
-                    failure(error);
-                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
-            }];
-        } else {
+        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
+            //retry
+            [self POST:URLString parameters:parameters success:success failure:failure];
             
-            
+        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
-            NSLog(@"failed : %@", [error localizedDescription]);
-        }
+        }];
     }];
 }
 
@@ -412,27 +376,14 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSHTTPURLResponse * http = (NSHTTPURLResponse *)task.response;
-        if(http.statusCode == 403 && !self.isAnonymous){
-            [self refreshAuthentication:^(NSString * refreshToken) {
-                
-                NSLog(@"continuing request after auth failed: %@", URLString);
-                [self GET:URLString parameters:parameters success:success failure:failure];
-                
-            } failure:^(NSError *error) {
-                
-                if(failure)
-                    failure(error);
-                NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
-            }];
-        } else {
+        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
+            //retry
+            [self GET:URLString parameters:parameters success:success failure:failure];
             
-            
-        
+        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
-            NSLog(@"failed : %@", [error localizedDescription]);
-        }
+        }];
     }];
 }
 
@@ -446,25 +397,15 @@
         [progress removeObserver:self forKeyPath:@"fractionCompleted" context:NULL];
         if (error) {
             
-            NSHTTPURLResponse * http = (NSHTTPURLResponse *)response;
-            if(http.statusCode == 403 && !self.isAnonymous){
-                [self refreshAuthentication:^(NSString * refreshToken) {
-                    
-                    NSLog(@"continuing request after auth failed: %@", URLString);
-                    [self POST:URLString parameters:parameters constructingBodyWithBlock:block success:success failure:failure];
-                    
-                } failure:^(NSError *error) {
-                    
-                    if(failure)
-                        failure(error);
-                    NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
-                }];
-            } else {
+            [self attemptRefreshWithResponse:(NSHTTPURLResponse*)response error:error success:^{
+                //retry
+                [self POST:URLString parameters:parameters constructingBodyWithBlock:block success:success failure:failure];
                 
+            } failure:^(NSError * error) {
                 if(failure)
                     failure(error);
-                NSLog(@"failed : %@", [error localizedDescription]);
-            }
+            }];
+
         } else {
             if(success)
                 success(task, responseObject);
@@ -478,6 +419,32 @@
                   options:NSKeyValueObservingOptionNew
                   context:NULL];
     return task;
+}
+
+
+-(void)attemptRefreshWithResponse:(NSHTTPURLResponse*)response error:(NSError*)error success:(void (^)())success failure:(void (^)(NSError *))failure{
+    
+    if(response.statusCode == 403 && !self.isAnonymous){
+        [self refreshAuthentication:^(NSString * refreshToken) {
+            
+            NSLog(@"continuing request after auth failed");
+            
+            //success block attempts retry
+            if(success)
+                success();
+            
+        } failure:^(NSError *error) {
+            
+            if(failure)
+                failure(error);
+            NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
+        }];
+    } else {
+        
+        if(failure)
+            failure(error);
+        NSLog(@"failed : %@", [error localizedDescription]);
+    }
 }
 
 #pragma mark - KVO for progress upload
