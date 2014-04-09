@@ -277,18 +277,18 @@
         self.creditsUserReset = [headers[IMGHeaderUserReset] integerValue];
         
         //warn delegate if necessary
-        if(_creditsClientRemaining < _warnRateLimit && _creditsClientRemaining > 0){
+        if(_creditsUserRemaining < _warnRateLimit && _creditsUserRemaining > 0){
             
             dispatch_async(dispatch_get_main_queue(), ^{
             
                 if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNearRateLimit:) ]){
-                    [_delegate imgurSessionNearRateLimit:_creditsClientRemaining];
+                    [_delegate imgurSessionNearRateLimit:_creditsUserRemaining];
                 }
                 
                 //post notifications as well
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitNearLimitNotification object:nil];
             });
-        } else if (_creditsClientRemaining == 0){
+        } else if (_creditsUserRemaining == 0){
             
             dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -301,7 +301,7 @@
             });
         }
         
-        NSLog(@"Remaining daily allowable client requests: %ld",(long)_creditsClientRemaining);
+        NSLog(@"Remaining daily allowable user requests: %ld",(long)_creditsUserRemaining);
     }
 }
 
