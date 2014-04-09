@@ -73,36 +73,7 @@
     return self;
 }
 
-#pragma mark - Authentication
-
--(NSString*)strForAuthType:(IMGAuthType)authType{
-    NSString * authStr;
-    switch (authType) {
-        case IMGPinAuth:
-            authStr = @"pin";
-            break;
-        case IMGTokenAuth:
-            authStr = @"token";
-            break;
-        case IMGCodeAuth:
-            authStr = @"code";
-            break;
-        default:
-            NSAssert(NO, @"Bad ImgurSession Authorization Type");
-            break;
-    }
-    return authStr;
-}
-
-- (NSURL *)authenticateWithLink{
-    return [self authenticateWithExternalURLForType:IMGPinAuth];
-}
-
-- (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType{
-    
-    NSString *path = [NSString stringWithFormat:@"oauth2/authorize?response_type=%@&client_id=%@", [self strForAuthType:authType], _clientID];
-    return [NSURL URLWithString:path relativeToURL:[NSURL URLWithString:IMGBaseURL]];
-}
+#pragma mark - Authentication Notifications
 
 -(void)accessTokenExpired{
     //does not pro-actively refresh, just informs delegates, lazily waits until request fails to refresh
@@ -137,76 +108,41 @@
         return IMGAuthStateExpired;
 }
 
--(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
-    
-    NSLog(@"...attempting reauth...");
-    
-    if(!_refreshToken){
-        //alert app that it needs to present webview or go to safari
-        if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)]){
-            
-            if(failure)
-                failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
-                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURLForType:IMGPinAuth]];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
-            });
-        } else {
-            if(failure)
-                failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
-        }
-    } else {
-        //else get new access token with refresh token
 
-        NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
-        
-        [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            NSDictionary * json = responseObject;
-            //set auth header
-            [self setAuthorizationHeader:json];
-            
-            NSLog(@"refreshed authentication : %@   with expiry: %@", _accessToken, [_accessTokenExpiry description]);
-            
-            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)]){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                
-                    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
-                        [_delegate imgurSessionTokenRefreshed];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
-                });
-            }
-            
-            if(success)
-                success(_refreshToken);
-            
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            //not working anymore
-            NSHTTPURLResponse * resp = (NSHTTPURLResponse *)task.response;
-            
-            //in my experience, banned
-            if(resp.statusCode == 400)
-                [self refreshTokenBad];
-            
-            NSLog(@"%@", [error description]);
-            if(failure)
-                failure(error);
-        }];
+#pragma mark - Authentication
+
+-(NSString*)strForAuthType:(IMGAuthType)authType{
+    NSString * authStr;
+    switch (authType) {
+        case IMGPinAuth:
+            authStr = @"pin";
+            break;
+        case IMGTokenAuth:
+            authStr = @"token";
+            break;
+        case IMGCodeAuth:
+            authStr = @"code";
+            break;
+        default:
+            NSAssert(NO, @"Bad ImgurSession Authorization Type");
+            break;
     }
+    return authStr;
+}
+
+- (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType{
+    
+    NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGBaseURL, [self strForAuthType:authType], _clientID];
+    return [NSURL URLWithString:path];
 }
 
 - (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
     
-    //call oauth/token with pin
-    NSDictionary * pinParams = @{[self strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"pin"};
+    //call oauth/token with auth type
+    NSDictionary * params = @{[self strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":[self strForAuthType:authType]};
     
     //use super to bypass tracking
-    [super POST:IMGOAuthEndpoint parameters:pinParams success:^(NSURLSessionDataTask *task, id responseObject) {
+    [super POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
         //if never logged in before, alert delegate
         if(_lastAuthType == IMGNoAuthType){
@@ -233,6 +169,70 @@
         if(failure)
             failure(error);
     }];
+}
+
+
+-(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
+    
+    NSLog(@"...attempting reauth...");
+    
+    if(!_refreshToken){
+        //alert app that it needs to present webview or go to safari
+        if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)]){
+            
+            if(failure)
+                failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
+                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURLForType:_lastAuthType]];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
+            });
+        } else {
+            if(failure)
+                failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
+        }
+    } else {
+        //else get new access token with refresh token
+        
+        NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
+        
+        [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            NSDictionary * json = responseObject;
+            //set auth header
+            [self setAuthorizationHeader:json];
+            
+            NSLog(@"refreshed authentication : %@   with expiry: %@", _accessToken, [_accessTokenExpiry description]);
+            
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)]){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
+                        [_delegate imgurSessionTokenRefreshed];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
+                });
+            }
+            
+            if(success)
+                success(_refreshToken);
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            //not working anymore
+            NSHTTPURLResponse * resp = (NSHTTPURLResponse *)task.response;
+            
+            //in my experience, banned
+            if(resp.statusCode == 400)
+                [self refreshTokenBad];
+            
+            NSLog(@"%@", [error description]);
+            if(failure)
+                failure(error);
+        }];
+    }
 }
 
 #pragma mark - Authorization header

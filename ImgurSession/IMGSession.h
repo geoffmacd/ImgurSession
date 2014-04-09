@@ -194,12 +194,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param authType     authorization type pin,code,token
  @return    authorization URL to open in Webview or Safari
  */
-- (NSURL *)authenticateWithLink;
-/**
- Retrieves URL associated with website authorization page
- @param authType     authorization type pin,code,token
- @return    authorization URL to open in Webview or Safari
- */
 - (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType;
 /**
  Requests access tokens using inputted pin code
@@ -208,7 +202,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param success     success completion
  @param failure     failure completion
  */
-- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * accessToken))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
 
 
 
