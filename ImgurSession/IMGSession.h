@@ -203,8 +203,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param failure     failure completion
  */
 - (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
-
-
+/**
+ String constant for auth type
+ */
++(NSString*)strForAuthType:(IMGAuthType)authType;
 
 #pragma mark - Requests
 

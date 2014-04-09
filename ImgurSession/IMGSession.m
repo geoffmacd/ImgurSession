@@ -111,7 +111,7 @@
 
 #pragma mark - Authentication
 
--(NSString*)strForAuthType:(IMGAuthType)authType{
++(NSString*)strForAuthType:(IMGAuthType)authType{
     NSString * authStr;
     switch (authType) {
         case IMGPinAuth:
@@ -132,14 +132,16 @@
 
 - (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType{
     
-    NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGBaseURL, [self strForAuthType:authType], _clientID];
+    NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGBaseURL, [IMGSession strForAuthType:authType], _clientID];
     return [NSURL URLWithString:path];
 }
 
 - (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
     
+    NSString * grantTypeStr = (authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
+    
     //call oauth/token with auth type
-    NSDictionary * params = @{[self strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":[self strForAuthType:authType]};
+    NSDictionary * params = @{[IMGSession strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
     
     //use super to bypass tracking
     [super POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
