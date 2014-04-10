@@ -48,7 +48,8 @@
         
         _albumID = jsonData[@"id"];
         _title = jsonData[@"title"];
-        _albumDescription = jsonData[@"description"];
+        if(![jsonData[@"description"] isKindOfClass:[NSNull class]])
+            _albumDescription = jsonData[@"description"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _coverID = jsonData[@"cover"];
         if(_coverID && ![_coverID isKindOfClass:[NSNull class]]){

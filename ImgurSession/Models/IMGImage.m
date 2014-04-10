@@ -47,7 +47,8 @@
         
         _imageID = jsonData[@"id"];
         _title = jsonData[@"title"];
-        _imageDescription = jsonData[@"description"];
+        if(![jsonData[@"description"] isKindOfClass:[NSNull class]])
+            _imageDescription = jsonData[@"description"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _type = jsonData[@"type"];
         _section = jsonData[@"section"];
