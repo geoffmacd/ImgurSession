@@ -52,6 +52,34 @@
  Score
  */
 -(NSInteger)score;
+/**
+ Ups
+ */
+-(NSInteger)ups;
+/**
+ downs
+ */
+-(NSInteger)downs;
+/**
+ Views
+ */
+-(NSInteger)views;
+/**
+ Bandwidth
+ */
+-(NSInteger)bandwidth;
+/**
+ description
+ */
+-(NSString*)galleryDescription;
+/**
+ section
+ */
+-(NSString*)section;
+/**
+ Username who submitted this gallery image or album.
+ */
+-(NSString*)fromUsername;
 
 @end
 

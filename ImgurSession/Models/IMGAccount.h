@@ -32,7 +32,7 @@
 /**
  Reputation
  */
-@property (nonatomic, readonly) float reputation;
+@property (nonatomic, readonly) NSInteger reputation;
 /**
  Creation date for account
  */
@@ -49,4 +49,11 @@
 
 
 
+#pragma mark - Convenience
+
+/**
+ Returns string representing 'notoriety' as seen on Imgur account page based on reputation. Not localized.
+ */
+-(NSString*)notorietyString;
+    
 @end

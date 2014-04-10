@@ -18,7 +18,7 @@
 @property (readwrite) NSString *bio;
 @property (readwrite) NSInteger accountID;
 @property (readwrite) NSURL *url;
-@property (readwrite) float reputation;
+@property (readwrite) NSInteger reputation;
 @property (readwrite) NSDate *created;
 @end
 
@@ -49,17 +49,43 @@
         _accountID = [jsonData[@"id"] integerValue];
         _url = [NSURL URLWithString:jsonData[@"url"]];
         _bio = jsonData[@"bio"];
-        _reputation = [jsonData[@"reputation"] floatValue];
+        _reputation = [jsonData[@"reputation"] integerValue];
         _created = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"created"] integerValue]];
     }
     return [self trackModels];
 }
 
 
+#pragma mark - Convenience
+
+-(NSString*)notorietyString{
+    //based on reputation
+    
+    NSString * notoriety;
+    if(self.reputation >= 20000)
+        notoriety = @"Glorious";
+    if(self.reputation >= 8000)
+        notoriety = @"Renowned";
+    if(self.reputation >= 4000)
+        notoriety = @"Idolized";
+    if(self.reputation >= 2000)
+        notoriety = @"Trusted";
+    if(self.reputation >= 1000)
+        notoriety = @"Liked";
+    if(self.reputation >= 400)
+        notoriety = @"Accepted";
+    if(self.reputation >= 0)
+        notoriety = @"Neutral";
+    if(self.reputation < 0)
+        notoriety = @"Forever Alone";
+    
+    return notoriety;
+}
+
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %.2f; created: %@", [super description], (unsigned long)self.accountID, self.url, self.bio, self.reputation, self.created];
+    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %ld; created: %@", [super description], (unsigned long)self.accountID, self.url, self.bio, self.reputation, self.created];
 }
 
 -(BOOL)isEqual:(id)object{
@@ -83,7 +109,7 @@
     NSString * username = [decoder decodeObjectForKey:@"username"];
     NSURL * url = [decoder decodeObjectForKey:@"url"];
     NSString * bio = [decoder decodeObjectForKey:@"bio"];
-    float reputation = [[decoder decodeObjectForKey:@"reputation"] floatValue];
+    NSInteger reputation = [[decoder decodeObjectForKey:@"reputation"] integerValue];
     NSDate *created = [decoder decodeObjectForKey:@"created"];
     
     if (self = [super initWithCoder:decoder]) {
