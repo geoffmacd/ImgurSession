@@ -48,7 +48,8 @@
         _username = username;
         _accountID = [jsonData[@"id"] integerValue];
         _url = [NSURL URLWithString:jsonData[@"url"]];
-        _bio = jsonData[@"bio"];
+        if([jsonData[@"bio"] isKindOfClass:[NSString class]])
+            _bio = jsonData[@"bio"];
         _reputation = [jsonData[@"reputation"] integerValue];
         _created = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"created"] integerValue]];
     }
