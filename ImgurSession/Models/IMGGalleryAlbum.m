@@ -116,39 +116,9 @@
     
 }
 
--(NSInteger)score{
-    
-    return self.score;
-}
-
--(NSInteger)ups{
-    
-    return self.ups;
-}
-
--(NSInteger)downs{
-    
-    return self.downs;
-}
-
--(NSInteger)views{
-    
-    return self.views;
-}
-
--(NSInteger)bandwidth{
-    
-    return self.bandwidth;
-}
-
 -(NSString*)galleryDescription{
     
     return self.albumDescription;
-}
-
--(NSString*)section{
-    
-    return self.section;
 }
 
 -(NSString*)fromUsername{
