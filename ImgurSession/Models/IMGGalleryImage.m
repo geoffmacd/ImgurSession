@@ -7,6 +7,7 @@
 //
 
 #import "IMGGalleryImage.h"
+#import "NSDictionary+IMG.h"
 
 @interface IMGGalleryImage ()
 
@@ -35,19 +36,16 @@
             *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
             return nil;
         }
+        //clean NSNull
+        jsonData = [jsonData cleanNull];
         
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];
         _score = [jsonData[@"score"] integerValue];
         _accountURL = jsonData[@"account_url"];
-        if(![jsonData[@"vote"] isKindOfClass:[NSNull class]])
-            _vote = [IMGVote voteForStr:jsonData[@"vote"]];
-        else
-            _vote = IMGNeutralVote;
-        if(![jsonData[@"nsfw"] isKindOfClass:[NSNull class]])
-            _nsfw = [jsonData[@"nsfw"] boolValue];
-        if(![jsonData[@"favorite"] isKindOfClass:[NSNull class]])
-            _favorite = [jsonData[@"favorite"] boolValue];
+        _vote = [IMGVote voteForStr:jsonData[@"vote"]];
+        _nsfw = [jsonData[@"nsfw"] boolValue];
+        _favorite = [jsonData[@"favorite"] boolValue];
     }
     return [self trackModels];
 }

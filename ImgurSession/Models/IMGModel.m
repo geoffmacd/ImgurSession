@@ -10,7 +10,6 @@
 
 #import "IMGSession.h"
 
-
 @implementation IMGModel
 
 - (instancetype)initWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{

@@ -68,6 +68,10 @@
 		243CCDA218DD32EF00B4FBC6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		243CCDB018DD336900B4FBC6 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */; };
 		243CCDB118DD338700B4FBC6 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
+		2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; };
+		2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; };
+		2457E2DA18F77DDA00F022A1 /* NSDictionary+IMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */; };
+		2457E2DB18F77DDA00F022A1 /* NSDictionary+IMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */; };
 		2482266218CABF7B00C30677 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
 		249DABDC18D65FD7008531FE /* IMGBasicAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */; };
 		249DABDD18D65FD7008531FE /* IMGBasicAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */; };
@@ -328,6 +332,8 @@
 		240747B418D62B1B00B92063 /* IMGResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGResponseSerializer.h; path = Requests/IMGResponseSerializer.h; sourceTree = "<group>"; };
 		243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSessionOSXTests copy.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGAnonymousTests.m; sourceTree = "<group>"; };
+		2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+IMG.h"; sourceTree = "<group>"; };
+		2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+IMG.m"; sourceTree = "<group>"; };
 		249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = IMGBasicAlbum.h; path = ImgurSession/Models/IMGBasicAlbum.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		249DABDB18D65FD7008531FE /* IMGBasicAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = IMGBasicAlbum.m; path = ImgurSession/Models/IMGBasicAlbum.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24AC155418CAB4F9005F86C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -671,6 +677,8 @@
 				C3102D1818D9FF82007A75C4 /* ImgurSession.h */,
 				C30933E318CA204C009D9C57 /* IMGSession.h */,
 				C30933E418CA204C009D9C57 /* IMGSession.m */,
+				2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */,
+				2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */,
 				C30933C618CA1FFE009D9C57 /* Models */,
 				2407476A18D53BF900B92063 /* Endpoints */,
 			);
@@ -927,6 +935,7 @@
 				C328811818EA0DFF00B080CF /* AFURLResponseSerialization.h in Headers */,
 				C328811918EA0DFF00B080CF /* AFURLSessionManager.h in Headers */,
 				C328811A18EA0DFF00B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */,
+				2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
 				C328811B18EA0DFF00B080CF /* UIAlertView+AFNetworking.h in Headers */,
 				C328811C18EA0DFF00B080CF /* UIButton+AFNetworking.h in Headers */,
 				C328811D18EA0DFF00B080CF /* UIImageView+AFNetworking.h in Headers */,
@@ -978,6 +987,7 @@
 				C328810518EA0AF200B080CF /* AFURLResponseSerialization.h in Headers */,
 				C328810618EA0AF200B080CF /* AFURLSessionManager.h in Headers */,
 				C328810718EA0AF200B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */,
+				2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
 				C328810818EA0AF200B080CF /* UIAlertView+AFNetworking.h in Headers */,
 				C328810918EA0AF200B080CF /* UIButton+AFNetworking.h in Headers */,
 				C328810A18EA0AF200B080CF /* UIImageView+AFNetworking.h in Headers */,
@@ -1554,6 +1564,7 @@
 				2407479E18D62AF700B92063 /* IMGAccount.m in Sources */,
 				240747C418D62B1B00B92063 /* IMGNotificationRequest.m in Sources */,
 				2407479C18D62AF700B92063 /* IMGAccountSettings.m in Sources */,
+				2457E2DB18F77DDA00F022A1 /* NSDictionary+IMG.m in Sources */,
 				240747BE18D62B1B00B92063 /* IMGImageRequest.m in Sources */,
 				240747B818D62B1B00B92063 /* IMGAccountRequest.m in Sources */,
 				240747BA18D62B1B00B92063 /* IMGGalleryRequest.m in Sources */,
@@ -1599,6 +1610,7 @@
 				2407479B18D62AF700B92063 /* IMGAccountSettings.m in Sources */,
 				240747C318D62B1B00B92063 /* IMGNotificationRequest.m in Sources */,
 				2407475E18D4FA0300B92063 /* IMGGalleryProfile.m in Sources */,
+				2457E2DA18F77DDA00F022A1 /* NSDictionary+IMG.m in Sources */,
 				240747BD18D62B1B00B92063 /* IMGImageRequest.m in Sources */,
 				C30933E518CA204C009D9C57 /* IMGSession.m in Sources */,
 				240747B718D62B1B00B92063 /* IMGAccountRequest.m in Sources */,
@@ -2122,6 +2134,7 @@
 				C328812918EB1AFD00B080CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C3CDA2EB18CA66DA003B7F96 /* Build configuration list for PBXNativeTarget "iOSAuthenticatedTests" */ = {
 			isa = XCConfigurationList;

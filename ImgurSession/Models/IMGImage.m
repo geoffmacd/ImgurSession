@@ -7,6 +7,7 @@
 //
 
 #import "IMGImage.h"
+#import "NSDictionary+IMG.h"
 
 @interface IMGImage ()
 
@@ -39,30 +40,31 @@
             
             *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
             return nil;
-        } else if (!jsonData[@"id"] || !jsonData[@"title"] || !jsonData[@"link"] || !jsonData[@"animated"]){
-            
-            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
-            return nil;
         }
+        //clean NSNull
+        jsonData = [jsonData cleanNull];
         
         _imageID = jsonData[@"id"];
         _title = jsonData[@"title"];
-        if(![jsonData[@"description"] isKindOfClass:[NSNull class]])
-            _imageDescription = jsonData[@"description"];
-        _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
+        _imageDescription = jsonData[@"description"];
         _type = jsonData[@"type"];
         _section = jsonData[@"section"];
-        if(![jsonData[@"animated"] isKindOfClass:[NSNull class]])
-            _animated = [jsonData[@"animated"] boolValue];
-        else
-            _animated = NO;
+        _animated = [jsonData[@"animated"] boolValue];
+        _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
+        _deletehash = jsonData[@"deletehash"];
+        _url = [NSURL URLWithString:jsonData[@"link"]];
+        
         _width = [jsonData[@"width"] floatValue];
         _height = [jsonData[@"height"] floatValue];
         _size = [jsonData[@"size"] integerValue];
         _views = [jsonData[@"views"] integerValue];
         _bandwidth = [jsonData[@"bandwidth"] integerValue];
-        _deletehash = jsonData[@"deletehash"];
-        _url = [NSURL URLWithString:jsonData[@"link"]];
+        
+        if (!_imageID || !_url){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
     }   
     return [self trackModels];
 }

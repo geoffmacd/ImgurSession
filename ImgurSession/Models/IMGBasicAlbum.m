@@ -8,6 +8,7 @@
 
 #import "IMGBasicAlbum.h"
 #import "IMGImage.h"
+#import "NSDictionary+IMG.h"
 
 @interface IMGBasicAlbum ()
 
@@ -40,22 +41,17 @@
             
             *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
             return nil;
-        } else if (!jsonData[@"id"] || !jsonData[@"title"] || !jsonData[@"link"] || !jsonData[@"cover"]){
-            
-            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
-            return nil;
         }
+        //clean NSNull
+        jsonData = [jsonData cleanNull];
         
         _albumID = jsonData[@"id"];
         _title = jsonData[@"title"];
-        if(![jsonData[@"description"] isKindOfClass:[NSNull class]])
-            _albumDescription = jsonData[@"description"];
+        _albumDescription = jsonData[@"description"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _coverID = jsonData[@"cover"];
-        if(_coverID && ![_coverID isKindOfClass:[NSNull class]]){
-            _coverHeight = [jsonData[@"cover_height"] floatValue];
-            _coverWidth = [jsonData[@"cover_width"] floatValue];
-        }
+        _coverHeight = [jsonData[@"cover_height"] floatValue];
+        _coverWidth = [jsonData[@"cover_width"] floatValue];
         _accountURL = jsonData[@"account_url"];
         _privacy = jsonData[@"privacy"];
         _layout = [IMGBasicAlbum layoutForStr:jsonData[@"layout"]];
@@ -75,6 +71,12 @@
             }
         }
         _images = [NSArray arrayWithArray:images];
+        
+        if (!_albumID || !_coverID){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
     }
     return [self trackModels];
 }
