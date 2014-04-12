@@ -19,9 +19,9 @@
  */
 @property (readonly,nonatomic) NSInteger commentID;
 /**
- Image ID comment is associated with
+ Gallery Object ID comment is associated with (IMGGalleryImage or IMGGalleryAlbum)
  */
-@property (readonly,nonatomic, copy) NSString * imageID;
+@property (readonly,nonatomic, copy) NSString * galleryID;
 /**
  Actual comment string
  */

@@ -11,7 +11,7 @@
 @interface IMGComment ()
 
 @property (readwrite,nonatomic) NSInteger commentID;
-@property (readwrite,nonatomic) NSString *imageID;
+@property (readwrite,nonatomic) NSString *galleryID;
 @property (readwrite,nonatomic) NSString *caption;
 @property (readwrite,nonatomic) NSString *author;
 @property (readwrite,nonatomic) NSInteger authorID;
@@ -46,7 +46,7 @@
         }
         
         _commentID = [jsonData[@"id"] integerValue];
-        _imageID = jsonData[@"image_id"];
+        _galleryID = jsonData[@"image_id"];
         _caption = jsonData[@"comment"];
         _author = jsonData[@"author"];
         _authorID = [jsonData[@"author_id"] integerValue];
@@ -67,7 +67,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@; caption: \"%@\"; author: \"%@\"; authorId: %ld; imageId: %@;",  [super description], self.caption, self.author, (long)self.authorID, self.imageID];
+    return [NSString stringWithFormat:@"%@; caption: \"%@\"; author: \"%@\"; authorId: %ld; imageId: %@;",  [super description], self.caption, self.author, (long)self.authorID, self.galleryID];
 }
 
 -(BOOL)isEqual:(id)object{
@@ -97,7 +97,7 @@
     BOOL onAlbum = [[decoder decodeObjectForKey:@"onAlbum"] boolValue];
     BOOL deleted = [[decoder decodeObjectForKey:@"deleted"] boolValue];
     
-    NSString * imageID = [decoder decodeObjectForKey:@"imageID"];
+    NSString * galleryID = [decoder decodeObjectForKey:@"galleryID"];
     NSString * caption = [decoder decodeObjectForKey:@"caption"];
     NSString * author = [decoder decodeObjectForKey:@"author"];
     NSString * albumCover = [decoder decodeObjectForKey:@"albumCover"];
@@ -115,7 +115,7 @@
         _onAlbum = onAlbum;
         _deleted = deleted;
         
-        _imageID = imageID;
+        _galleryID = galleryID;
         _caption = caption;
         _author = author;
         _albumCover = albumCover;
@@ -130,7 +130,7 @@
     
     [super encodeWithCoder:coder];
     
-    [coder encodeObject:self.imageID forKey:@"imageID"];
+    [coder encodeObject:self.galleryID forKey:@"galleryID"];
     [coder encodeObject:self.caption forKey:@"caption"];
     [coder encodeObject:self.author forKey:@"author"];
     [coder encodeObject:self.albumCover forKey:@"albumCover"];
@@ -156,7 +156,7 @@
     
     if (copy) {
         // Copy NSObject subclasses
-        [copy setImageID:[self.imageID copyWithZone:zone]];
+        [copy setGalleryID:[self.galleryID copyWithZone:zone]];
         [copy setCaption:[self.caption copyWithZone:zone]];
         [copy setAuthor:[self.author copyWithZone:zone]];
         [copy setAlbumCover:[self.albumCover copyWithZone:zone]];

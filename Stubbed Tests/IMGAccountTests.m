@@ -137,18 +137,18 @@
         IMGComment * first = [comments firstObject];
         expect(first).beInstanceOf([IMGComment class]);
         expect(first.caption).beTruthy();
-        expect(first.imageID).beTruthy();
+        expect(first.galleryID).beTruthy();
         
         IMGComment * copy = [first copy];
         expect(first.caption).equal(copy.caption);
-        expect([first.imageID isEqualToString:copy.imageID]).beTruthy();
+        expect([first.galleryID isEqualToString:copy.galleryID]).beTruthy();
         expect(first.commentID == copy.commentID).beTruthy();
         
         NSData * data = [NSKeyedArchiver archivedDataWithRootObject:copy];
         copy = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
         expect(first.caption).equal(copy.caption);
-        expect([first.imageID isEqualToString:copy.imageID]).beTruthy();
+        expect([first.galleryID isEqualToString:copy.galleryID]).beTruthy();
         expect(first.commentID == copy.commentID).beTruthy();
         expect(copy).equal(first);
         
@@ -168,7 +168,7 @@
     [IMGAccountRequest accountCommentWithID:15325 success:^(IMGComment * firstComment) {
         
         expect(firstComment.caption).beTruthy();
-        expect(firstComment.imageID).beTruthy();
+        expect(firstComment.galleryID).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];
