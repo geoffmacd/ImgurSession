@@ -204,6 +204,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 - (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
 /**
+ Authenticates and refreshes with user provided refresh token
+ @param refreshToken     valid refresh token to manually set
+ */
+-(void)authenticateWithRefreshToken:(NSString*)refreshToken;
+/**
  String constant for auth type
  */
 +(NSString*)strForAuthType:(IMGAuthType)authType;

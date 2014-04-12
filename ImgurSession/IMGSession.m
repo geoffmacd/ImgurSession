@@ -237,6 +237,13 @@
     }
 }
 
+-(void)authenticateWithRefreshToken:(NSString*)refreshToken{
+    
+    self.refreshToken = refreshToken;
+    
+    [self refreshAuthentication:nil failure:nil];
+}
+
 #pragma mark - Authorization header
 
 -(void)setAnonmyousAuthenticationWithID:(NSString*)clientID{

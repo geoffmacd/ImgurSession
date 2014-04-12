@@ -54,8 +54,8 @@
         _deletehash = jsonData[@"deletehash"];
         _url = [NSURL URLWithString:jsonData[@"link"]];
         
-        _width = [jsonData[@"width"] floatValue];
-        _height = [jsonData[@"height"] floatValue];
+        _width = [jsonData[@"width"] floatValue] / 2.0f;   //assume retina px scaling
+        _height = [jsonData[@"height"] floatValue] / 2.0f; //assume retina px scaling
         _size = [jsonData[@"size"] integerValue];
         _views = [jsonData[@"views"] integerValue];
         _bandwidth = [jsonData[@"bandwidth"] integerValue];

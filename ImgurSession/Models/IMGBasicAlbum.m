@@ -50,8 +50,8 @@
         _albumDescription = jsonData[@"description"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _coverID = jsonData[@"cover"];
-        _coverHeight = [jsonData[@"cover_height"] floatValue];
-        _coverWidth = [jsonData[@"cover_width"] floatValue];
+        _coverHeight = [jsonData[@"cover_height"] floatValue] / 2.0f;  //assume retina px scaling
+        _coverWidth = [jsonData[@"cover_width"] floatValue] / 2.0f;    //assume retina px scaling
         _accountURL = jsonData[@"account_url"];
         _privacy = jsonData[@"privacy"];
         _layout = [IMGBasicAlbum layoutForStr:jsonData[@"layout"]];
