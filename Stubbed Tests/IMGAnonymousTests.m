@@ -279,7 +279,6 @@
     
     [IMGAccountRequest accountWithUser:imgurUnitTestParams[@"recipientId"]  success:^(IMGAccount *account) {
         
-        expect(account.bio).beTruthy();
         expect(account.accountID).beTruthy();
         expect(account.username).beTruthy();
         

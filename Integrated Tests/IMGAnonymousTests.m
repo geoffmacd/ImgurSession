@@ -185,6 +185,21 @@
     expect(isSuccess).will.beTruthy();
 }
 
+- (void)testGalleryObject{
+    
+    __block BOOL isSuccess;
+    
+    [IMGGalleryRequest objectWithID:@"HtAOg" success:^(id<IMGGalleryObjectProtocol> object) {
+        
+        expect(object.isAlbum).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+
 - (void)testAlbum{
     
     __block BOOL isSuccess;
@@ -263,19 +278,19 @@
     expect(isSuccess).will.beTruthy();
 }
 
-- (void)testAllCommentReplies{
-    
-    __block BOOL isSuccess;
-    
-    [IMGGalleryRequest allCommentsWithGalleryID:@"1I5nqe0" withSort:IMGGalleryCommentSortHot success:^(NSArray * comments) {
-        
-        IMGComment * first = [comments firstObject];
-        expect(first.commentID).beTruthy();
-        isSuccess = YES;
-        
-    } failure:failBlock];
-    
-    expect(isSuccess).will.beTruthy();
-}
+//- (void)testAllCommentReplies{
+//    
+//    __block BOOL isSuccess;
+//    
+//    [IMGGalleryRequest allCommentsWithGalleryID:@"1I5nqe0" withSort:IMGGalleryCommentSortHot success:^(NSArray * comments) {
+//        
+//        IMGComment * first = [comments firstObject];
+//        expect(first.commentID).beTruthy();
+//        isSuccess = YES;
+//        
+//    } failure:failBlock];
+//    
+//    expect(isSuccess).will.beTruthy();
+//}
 
 @end

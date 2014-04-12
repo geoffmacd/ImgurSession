@@ -70,7 +70,7 @@
                 *error = [NSError errorWithDomain:IMGErrorDomain code:403 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
             }
         } else if([httpRes statusCode] == 404){
-            //user rate limiting
+            //not found
             
             if(jsonResult[@"data"][@"error"]){
                 

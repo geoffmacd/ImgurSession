@@ -11,6 +11,7 @@
 
 
 @class IMGGalleryAlbum,IMGGalleryImage,IMGGalleryProfile,IMGComment;
+@protocol IMGGalleryObjectProtocol;
 
 typedef NS_ENUM(NSInteger, IMGGallerySectionType) {
     IMGGallerySectionTypeHot, //default
@@ -69,7 +70,11 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
 +(void)galleryWithParameters:(NSDictionary *)parameters success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Load Gallery objects
-
+/**
+ Retrieves gallery object with id
+ @param galleryObjectID    object Id string as retrieved through gallery page call
+ */
++ (void)objectWithID:(NSString *)galleryObjectID success:(void (^)(id<IMGGalleryObjectProtocol>))success failure:(void (^)(NSError *))failure;
 /**
  Retrieves gallery image with id
  @param imageID    image Id string as retrieved through gallery page call

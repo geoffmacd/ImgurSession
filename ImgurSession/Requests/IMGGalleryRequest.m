@@ -117,6 +117,42 @@
 
 #pragma mark - Load Gallery objects
 
++ (void)objectWithID:(NSString *)galleryObjectID success:(void (^)(id<IMGGalleryObjectProtocol>))success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithID:galleryObjectID];
+    
+    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSError *JSONError = nil;
+        
+        if([responseObject[@"is_album"] boolValue]){
+            
+            IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
+            
+            if(!JSONError && album) {
+                if(success)
+                    success(album);
+            }
+            else {
+                if(failure)
+                    failure(JSONError);
+            }
+        } else {
+            IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:responseObject error:&JSONError];
+            
+            if(!JSONError && image) {
+                if(success)
+                    success(image);
+            }
+            else {
+                
+                if(failure)
+                    failure(JSONError);
+            }
+        }
+        
+    } failure:failure];
+}
+
 +(void)imageWithID:(NSString *)imageID success:(void (^)(IMGGalleryImage *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"image" withID2:imageID];
     
