@@ -11,7 +11,15 @@
 #import "IMGGalleryAlbum.h"
 #import "IMGComment.h"
 #import "IMGCommentRequest.h"
+#import "IMGImageRequest.h"
 #import "IMGSession.h"
+
+
+@interface IMGGalleryAlbum ()
+
+@property (readwrite,nonatomic) NSArray *images;
+
+@end
 
 @implementation IMGGalleryRequest
 
@@ -174,21 +182,53 @@
 }
 
 + (void)albumWithID:(NSString *)albumID success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *))failure{
+    [self albumWithID:albumID withCoverImage:NO success:success failure:failure];
+}
+
++ (void)albumWithID:(NSString *)albumID withCoverImage:(BOOL)coverImage success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"album" withID2:albumID];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+
         
         NSError *JSONError = nil;
         IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:responseObject error:&JSONError];
         
         if(!JSONError && album) {
-            if(success)
-                success(album);
+            if(coverImage){
+                [IMGImageRequest imageWithID:album.coverID success:^(IMGImage *image) {
+                    
+                    //set just the cover image
+                    [album setImages:[NSArray arrayWithObject:image]];
+                    
+                    if(success)
+                        success(album);
+                    
+                } failure:failure];
+            } else {
+                //don't download cover
+                if(success)
+                    success(album);
+            }
         }
         else {
             if(failure)
                 failure(JSONError);
         }
+    } failure:failure];
+}
+
++ (void)albumCoverWithAlbum:(IMGGalleryAlbum*)album success:(void (^)(IMGGalleryAlbum *))success failure:(void (^)(NSError *))failure{
+
+    [IMGImageRequest imageWithID:album.coverID success:^(IMGImage *image) {
+        
+        //set just the cover image
+        [album setImages:[NSArray arrayWithObject:image]];
+        
+        if(success)
+            success(album);
+        
     } failure:failure];
 }
 

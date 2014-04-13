@@ -91,7 +91,7 @@
 -(IMGImage *)coverImage{
     
     //image should be included in the images array
-    __block IMGImage * cover;
+    __block IMGImage * cover = nil;
     
     [self.images enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         IMGImage * img = obj;
