@@ -8,6 +8,8 @@
 
 #import "IMGModel.h"
 
+#import "IMGObject.h"
+
 
 typedef NS_ENUM(NSInteger, IMGAlbumPrivacy){
     IMGAlbumDefault = 1,
@@ -27,7 +29,7 @@ typedef NS_ENUM(NSInteger, IMGAlbumLayout){
 /**
  Model object class to represent common denominator properties to gallery and user albums. https://api.imgur.com/models/album
  */
-@interface IMGBasicAlbum : IMGModel <NSCopying,NSCoding>
+@interface IMGBasicAlbum : IMGModel <NSCopying,NSCoding,IMGObjectProtocol>
 
 /**
  Album ID

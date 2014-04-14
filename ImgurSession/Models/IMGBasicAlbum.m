@@ -81,6 +81,45 @@
     return [self trackModels];
 }
 
+#pragma mark - IMGGalleryObject
+
+-(BOOL)isAlbum{
+    return YES;
+}
+
+-(IMGImage *)coverImage{
+    
+    //image should be included in the images array
+    __block IMGImage * cover = nil;
+    
+    [self.images enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IMGImage * img = obj;
+        
+        if([self.coverID isEqualToString:img.imageID]){
+            //this is the cover
+            cover = img;
+            *stop = YES;
+        }
+    }];
+    
+    if(!cover)
+        NSLog(@"No cover image found for album");
+    
+    return cover;
+}
+
+-(NSString *)objectID{
+    
+    return self.albumID;
+    
+}
+
+-(NSString*)galleryDescription{
+    
+    return self.albumDescription;
+}
+
+
 #pragma mark - Album Layout setting
 
 +(NSString*)strForLayout:(IMGAlbumLayout)layoutType{

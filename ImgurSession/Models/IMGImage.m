@@ -69,6 +69,32 @@
     return [self trackModels];
 }
 
+#pragma mark - IMGObject
+
+-(BOOL)isAlbum{
+    return NO;
+}
+
+-(IMGImage *)coverImage{
+    
+    return self;
+}
+
+-(NSString *)objectID{
+    
+    return self.imageID;
+    
+}
+
+-(NSString*)galleryDescription{
+    
+    return self.imageDescription;
+}
+
+-(NSString *)coverID{
+    return self.imageID;
+}
+
 #pragma mark - Describe
 
 - (NSString *)description{

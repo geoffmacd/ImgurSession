@@ -7,7 +7,7 @@
 //
 
 #import "IMGModel.h"    
-
+#import "IMGObject.h"
 
 /*
  There are 6 total thumbnails that an image can be resized to. Each one is accessable by appending a single character suffix to the end of the image id, and before the file extension. The thumbnails are:
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, IMGSize) {
 /**
  Model object class to represent images posted to Imgur. https://api.imgur.com/models/image
  */
-@interface IMGImage : IMGModel <NSCopying,NSCoding>
+@interface IMGImage : IMGModel <NSCopying,NSCoding,IMGObjectProtocol>
 
 /**
  Image ID to reference in Imgur globally
