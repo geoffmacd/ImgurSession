@@ -65,10 +65,15 @@
         return YES;
     }
     
-    if (![object isKindOfClass:[IMGGalleryImage class]]) {
+    if (![object isKindOfClass:[IMGImage class]]) {
         return NO;
     }
     return ([[object imageID] isEqualToString:self.imageID]);
+}
+
+-(NSUInteger)hash{
+    
+    return [self.imageID hash];
 }
 
 #pragma mark - IMGGalleryObjectProtocol

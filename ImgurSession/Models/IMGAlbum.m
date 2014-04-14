@@ -55,6 +55,11 @@
     return ([[object albumID] isEqualToString:self.albumID]);
 }
 
+-(NSUInteger)hash{
+    
+    return [self.albumID hash];
+}
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {

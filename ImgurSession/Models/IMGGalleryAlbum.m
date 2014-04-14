@@ -63,11 +63,16 @@
         return YES;
     }
     
-    if (![object isKindOfClass:[IMGGalleryAlbum class]]) {
+    if (![object isKindOfClass:[IMGBasicAlbum class]]) {
         return NO;
     }
     
     return ([[object albumID] isEqualToString:self.albumID]);
+}
+
+-(NSUInteger)hash{
+    
+    return [self.albumID hash];
 }
 
 #pragma mark - IMGGalleryObjectProtocol

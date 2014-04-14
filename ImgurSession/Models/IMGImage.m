@@ -158,6 +158,11 @@
     return ([[object imageID] isEqualToString:self.imageID]);
 }
 
+-(NSUInteger)hash{
+    
+    return [_imageID hash];
+}
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {

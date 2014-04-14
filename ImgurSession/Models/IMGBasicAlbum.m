@@ -210,6 +210,11 @@
     return ([[object albumID] isEqualToString:self.albumID]);
 }
 
+-(NSUInteger)hash{
+    
+    return [_albumID hash];
+}
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {
