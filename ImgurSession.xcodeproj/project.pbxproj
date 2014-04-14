@@ -146,9 +146,9 @@
 		C355E5CF18CA80A100D5CEA5 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
 		C36C00F318CA7611004576A5 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C36C010E18CA7A7F004576A5 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
-		C3C1356218FC6A5900829868 /* IMGGalleryObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356118FC6A5900829868 /* IMGGalleryObject.h */; };
+		C3C1356218FC6A5900829868 /* IMGGalleryObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356118FC6A5900829868 /* IMGGalleryObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C3C1356318FC6A5900829868 /* IMGGalleryObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356118FC6A5900829868 /* IMGGalleryObject.h */; };
-		C3C1356518FC6A6800829868 /* IMGObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356418FC6A6800829868 /* IMGObject.h */; };
+		C3C1356518FC6A6800829868 /* IMGObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356418FC6A6800829868 /* IMGObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C3C1356618FC6A6800829868 /* IMGObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356418FC6A6800829868 /* IMGObject.h */; };
 		C3CDA2DD18CA66DA003B7F96 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		C3CDA2DE18CA66DA003B7F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
@@ -1018,8 +1018,6 @@
 				C3F1B49518E9BD68004ED254 /* IMGGalleryImage.h in Headers */,
 				C3F1B49618E9BD68004ED254 /* IMGGalleryProfile.h in Headers */,
 				C3F1B49718E9BD68004ED254 /* IMGImage.h in Headers */,
-				C3C1356518FC6A6800829868 /* IMGObject.h in Headers */,
-				C3C1356218FC6A5900829868 /* IMGGalleryObject.h in Headers */,
 				C3F1B49818E9BD68004ED254 /* IMGMessage.h in Headers */,
 				C3F1B49918E9BD68004ED254 /* IMGConversation.h in Headers */,
 				C3F1B49A18E9BD68004ED254 /* IMGNotification.h in Headers */,
@@ -1028,6 +1026,8 @@
 				C3F1B49F18E9BD68004ED254 /* IMGAlbumRequest.h in Headers */,
 				C3F1B4A018E9BD68004ED254 /* IMGCommentRequest.h in Headers */,
 				C3F1B4A118E9BD68004ED254 /* IMGConversationRequest.h in Headers */,
+				C3C1356518FC6A6800829868 /* IMGObject.h in Headers */,
+				C3C1356218FC6A5900829868 /* IMGGalleryObject.h in Headers */,
 				C3F1B4A218E9BD69004ED254 /* IMGGalleryRequest.h in Headers */,
 				C3F1B4A318E9BD69004ED254 /* IMGImageRequest.h in Headers */,
 				C3F1B4A418E9BD69004ED254 /* IMGNotificationRequest.h in Headers */,

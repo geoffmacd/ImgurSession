@@ -119,6 +119,10 @@
     return self.albumDescription;
 }
 
+- (NSURL *)URLWithSize:(IMGSize)size{
+    //could be nil if cover image not retrieved
+    return [self.coverImage URLWithSize:size];
+}
 
 #pragma mark - Album Layout setting
 

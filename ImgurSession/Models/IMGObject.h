@@ -8,6 +8,27 @@
 
 @class IMGImage;
 
+/*
+ There are 6 total thumbnails that an image can be resized to. Each one is accessable by appending a single character suffix to the end of the image id, and before the file extension. The thumbnails are:
+ 
+ Thumbnail Suffix	Thumbnail Name	Thumbnail Size	Keeps Image Proportions
+ s	Small Square	90x90	No
+ b	Big Square	160x160	No
+ t	Small Thumbnail	160x160	Yes
+ m	Medium Thumbnail	320x320	Yes
+ l	Large Thumbnail	640x640	Yes
+ h	Huge Thumbnail	1024x1024	Yes
+ For example, the image located at http://i.imgur.com/12345.jpg has the Medium Thumbnail located at http://i.imgur.com/12345m.jpg
+ */
+typedef NS_ENUM(NSInteger, IMGSize) {
+    IMGSmallSquareSize,
+    IMGBigSquareSize,
+    IMGSmallThumbnailSize,
+    IMGMediumThumbnailSize,
+    IMGLargeThumbnailSize,
+    IMGHugeThumbnailSize
+};
+
 #ifndef ImgurSession_IMGObject_h
 #define ImgurSession_IMGObject_h
 
@@ -44,6 +65,10 @@
  description
  */
 -(NSString*)galleryDescription;
+/**
+ Get thumbnails for image/album
+ */
+- (NSURL *)URLWithSize:(IMGSize)size;
 
 @end
 

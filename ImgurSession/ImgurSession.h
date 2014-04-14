@@ -24,6 +24,9 @@
         #import "IMGImageRequest.h"
         #import "IMGNotificationRequest.h"
 
+        #import "IMGObject.h"
+        #import "IMGGalleryObject.h"
+
         #import "IMGAccount.h"
         #import "IMGAccountSettings.h"
         #import "IMGAlbum.h"

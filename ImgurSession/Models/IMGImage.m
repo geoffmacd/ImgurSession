@@ -95,27 +95,6 @@
     return self.imageID;
 }
 
-#pragma mark - Describe
-
-- (NSString *)description{
-    return [NSString stringWithFormat:
-            @"%@; image ID: %@ ; title: \"%@\"; datetime: %@; type: %@; animated: %d; width: %ld; height: %ld; size: %ld; views: %ld; bandwidth: %ld",
-            [super description],  self.imageID, self.title, self.datetime, self.type, self.animated, (long)self.width, (long)self.height, (long)self.size, (long)self.views, (long)self.bandwidth];
-}
-
--(BOOL)isEqual:(id)object{
-    
-    if (self == object) {
-        return YES;
-    }
-    
-    if (![object isKindOfClass:[IMGImage class]]) {
-        return NO;
-    }
-    
-    return ([[object imageID] isEqualToString:self.imageID]);
-}
-
 #pragma mark - Display
 
 - (NSURL *)URLWithSize:(IMGSize)size{
@@ -133,7 +112,7 @@
             stringURL = [NSString stringWithFormat:@"%@b.%@", path, extension];
             break;
             
-        //keeps image proportions below, please use these for better looking design
+            //keeps image proportions below, please use these for better looking design
             
         case IMGSmallThumbnailSize:
             stringURL = [NSString stringWithFormat:@"%@t.%@", path, extension];
@@ -156,6 +135,27 @@
             return nil;
     }
     return [NSURL URLWithString:stringURL];
+}
+
+#pragma mark - Describe
+
+- (NSString *)description{
+    return [NSString stringWithFormat:
+            @"%@; image ID: %@ ; title: \"%@\"; datetime: %@; type: %@; animated: %d; width: %ld; height: %ld; size: %ld; views: %ld; bandwidth: %ld",
+            [super description],  self.imageID, self.title, self.datetime, self.type, self.animated, (long)self.width, (long)self.height, (long)self.size, (long)self.views, (long)self.bandwidth];
+}
+
+-(BOOL)isEqual:(id)object{
+    
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[IMGImage class]]) {
+        return NO;
+    }
+    
+    return ([[object imageID] isEqualToString:self.imageID]);
 }
 
 #pragma mark - NSCoding
