@@ -25,6 +25,16 @@
 #pragma mark - Upload one image
 
 /**
+ Upload a gif with NSData
+ */
++ (void)uploadImageWithGifData:(NSData *)gifData title:(NSString *)title success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure;
++ (void)uploadImageWithGifData:(NSData *)gifData compression:(CGFloat)compression title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure;
+/**
+ Upload an image with NSData
+ */
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure;
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure;
+/**
  Upload an image with local image URL
  */
 + (void)uploadImageWithFileURL:(NSURL *)fileURL success:(void (^)(IMGImage *image))success failure:(void (^)(NSError *error))failure;
@@ -36,7 +46,7 @@
 + (void)uploadImageWithURL:(NSURL *)url success:(void (^)(IMGImage *image))success failure:(void (^)(NSError *error))failure;
 + (void)uploadImageWithURL:(NSURL *)url title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *image))success failure:(void (^)(NSError *error))failure;
 
-#pragma mark - Upload multiple images
+#pragma mark - Upload multiple images - JPEG only
 
 /**
  Upload multiple images using image file url, title and description in NSDictionary in files and optionally link the images to an album

@@ -52,6 +52,7 @@
             //request malformed
             
             if(jsonResult[@"data"][@"error"]){
+                /*This error indicates that a required parameter is missing or a parameter has a value that is out of bounds or otherwise incorrect. This status code is also returned when image uploads fail due to images that are corrupt or do not meet the format requirements.*/
                 
                 *error = [NSError errorWithDomain:IMGErrorDomain code:400 userInfo:@{@"error":jsonResult[@"data"][@"error"]}];
             }

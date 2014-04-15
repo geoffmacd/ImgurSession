@@ -18,6 +18,7 @@
     //various metadata to store
     NSDictionary *imgurUnitTestParams;
     NSURL * testfileURL;
+    NSURL * testGifURL;
     __block void(^ failBlock)(NSError * error);
     BOOL anon;
 }

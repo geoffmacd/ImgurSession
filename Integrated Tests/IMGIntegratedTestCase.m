@@ -32,7 +32,7 @@
     //run before each test
     
     //30 second timeout
-    [Expecta setAsynchronousTestTimeout:30.0];
+    [Expecta setAsynchronousTestTimeout:60.0];
     
         
     // Storing various testing values
@@ -68,6 +68,7 @@
     };
     
     testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    testGifURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"example" ofType:@"gif"]];
     
     //Ensure client data is avaialble for authentication to proceed
     XCTAssertTrue(clientID, @"Client ID is missing");

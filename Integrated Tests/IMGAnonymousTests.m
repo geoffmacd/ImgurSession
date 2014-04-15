@@ -119,10 +119,28 @@
     
     __block BOOL isSuccess;
     
-    [IMGImageRequest uploadImageWithFileURL:testfileURL success:^(IMGImage *image) {
+    NSData * data = [NSData dataWithContentsOfURL:testfileURL];
+    
+    [IMGImageRequest uploadImageWithData:data title:@"random test image of kitties" success:^(IMGImage *image) {
         
         expect(image.imageID).beTruthy();
         isSuccess = YES;
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+- (void)testPostAnonymousGif{
+    
+    __block BOOL isSuccess;
+    
+    NSData * data = [NSData dataWithContentsOfURL:testGifURL];
+    
+    [IMGImageRequest uploadImageWithGifData:data title:@"Stupid top post" success:^(IMGImage * image) {
+        
+        expect(image.imageID).beTruthy();
+        isSuccess = YES;
+        
     } failure:failBlock];
     
     expect(isSuccess).will.beTruthy();

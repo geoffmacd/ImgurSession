@@ -43,6 +43,110 @@
 
 #pragma mark - Upload one image
 
++ (void)uploadImageWithGifData:(NSData *)gifData title:(NSString *)title success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
+    
+    [self uploadImageWithGifData:gifData compression:1.0f title:title description:nil linkToAlbumWithID:nil success:success failure:failure];
+}
+
++ (void)uploadImageWithGifData:(NSData *)gifData compression:(CGFloat)compression title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
+    //upload file from binary data
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"type"] = @"file";
+    
+    // Add used parameters
+    if(title)
+        parameters[@"title"] = title;
+    if(description)
+        parameters[@"description"] = description;
+    if(albumID )
+        parameters[@"album"] = albumID;
+    
+    // Create the request with the file appended to the body
+    __block NSError *fileAppendingError = nil;
+    
+    void (^appendFile)(id<AFMultipartFormData> formData) = ^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:gifData name:@"image" fileName:title mimeType:@"image/gif"];
+    };
+    
+    
+    // If there's a file appending error, we must abort and return the error
+    if(fileAppendingError){
+        if(failure)
+            failure(fileAppendingError);
+        return;
+    }
+    
+    //post
+    [[IMGSession sharedInstance] POST:[self path] parameters:parameters constructingBodyWithBlock:appendFile success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSError *JSONError = nil;
+        IMGImage *image = [[IMGImage alloc] initWithJSONObject:responseObject error:&JSONError];
+        
+        if(!JSONError && image) {
+            if(success)
+                success(image);
+        }
+        else {
+            if(failure)
+                failure(JSONError);
+        }
+        
+    } failure:failure];
+}
+
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
+ 
+    [self uploadImageWithData:imageData title:title description:nil linkToAlbumWithID:nil success:success failure:failure];
+}
+
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
+    //upload file from binary data
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"type"] = @"file";
+    
+    // Add used parameters
+    if(title)
+        parameters[@"title"] = title;
+    if(description)
+        parameters[@"description"] = description;
+    if(albumID )
+        parameters[@"album"] = albumID;
+    
+    // Create the request with the file appended to the body
+    __block NSError *fileAppendingError = nil;
+    
+    void (^appendFile)(id<AFMultipartFormData> formData) = ^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"image" fileName:title mimeType:@"image/jpeg"];
+    };
+    
+    
+    // If there's a file appending error, we must abort and return the error
+    if(fileAppendingError){
+        if(failure)
+            failure(fileAppendingError);
+        return;
+    }
+    
+    //post
+    [[IMGSession sharedInstance] POST:[self path] parameters:parameters constructingBodyWithBlock:appendFile success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSError *JSONError = nil;
+        IMGImage *image = [[IMGImage alloc] initWithJSONObject:responseObject error:&JSONError];
+        
+        if(!JSONError && image) {
+            if(success)
+                success(image);
+        }
+        else {
+            if(failure)
+                failure(JSONError);
+        }
+        
+    } failure:failure];
+}
+
 + (void)uploadImageWithFileURL:(NSURL *)fileURL success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
     
     [self uploadImageWithFileURL:fileURL title:nil description:nil linkToAlbumWithID:nil success:success failure:failure];

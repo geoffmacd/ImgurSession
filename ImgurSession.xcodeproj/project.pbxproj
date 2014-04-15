@@ -144,6 +144,11 @@
 		C328812018EA0DFF00B080CF /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C328812118EA0DFF00B080CF /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C355E5CF18CA80A100D5CEA5 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
+		C35A124318FDAD1C007D2260 /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = C35A124218FDAD1C007D2260 /* example.gif */; };
+		C35A124418FDAD1C007D2260 /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = C35A124218FDAD1C007D2260 /* example.gif */; };
+		C35A124518FDAD1C007D2260 /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = C35A124218FDAD1C007D2260 /* example.gif */; };
+		C35A124618FDAD1C007D2260 /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = C35A124218FDAD1C007D2260 /* example.gif */; };
+		C35A124718FDAD1C007D2260 /* example.gif in Resources */ = {isa = PBXBuildFile; fileRef = C35A124218FDAD1C007D2260 /* example.gif */; };
 		C36C00F318CA7611004576A5 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
 		C36C010E18CA7A7F004576A5 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
 		C3C1356218FC6A5900829868 /* IMGGalleryObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356118FC6A5900829868 /* IMGGalleryObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -396,6 +401,7 @@
 		C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
 		C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "Pods/AFNetworking/UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
+		C35A124218FDAD1C007D2260 /* example.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = example.gif; sourceTree = "<group>"; };
 		C36C00E618CA7472004576A5 /* ImgurSession Tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ImgurSession Tests-Prefix.pch"; path = "Resources/ImgurSession Tests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		C3C1356118FC6A5900829868 /* IMGGalleryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGGalleryObject.h; sourceTree = "<group>"; };
 		C3C1356418FC6A6800829868 /* IMGObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGObject.h; sourceTree = "<group>"; };
@@ -820,6 +826,7 @@
 		C3EB4B3E18CA20B20010FD19 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C35A124218FDAD1C007D2260 /* example.gif */,
 				C3F1B3BC18E2189A004ED254 /* Anonymous Test Config.plist */,
 				C3F1B3BD18E2189A004ED254 /* Authenticated Test Config.plist */,
 				C397090E18E0B45B001DA560 /* Responses */,
@@ -1232,6 +1239,7 @@
 			files = (
 				C3F1B42718E369B6004ED254 /* image.json in Resources */,
 				C3F1B42218E369B6004ED254 /* galleryalbum.json in Resources */,
+				C35A124618FDAD1C007D2260 /* example.gif in Resources */,
 				C3F1B42818E369B6004ED254 /* topgalleryanon.json in Resources */,
 				C3F1B42418E369B6004ED254 /* geoffsaccount.json in Resources */,
 				C3F1B42618E369B6004ED254 /* hotgalleryanon.json in Resources */,
@@ -1285,6 +1293,7 @@
 				C3F1B40718E369A9004ED254 /* mycommentids.json in Resources */,
 				C3F1B40218E369A9004ED254 /* myalbumids.json in Resources */,
 				C3F1B3FC18E369A9004ED254 /* deleteimage.json in Resources */,
+				C35A124418FDAD1C007D2260 /* example.gif in Resources */,
 				C3F1B40118E369A9004ED254 /* myalbumcount.json in Resources */,
 				C3F1B3F618E369A9004ED254 /* conversationdelete.json in Resources */,
 				C3F1B40A18E369A9004ED254 /* myfavs.json in Resources */,
@@ -1297,6 +1306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C36C00F318CA7611004576A5 /* image-example.jpg in Resources */,
+				C35A124318FDAD1C007D2260 /* example.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1305,6 +1315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24C5D0F218E642A000BB9EEB /* image-example.jpg in Resources */,
+				C35A124518FDAD1C007D2260 /* example.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1313,6 +1324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24C5D0F118E6429900BB9EEB /* image-example.jpg in Resources */,
+				C35A124718FDAD1C007D2260 /* example.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
