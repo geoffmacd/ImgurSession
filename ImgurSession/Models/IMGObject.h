@@ -69,6 +69,10 @@ typedef NS_ENUM(NSInteger, IMGSize) {
  Get thumbnails for image/album
  */
 - (NSURL *)URLWithSize:(IMGSize)size;
+/**
+ Get date object was created
+ */
+- (NSDate *)datetime;
 
 @end
 
