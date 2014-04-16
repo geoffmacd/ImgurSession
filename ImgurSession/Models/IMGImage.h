@@ -9,6 +9,7 @@
 #import "IMGModel.h"    
 #import "IMGObject.h"
 
+@class IMGBasicAlbum;
 
 /**
  Model object class to represent images posted to Imgur. https://api.imgur.com/models/image
@@ -74,6 +75,10 @@
 
 
 #pragma mark - Display
+/**
+ For creating constructed cover image from the cover paramaters in basicAlbum
+ */
+-(instancetype)initCoverImageWithAlbum:(IMGBasicAlbum*)album error:(NSError *__autoreleasing *)error;
 
 /**
  Retrieves various image sizes using the url with the letter specifier model as described at https://api.imgur.com/models/image

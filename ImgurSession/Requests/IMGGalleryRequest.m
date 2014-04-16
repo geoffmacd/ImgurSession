@@ -92,7 +92,7 @@
         path = [path stringByAppendingPathComponent:parameters[@"sort"]];
     
     if(parameters[@"page"])
-        path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", [(NSNumber*)parameters[@"page"] integerValue]]];
+        path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", (long)[(NSNumber*)parameters[@"page"] integerValue]]];
     
     if(parameters[@"showViral"])
         path = [path stringByAppendingString:[NSString stringWithFormat:@"&showViral=%@",[(NSNumber*)parameters[@"showViral"] boolValue] ? @"true" : @"false"]];

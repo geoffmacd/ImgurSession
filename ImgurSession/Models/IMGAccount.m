@@ -86,7 +86,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %ld; created: %@", [super description], (unsigned long)self.accountID, self.url, self.bio, self.reputation, self.created];
+    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %ld; created: %@", [super description], (unsigned long)self.accountID, self.url, self.bio, (long)self.reputation, self.created];
 }
 
 -(BOOL)isEqual:(id)object{

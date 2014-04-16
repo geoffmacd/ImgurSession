@@ -72,6 +72,12 @@
         }
         _images = [NSArray arrayWithArray:images];
         
+        if(!_images.count && _coverID){
+            //construct cover if not available
+            IMGImage * cover  = [[IMGImage alloc] initCoverImageWithAlbum:self error:error];
+            [self setCoverImage:cover];
+        }
+        
         if (!_albumID || !_coverID){
             
             *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
@@ -81,7 +87,7 @@
     return [self trackModels];
 }
 
-#pragma mark - IMGGalleryObject
+#pragma mark - IMGObjectProtocol
 
 -(BOOL)isAlbum{
     return YES;
@@ -106,6 +112,18 @@
         NSLog(@"No cover image found for album");
     
     return cover;
+}
+
+-(void)setCoverImage:(IMGImage*)coverImage{
+    
+    if([self.images containsObject:coverImage])
+        return;
+    else {
+        
+        NSMutableArray * marray = [NSMutableArray arrayWithArray:self.images];
+        [marray addObject:coverImage];
+        self.images = [NSArray arrayWithArray:marray];
+    }
 }
 
 -(NSString *)objectID{

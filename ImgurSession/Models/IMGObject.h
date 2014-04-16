@@ -46,6 +46,10 @@ typedef NS_ENUM(NSInteger, IMGSize) {
  */
 -(IMGImage*)coverImage;
 /**
+ Set the cover image representation of object
+ */
+-(void)setCoverImage:(IMGImage*)coverImage;
+/**
  ID for the  object
  */
 -(NSString*)objectID;

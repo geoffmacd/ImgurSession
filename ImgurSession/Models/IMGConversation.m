@@ -68,7 +68,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"%@  author: \"%@\"; last message: %@; count: %lu;", [super description], self.fromUsername, self.lastMessage, self.messageCount];
+    return [NSString stringWithFormat:@"%@  author: \"%@\"; last message: %@; count: %lu;", [super description], self.fromUsername, self.lastMessage, (long)self.messageCount];
 }
 
 -(BOOL)isEqual:(id)object{

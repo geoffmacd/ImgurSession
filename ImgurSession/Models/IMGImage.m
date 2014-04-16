@@ -7,6 +7,7 @@
 //
 
 #import "IMGImage.h"
+#import "IMGBasicAlbum.h"
 #import "NSDictionary+IMG.h"
 
 @interface IMGImage ()
@@ -69,6 +70,27 @@
     return [self trackModels];
 }
 
+-(instancetype)initCoverImageWithAlbum:(IMGBasicAlbum*)album error:(NSError *__autoreleasing *)error{
+    
+    if(self = [super init]){
+        
+        _imageID = album.coverID;
+        _height = album.coverHeight;
+        _width = album.coverWidth;
+        
+        //guess at url
+        NSString * constructedStr = [NSString stringWithFormat:@"http://i.imgur.com/%@.jpg", _imageID];
+        _url = [NSURL URLWithString:constructedStr];
+        
+        if (!album.coverID){
+            
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+    }
+    return [self trackModels];
+}
+
 #pragma mark - IMGObject
 
 -(BOOL)isAlbum{
@@ -78,6 +100,10 @@
 -(IMGImage *)coverImage{
     
     return self;
+}
+
+-(void)setCoverImage:(IMGImage*)coverImage{
+    
 }
 
 -(NSString *)objectID{
