@@ -16,16 +16,33 @@
  */
 @interface IMGGalleryImage : IMGImage <IMGGalleryObjectProtocol>
 
+/**
+ Users up or down vote on the image
+ */
 @property (nonatomic, readonly) IMGVoteType vote;
-
+/**
+ Username of submitter if not anon
+ */
 @property (nonatomic, readonly, copy) NSString *accountURL;
-
+/**
+ Global up votes
+ */
 @property (nonatomic, readonly) NSInteger ups;
+/**
+ Global down votes
+ */
 @property (nonatomic, readonly) NSInteger downs;
+/**
+ Up votes minus down vote.
+ */
 @property (nonatomic, readonly) NSInteger score;
-
-
+/**
+ Has the user favorited?
+ */
 @property (nonatomic, readonly) BOOL favorite;
+/**
+ Is it flagged NSFW>
+ */
 @property (nonatomic, readonly) BOOL nsfw;
 
 @end
