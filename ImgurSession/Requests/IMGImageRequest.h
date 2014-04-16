@@ -57,7 +57,7 @@
 #pragma mark - Delete
 
 /**
- Delete an image with an image ID if you are the owner of the image.
+ Delete an image with an image ID if you are the owner of the image. Must be logged in.
  */
 + (void)deleteImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 /**

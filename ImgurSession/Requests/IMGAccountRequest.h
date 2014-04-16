@@ -20,6 +20,9 @@
 
 
 #pragma mark - Load
+
+//call IMGSession refreshUserAccount to refresh the current user's account. Retrieve at the 'user' property
+
 /**
  Request standard user information. If you need the username for the account that is logged in, it is returned in the request for an access token.
  @param username username to fetch
@@ -35,7 +38,7 @@
  */
 + (void)accountGalleryFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
- Returns the current user's favorited images when signed in
+ Returns the current user's favorited images when signed in.  Must be logged in.
  @return signal with request
  */
 + (void)accountFavourites:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
@@ -60,18 +63,18 @@
 
 #pragma mark - Load settings
 /**
- Retrieve account settings only for current user
+ Retrieve account settings only for current user. Must be logged in.
  @return signal with request
  */
 + (void)accountSettings:(void (^)(IMGAccountSettings *settings))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Update settings
 /**
- Update current account settings with new values
+ Update current account settings with new values. Must be logged in.
  */
 + (void)changeAccountWithBio:(NSString*)bio success:(void (^)())success failure:(void (^)(NSError *error))failure;
 /**
- Update current account settings with new values
+ Update current account settings with new values. Must be logged in.
  */
 + (void)changeAccountWithBio:(NSString*)bio messagingEnabled:(BOOL)msgEnabled publicImages:(BOOL)publicImages albumPrivacy:(IMGAlbumPrivacy)privacy acceptedGalleryTerms:(BOOL)galTerms success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
@@ -95,7 +98,7 @@
  */
 + (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
 /**
- Delete an Album with a given id.
+ Delete an Album with a given id.  Must be logged in.
  */
 + (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
@@ -144,7 +147,7 @@
  */
 + (void)accountCommentCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
 /**
- Delete a comment from the current account.
+ Delete a comment from the current account. Must be logged in.
  */
 + (void)accountDeleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 

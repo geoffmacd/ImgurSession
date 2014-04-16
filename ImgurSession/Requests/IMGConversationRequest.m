@@ -23,6 +23,12 @@
 + (void)conversations:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString * path = [self path];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSArray * convoJSON = responseObject;
@@ -46,6 +52,12 @@
 
 + (void)conversationWithMessageID:(NSInteger)messageId success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure{
     NSString * path = [self pathWithID:[NSString stringWithFormat:@"%lu", (long)messageId]];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -71,6 +83,12 @@
     NSString *path = [self pathWithID:recipient];
     NSDictionary * params = @{@"recipient":recipient,@"body":body};
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
@@ -83,6 +101,12 @@
 
 + (void)deleteConversation:(NSInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", (long)convoID]];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -97,6 +121,12 @@
 + (void)reportSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"report" withID2:username];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
@@ -109,6 +139,12 @@
 
 + (void)blockSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithOption:@"block" withID2:username];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

@@ -27,6 +27,12 @@
 + (void)notificationsWithFresh:(BOOL)freshOnly success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self path];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] GET:path parameters:@{@"new":[NSNumber numberWithBool:freshOnly]} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         
@@ -60,6 +66,12 @@
 + (void)notificationWithID:(NSString*)notificationId success:(void (^)(IMGNotification *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:notificationId];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSError *JSONError = nil;
@@ -91,6 +103,12 @@
 
 + (void)notificationViewed:(NSString *)notificationId success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:notificationId];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     //PUT or POST or DELETE
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

@@ -18,23 +18,24 @@
 
 #pragma mark - Load
 /**
- Get list of all conversations for the logged in user.
+ Get list of all conversations for the logged in user.Must be logged in.
  */
 + (void)conversations:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
- Get information about a specific conversation. Includes messages.
+ Get information about a specific conversation. Includes messages. Must be logged in.
  */
 + (void)conversationWithMessageID:(NSInteger)messageID success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Create
 /**
- Create a new message.
+ Create a new message. Must be logged in.
  */
 + (void)createMessageWithRecipient:(NSString*)recipient withBody:(NSString*)body success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Delete
 /**
+ Delete a conversation. Must be logged in.
  @param commentId comment id to delete
  @return signal with request
  */
@@ -42,13 +43,13 @@
 
 #pragma mark - Report
 /**
- Report a user for sending messages that are against the Terms of Service.
+ Report a user for sending messages that are against the Terms of Service. Must be logged in.
  */
 + (void)reportSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Block
 /**
- Report a user for sending messages that are against the Terms of Service.
+ Report a user for sending messages that are against the Terms of Service. Must be logged in.
  */
 + (void)blockSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure;
 @end

@@ -32,12 +32,14 @@
 
 #pragma mark - Create
 /**
+ Create comment at the parent. Must be logged in.
  @param caption comment string
  @param imageId id of image to comment on
  @param parentId id of parent image to comment on
  */
 + (void)submitComment:(NSString*)caption withImageID:(NSString *)imageID withParentID:(NSInteger)parentID success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
 /**
+ Reply to a parent comment. Must be logged in.
  @param caption comment string
  @param imageId id of image to comment on
  @param parentCommentId id of parent comment to reply to
@@ -46,12 +48,14 @@
 
 #pragma mark - Delete
 /**
+ Delete comment. Must be logged in.
  @param commentId comment id to delete
  */
 + (void)deleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Vote
 /**
+ Vote on a comment. Must be logged in.
  @param commentId comment id to vote on
  @param vote vote to give comment
  */
@@ -59,6 +63,7 @@
 
 #pragma mark - Report
 /**
+ Report a comment. Must be logged in.
  @param commentId comment id to report
  */
 + (void)reportCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;

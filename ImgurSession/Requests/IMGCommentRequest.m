@@ -70,6 +70,12 @@
 + (void)submitComment:(NSString*)caption withImageID:(NSString *)imageId withParentID:(NSInteger)parentId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:imageId];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     NSDictionary * params;
     
     if(parentId)
@@ -94,6 +100,12 @@
 + (void)replyToComment:(NSString*)caption withImageID:(NSString*)imageId withCommentID:(NSInteger)parentCommentId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%ld",(long)parentCommentId]];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     NSDictionary * params = @{@"image_id":imageId,@"comment":caption};
     
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -114,6 +126,12 @@
 + (void)deleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
@@ -125,6 +143,12 @@
 
 + (void)voteCommentWithID:(NSInteger)commentID withVote:(IMGVoteType)vote success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"vote" withID2:[IMGVote strForVote:vote]];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -139,6 +163,12 @@
 
 + (void)reportCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"vote/report"];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
