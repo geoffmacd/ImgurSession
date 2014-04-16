@@ -152,6 +152,18 @@
 + (void)deleteAlbumWithID:(NSString *)albumID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:albumID];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
+    [self deleteAlbumWithDeleteHash:albumID success:success failure:failure];
+}
+
++ (void)deleteAlbumWithDeleteHash:(NSString *)deletehash success:(void (^)())success failure:(void (^)(NSError *error))failure{
+    NSString *path = [self pathWithID:deletehash];
+    
     [[IMGSession sharedInstance] DELETE:path parameters:Nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
@@ -163,6 +175,12 @@
 
 +(void)favouriteAlbumWithID:(NSString*)albumID  success:(void (^)())success failure:(void (^)(NSError *error))failure{
     NSString *path = [self pathWithID:albumID withOption:@"favorite"];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     [[IMGSession sharedInstance] POST:path parameters:Nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

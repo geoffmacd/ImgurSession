@@ -36,7 +36,7 @@
 #pragma mark - Update
 
 /**
- Update an existing album with ID and optional params
+ Update an existing album with optional params. If anonymous, use deletehash for album ID
  */
 + (void)updateAlbumWithID:(NSString*)albumID imageIDs:(NSArray *)imageIDs success:(void (^)())success failure:(void (^)(NSError *))failure;
 + (void)updateAlbumWithID:(NSString*)albumID title:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(NSString *)coverID success:(void (^)())success failure:(void (^)(NSError *))failure;
@@ -47,6 +47,7 @@
  Delete an album with an albumID if you are the owner of the album. For anonymous delete, you must pass the deletehash instead
  */
 + (void)deleteAlbumWithID:(NSString *)albumID success:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void)deleteAlbumWithDeleteHash:(NSString *)deletehash success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 
 #pragma mark - Favourite
