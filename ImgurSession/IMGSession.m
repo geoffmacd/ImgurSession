@@ -9,6 +9,7 @@
 #import "IMGSession.h"
 
 #import "IMGResponseSerializer.h"
+#import "IMGAccountRequest.h"
 
 @interface IMGSession ()
 
@@ -25,6 +26,7 @@
 @property (readwrite,nonatomic) NSInteger creditsClientLimit;
 @property  (readwrite,nonatomic) NSInteger warnRateLimit;
 @property (readwrite, nonatomic) BOOL isAnonymous;
+@property (readwrite, nonatomic) IMGAccount * user;
 
 -(void)accessTokenExpired;
 
@@ -161,6 +163,8 @@
         NSDictionary * json = responseObject;
         //set auth header
         [self setAuthorizationHeader:json];
+        //retrieve user account
+        [self refreshUserAccount:nil failure:nil];
         
         if(success)
             success(_refreshToken);
@@ -205,6 +209,8 @@
             NSDictionary * json = responseObject;
             //set auth header
             [self setAuthorizationHeader:json];
+            //retrieve user account
+            [self refreshUserAccount:nil failure:nil];
             
             NSLog(@"refreshed authentication : %@   with expiry: %@", _accessToken, [_accessTokenExpiry description]);
             
@@ -243,6 +249,22 @@
     
     [self refreshAuthentication:nil failure:nil];
 }
+
+#pragma mark - Authorized User Account
+
+-(void)refreshUserAccount:(void (^)(IMGAccount * user))success failure:(void (^)(NSError * err))failure{
+    
+    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        
+        //set need user
+        self.user = account;
+        
+        if(success)
+            success(account);
+        
+    } failure:failure];
+}
+
 
 #pragma mark - Authorization header
 

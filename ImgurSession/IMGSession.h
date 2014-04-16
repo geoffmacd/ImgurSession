@@ -6,6 +6,8 @@
 //  Distributed under the MIT license.
 //
 
+#import "IMGAccount.h"
+
 //endpoints
 static NSString * const IMGBaseURL = @"https://api.imgur.com";
 static NSString * const IMGAPIVersion = @"3";
@@ -121,6 +123,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Is current session anonymous?
  */
 @property (readonly, nonatomic) BOOL isAnonymous;
+/**
+ User Account if logged in
+ */
+@property (readonly, nonatomic) IMGAccount * user;
 
 
 // rate limiting
@@ -212,6 +218,13 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  String constant for auth type
  */
 +(NSString*)strForAuthType:(IMGAuthType)authType;
+
+
+#pragma mark - Authorized User Account
+/**
+ Refresh sessions current user with optional blocks
+ */
+-(void)refreshUserAccount:(void (^)(IMGAccount * user))success failure:(void (^)(NSError * err))failure;
 
 #pragma mark - Requests
 
