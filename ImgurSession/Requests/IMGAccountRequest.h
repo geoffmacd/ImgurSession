@@ -38,7 +38,7 @@
  Returns the current user's favorited images when signed in
  @return signal with request
  */
-+ (void)accountFavouritesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountFavourites:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Gallery Profile
 /**
@@ -122,7 +122,7 @@
 /**
  Deletes an Image. This requires a delete hash rather than an ID.
  */
-+ (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteImageWithUser:(NSString*)username deletehash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Comments associated with account

@@ -289,6 +289,18 @@
 + (void)deleteImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:imageID];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
+    [self deleteImageWithHash:imageID success:success failure:failure];
+}
+
++ (void)deleteImageWithHash:(NSString *)deletehash success:(void (^)())success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithID:deletehash];
+    
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
@@ -302,10 +314,49 @@
 +(void)favouriteImageWithID:(NSString*)imageID  success:(void (^)())success failure:(void (^)(NSError *error))failure{
     NSString *path = [self pathWithID:imageID withOption:@"favorite"];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] POST:path parameters:Nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
             success();
+    } failure:failure];
+}
+
+#pragma mark - Update
+
++ (void)updateImageWithID:(NSString *)imageID title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithID:imageID];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
+    [self updateImageWithDeleteHash:imageID title:title description:description success:success failure:failure];
+}
+
++ (void)updateImageWithDeleteHash:(NSString *)deletehash title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithID:deletehash];
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    // Add used parameters
+    if(title)
+        parameters[@"title"] = title;
+    if(description)
+        parameters[@"description"] = description;
+    
+    [[IMGSession sharedInstance] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if(success)
+            success();
+        
     } failure:failure];
 }
 @end

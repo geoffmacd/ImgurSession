@@ -74,8 +74,14 @@
     } failure:failure];
 }
 
-+ (void)accountFavouritesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountFavourites:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:@"me" withOption:@"favorites"];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -151,6 +157,12 @@
     //only allows settings for current account after login
     NSString *path = [self pathWithID:@"me" withOption:@"settings"];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSError *JSONError = nil;
@@ -174,6 +186,12 @@
     //only allows settings for current account after login
     NSString *path = [self pathWithID:@"me" withOption:@"settings"];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     NSDictionary * params = @{@"bio":bio};
     
     //put or post
@@ -188,6 +206,12 @@
 + (void)changeAccountWithBio:(NSString*)bio messagingEnabled:(BOOL)msgEnabled publicImages:(BOOL)publicImages albumPrivacy:(IMGAlbumPrivacy)privacy acceptedGalleryTerms:(BOOL)galTerms success:(void (^)())success failure:(void (^)(NSError *error))failure{
     //only allows settings for current account after login
     NSString *path = [self pathWithID:@"me" withOption:@"settings"];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     NSDictionary * params = @{@"bio":bio,@"public_images":[NSNumber numberWithBool:publicImages],@"messaging_enabled":[NSNumber numberWithBool:msgEnabled],@"album_privacy":[IMGBasicAlbum strForPrivacy:privacy],@"accepted_gallery_terms":[NSNumber numberWithBool:galTerms]};
     
@@ -285,6 +309,12 @@
 + (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)())success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithID:@"me" withOption:@"albums" withID2:albumID];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
 
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -352,8 +382,9 @@
     } failure:failure];
 }
 
-+ (void)accountDeleteImageWithHash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithID:@"me" withOption:@"image" withID2:deleteHash];
++ (void)accountDeleteImageWithUser:(NSString*)username deletehash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure{
+
+    NSString *path = [self pathWithID:username withOption:@"image" withID2:deleteHash];
     
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
     
@@ -430,6 +461,12 @@
     
     NSString *path = [self pathWithID:@"me" withOption:@"comment" withID2:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
+    
     [[IMGSession sharedInstance] DELETE:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
@@ -450,6 +487,12 @@
 + (void)accountRepliesWithFresh:(BOOL)freshOnly success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithID:@"me" withOption:@"notifications/replies"];
+    
+    if([[IMGSession sharedInstance] isAnonymous]){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+        return;
+    }
     
     NSDictionary * params = @{@"new":[NSNumber numberWithBool:freshOnly]};
     

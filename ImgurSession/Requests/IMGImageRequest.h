@@ -57,9 +57,13 @@
 #pragma mark - Delete
 
 /**
- Delete an image with an image ID if you are the owner of the image. For anonymous delete, you must pass the deletehash instead
+ Delete an image with an image ID if you are the owner of the image.
  */
 + (void)deleteImageWithID:(NSString *)imageID success:(void (^)())success failure:(void (^)(NSError *error))failure;
+/**
+ Delete an image with an anonymous deletehash
+ */
++ (void)deleteImageWithHash:(NSString *)deletehash success:(void (^)())success failure:(void (^)(NSError *))failure;
 
 #pragma mark - Favourtie
 /**
@@ -67,4 +71,15 @@
  */
 +(void)favouriteImageWithID:(NSString*)imageID  success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
+
+#pragma mark - Update
+
+/**
+ Change image title or description or both. Must be logged In.
+ */
++ (void)updateImageWithID:(NSString *)imageID title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError *))failure;
+/**
+ Anonymously change title or description with deletehash
+ */
++ (void)updateImageWithDeleteHash:(NSString *)deletehash title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError *))failure;
 @end
