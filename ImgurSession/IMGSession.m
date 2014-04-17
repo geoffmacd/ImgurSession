@@ -166,7 +166,9 @@
         return [NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil];
     }
     
-
+    //cancel all
+    [self.operationQueue cancelAllOperations];
+    
     NSString * grantTypeStr = (authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
     //call oauth/token with auth type
     NSDictionary * params = @{[IMGSession strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
@@ -205,8 +207,7 @@
         return nil;
         
     } else {
-        
-        NSLog(@"%@", [authOp.error description]);
+
         return authOp.error;
     }
 }
@@ -220,8 +221,6 @@
             failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil]);
         return;
     }
-    
-    NSLog(@"...attempting reauth...");
     
     if(!_refreshToken){
         //alert app that it needs to present webview or go to safari
@@ -253,8 +252,6 @@
             //retrieve user account
             [self refreshUserAccount:nil failure:nil];
             
-            NSLog(@"refreshed authentication : %@   with expiry: %@", _accessToken, [_accessTokenExpiry description]);
-            
             if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)]){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -277,7 +274,6 @@
             if(resp.statusCode == 400)
                 [self refreshTokenBad];
             
-            NSLog(@"%@", [error description]);
             if(failure)
                 failure(error);
         }];
@@ -372,8 +368,6 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitExceededNotification object:nil];
             });
         }
-        
-        NSLog(@"Remaining daily allowable user requests: %ld",(long)_creditsUserRemaining);
     }
 }
 
@@ -499,7 +493,6 @@
     if(response.statusCode == 403 && !self.isAnonymous){
         [self refreshAuthentication:^(NSString * refreshToken) {
             
-            NSLog(@"continuing request after auth failed");
             
             //success block attempts retry
             if(success)
@@ -509,13 +502,11 @@
             
             if(failure)
                 failure(error);
-            NSLog(@"failed refresh authentication : %@", [error localizedDescription]);
         }];
     } else {
         
         if(failure)
             failure(error);
-        NSLog(@"failed : %@", [error localizedDescription]);
     }
 }
 
@@ -524,7 +515,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"fractionCompleted"]) {
         NSProgress *progress = (NSProgress *)object;
-        NSLog(@"Progress… %f", progress.fractionCompleted);
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -533,8 +523,6 @@
 #pragma mark - Model Tracking
 
 -(void)trackModelObjectsForDelegateHandling:(id)model{
-    
-    NSLog(@"Fetched object of type: <%@>", (NSStringFromClass ([model class])));
     
     //post notifications as well to class name
     dispatch_async(dispatch_get_main_queue(), ^{

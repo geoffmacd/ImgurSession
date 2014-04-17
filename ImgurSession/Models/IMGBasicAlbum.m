@@ -108,9 +108,6 @@
         }
     }];
     
-    if(!cover)
-        NSLog(@"No cover image found for album");
-    
     return cover;
 }
 
