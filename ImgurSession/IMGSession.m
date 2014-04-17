@@ -48,6 +48,7 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[IMGSession alloc] initWithClientID:clientID secret:secret];
     });
+    
     return sharedInstance;
 }
 
@@ -74,6 +75,24 @@
     }
     return self;
 }
+
+-(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret{
+    
+    if(secret){
+        self.secret = secret;
+        self.isAnonymous = NO;
+    } else {
+        //should be anonymous
+        self.isAnonymous = YES;
+        [self setAnonmyousAuthenticationWithID:clientID];
+    }
+    
+    self.clientID = clientID;
+    //default
+    self.warnRateLimit = 100;
+    self.lastAuthType = IMGNoAuthType;
+}
+
 
 #pragma mark - Authentication Notifications
 
@@ -134,24 +153,42 @@
 
 - (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType{
     
+    if(self.isAnonymous)
+        return nil;
+    
     NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGBaseURL, [IMGSession strForAuthType:authType], _clientID];
     return [NSURL URLWithString:path];
 }
 
-- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
+- (NSError*)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code{
     
+    if(self.isAnonymous){
+        return [NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil];
+    }
+    
+
     NSString * grantTypeStr = (authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
-    
     //call oauth/token with auth type
     NSDictionary * params = @{[IMGSession strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
     
-    //use super to bypass tracking
-    [super POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.securityPolicy setAllowInvalidCertificates:YES];
+    NSMutableURLRequest * req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@/%@",IMGBaseURL,IMGOAuthEndpoint] parameters:params error:nil];
+    AFHTTPRequestOperation * authOp = [[AFHTTPRequestOperation alloc] initWithRequest:req];
+    [authOp setResponseSerializer:[AFJSONResponseSerializer serializer]];
+    
+    //block main thread
+    [[[NSOperationQueue alloc] init] addOperation:authOp];
+    [authOp waitUntilFinished];
+    
+    
+    if(authOp.response.statusCode == 200 && !authOp.error){
+    
+        NSDictionary * json = authOp.responseObject;
         
         //if never logged in before, alert delegate
         if(_lastAuthType == IMGNoAuthType){
             dispatch_async(dispatch_get_main_queue(), ^{
-            
+                
                 if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
                     [_delegate imgurSessionAuthStateChanged:IMGAuthStateAuthenticated];
                 
@@ -160,25 +197,29 @@
         }
         _lastAuthType = authType;
         
-        NSDictionary * json = responseObject;
         //set auth header
         [self setAuthorizationHeader:json];
         //retrieve user account
         [self refreshUserAccount:nil failure:nil];
         
-        if(success)
-            success(_refreshToken);
+        return nil;
         
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    } else {
         
-        NSLog(@"%@", [error description]);
-        if(failure)
-            failure(error);
-    }];
+        NSLog(@"%@", [authOp.error description]);
+        return authOp.error;
+    }
 }
 
 
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
+    
+    if(self.isAnonymous){
+        
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil]);
+        return;
+    }
     
     NSLog(@"...attempting reauth...");
     

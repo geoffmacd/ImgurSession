@@ -39,7 +39,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"myfavs.json"];
     
-    [IMGAccountRequest accountFavouritesWithSuccess:^(NSArray * favorites) {
+    [IMGAccountRequest accountFavourites:^(NSArray * favorites) {
         
         expect(favorites).haveCountOf(2);
         isSuccess = YES;
@@ -351,7 +351,7 @@
     __block BOOL isDeleted;
     [self stubWithFile:@"myimagedelete.json"];
     
-    [IMGAccountRequest accountDeleteImageWithHash:@"fdshbfdjshfs" success:^() {
+    [IMGAccountRequest accountDeleteAlbumWithID:@"fdshbfdjshfs" success:^() {
         
         isDeleted = YES;
 

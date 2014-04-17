@@ -178,9 +178,8 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 /**
  @param clientID    client Id string as registered with Imgur
  @param secret    secret string as registered with Imgur
- @return            Session manager
  */
-- (instancetype)initWithClientID:(NSString *)clientID secret:(NSString *)secret;
+-(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret;
 
 #pragma mark - Authentication
 
@@ -205,10 +204,9 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Requests access tokens using inputted pin code
  @param authType     authorization type pin,code,token
  @param code     code input string for authorization
- @param success     success completion
- @param failure     failure completion
+ @return error
  */
-- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+- (NSError*)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code;
 /**
  Authenticates and refreshes with user provided refresh token
  @param refreshToken     valid refresh token to manually set

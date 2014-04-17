@@ -113,13 +113,7 @@
         scanf("%s", pin);
         
         //send pin code to retrieve access tokens
-        [session authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin] success:^(NSString *refresh) {
-            
-            NSLog(@"Refresh token: %@", refresh);
-        } failure:^(NSError *error) {
-            
-            NSLog(@"%@", error.localizedRecoverySuggestion);
-        }];
+        [session authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin]];
     }
     
     //both cases should lead to access token

@@ -38,7 +38,7 @@
     
     __block BOOL isSuccess;
     
-    [IMGAccountRequest accountFavouritesWithSuccess:^(NSArray * favorites) {
+    [IMGAccountRequest accountFavourites:^(NSArray * favorites) {
         
         isSuccess = YES;
         
@@ -223,7 +223,7 @@
     
     [self postTestImage:^(IMGImage * image, void(^success)()) {
 
-        [IMGAccountRequest accountDeleteImageWithHash:image.deletehash success:^() {
+        [IMGAccountRequest accountDeleteAlbumWithID:image.deletehash success:^() {
             
             success();
             isDeleted = YES;
