@@ -1044,8 +1044,8 @@
 				C3F1B4A118E9BD68004ED254 /* IMGConversationRequest.h in Headers */,
 				C3C1356518FC6A6800829868 /* IMGObject.h in Headers */,
 				C3C1356218FC6A5900829868 /* IMGGalleryObject.h in Headers */,
-				2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
 				C3F1B4A218E9BD69004ED254 /* IMGGalleryRequest.h in Headers */,
+				2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
 				C3F1B4A318E9BD69004ED254 /* IMGImageRequest.h in Headers */,
 				C3F1B4A418E9BD69004ED254 /* IMGNotificationRequest.h in Headers */,
 			);

@@ -175,12 +175,12 @@
     return authStr;
 }
 
-- (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType{
+- (NSURL *)authenticateWithExternalURL{
     
     if(self.isAnonymous)
         return nil;
     
-    NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGBaseURL, [IMGSession strForAuthType:authType], _clientID];
+    NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGBaseURL, [IMGSession strForAuthType:self.authType], _clientID];
     return [NSURL URLWithString:path];
 }
 
@@ -281,7 +281,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
-                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURLForType:_authType] completion:^{
+                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
                         
                         if(success)
                             success(self.refreshToken);

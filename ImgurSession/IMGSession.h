@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 -(void)imgurSessionRateLimitExceeded;
 /**
- Alerts delegate that webview is needed to present Imgur OAuth authentication. Call completion upon authenticating with
+ Alerts delegate that webview is needed to present Imgur OAuth authentication. Call completion upon authenticating with asyncAuthenticateWithType when you want to ensure previous requests do not fail, as this method was called lazily by the session.
  */
 -(void)imgurSessionNeedsExternalWebview:(NSURL*)url completion:(void(^)())completion;
 
@@ -208,11 +208,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure;
 /**
- Retrieves URL associated with website authorization page
- @param authType     authorization type pin,code,token
+ Retrieves URL associated with website authorization page for session authentication type
  @return    authorization URL to open in Webview or Safari
  */
-- (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType;
+- (NSURL *)authenticateWithExternalURL;
 /**
  Synchronously requests refresh tokens using inputted pin code.
  @param authType     authorization type pin,code,token
