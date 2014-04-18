@@ -19,6 +19,7 @@
 @property (readwrite, nonatomic, copy) NSString *secret;
 @property (readwrite, nonatomic, copy) NSString *refreshToken;
 @property (readwrite, nonatomic, copy) NSString *accessToken;
+@property (readwrite, nonatomic, copy) NSString *codeAwaitingAuthentication;
 @property (readwrite, nonatomic) NSDate *accessTokenExpiry;
 @property (readwrite, nonatomic) IMGAuthType authType;
 @property (readwrite,nonatomic) NSInteger creditsUserRemaining;
@@ -144,6 +145,8 @@
         
         if(self.accessToken.length && [self.accessTokenExpiry timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970])
             return IMGAuthStateAuthenticated;
+        else if(self.codeAwaitingAuthentication.length)
+            return IMGAuthStateAwaitingCodeInput;
         else if(self.refreshToken.length)
             return IMGAuthStateExpired;
         else if(self.clientID.length && self.secret.length)
@@ -194,7 +197,6 @@
     //call oauth/token with auth type
     NSDictionary * params = @{[IMGSession strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
     
-    [self.securityPolicy setAllowInvalidCertificates:YES];
     NSMutableURLRequest * req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@/%@",IMGBaseURL,IMGOAuthEndpoint] parameters:params error:nil];
     AFHTTPRequestOperation * authOp = [[AFHTTPRequestOperation alloc] initWithRequest:req];
     [authOp setResponseSerializer:[AFJSONResponseSerializer serializer]];
@@ -270,29 +272,56 @@
     }];
 }
 
+-(void)setAuthCode:(NSString*)code{
+    
+    self.codeAwaitingAuthentication = code;
+}
 
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
     
     if(!self.refreshToken){
         //we need to retrieve refresh token with client credentials first
         
-        //alert app that it needs to present webview or go to safari
-        if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)]){
+        if(!self.codeAwaitingAuthentication){
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
-                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
-                        
-                        if(success)
-                            success(self.refreshToken);
-                    }];
+            //alert app that it needs to present webview or go to safari
+            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)]){
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
-            });
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
+                        [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                            
+                            [self refreshAuthentication:^(NSString * refresh) {
+                                
+                                if(success)
+                                    success(refresh);
+                                
+                            } failure:failure];
+                        
+                            
+                        }];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
+                });
+            }
+            
+            if(failure)
+                failure([NSError errorWithDomain:@"com.imgursession" code:IMGErrorRequiresUserAuthentication userInfo:nil]);
+        } else {
+            
+            //post code
+            [self asyncAuthenticateWithType:self.authType withCode:self.codeAwaitingAuthentication success:^(NSString *refreshToken){
+                
+                self.codeAwaitingAuthentication = nil;
+                //continue with requests
+                if(success)
+                    success(self.refreshToken);
+            } failure:^(NSError *error) {
+                
+                if(failure)
+                    failure(error);
+            }];
         }
-        
-        if(failure)
-            failure([NSError errorWithDomain:@"com.imgursession" code:IMGErrorRequiresUserAuthentication userInfo:nil]);
 
     } else {
         //get new access token with refresh token
@@ -427,7 +456,7 @@
 }
 
 #pragma mark - Requests
-//needed to subclass to manage re-authentication
+//needed to subclass to manage authentication state
 
 
 -(NSURLSessionDataTask *)methodRequest:(NSString *)URLString parameters:(NSDictionary *)parameters completion:(NSURLSessionDataTask * (^)())completion success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
@@ -438,7 +467,7 @@
             failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorNoAuthentication userInfo:nil]);
         
         return nil;
-    } else if (auth == IMGAuthStateExpired || auth == IMGAuthStateNone){
+    } else if (auth == IMGAuthStateExpired || auth == IMGAuthStateNone || auth == IMGAuthStateAwaitingCodeInput){
         
         //refresh or ask delegate for external webview to login for first time
         [self refreshAuthentication:^(NSString * refreshToken) {

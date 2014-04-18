@@ -246,7 +246,7 @@
     scanf("%s", pin);
     
     //send pin code to retrieve access tokens
-    [[IMGSession sharedInstance] syncAuthenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin]];
+    [[IMGSession sharedInstance] setAuthCode:[NSString stringWithUTF8String:pin]];
     
     completion();
 }

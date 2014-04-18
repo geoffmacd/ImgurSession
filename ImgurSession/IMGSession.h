@@ -47,7 +47,8 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
     IMGAuthStateNone,
     IMGAuthStateAuthenticated,
     IMGAuthStateAnon,
-    IMGAuthStateExpired
+    IMGAuthStateExpired,
+    IMGAuthStateAwaitingCodeInput
 };
 
 
@@ -113,6 +114,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Access token as retrieved from oauth/token GET request with PIN. Expires after 1 hour after retrieval
  */
 @property (readonly, nonatomic, copy) NSString *accessToken;
+/**
+ Code retrieved from imgur by using external URL for authentication
+ */
+@property (readonly, nonatomic, copy) NSString * codeAwaitingAuthentication;
 /**
  Access token expiry date
  */
@@ -224,7 +229,12 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param authType     authorization type pin,code,token
  @param code     code input string for authorization
  */
-- (void)asyncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code completion:(void(^)())completion;
+- (void)asyncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+/**
+ Sets input code from external URL for lazy authentication
+ @param code    input code to authenticate with
+ */
+-(void)setAuthCode:(NSString*)code;
 /**
  Manual authenticates and refreshes with user provided refresh token
  @param refreshToken     valid refresh token to manually set
