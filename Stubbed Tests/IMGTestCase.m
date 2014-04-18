@@ -8,6 +8,18 @@
 
 #import "IMGTestCase.h"
 
+//add read-write prop
+@interface IMGSession (TestSession)
+
+@property (readwrite, nonatomic,copy) NSString *clientID;
+@property (readwrite, nonatomic, copy) NSString *secret;
+@property (readwrite, nonatomic, copy) NSString *refreshToken;
+@property (readwrite, nonatomic, copy) NSString *accessToken;
+@property (readwrite, nonatomic) NSDate *accessTokenExpiry;
+@property (readwrite, nonatomic) IMGAuthType lastAuthType;
+
+@end
+
 @implementation IMGTestCase
 
 - (void)setUp {
@@ -19,6 +31,13 @@
         
     // Storing various testing values
     NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
+    
+    //dummy auth session
+    [IMGSession authenticatedSessionWithClientID:@"ffdsf" secret:@"dfdsf" authType:IMGPinAuth];
+    [[IMGSession sharedInstance] setRefreshToken:@"efssdfsd"];
+    [[IMGSession sharedInstance] setAccessToken:@"efssdfsd"];
+    [[IMGSession sharedInstance] setAccessTokenExpiry:[NSDate dateWithTimeIntervalSinceNow:10000000]];
+    
     
     //need various values such as image title
     imgurUnitTestParams = infos[@"imgurUnitTestParams"];
@@ -59,7 +78,8 @@
 }
 #pragma mark - IMGSessionDelegate Delegate methods
 
--(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
+-(void)imgurSessionNeedsExternalWebview:(NSURL *)url completion:(void (^)())completion{
+    
 }
 
 -(void)imgurSessionModelFetched:(id)model{

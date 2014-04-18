@@ -42,9 +42,11 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
  State of authentication
  */
 typedef NS_ENUM(NSInteger, IMGAuthState){
-    IMGAuthStateNone = 0,
+    IMGAuthStateMissingParameters = 0,
     IMGAuthStateBad = 0,
+    IMGAuthStateNone,
     IMGAuthStateAuthenticated,
+    IMGAuthStateAnon,
     IMGAuthStateExpired
 };
 
@@ -61,9 +63,9 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 -(void)imgurSessionRateLimitExceeded;
 /**
- Alerts delegate that webview is needed to present Imgur OAuth authentication
+ Alerts delegate that webview is needed to present Imgur OAuth authentication. Call completion upon authenticating with
  */
--(void)imgurSessionNeedsExternalWebview:(NSURL*)url;
+-(void)imgurSessionNeedsExternalWebview:(NSURL*)url completion:(void(^)())completion;
 
 @optional
 
@@ -116,9 +118,9 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (readonly, nonatomic) NSDate *accessTokenExpiry;
 /**
- Most recent type of authentication, if it has been attempted yet
+ Type of authentication intended, IMGNoAuthType if anon
  */
-@property (readonly, nonatomic) IMGAuthType lastAuthType;
+@property (readonly, nonatomic) IMGAuthType authType;
 /**
  Is current session anonymous?
  */
@@ -166,20 +168,31 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 #pragma mark - Initialize
 
 /**
+ Returns shared instance, or else creates one with nil authentication params.
  @return Session manager
  */
 + (instancetype)sharedInstance;
 /**
+ Returns authenticated session with these parameters
  @param clientID    client Id string as registered with Imgur
  @param secret    secret string as registered with Imgur
+ @param authType    type of auth for session
  @return            Session manager for interacting with Imgur account
  */
-+ (instancetype)sharedInstanceWithClientID:(NSString *)clientID secret:(NSString *)secret;
++(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType;
 /**
+ Returns anonymous session with client ID
  @param clientID    client Id string as registered with Imgur
- @param secret    secret string as registered with Imgur
+ @return            Session manager for interacting with Imgur anonymously
  */
--(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret;
++(instancetype)anonymousSessionWithClientID:(NSString *)clientID;    
+/**
+ Reset the session with these manual params. Leave secret nil and authType IMGNoAuthType for anon.
+ @param clientID    client Id string as registered with Imgur
+ @param secret      secret string as registered with Imgur
+ @param authType    type of auth for session
+ */
+-(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType;
 
 #pragma mark - Authentication
 
@@ -201,14 +214,20 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 - (NSURL *)authenticateWithExternalURLForType:(IMGAuthType)authType;
 /**
- Requests access tokens using inputted pin code
+ Synchronously requests refresh tokens using inputted pin code.
  @param authType     authorization type pin,code,token
  @param code     code input string for authorization
  @return error
  */
-- (NSError*)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code;
+- (NSError*)syncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code;
 /**
- Authenticates and refreshes with user provided refresh token
+ Asynchronously requests refresh tokens using inputted pin code.
+ @param authType     authorization type pin,code,token
+ @param code     code input string for authorization
+ */
+- (void)asyncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code completion:(void(^)())completion;
+/**
+ Manual authenticates and refreshes with user provided refresh token
  @param refreshToken     valid refresh token to manually set
  */
 -(void)authenticateWithRefreshToken:(NSString*)refreshToken;

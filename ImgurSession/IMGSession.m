@@ -9,7 +9,9 @@
 #import "IMGSession.h"
 
 #import "IMGResponseSerializer.h"
+#import "IMGRequestSerializer.h"
 #import "IMGAccountRequest.h"
+
 
 @interface IMGSession ()
 
@@ -18,7 +20,7 @@
 @property (readwrite, nonatomic, copy) NSString *refreshToken;
 @property (readwrite, nonatomic, copy) NSString *accessToken;
 @property (readwrite, nonatomic) NSDate *accessTokenExpiry;
-@property (readwrite, nonatomic) IMGAuthType lastAuthType;
+@property (readwrite, nonatomic) IMGAuthType authType;
 @property (readwrite,nonatomic) NSInteger creditsUserRemaining;
 @property (readwrite,nonatomic) NSInteger creditsUserLimit;
 @property (readwrite,nonatomic) NSInteger creditsUserReset;
@@ -37,46 +39,53 @@
 #pragma mark - Initialize
 
 + (instancetype)sharedInstance{
-    return [self sharedInstanceWithClientID:nil secret:nil];
-}
-
-
-+(instancetype)sharedInstanceWithClientID:(NSString *)clientID secret:(NSString *)secret{
     
     static dispatch_once_t onceToken;
     static IMGSession *sharedInstance = nil;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[IMGSession alloc] initWithClientID:clientID secret:secret];
+        sharedInstance = [[IMGSession alloc] init];
     });
     
     return sharedInstance;
 }
 
-- (instancetype)initWithClientID:(NSString *)clientID secret:(NSString *)secret{
++(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType{
+    
+    NSParameterAssert(clientID);
+    NSParameterAssert(secret);
+    
+    [[IMGSession sharedInstance] resetWithClientID:clientID secret:secret authType:authType];
+    
+    return [self sharedInstance];
+}
+
++(instancetype)anonymousSessionWithClientID:(NSString *)clientID{
+    
+    NSParameterAssert(clientID);
+    
+    [[IMGSession sharedInstance] resetWithClientID:clientID secret:nil authType:IMGNoAuthType];
+    
+    return [self sharedInstance];
+}
+
+
+- (instancetype)init{
+    
     if(self = [self initWithBaseURL:[NSURL URLWithString:IMGBaseURL]]){
 
-        if(secret){
-            self.secret = secret;
-            self.isAnonymous = NO;
-        } else {
-            //should be anonymous
-            self.isAnonymous = YES;
-            [self setAnonmyousAuthenticationWithID:clientID];
-        }
-        
-        self.clientID = clientID;
-        //default
-        self.warnRateLimit = 100;
-        self.lastAuthType = IMGNoAuthType;
         
         //to enable rate tracking
-        IMGResponseSerializer * serializer = [IMGResponseSerializer serializer];
-        [self setResponseSerializer:serializer];
+        IMGResponseSerializer * responseSerializer = [IMGResponseSerializer serializer];
+        [self setResponseSerializer:responseSerializer];
+        
+        //to prevent requests with no authorization
+        IMGRequestSerializer * reqSerializer = [IMGRequestSerializer serializer];
+        [self setRequestSerializer:reqSerializer];
     }
     return self;
 }
 
--(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret{
+-(void)setupClientWithID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType{
     
     if(secret){
         self.secret = secret;
@@ -90,9 +99,13 @@
     self.clientID = clientID;
     //default
     self.warnRateLimit = 100;
-    self.lastAuthType = IMGNoAuthType;
+    self.authType = authType;
 }
 
+-(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType{
+    
+    [self setupClientWithID:clientID secret:secret authType:authType];
+}
 
 #pragma mark - Authentication Notifications
 
@@ -121,12 +134,23 @@
 
 -(IMGAuthState)sessionAuthState{
     
-    if(!self.refreshToken)
-        return IMGAuthStateNone;
-    else if(self.accessTokenExpiry && [self.accessTokenExpiry timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970])
-        return IMGAuthStateAuthenticated;
-    else
-        return IMGAuthStateExpired;
+    if(self.isAnonymous){
+        
+        if(self.clientID.length)
+            return IMGAuthStateAnon;
+        else
+            return IMGAuthStateMissingParameters;
+    } else {
+        
+        if(self.accessToken.length && [self.accessTokenExpiry timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970])
+            return IMGAuthStateAuthenticated;
+        else if(self.refreshToken.length)
+            return IMGAuthStateExpired;
+        else if(self.clientID.length && self.secret.length)
+            return IMGAuthStateNone;    //enough to login
+        else
+            return IMGAuthStateMissingParameters;
+    }
 }
 
 
@@ -160,14 +184,11 @@
     return [NSURL URLWithString:path];
 }
 
-- (NSError*)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code{
-    
-    if(self.isAnonymous){
-        return [NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil];
-    }
+- (NSError*)syncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code{
     
     //cancel all
     [self.operationQueue cancelAllOperations];
+    [self.requestSerializer clearAuthorizationHeader];
     
     NSString * grantTypeStr = (authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
     //call oauth/token with auth type
@@ -187,17 +208,14 @@
     
         NSDictionary * json = authOp.responseObject;
         
-        //if never logged in before, alert delegate
-        if(_lastAuthType == IMGNoAuthType){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
-                    [_delegate imgurSessionAuthStateChanged:IMGAuthStateAuthenticated];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
-            });
-        }
-        _lastAuthType = authType;
+        //alert delegate
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
+                [_delegate imgurSessionAuthStateChanged:IMGAuthStateAuthenticated];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
+        });
         
         //set auth header
         [self setAuthorizationHeader:json];
@@ -212,35 +230,72 @@
     }
 }
 
+- (void)asyncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
+    
+    //cancel all
+    [self.operationQueue cancelAllOperations];
+    [self.requestSerializer clearAuthorizationHeader];
+    
+    NSString * grantTypeStr = (authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
+    
+    //call oauth/token with auth type
+    NSDictionary * params = @{[IMGSession strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
+    
+    //use super to bypass tracking
+    [super POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        //if never logged in before, alert delegate
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
+                [_delegate imgurSessionAuthStateChanged:IMGAuthStateAuthenticated];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
+        });
+        
+        NSDictionary * json = responseObject;
+        //set auth header
+        [self setAuthorizationHeader:json];
+        //retrieve user account
+        [self refreshUserAccount:nil failure:nil];
+        
+        if(success)
+            success(self.refreshToken);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@", [error description]);
+        if(failure)
+            failure(error);
+    }];
+}
+
 
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
     
-    if(self.isAnonymous){
+    if(!self.refreshToken){
+        //we need to retrieve refresh token with client credentials first
         
-        if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil]);
-        return;
-    }
-    
-    if(!_refreshToken){
         //alert app that it needs to present webview or go to safari
         if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)]){
             
-            if(failure)
-                failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
-                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURLForType:_lastAuthType]];
+                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURLForType:_authType] completion:^{
+                        
+                        if(success)
+                            success(self.refreshToken);
+                    }];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
             });
-        } else {
-            if(failure)
-                failure([NSError errorWithDomain:@"com.imgursession" code:0 userInfo:nil]);
         }
+        
+        if(failure)
+            failure([NSError errorWithDomain:@"com.imgursession" code:IMGErrorRequiresUserAuthentication userInfo:nil]);
+
     } else {
-        //else get new access token with refresh token
+        //get new access token with refresh token
         
         NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
         
@@ -275,7 +330,7 @@
                 [self refreshTokenBad];
             
             if(failure)
-                failure(error);
+                failure([NSError errorWithDomain:@"com.imgursession" code:IMGErrorCouldNotAuthenticate userInfo:@{@"orgError":error}]);
         }];
     }
 }
@@ -328,7 +383,7 @@
     self.accessToken = tokens[@"access_token"];
     
     //change the serializer to include this authorization header
-    AFHTTPRequestSerializer * serializer = self.requestSerializer;    
+    AFHTTPRequestSerializer * serializer = self.requestSerializer;
     [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
 }
 
@@ -374,88 +429,95 @@
 #pragma mark - Requests
 //needed to subclass to manage re-authentication
 
+
+-(NSURLSessionDataTask *)methodRequest:(NSString *)URLString parameters:(NSDictionary *)parameters completion:(NSURLSessionDataTask * (^)())completion success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
+    
+    IMGAuthState auth = [self sessionAuthState];
+    if(auth == IMGAuthStateMissingParameters){
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorNoAuthentication userInfo:nil]);
+        
+        return nil;
+    } else if (auth == IMGAuthStateExpired || auth == IMGAuthStateNone){
+        
+        //refresh or ask delegate for external webview to login for first time
+        [self refreshAuthentication:^(NSString * refreshToken) {
+            
+            completion();
+            
+        } failure:^(NSError *error) {
+            
+            //inform of either refresh failure or delegate needs to login
+            if(error.code == IMGErrorCouldNotAuthenticate){
+                if(failure)
+                    failure(error);
+            }
+        }];
+        return nil;
+    } else {
+        
+        return completion();
+    }
+    
+}
+
 -(NSURLSessionDataTask *)PUT:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
-    return [super PUT:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+    return [self methodRequest:URLString parameters:parameters completion:^{
         
-        if(success)
-            success(task,responseObject);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
-            //retry
-            [self PUT:URLString parameters:parameters success:success failure:failure];
+        return [super PUT:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
         }];
-    }];
+        
+    } success:success failure:failure];
 }
 
 -(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
-    return [super DELETE:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    return [self methodRequest:URLString parameters:parameters completion:^{
         
-        if(success)
-            success(task,responseObject);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
-            //retry
-            [self DELETE:URLString parameters:parameters success:success failure:failure];
+        return [super DELETE:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
         }];
-    }];
+        
+    } success:success failure:failure];
 }
 
 -(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
-    return [super POST:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    return [self methodRequest:URLString parameters:parameters completion:^{
         
-        if(success)
-            success(task,responseObject);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
-            //retry
-            [self POST:URLString parameters:parameters success:success failure:failure];
+        return [super POST:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
         }];
-    }];
+        
+    } success:success failure:failure];
 }
+
 
 -(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure{
     
-    return [super GET:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-
-        if(success)
-            success(task,responseObject);
+    return [self methodRequest:URLString parameters:parameters completion:^{
         
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        [self attemptRefreshWithResponse:(NSHTTPURLResponse*)task.response error:error success:^{
-            //retry
-            [self GET:URLString parameters:parameters success:success failure:failure];
+        return [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-        } failure:^(NSError * error) {
             if(failure)
                 failure(error);
         }];
-    }];
+        
+    } success:success failure:failure];
 }
 
 //needed to re-implement from AFNetworking implementation without super call because progress is not handled in AFnetworking
 -(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure{
-
+    
     NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:nil];
     NSProgress * progress;
     
@@ -463,15 +525,9 @@
         [progress removeObserver:self forKeyPath:@"fractionCompleted" context:NULL];
         if (error) {
             
-            [self attemptRefreshWithResponse:(NSHTTPURLResponse*)response error:error success:^{
-                //retry
-                [self POST:URLString parameters:parameters constructingBodyWithBlock:block success:success failure:failure];
-                
-            } failure:^(NSError * error) {
-                if(failure)
-                    failure(error);
-            }];
-
+            if(failure)
+                failure(error);
+            
         } else {
             if(success)
                 success(task, responseObject);
@@ -487,28 +543,6 @@
     return task;
 }
 
-
--(void)attemptRefreshWithResponse:(NSHTTPURLResponse*)response error:(NSError*)error success:(void (^)())success failure:(void (^)(NSError *))failure{
-    
-    if(response.statusCode == 403 && !self.isAnonymous){
-        [self refreshAuthentication:^(NSString * refreshToken) {
-            
-            
-            //success block attempts retry
-            if(success)
-                success();
-            
-        } failure:^(NSError *error) {
-            
-            if(failure)
-                failure(error);
-        }];
-    } else {
-        
-        if(failure)
-            failure(error);
-    }
-}
 
 #pragma mark - KVO for progress upload
 

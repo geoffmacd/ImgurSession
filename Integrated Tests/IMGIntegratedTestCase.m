@@ -47,18 +47,14 @@
     anon = [imgurClient[@"anonymous"] boolValue];
     
     if(anon){
-        [IMGSession sharedInstanceWithClientID:clientID secret:nil];
-        
-        //make sure auth is correct after bad authentication tests
-        [[IMGSession sharedInstance] setAnonmyousAuthenticationWithID:clientID];
+        [IMGSession anonymousSessionWithClientID:clientID];
     } else {
         //Lazy init, may already exist
-        IMGSession * ses = [IMGSession sharedInstanceWithClientID:clientID secret:clientSecret];
-        [ses setDelegate:self];
+        IMGSession * ses = [IMGSession authenticatedSessionWithClientID:clientID secret:clientSecret authType:IMGPinAuth];
         if([imgurClient[@"refreshToken"] length])
             ses.refreshToken = imgurClient[@"refreshToken"];
-        [self authenticateUsingOAuthWithPINAsync];
     }
+    [[IMGSession sharedInstance] setDelegate:self];
     
     //failure block
     failBlock = ^(NSError * error) {
@@ -76,48 +72,6 @@
 
 - (void)tearDown {
     [super tearDown];
-}
-
-#pragma mark - authentication for tests
-
-/*
- Tests authentication and sets global access token to save for rest of the test. Needs to be marked test1 so that it is run first (alphabetical order)
- **/
--(void)authenticateUsingOAuthWithPINAsync
-{
-    IMGSession *session = [IMGSession sharedInstance];
-    
-    //sets refresh token if available, required for iPhone unit test
-    if([session sessionAuthState] == IMGAuthStateExpired){
-        
-        //should retrieve new access code
-        [session refreshAuthentication:^(NSString * refresh) {
-            
-            NSLog(@"Refresh token: %@", refresh);
-            
-        } failure:^(NSError *error) {
-            
-            NSLog(@"%@", error.localizedRecoverySuggestion);
-            
-        }];
-    } else if ([session sessionAuthState] == IMGAuthStateNone) {
-        
-        //set to pin
-        [session setLastAuthType:IMGPinAuth];
-        //go straight to delegate call
-        [self imgurSessionNeedsExternalWebview:[[IMGSession sharedInstance] authenticateWithExternalURLForType:IMGPinAuth]];
-        
-        //need to manually enter pin for testing
-        NSLog(@"Enter the code PIN");
-        char pin[20];
-        scanf("%s", pin);
-        
-        //send pin code to retrieve access tokens
-        [session authenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin]];
-    }
-    
-    //both cases should lead to access token
-    expect(session.accessToken).willNot.beNil();
 }
 
 #pragma mark - Test methods to provide image or album to play with - this code is not infallable
@@ -276,7 +230,7 @@
 
 #pragma mark - IMGSessionDelegate Delegate methods
 
--(void)imgurSessionNeedsExternalWebview:(NSURL *)url{
+-(void)imgurSessionNeedsExternalWebview:(NSURL *)url completion:(void (^)())completion{
     //show external webview to allow auth
     
 #if TARGET_OS_IPHONE
@@ -285,6 +239,16 @@
 #elif TARGET_OS_MAC
     [[NSWorkspace sharedWorkspace] openURL:url];
 #endif
+    
+    //need to manually enter pin for testing
+    NSLog(@"Enter the code PIN");
+    char pin[20];
+    scanf("%s", pin);
+    
+    //send pin code to retrieve access tokens
+    [[IMGSession sharedInstance] syncAuthenticateWithType:IMGPinAuth withCode:[NSString stringWithUTF8String:pin]];
+    
+    completion();
 }
 
 -(void)imgurSessionModelFetched:(id)model{

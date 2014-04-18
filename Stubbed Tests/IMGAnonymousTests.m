@@ -8,6 +8,63 @@
 
 #import "IMGTestCase.h"
 
+//add read-write prop
+@interface IMGSession (TestSession)
+
+@property (readwrite, nonatomic,copy) NSString *clientID;
+@property (readwrite, nonatomic, copy) NSString *secret;
+@property (readwrite, nonatomic, copy) NSString *refreshToken;
+@property (readwrite, nonatomic, copy) NSString *accessToken;
+@property (readwrite, nonatomic) NSDate *accessTokenExpiry;
+@property (readwrite, nonatomic) IMGAuthType lastAuthType;
+
+@end
+
+
+@interface IMGTestCase (Anon)
+
+@property (readwrite, nonatomic,copy) NSString *clientID;
+@property (readwrite, nonatomic, copy) NSString *secret;
+@property (readwrite, nonatomic, copy) NSString *refreshToken;
+@property (readwrite, nonatomic, copy) NSString *accessToken;
+@property (readwrite, nonatomic) NSDate *accessTokenExpiry;
+@property (readwrite, nonatomic) IMGAuthType lastAuthType;
+
+@end
+
+@implementation IMGTestCase (Anon)
+
+-(void)setUp{
+    [super setUp];
+    //run before each test
+    
+    //5 second timeout
+    [Expecta setAsynchronousTestTimeout:5.0];
+    
+    // Storing various testing values
+    NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
+    
+    //dummy auth session
+    [IMGSession anonymousSessionWithClientID:@"dfsfds"];
+    
+    
+    //need various values such as image title
+    imgurUnitTestParams = infos[@"imgurUnitTestParams"];
+    
+    //failure block
+    failBlock = ^(NSError * error) {
+        
+        NSLog(@"Error : %@", [error localizedDescription]);
+        
+        XCTAssert(nil, @"FAIL");
+    };
+}
+
+
+@end
+
+
+
 @interface IMGAnonymousTests : IMGTestCase
 
 @end

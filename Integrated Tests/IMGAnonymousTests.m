@@ -158,7 +158,7 @@
 
             expect(albumID).beTruthy();
             
-            [IMGAlbumRequest deleteAlbumWithID:deletehash success:^{
+            [IMGAlbumRequest deleteAlbumWithDeleteHash:deletehash success:^{
                 
                 
                 isSuccess = YES;
@@ -254,7 +254,7 @@
     
     [IMGAccountRequest accountCommentsWithUser:imgurUnitTestParams[@"recipientId"] success:^(NSArray * comments) {
         
-        expect(comments).haveCountOf(1);
+        expect(comments.count).beGreaterThan(0);
         IMGComment * first = [comments firstObject];
         expect(first.commentID).beTruthy();
         isSuccess = YES;
