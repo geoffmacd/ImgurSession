@@ -10,6 +10,7 @@
 
 #import "IMGVote.h"
 #import "IMGGalleryImage.h"
+#import "IMGComment.h"
 
 
 /**
@@ -46,4 +47,9 @@
  Is it flagged NSFW>
  */
 @property (nonatomic, readonly) BOOL nsfw;
+
+/**
+ Custom init with comment
+ */
+-(instancetype)initWithComment:(IMGComment*)comment error:(NSError *__autoreleasing *)error;
 @end

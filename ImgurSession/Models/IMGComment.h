@@ -8,6 +8,8 @@
 
 #import "IMGModel.h"
 
+#import "IMGGalleryObject.h"
+
 /**
  Model object class to represent comments on images, albums, and comments. https://api.imgur.com/models/comment
  */
@@ -71,5 +73,9 @@
  */
 @property (readonly,nonatomic, copy) NSArray * children;
 
+/**
+ Retrieve constructed gallery object for this comment
+ */
+-(id <IMGGalleryObjectProtocol>)galleryObject;
 
 @end

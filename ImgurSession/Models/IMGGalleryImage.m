@@ -50,6 +50,16 @@
     return [self trackModels];
 }
 
+-(instancetype)initWithComment:(IMGComment*)comment error:(NSError *__autoreleasing *)error{
+    
+    NSParameterAssert(comment);
+    
+    if(self = [super initWithGalleryID:comment.galleryID error:error]){
+        
+        
+    }
+    return [self trackModels];
+}
 
 #pragma mark - Describe
 

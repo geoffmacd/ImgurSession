@@ -8,6 +8,9 @@
 
 #import "IMGComment.h"
 
+#import "IMGGalleryAlbum.h"
+#import "IMGGalleryImage.h"
+
 @interface IMGComment ()
 
 @property (readwrite,nonatomic) NSInteger commentID;
@@ -81,6 +84,26 @@
     }
     
     return ([object commentID] == self.commentID);
+}
+
+-(id <IMGGalleryObjectProtocol>)galleryObject{
+    
+    NSError * err;
+    id <IMGGalleryObjectProtocol> galObject;
+    
+    //construct gallery object for comment
+    if(self.onAlbum){
+    
+        galObject = [[IMGGalleryAlbum alloc] initWithComment:self error:&err];
+        
+    } else {
+        
+        galObject = [[IMGGalleryImage alloc] initWithComment:self error:&err];
+    }
+    
+    if(err)
+        return nil;
+    return galObject;
 }
 
 

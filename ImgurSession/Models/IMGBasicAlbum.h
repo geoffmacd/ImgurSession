@@ -88,6 +88,10 @@ typedef NS_ENUM(NSInteger, IMGAlbumLayout){
  */
 @property (nonatomic, readonly, copy) NSArray *images; // Optional: can be set to nil
 
+/**
+ For custom init with gallery ID and cover ID
+ */
+-(instancetype)initWithGalleryID:(NSString*)objectID coverID:(NSString*)coverID error:(NSError *__autoreleasing *)error;
 
 
 #pragma mark - Album Layout setting

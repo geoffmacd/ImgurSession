@@ -87,6 +87,22 @@
     return [self trackModels];
 }
 
+-(instancetype)initWithGalleryID:(NSString*)objectID coverID:(NSString*)coverID error:(NSError *__autoreleasing *)error{
+    
+    NSParameterAssert(objectID);
+    
+    if(self = [super init]){
+        
+        _albumID = objectID;
+        
+        //construct cover URL
+        IMGImage * cover  = [[IMGImage alloc] initCoverImageWithAlbum:self error:error];
+        [self setCoverImage:cover];
+        
+    }
+    return [self trackModels];
+}
+
 #pragma mark - IMGObjectProtocol
 
 -(BOOL)isAlbum{

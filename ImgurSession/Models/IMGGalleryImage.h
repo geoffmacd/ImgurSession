@@ -10,6 +10,7 @@
 
 #import "IMGVote.h"
 #import "IMGGalleryObject.h"
+#import "IMGComment.h"
 
 /**
  Model object class to represent images that are posted to the Imgur Gallery. Can be a part of an album. https://api.imgur.com/models/gallery_image 
@@ -44,5 +45,10 @@
  Is it flagged NSFW>
  */
 @property (nonatomic, readonly) BOOL nsfw;
+
+/**
+ Custom init with comment
+ */
+-(instancetype)initWithComment:(IMGComment*)comment error:(NSError *__autoreleasing *)error;
 
 @end
