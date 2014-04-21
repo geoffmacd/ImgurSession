@@ -91,6 +91,22 @@
     return [self trackModels];
 }
 
+-(instancetype)initWithGalleryID:(NSString*)objectID error:(NSError *__autoreleasing *)error{
+    
+    NSParameterAssert(objectID);
+    
+    if(self = [super init]){
+        
+        _imageID = objectID;
+        
+        //guess at url
+        NSString * constructedStr = [NSString stringWithFormat:@"http://i.imgur.com/%@.jpg", _imageID];
+        _url = [NSURL URLWithString:constructedStr];
+
+    }
+    return [self trackModels];
+}
+
 #pragma mark - IMGObject
 
 -(BOOL)isAlbum{

@@ -81,6 +81,11 @@
 -(instancetype)initCoverImageWithAlbum:(IMGBasicAlbum*)album error:(NSError *__autoreleasing *)error;
 
 /**
+ For creating constructed image from just a gallery object ID
+ */
+-(instancetype)initWithGalleryID:(NSString*)objectID error:(NSError *__autoreleasing *)error;
+
+/**
  Retrieves various image sizes using the url with the letter specifier model as described at https://api.imgur.com/models/image
  @param size constant to specify requested image size
  @return URL for image of that size
