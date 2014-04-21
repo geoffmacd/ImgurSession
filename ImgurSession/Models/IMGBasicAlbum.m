@@ -129,14 +129,8 @@
 
 -(void)setCoverImage:(IMGImage*)coverImage{
     
-    if([self.images containsObject:coverImage])
-        return;
-    else {
-        
-        NSMutableArray * marray = [NSMutableArray arrayWithArray:self.images];
-        [marray addObject:coverImage];
-        self.images = [NSArray arrayWithArray:marray];
-    }
+    NSArray * array = [NSArray arrayWithObject:coverImage];
+    self.images = array;
 }
 
 -(NSString *)objectID{
