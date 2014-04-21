@@ -94,6 +94,10 @@
     if(self = [super init]){
         
         _albumID = objectID;
+        _coverID = coverID;
+        
+        NSMutableArray * images = [NSMutableArray new];
+        _images = [NSArray arrayWithArray:images];
         
         //construct cover URL
         IMGImage * cover  = [[IMGImage alloc] initCoverImageWithAlbum:self error:error];
@@ -129,8 +133,14 @@
 
 -(void)setCoverImage:(IMGImage*)coverImage{
     
-    NSArray * array = [NSArray arrayWithObject:coverImage];
-    self.images = array;
+    if([self.images containsObject:coverImage])
+        return;
+    else {
+        
+        NSMutableArray * marray = [NSMutableArray arrayWithArray:self.images];
+        [marray addObject:coverImage];
+        self.images = [NSArray arrayWithArray:marray];
+    }
 }
 
 -(NSString *)objectID{
