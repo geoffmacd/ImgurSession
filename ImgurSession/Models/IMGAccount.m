@@ -17,7 +17,6 @@
 @property (readwrite) NSString *username;
 @property (readwrite) NSString *bio;
 @property (readwrite) NSInteger accountID;
-@property (readwrite) NSURL *url;
 @property (readwrite) NSInteger reputation;
 @property (readwrite) NSDate *created;
 @end
@@ -47,7 +46,7 @@
         
         _accountID = [jsonData[@"id"] integerValue];
         //the 'url' is actually the user's name in the API
-        _username = [NSURL URLWithString:jsonData[@"url"]];
+        _username = jsonData[@"url"];
         if([jsonData[@"bio"] isKindOfClass:[NSString class]])
             _bio = jsonData[@"bio"];
         _reputation = [jsonData[@"reputation"] integerValue];
@@ -86,7 +85,7 @@
 #pragma mark - Describe
 
 - (NSString *)description{
-    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %ld; created: %@", [super description], (unsigned long)self.accountID, self.url, self.bio, (long)self.reputation, self.created];
+    return [NSString stringWithFormat: @"%@; accountID: %lu; url: \"%@\"; bio: \"%@\"; reputation: %ld; created: %@", [super description], (unsigned long)self.accountID, self.username, self.bio, (long)self.reputation, self.created];
 }
 
 -(BOOL)isEqual:(id)object{
@@ -108,7 +107,6 @@
     
     NSInteger accountID = [[decoder decodeObjectForKey:@"accountID"] integerValue];
     NSString * username = [decoder decodeObjectForKey:@"username"];
-    NSURL * url = [decoder decodeObjectForKey:@"url"];
     NSString * bio = [decoder decodeObjectForKey:@"bio"];
     NSInteger reputation = [[decoder decodeObjectForKey:@"reputation"] integerValue];
     NSDate *created = [decoder decodeObjectForKey:@"created"];
@@ -118,7 +116,6 @@
         _bio = bio;
         _username = username;
         _reputation = reputation;
-        _url = url;
         _created = created;
     }
     return self;
@@ -130,7 +127,6 @@
     
     [coder encodeObject:@(self.accountID) forKey:@"accountID"];
     [coder encodeObject:self.username forKey:@"username"];
-    [coder encodeObject:self.url  forKey:@"url"];
     [coder encodeObject:self.bio forKey:@"bio"];
     [coder encodeObject:@(self.reputation) forKey:@"reputation"];
     [coder encodeObject:self.created forKey:@"created"];
@@ -146,7 +142,6 @@
         // Copy NSObject subclasses
         [copy setUsername:[self.username copyWithZone:zone]];
         [copy setBio:[self.bio copyWithZone:zone]];
-        [copy setUrl:[self.url copyWithZone:zone]];
         [copy setCreated:[self.created copyWithZone:zone]];
         
         // Set primitives
