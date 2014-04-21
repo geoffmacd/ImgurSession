@@ -50,7 +50,8 @@
         for(NSDictionary * messageJSON in messagesJSON){
             NSError *JSONError = nil;
             IMGNotification * notification = [[IMGNotification alloc] initConversationNotificationWithJSONObject:messageJSON error:&JSONError];
-            if(!JSONError && notification)
+            //API returns duplicates of the same object for some reason
+            if(!JSONError && notification && ![messages containsObject:notification])
                 [messages addObject:notification];
         }
         

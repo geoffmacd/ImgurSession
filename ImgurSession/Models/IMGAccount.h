@@ -22,10 +22,6 @@
  */
 @property (nonatomic, readonly, copy) NSString *username;
 /**
- URL link for account page
- */
-@property (nonatomic, readonly) NSURL *url;
-/**
  Biography string displayed on right pane on account page
  */
 @property (nonatomic, readonly, copy) NSString *bio;

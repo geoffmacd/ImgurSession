@@ -45,9 +45,9 @@
             return nil;
         }
         
-        _username = username;
         _accountID = [jsonData[@"id"] integerValue];
-        _url = [NSURL URLWithString:jsonData[@"url"]];
+        //the 'url' is actually the user's name in the API
+        _username = [NSURL URLWithString:jsonData[@"url"]];
         if([jsonData[@"bio"] isKindOfClass:[NSString class]])
             _bio = jsonData[@"bio"];
         _reputation = [jsonData[@"reputation"] integerValue];
