@@ -75,7 +75,13 @@
         return NO;
     }
     
-    return ([[object notificationID] isEqualToString:self.notificationID]);
+    if(self.isReply){
+        
+        return ([[object reply] isEqual:self.reply]);
+    } else {
+        
+        return ([[object conversation] isEqual:self.conversation]);
+    }
 }
 
 
