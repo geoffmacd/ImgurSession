@@ -40,38 +40,51 @@
 -(void)testGarbageAccessToken{
  
      __block BOOL isSuccess;
-     
-     //sets bad access token in header which will cause re-auth with correct refresh token
-    [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Client-ID %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
-     
-     //should fail and trigger re-auth
-     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
-     
-         isSuccess = YES;
-         expect(account.username).beTruthy();
-     
-     } failure:failBlock];
+    
+    //after getting correct tokens
+    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        
+         //sets bad access token in header which will cause re-auth with correct refresh token
+        [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
+         
+         //should fail and trigger re-auth
+         [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+         
+             isSuccess = YES;
+             expect(account.username).beTruthy();
+         
+         } failure:failBlock];
+    } failure:failBlock];
      
      expect(isSuccess).will.beTruthy();
 }
     
--(void)testGarbageRefreshAndAccessToken{
+-(void)testGarbageRefreshToken{
  
      __block BOOL isSuccess = NO;
-     
-     //set bad refresh token and access token
-    [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
-    [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Client-ID %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
     
-     //should fail request, then attempt refresh, should fail refresh, then attempt code input before retrieving new refresh code and continuing requests
-     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
-         
-         //should go here
-         isSuccess = YES;
-     
-     } failure:failBlock];
-     
-     expect(isSuccess).will.beTruthy();
+    //after getting correct tokens
+    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        
+        //should fail request, then attempt refresh, should fail refresh, then attempt code input before retrieving new refresh code and continuing requests
+        
+        //set bad refresh token
+        [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
+        [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
+        
+        //should fail request, then attempt refresh, should fail refresh, then attempt code input before retrieving new refresh code and continuing requests
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            //should go here
+            isSuccess = YES;
+            
+        } failure:failBlock];
+        
+        
+    } failure:failBlock];
+    
+    
+    expect(isSuccess).will.beTruthy();
 }
 
 -(void)testImageNotFound{
@@ -103,15 +116,16 @@
     
     __block BOOL isSuccess;
     
+    //get original copy of credits remaining
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
-        NSInteger remaining = [[IMGSession sharedInstance] creditsClientRemaining];
+        NSInteger remaining = [[IMGSession sharedInstance] creditsUserRemaining];
         
         //should fail and trigger re-auth
         [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
             
             //ensure counter has gone down since we've done one request
-            expect([[IMGSession sharedInstance] creditsClientRemaining]).beLessThan(remaining);
+            expect([[IMGSession sharedInstance] creditsUserRemaining]).beLessThan(remaining);
             isSuccess = YES;
             
         } failure:failBlock];

@@ -489,7 +489,7 @@
         }];
         return nil;
     } else {
-        
+        //continue with request
         return completion();
     }
     
@@ -502,8 +502,26 @@
         
         return [super PUT:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            if(failure)
-                failure(error);
+            if(error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication){
+                
+                [self refreshAuthentication:^(NSString * accessCode) {
+                    
+                    [super PUT:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error){
+                        
+                        if(failure)
+                            failure(error);
+                    }];
+                } failure:^(NSError *error) {
+                    
+                    if(failure)
+                        failure(error);
+                }];
+                
+            } else {
+                
+                if(failure)
+                    failure(error);
+            }
         }];
         
     } success:success failure:failure];
@@ -515,8 +533,27 @@
         
         return [super DELETE:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            if(failure)
-                failure(error);
+            if(error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication){
+                
+                [self refreshAuthentication:^(NSString * accessCode) {
+                    
+                    [super DELETE:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error){
+                        
+                        if(failure)
+                            failure(error);
+                    }];
+                } failure:^(NSError *error) {
+                    
+                    if(failure)
+                        failure(error);
+                }];
+                
+            } else {
+                
+                if(failure)
+                    failure(error);
+            }
+
         }];
         
     } success:success failure:failure];
@@ -528,8 +565,27 @@
         
         return [super POST:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            if(failure)
-                failure(error);
+            if(error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication){
+                
+                
+                [self refreshAuthentication:^(NSString * accessCode) {
+                    
+                    [super POST:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
+                        
+                        if(failure)
+                            failure(error);
+                    }];
+                } failure:^(NSError *error) {
+                    
+                    if(failure)
+                        failure(error);
+                }];
+                
+            } else {
+                
+                if(failure)
+                    failure(error);
+            }
         }];
         
     } success:success failure:failure];
@@ -542,11 +598,36 @@
         
         return [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            if(failure)
-                failure(error);
+            if([self canRequestFailureBeRecovered:error]){
+                
+                [self refreshAuthentication:^(NSString * accessCode) {
+                    
+                    [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
+                        
+                        if(failure)
+                            failure(error);
+                    }];
+                } failure:^(NSError *error) {
+                    
+                    if(failure)
+                        failure(error);
+                }];
+                
+            } else {
+            
+                if(failure)
+                    failure(error);
+            }
         }];
         
     } success:success failure:failure];
+}
+
+-(BOOL)canRequestFailureBeRecovered:(NSError*)error{
+    
+    //attempt refresh or worst case code input in case of 401 and 403
+    
+    return (error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication);
 }
 
 //needed to re-implement from AFNetworking implementation without super call because progress is not handled in AFnetworking
