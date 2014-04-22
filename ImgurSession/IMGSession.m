@@ -642,11 +642,11 @@
 }
 
 //needed to re-implement from AFNetworking implementation without super call because progress is not handled in AFnetworking
--(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure{
+-(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     
     NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:nil];
-    NSProgress * progress;
     
+    NSProgress * progress;
     __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         [progress removeObserver:self forKeyPath:@"fractionCompleted" context:NULL];
         if (error) {
@@ -665,7 +665,7 @@
     [progress addObserver:self
                forKeyPath:@"fractionCompleted"
                   options:NSKeyValueObservingOptionNew
-                  context:NULL];
+                  context:(__bridge void *)(progressHandler)];
     return task;
 }
 
@@ -675,6 +675,8 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"fractionCompleted"]) {
         NSProgress *progress = (NSProgress *)object;
+        void (^handler)(CGFloat progress) = (__bridge void (^)(CGFloat progress))context;
+        handler(progress.fractionCompleted);
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }

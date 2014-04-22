@@ -118,6 +118,7 @@
 - (void)testPostAnonymousImage{
     
     __block BOOL isSuccess;
+    __block BOOL progressTested;
     
     NSData * data = [NSData dataWithContentsOfURL:testfileURL];
     
@@ -125,14 +126,20 @@
         
         expect(image.imageID).beTruthy();
         isSuccess = YES;
+    } progress:^(CGFloat progress) {
+        
+        progressTested = YES;
+        
     } failure:failBlock];
     
+    expect(progressTested).will.beTruthy();
     expect(isSuccess).will.beTruthy();
 }
 
 - (void)testPostAnonymousGif{
     
     __block BOOL isSuccess;
+    __block BOOL progressTested;
     
     NSData * data = [NSData dataWithContentsOfURL:testGifURL];
     
@@ -141,8 +148,13 @@
         expect(image.imageID).beTruthy();
         isSuccess = YES;
         
+    } progress:^(CGFloat progress) {
+        
+        progressTested = YES;
+        
     } failure:failBlock];
     
+    expect(progressTested).will.beTruthy();
     expect(isSuccess).will.beTruthy();
 }
 
@@ -165,6 +177,9 @@
                 
             } failure:failBlock];
         } failure:failBlock];
+    } progress:^(CGFloat progress) {
+        
+        
     } failure:failBlock];
     
     expect(isSuccess).will.beTruthy();
@@ -183,6 +198,9 @@
         IMGImage * image = [array firstObject];
         expect(image.imageID).beTruthy();
         isSuccess = YES;
+        
+    } progress:^(CGFloat progress) {
+        
         
     } failure:failBlock];
     

@@ -113,6 +113,9 @@
             
         } failure:failBlock];
         
+    } progress:^(CGFloat progress) {
+        
+        
     } failure:failBlock];
 }
 
@@ -139,6 +142,9 @@
                     
                 } failure:failBlock];
             });
+        
+    } progress:^(CGFloat progress) {
+        
         
     } failure:failBlock];
 }
@@ -188,6 +194,9 @@
             
         } failure:failBlock];
         
+    } progress:^(CGFloat progress) {
+        
+        
     } failure:failBlock];
 }
 
@@ -226,6 +235,9 @@
             } failure:failBlock];
         
         } failure:failBlock];
+        
+    } progress:^(CGFloat progress) {
+        
         
     } failure:failBlock];
 }

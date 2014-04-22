@@ -43,12 +43,12 @@
 
 #pragma mark - Upload one image
 
-+ (void)uploadImageWithGifData:(NSData *)gifData title:(NSString *)title success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithGifData:(NSData *)gifData title:(NSString *)title success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     
-    [self uploadImageWithGifData:gifData compression:1.0f title:title description:nil linkToAlbumWithID:nil success:success failure:failure];
+    [self uploadImageWithGifData:gifData compression:1.0f title:title description:nil linkToAlbumWithID:nil success:success progress:progressHandler failure:failure];
 }
 
-+ (void)uploadImageWithGifData:(NSData *)gifData compression:(CGFloat)compression title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithGifData:(NSData *)gifData compression:(CGFloat)compression title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success  progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     //upload file from binary data
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -92,15 +92,15 @@
                 failure(JSONError);
         }
         
-    } failure:failure];
+    } progress:progressHandler failure:failure];
 }
 
-+ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
  
-    [self uploadImageWithData:imageData title:title description:nil linkToAlbumWithID:nil success:success failure:failure];
+    [self uploadImageWithData:imageData title:title description:nil linkToAlbumWithID:nil success:success progress:progressHandler failure:failure];
 }
 
-+ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     //upload file from binary data
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -144,15 +144,15 @@
                 failure(JSONError);
         }
         
-    } failure:failure];
+    } progress:progressHandler failure:failure];
 }
 
-+ (void)uploadImageWithFileURL:(NSURL *)fileURL success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithFileURL:(NSURL *)fileURL success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     
-    [self uploadImageWithFileURL:fileURL title:nil description:nil linkToAlbumWithID:nil success:success failure:failure];
+    [self uploadImageWithFileURL:fileURL title:nil description:nil linkToAlbumWithID:nil success:success progress:progressHandler failure:failure];
 }
 
-+ (void)uploadImageWithFileURL:(NSURL *)fileURL title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
++ (void)uploadImageWithFileURL:(NSURL *)fileURL title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     //upload file from binary data
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -196,7 +196,7 @@
                 failure(JSONError);
         }
         
-    } failure:failure];
+    } progress:progressHandler failure:failure];
 }
 
 + (void)uploadImageWithURL:(NSURL *)url success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure{
@@ -236,12 +236,12 @@
 
 #pragma mark - Upload multiple images
 
-+(void)uploadImages:(NSArray*)files success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++(void)uploadImages:(NSArray*)files success:(void (^)(NSArray *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     
-    [self uploadImages:files toAlbumWithID:nil success:success failure:failure];
+    [self uploadImages:files toAlbumWithID:nil success:success progress:progressHandler failure:failure];
 }
 
-+(void)uploadImages:(NSArray*)files toAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++(void)uploadImages:(NSArray*)files toAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
     
     NSParameterAssert(files);
     
@@ -266,7 +266,7 @@
                 
                 dispatch_semaphore_signal(sema);
                 
-            } failure:^(NSError *error) {
+            } progress:progressHandler failure:^(NSError *error) {
                 
                 dispatch_semaphore_signal(sema);
             }];
