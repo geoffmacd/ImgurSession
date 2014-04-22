@@ -121,7 +121,8 @@
     });
 }
 
--(void)refreshTokenBad{
+-(void)badRefreshToken{
+    
     //refresh token is no longer working, probably banned from API
     self.refreshToken = nil;
     
@@ -136,7 +137,7 @@
 -(IMGAuthState)sessionAuthState{
     
     if(self.isAnonymous){
-        
+        //anon clients only need the clientID to log in
         if(self.clientID.length)
             return IMGAuthStateAnon;
         else
@@ -144,15 +145,15 @@
     } else {
         
         if(self.accessToken.length && [self.accessTokenExpiry timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970])
-            return IMGAuthStateAuthenticated;
+            return IMGAuthStateAuthenticated;                   //continue with request
         else if(self.codeAwaitingAuthentication.length)
-            return IMGAuthStateAwaitingCodeInput;
+            return IMGAuthStateAwaitingCodeInput;               //no access token, delay the request until tokens are retrieved
         else if(self.refreshToken.length)
-            return IMGAuthStateExpired;
+            return IMGAuthStateExpired;                         //access token is expired, delay request until new access token retrieved
         else if(self.clientID.length && self.secret.length)
-            return IMGAuthStateNone;    //enough to login
+            return IMGAuthStateNone;                            //enough information to retrieve tokens, wait until tokens are retrieved
         else
-            return IMGAuthStateMissingParameters;
+            return IMGAuthStateMissingParameters;               //not enough information to login
     }
 }
 
@@ -204,7 +205,6 @@
     //block main thread
     [[[NSOperationQueue alloc] init] addOperation:authOp];
     [authOp waitUntilFinished];
-    
     
     if(authOp.response.statusCode == 200 && !authOp.error){
     
@@ -297,35 +297,37 @@
                                     success(refresh);
                                 
                             } failure:failure];
-                        
-                            
                         }];
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
                 });
             }
-            
-            if(failure)
-                failure([NSError errorWithDomain:@"com.imgursession" code:IMGErrorRequiresUserAuthentication userInfo:nil]);
         } else {
             
-            //post code
+            //post input code to retrieve tokens asynchronously
             [self asyncAuthenticateWithType:self.authType withCode:self.codeAwaitingAuthentication success:^(NSString *refreshToken){
                 
+                //set to nil so we don't do this again
                 self.codeAwaitingAuthentication = nil;
-                //continue with requests
+                
+                //continue with requests which were paused until this routine was finished
                 if(success)
                     success(self.refreshToken);
+                
             } failure:^(NSError *error) {
+                //if this fails, we have no choice but to tell the user we could not authenticate with the client and secret
+                
+                //alert delegate
+                [self badRefreshToken];
                 
                 if(failure)
-                    failure(error);
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:@{IMGErrorAuthenticationError:error}]);
             }];
         }
 
     } else {
-        //get new access token with refresh token
         
+        //refresh access token with refresh token
         NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
         
         [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -333,9 +335,10 @@
             NSDictionary * json = responseObject;
             //set auth header
             [self setAuthorizationHeader:json];
-            //retrieve user account
+            //immediately request latest user updates
             [self refreshUserAccount:nil failure:nil];
             
+            //alert
             if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)]){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -350,21 +353,24 @@
                 success(_refreshToken);
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            
             //in my experience, usually banned at this point, refresh codes shouldn't expire
-            //set nil anyways
-            self.refreshToken = nil;
-
             
-            [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
-                
-                [self refreshAuthentication:^(NSString * refresh) {
+            //set to nil to ensure we attempt to request new tokens
+            self.refreshToken = nil;
+            
+            //need to ask user for a new code input
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
                     
-                    if(success)
-                        success(refresh);
-                    
-                } failure:failure];
-            }];
+                    //post code and retrieve newstokens
+                    [self refreshAuthentication:^(NSString * refresh) {
+                        
+                        if(success)
+                            success(refresh);
+                        
+                    } failure:failure]; //failure will generate IMGErrorCouldNotAuthenticate error code as per above
+                }];
+            });
         }];
     }
 }
@@ -402,7 +408,7 @@
 }
 
 - (void)setAuthorizationHeader:(NSDictionary *)tokens{
-    //store authentication from oauth/token response
+    //store authentication from oauth/token response and set metadata
     
     //refresh token
     if(tokens[@"refresh_token"]){
@@ -466,7 +472,7 @@
     IMGAuthState auth = [self sessionAuthState];
     if(auth == IMGAuthStateMissingParameters){
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorNoAuthentication userInfo:nil]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);
         
         return nil;
     } else if (auth == IMGAuthStateExpired || auth == IMGAuthStateNone || auth == IMGAuthStateAwaitingCodeInput){
