@@ -351,15 +351,20 @@
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            //not working anymore
-            NSHTTPURLResponse * resp = (NSHTTPURLResponse *)task.response;
+            //in my experience, usually banned at this point, refresh codes shouldn't expire
+            //set nil anyways
+            self.refreshToken = nil;
+
             
-            //in my experience, banned
-            if(resp.statusCode == 400)
-                [self refreshTokenBad];
-            
-            if(failure)
-                failure([NSError errorWithDomain:@"com.imgursession" code:IMGErrorCouldNotAuthenticate userInfo:@{@"orgError":error}]);
+            [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                
+                [self refreshAuthentication:^(NSString * refresh) {
+                    
+                    if(success)
+                        success(refresh);
+                    
+                } failure:failure];
+            }];
         }];
     }
 }

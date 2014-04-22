@@ -1,4 +1,4 @@
-//
+    //
 //  IMGAuthenticationTests.m
 //  ImgurSession
 //
@@ -41,7 +41,7 @@
  
      __block BOOL isSuccess;
      
-     //just sets bad access token in header which will cause re-auth with correct refresh token
+     //sets bad access token in header which will cause re-auth with correct refresh token
     [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Client-ID %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
      
      //should fail and trigger re-auth
@@ -53,28 +53,48 @@
      } failure:failBlock];
      
      expect(isSuccess).will.beTruthy();
- }
+}
+    
+-(void)testGarbageRefreshAndAccessToken{
  
--(void)testGarbageRefreshToken{
- 
-     __block BOOL isFailed = NO;
+     __block BOOL isSuccess = NO;
      
-     //re-auth will be unsuccessful
+     //set bad refresh token and access token
     [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
     [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Client-ID %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
     
-     //should fail and trigger re-auth, then fail again
+     //should fail request, then attempt refresh, should fail refresh, then attempt code input before retrieving new refresh code and continuing requests
      [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+         
+         //should go here
+         isSuccess = YES;
      
-         //should not get here
-         expect(0).beTruthy();
+     } failure:failBlock];
      
-     } failure:^(NSError *error) {
-     
-         isFailed = YES;
-     }];
-     
-     expect(isFailed).will.beTruthy();
+     expect(isSuccess).will.beTruthy();
+}
+
+-(void)testImageNotFound{
+    
+    __block BOOL isSuccess = NO;
+    
+    //should fail request, then attempt refresh, should fail refresh, then attempt code input before retrieving new refresh code and continuing requests
+    
+    [IMGImageRequest imageWithID:@"fdsfdsfdsa" success:^(IMGImage *image) {
+        
+        //should not success
+        failBlock([NSError errorWithDomain:IMGErrorDomain code:0 userInfo:nil]);
+        
+    } failure:^(NSError *error) {
+        
+        expect(error.code == 404).beTruthy();
+        
+        //should go here
+        isSuccess = YES;
+        
+    }];
+    
+    expect(isSuccess).will.beTruthy();
 }
 
 #pragma mark - Testing Rate Limit tracking

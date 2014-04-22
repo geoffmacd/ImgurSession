@@ -6,17 +6,7 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-
-//error codes
-#define IMGErrorDomain                          @"com.imgursession"
-
-#define IMGErrorMalformedResponseFormat         0   //Response data is in wrong format
-#define IMGErrorResponseMissingParameters       1   //some critical fields are not in response
-#define IMGErrorNoAuthentication                2   //no authentication, anon or otherwise
-#define IMGErrorCouldNotAuthenticate            3   //refresh token did not succeed
-#define IMGErrorRequiresUserAuthentication      401   //for when anonymous sessions attempt calls only logged in users can perform
-#define IMGErrorUserRateLimitExceeded           429   //user rate limit hit
-
+#import "NSError+IMGError.h"
 
 @interface IMGModel : NSObject <NSCoding>
 

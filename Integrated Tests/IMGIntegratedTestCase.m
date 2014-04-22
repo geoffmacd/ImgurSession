@@ -32,7 +32,7 @@
     //run before each test
     
     //30 second timeout
-    [Expecta setAsynchronousTestTimeout:60.0];
+    [Expecta setAsynchronousTestTimeout:100.0];
     
         
     // Storing various testing values
@@ -48,9 +48,11 @@
     
     if(anon){
         [IMGSession anonymousSessionWithClientID:clientID];
+        [[IMGSession sharedInstance] securityPolicy].allowInvalidCertificates = YES;
     } else {
         //Lazy init, may already exist
         IMGSession * ses = [IMGSession authenticatedSessionWithClientID:clientID secret:clientSecret authType:IMGPinAuth];
+        [[IMGSession sharedInstance] securityPolicy].allowInvalidCertificates = YES;
         if([imgurClient[@"refreshToken"] length])
             ses.refreshToken = imgurClient[@"refreshToken"];
     }
@@ -248,6 +250,7 @@
     //send pin code to retrieve access tokens
     [[IMGSession sharedInstance] setAuthCode:[NSString stringWithUTF8String:pin]];
     
+    //we need to continue previous requests this way
     completion();
 }
 

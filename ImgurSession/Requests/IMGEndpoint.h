@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
+#import "NSError+IMGError.h"
+
 /**
  Endpoint superclass for Imgur endpoints. Provides convenience methods common to all endpoints.
  */

@@ -9,8 +9,8 @@
 
 #import "IMGVote.h"
 
-
 @class IMGGalleryAlbum,IMGGalleryImage,IMGGalleryProfile,IMGComment;
+
 @protocol IMGGalleryObjectProtocol;
 
 typedef NS_ENUM(NSInteger, IMGGallerySectionType) {
