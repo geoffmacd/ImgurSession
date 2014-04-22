@@ -19,7 +19,6 @@
  */
 -(id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error{
     
-    IMGSession * ses = [IMGSession sharedInstance];
     NSHTTPURLResponse * httpRes = (NSHTTPURLResponse *)response;
     
     //json parsing with AFJSONResponseSerializer, result should be 'basic' model specifed @ https://api.imgur.com/models/basic
@@ -35,7 +34,6 @@
             //decoding error
             
             NSString * errorDescription = [jsonError localizedDescription];
-            
             NSMutableDictionary * errorDict = [NSMutableDictionary new];
             if(errorDescription)
                 [errorDict setObject:errorDescription forKey:NSLocalizedDescriptionKey];
@@ -50,7 +48,7 @@
             //let response continue processing by ImgurSession completion blocks
             
             //update rate limit tracking in the session
-            [ses updateClientRateLimiting:httpRes];
+            [[IMGSession sharedInstance] updateClientRateLimiting:httpRes];
             
             //pass back only "data" for simplicity to request subclasses
             return jsonResult[@"data"];
@@ -83,7 +81,7 @@
          **/
         
         //construct error to inform original API request of exact issue.
-        //Special cases are needed for 401,403,429 as detaileed in NSError+IMGError
+        //Special cases are needed for 401,403,429 as detaileed in NSError+IMGError and IMGSession
         
         NSString * errorDescription = jsonResult[@"data"][@"error"];
         NSString * errorPath = jsonResult[@"data"][@"request"];

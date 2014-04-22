@@ -425,44 +425,41 @@
 
 -(void)updateClientRateLimiting:(NSHTTPURLResponse*)response{
     
-    @synchronized(self){
-        NSDictionary * headers = response.allHeaderFields;
-        self.creditsClientRemaining = [headers[IMGHeaderClientRemaining] integerValue];
-        self.creditsClientLimit = [headers[IMGHeaderClientLimit] integerValue];
-        self.creditsUserLimit = [headers[IMGHeaderUserLimit] integerValue];
-        self.creditsUserRemaining = [headers[IMGHeaderUserRemaining] integerValue];
-        self.creditsUserReset = [headers[IMGHeaderUserReset] integerValue];
+    NSDictionary * headers = response.allHeaderFields;
+    self.creditsClientRemaining = [headers[IMGHeaderClientRemaining] integerValue];
+    self.creditsClientLimit = [headers[IMGHeaderClientLimit] integerValue];
+    self.creditsUserLimit = [headers[IMGHeaderUserLimit] integerValue];
+    self.creditsUserRemaining = [headers[IMGHeaderUserRemaining] integerValue];
+    self.creditsUserReset = [headers[IMGHeaderUserReset] integerValue];
+    
+    //warn delegate if necessary
+    if(_creditsUserRemaining < _warnRateLimit && _creditsUserRemaining > 0){
         
-        //warn delegate if necessary
-        if(_creditsUserRemaining < _warnRateLimit && _creditsUserRemaining > 0){
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNearRateLimit:) ]){
+                [_delegate imgurSessionNearRateLimit:_creditsUserRemaining];
+            }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+            //post notifications as well
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitNearLimitNotification object:nil];
+        });
+    } else if (_creditsUserRemaining == 0){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
+                [_delegate imgurSessionRateLimitExceeded];
+            }
             
-                if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNearRateLimit:) ]){
-                    [_delegate imgurSessionNearRateLimit:_creditsUserRemaining];
-                }
-                
-                //post notifications as well
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitNearLimitNotification object:nil];
-            });
-        } else if (_creditsUserRemaining == 0){
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-            
-                if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
-                    [_delegate imgurSessionRateLimitExceeded];
-                }
-                
-                //post notifications as well
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitExceededNotification object:nil];
-            });
-        }
+            //post notifications as well
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitExceededNotification object:nil];
+        });
     }
 }
 
 #pragma mark - Requests
 //needed to subclass to manage authentication state
-
 
 -(NSURLSessionDataTask *)methodRequest:(NSString *)URLString parameters:(NSDictionary *)parameters completion:(NSURLSessionDataTask * (^)())completion success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
@@ -502,7 +499,7 @@
         
         return [super PUT:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            if(error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication){
+            if([self canRequestFailureBeRecovered:error]){
                 
                 [self refreshAuthentication:^(NSString * accessCode) {
                     
@@ -533,7 +530,7 @@
         
         return [super DELETE:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            if(error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication){
+            if([self canRequestFailureBeRecovered:error]){
                 
                 [self refreshAuthentication:^(NSString * accessCode) {
                     
@@ -565,7 +562,7 @@
         
         return [super POST:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
             
-            if(error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication){
+            if([self canRequestFailureBeRecovered:error]){
                 
                 
                 [self refreshAuthentication:^(NSString * accessCode) {
@@ -676,7 +673,7 @@
     //post notifications as well to class name
     dispatch_async(dispatch_get_main_queue(), ^{
     
-        //warn delegate if necessary
+        //tell delegate if necessary
         if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionModelFetched:)]){
                 [_delegate imgurSessionModelFetched:model];
         }

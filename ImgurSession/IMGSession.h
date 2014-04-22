@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 @required
 
 /**
- Alerts delegate that request limit is hit
+ Alerts delegate that request limit is hit and cannot continue
  */
 -(void)imgurSessionRateLimitExceeded;
 /**
