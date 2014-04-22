@@ -25,7 +25,7 @@
     
     if([[IMGSession sharedInstance] isAnonymous]){
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{IMGErrorServerPath:path}]);
         return;
     }
     
@@ -55,7 +55,7 @@
     
     if([[IMGSession sharedInstance] isAnonymous]){
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{IMGErrorServerPath:path}]);
         return;
     }
     
@@ -85,7 +85,7 @@
     
     if([[IMGSession sharedInstance] isAnonymous]){
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{IMGErrorServerPath:path}]);
         return;
     }
     
@@ -104,7 +104,7 @@
     
     if([[IMGSession sharedInstance] isAnonymous]){
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{IMGErrorServerPath:path}]);
         return;
     }
     
@@ -123,7 +123,7 @@
     
     if([[IMGSession sharedInstance] isAnonymous]){
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{IMGErrorServerPath:path}]);
         return;
     }
     
@@ -142,7 +142,7 @@
     
     if([[IMGSession sharedInstance] isAnonymous]){
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{@"path":path}]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{IMGErrorServerPath:path}]);
         return;
     }
     

@@ -15,7 +15,7 @@
 //    IMGAuthState auth = [[IMGSession sharedInstance] sessionAuthState];
 //    if(auth == IMGNoAuthType || auth == IMGAuthStateExpired){
 //        
-//        *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil];//@{@"path":[URLString lastPathComponent]}];
+//        *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:nil];//@{IMGErrorServerPath:[URLString lastPathComponent]}];
 //        return nil;
 //    }
     

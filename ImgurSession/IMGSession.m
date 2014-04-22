@@ -673,8 +673,12 @@
 #pragma mark - KVO for progress upload
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
     if ([keyPath isEqualToString:@"fractionCompleted"]) {
+        //we were tracking image upload progress probably
         NSProgress *progress = (NSProgress *)object;
+        
+        //the progress handler was passed to context, type cast back to pass in float to alert requester of progress
         void (^handler)(CGFloat progress) = (__bridge void (^)(CGFloat progress))context;
         handler(progress.fractionCompleted);
     } else {
