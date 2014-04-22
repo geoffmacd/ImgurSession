@@ -464,7 +464,8 @@
     }
 }
 
-#pragma mark - Requests
+#pragma mark - Request authorization management
+
 //needed to subclass to manage authentication state
 
 -(NSURLSessionDataTask *)methodRequest:(NSString *)URLString parameters:(NSDictionary *)parameters completion:(NSURLSessionDataTask * (^)())completion success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
@@ -497,6 +498,20 @@
     }
     
 }
+
+-(BOOL)canRequestFailureBeRecovered:(NSError*)error{
+
+    if(self.isAnonymous){
+        //if anon, nothing we can do but tell the user
+        return NO;
+    } else {
+        //if authenticated, attempt refresh or worst case code input in case of 401 and 403
+        
+        return (error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication);
+    }
+}
+
+#pragma mark - Requests
 
 -(NSURLSessionDataTask *)PUT:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
@@ -624,13 +639,6 @@
         }];
         
     } success:success failure:failure];
-}
-
--(BOOL)canRequestFailureBeRecovered:(NSError*)error{
-    
-    //attempt refresh or worst case code input in case of 401 and 403
-    
-    return (error.code == IMGErrorForbidden || error.code == IMGErrorRequiresUserAuthentication);
 }
 
 //needed to re-implement from AFNetworking implementation without super call because progress is not handled in AFnetworking
