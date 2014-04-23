@@ -220,18 +220,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 - (NSURL *)authenticateWithExternalURL;
 /**
- Synchronously requests refresh tokens using inputted pin code.
- @param authType     authorization type pin,code,token
- @param code     code input string for authorization
- @return error
- */
-- (NSError*)syncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code;
-/**
  Asynchronously requests refresh tokens using inputted pin code.
  @param authType     authorization type pin,code,token
  @param code     code input string for authorization
  */
-- (void)asyncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
 /**
  Sets input code from external URL for lazy authentication
  @param code    input code to authenticate with

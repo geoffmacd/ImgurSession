@@ -193,44 +193,7 @@
     return [NSURL URLWithString:path];
 }
 
-- (NSError*)syncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code{
-    
-    //cancel all
-    [self.operationQueue cancelAllOperations];
-    [self.requestSerializer clearAuthorizationHeader];
-    
-    NSString * grantTypeStr = (authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
-    //call oauth/token with auth type
-    NSDictionary * params = @{[IMGSession strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
-    
-    NSMutableURLRequest * req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@/%@",IMGBaseURL,IMGOAuthEndpoint] parameters:params error:nil];
-    AFHTTPRequestOperation * authOp = [[AFHTTPRequestOperation alloc] initWithRequest:req];
-    [authOp setResponseSerializer:[AFJSONResponseSerializer serializer]];
-    
-    [[[NSOperationQueue alloc] init] addOperation:authOp];
-    [authOp waitUntilFinished];
-    
-    if(authOp.response.statusCode == 200 && !authOp.error){
-        
-        NSDictionary * json = authOp.responseObject;
-        
-        //alert delegate
-        [self informClientAuthStateChanged:IMGAuthStateAuthenticated];
-        
-        //set auth header
-        [self setAuthorizationHeader:json];
-        //retrieve user account
-        [self refreshUserAccount:nil failure:nil];
-        
-        return nil;
-        
-    } else {
-        
-        return authOp.error;
-    }
-}
-
-- (void)asyncAuthenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
+- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
     
     //cancel all
     [self.operationQueue cancelAllOperations];
