@@ -40,7 +40,7 @@
             if(jsonError)
                 [errorDict setObject:jsonError forKey:IMGErrorDecoding];
             
-            *error = [NSError errorWithDomain:IMGErrorDomain code:httpRes.statusCode userInfo:[NSDictionary dictionaryWithDictionary:errorDict]];
+            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:[NSDictionary dictionaryWithDictionary:errorDict]];
             return nil;
         }
         

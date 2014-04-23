@@ -259,7 +259,7 @@
         } else {
             
             //post input code to retrieve tokens asynchronously
-            [self asyncAuthenticateWithType:self.authType withCode:self.codeAwaitingAuthentication success:^(NSString *refreshToken){
+            [self authenticateWithType:self.authType withCode:self.codeAwaitingAuthentication success:^(NSString *refreshToken){
                 
                 //set to nil so we don't do this again
                 self.codeAwaitingAuthentication = nil;
