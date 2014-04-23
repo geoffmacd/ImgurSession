@@ -25,6 +25,8 @@
 @property (readwrite, nonatomic) NSInteger creditsClientLimit;
 @property (readwrite, nonatomic) NSInteger warnRateLimit;
 
+- (void)setAuthorizationHeader:(NSDictionary *)tokens;
+
 @end
 
 
@@ -58,6 +60,31 @@
      
      expect(isSuccess).will.beTruthy();
 }
+
+-(void)testSuspend{
+    
+    __block BOOL isSuccess;
+    
+    [[IMGSession sharedInstance] refreshUserAccount:^(IMGAccount *user) {
+        
+        IMGSession * ses = [IMGSession sharedInstance];
+        [ses.operationQueue setSuspended:YES];
+        
+        [ses refreshUserAccount:^(IMGAccount *user) {
+            
+            isSuccess = YES;
+            
+        } failure:failBlock];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [ses.operationQueue setSuspended:NO];
+        });
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
     
 -(void)testGarbageRefreshToken{
  
@@ -87,11 +114,35 @@
     expect(isSuccess).will.beTruthy();
 }
 
+-(void)testAccessTokenDateExpiry{
+    //test to ensure that upon access token expiry date, we refresh automatically
+    
+    __block BOOL isAwaitingRefresh = NO;
+    __block NSString * oldAccess;
+    
+    IMGSession * ses = [IMGSession sharedInstance];
+    
+    [[IMGSession sharedInstance] refreshUserAccount:^(IMGAccount *user) {
+        
+        oldAccess = ses.accessToken;
+        isAwaitingRefresh = YES;
+        
+        //hijack refresh to expire in 5 seconds rather than 3600
+        NSDictionary * tokens = @{@"refresh_token":ses.refreshToken,@"access_token":ses.accessToken,@"expires_in":@5};
+        [ses setAuthorizationHeader:tokens];
+        
+        
+    } failure:failBlock];
+    
+    expect(isAwaitingRefresh).will.beTruthy();
+    expect(ses.accessToken != oldAccess).will.beTruthy();
+}
+
 -(void)testImageNotFound{
     
     __block BOOL isSuccess = NO;
     
-    //should fail request, then attempt refresh, should fail refresh, then attempt code input before retrieving new refresh code and continuing requests
+    //should fail request with not found
     
     [IMGImageRequest imageWithID:@"fdsfdsfdsa" success:^(IMGImage *image) {
         
@@ -99,6 +150,9 @@
         failBlock([NSError errorWithDomain:IMGErrorDomain code:0 userInfo:nil]);
         
     } failure:^(NSError *error) {
+        
+        //imgur sometimes responds with previous account requests for some reasons saying it is a cache hit even though it is a different URL
+        //in this case this test will fail with code 1 == IMGErrorResponseMissingParameters
         
         expect(error.code == 404).beTruthy();
         
@@ -119,16 +173,21 @@
     //get original copy of credits remaining
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
-        NSInteger remaining = [[IMGSession sharedInstance] creditsUserRemaining];
+        NSInteger remaining = [[IMGSession sharedInstance] creditsClientRemaining];
         
-        //should fail and trigger re-auth
-        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        //imgur doesn't synchronize the counts instantly for some reason so we wait a second until they do
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            //ensure counter has gone down since we've done one request
-            expect([[IMGSession sharedInstance] creditsUserRemaining]).beLessThan(remaining);
-            isSuccess = YES;
-            
-        } failure:failBlock];
+            //should fail and trigger re-auth
+            [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+                
+                //ensure counter has gone down since we've done one request
+                NSInteger next = [[IMGSession sharedInstance] creditsClientRemaining];
+                expect(next).beLessThan(remaining);
+                isSuccess = YES;
+                
+            } failure:failBlock];
+        });
         
     } failure:failBlock];
     

@@ -132,6 +132,7 @@
         
         NSError *JSONError = nil;
         
+        //check if album or image
         if([responseObject[@"is_album"] boolValue]){
             
             IMGGalleryAlbum *album = [[IMGGalleryAlbum alloc] initWithJSONObject:responseObject error:&JSONError];

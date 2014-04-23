@@ -111,14 +111,8 @@
 #pragma mark - Authentication Notifications
 
 -(void)accessTokenExpired{
-    //does not pro-actively refresh, just informs delegates, lazily waits until request fails to refresh
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
-            [_delegate imgurSessionAuthStateChanged:IMGAuthStateExpired];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
-    });
+    [self refreshAuthentication:nil failure:nil];
 }
 
 -(void)badRefreshToken{
@@ -202,12 +196,11 @@
     AFHTTPRequestOperation * authOp = [[AFHTTPRequestOperation alloc] initWithRequest:req];
     [authOp setResponseSerializer:[AFJSONResponseSerializer serializer]];
     
-    //block main thread
     [[[NSOperationQueue alloc] init] addOperation:authOp];
     [authOp waitUntilFinished];
     
     if(authOp.response.statusCode == 200 && !authOp.error){
-    
+        
         NSDictionary * json = authOp.responseObject;
         
         //alert delegate
@@ -227,7 +220,7 @@
         return nil;
         
     } else {
-
+        
         return authOp.error;
     }
 }
@@ -402,29 +395,41 @@
 
 -(void)setAnonmyousAuthenticationWithID:(NSString*)clientID{
     
+    //suspend until complete
+    [self.operationQueue setSuspended:YES];
+    
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;
     [serializer setValue:[NSString stringWithFormat:@"Client-ID %@", clientID] forHTTPHeaderField:@"Authorization"];
+    
+    [self.operationQueue setSuspended:NO];
 }
 
 - (void)setAuthorizationHeader:(NSDictionary *)tokens{
     //store authentication from oauth/token response and set metadata
     
-    //refresh token
-    if(tokens[@"refresh_token"]){
-        self.refreshToken = tokens[@"refresh_token"];
+    //suspend until complete
+    [self.operationQueue setSuspended:YES];
+    
+    @synchronized(self){
+        //refresh token
+        if(tokens[@"refresh_token"]){
+            self.refreshToken = tokens[@"refresh_token"];
+        }
+        
+        //set expiracy time, currrently at 3600 seconds after
+        NSInteger expirySeconds = [tokens[@"expires_in"] integerValue];
+        self.accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + expirySeconds)];
+        NSTimer * timer = [NSTimer timerWithTimeInterval:expirySeconds target:self selector:@selector(accessTokenExpired) userInfo:nil repeats:NO];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        self.accessToken = tokens[@"access_token"];
+        
+        //change the serializer to include this authorization header
+        AFHTTPRequestSerializer * serializer = self.requestSerializer;
+        [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
     }
     
-    //set expiracy time, currrently at 3600 seconds after
-    NSInteger expirySeconds = [tokens[@"expires_in"] integerValue];
-    self.accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + expirySeconds)];
-    NSTimer * timer = [NSTimer timerWithTimeInterval:expirySeconds target:self selector:@selector(accessTokenExpired) userInfo:nil repeats:NO];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    self.accessToken = tokens[@"access_token"];
-    
-    //change the serializer to include this authorization header
-    AFHTTPRequestSerializer * serializer = self.requestSerializer;
-    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
+    [self.operationQueue setSuspended:NO];
 }
 
 #pragma mark - Rate Limit Tracking
@@ -432,11 +437,17 @@
 -(void)updateClientRateLimiting:(NSHTTPURLResponse*)response{
     
     NSDictionary * headers = response.allHeaderFields;
-    self.creditsClientRemaining = [headers[IMGHeaderClientRemaining] integerValue];
-    self.creditsClientLimit = [headers[IMGHeaderClientLimit] integerValue];
-    self.creditsUserLimit = [headers[IMGHeaderUserLimit] integerValue];
-    self.creditsUserRemaining = [headers[IMGHeaderUserRemaining] integerValue];
-    self.creditsUserReset = [headers[IMGHeaderUserReset] integerValue];
+    //sometimes the headers aren't there and 0 is the result which will wrongly trigger ratelimitexceeded
+    if(headers[IMGHeaderClientRemaining])
+        self.creditsClientRemaining = [headers[IMGHeaderClientRemaining] integerValue];
+    if(headers[IMGHeaderClientLimit])
+        self.creditsClientLimit = [headers[IMGHeaderClientLimit] integerValue];
+    if(headers[IMGHeaderUserLimit])
+        self.creditsUserLimit = [headers[IMGHeaderUserLimit] integerValue];
+    if(headers[IMGHeaderUserRemaining])
+        self.creditsUserRemaining = [headers[IMGHeaderUserRemaining] integerValue];
+    if(headers[IMGHeaderUserReset])
+        self.creditsUserReset = [headers[IMGHeaderUserReset] integerValue];
     
     //warn delegate if necessary
     if(_creditsUserRemaining < _warnRateLimit && _creditsUserRemaining > 0){
