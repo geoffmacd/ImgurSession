@@ -36,12 +36,12 @@
  @param username name of account
  @return signal with request
  */
-+ (void)accountGalleryFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountFavouritesWithUser:(NSString *)username success:(void (^)(NSArray * favs))success failure:(void (^)(NSError *error))failure;
 /**
  Returns the current user's favorited images when signed in.  Must be logged in.
  @return signal with request
  */
-+ (void)accountFavourites:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountFavourites:(void (^)(NSArray * favs))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Gallery Profile
 /**
@@ -49,7 +49,7 @@
  @param username name of account
  @return signal with request
  */
-+ (void)accountGalleryProfileWithUser:(NSString *)username success:(void (^)(IMGGalleryProfile *))success failure:(void (^)(NSError *))failure;
++ (void)accountGalleryProfileWithUser:(NSString *)username success:(void (^)(IMGGalleryProfile * profile))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Submissions
 /**
@@ -58,7 +58,7 @@
  @param username name of account
  @return signal with request
  */
-+ (void)accountSubmissionsWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountSubmissionsWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray * submissions))success failure:(void (^)(NSError *error))failure;
 
 
 #pragma mark - Load settings
@@ -84,23 +84,23 @@
 /**
  Get all the albums associated with the account. Must be logged in as the user to see secret and hidden albums.
  */
-+ (void)accountAlbumsWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountAlbumsWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray * albums))success failure:(void (^)(NSError * error))failure;
 /**
  Return an array of all of the album IDs.
  */
-+ (void)accountAlbumIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountAlbumIDsWithUser:(NSString*)username success:(void (^)(NSArray * albumIDs))success failure:(void (^)(NSError * error))failure;
 /**
  Get additional information about an album, this endpoint works the same as the Album Endpoint. You can also use any of the additional routes that are used on an album in the album endpoint.
  */
-+ (void)accountAlbumWithID:(NSString*)albumID success:(void (^)(IMGAlbum *))success failure:(void (^)(NSError *))failure;
++ (void)accountAlbumWithID:(NSString*)albumID success:(void (^)(IMGAlbum * album))success failure:(void (^)(NSError * error))failure;
 /**
  Return the total number of albums associated with the account.
  */
-+ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
++ (void)accountAlbumCountWithUser:(NSString*)username success:(void (^)(NSInteger albumCount))success failure:(void (^)(NSError * error))failure;
 /**
  Delete an Album with a given id.  Must be logged in.
  */
-+ (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteAlbumWithID:(NSString*)albumID success:(void (^)())success failure:(void (^)(NSError * error))failure;
 
 
 
@@ -109,23 +109,23 @@
 /**
  Return all of the images associated with the account. You can page through the images by setting the page, this defaults to 0.
  */
-+ (void)accountImagesWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountImagesWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray * images))success failure:(void (^)(NSError * error))failure;
 /**
  Returns an array of Image IDs that are associated with the account..
  */
-+ (void)accountImageIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountImageIDsWithUser:(NSString*)username success:(void (^)(NSArray * imageIDs))success failure:(void (^)(NSError * error))failure;
 /**
  Return information about a specific image. This endpoint works the same as the Image Endpoint. You can use any of the additional actions that the image endpoint with this endpoint.
  */
-+ (void)accountImageWithID:(NSString*)imageId success:(void (^)(IMGImage *))success failure:(void (^)(NSError *))failure;
++ (void)accountImageWithID:(NSString*)imageId success:(void (^)(IMGImage * image))success failure:(void (^)(NSError * error))failure;
 /**
  Returns the total number of images associated with the account.
  */
-+ (void)accountImageCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
++ (void)accountImageCount:(NSString*)username success:(void (^)(NSInteger imageCount))success failure:(void (^)(NSError * error))failure;
 /**
  Deletes an Image. This requires a delete hash rather than an ID.
  */
-+ (void)accountDeleteImageWithUser:(NSString*)username deletehash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteImageWithUser:(NSString*)username deletehash:(NSString*)deleteHash success:(void (^)())success failure:(void (^)(NSError * error))failure;
 
 
 #pragma mark - Comments associated with account
@@ -133,23 +133,23 @@
 /**
  Return the comments the current user has created.
  */
-+ (void)accountCommentsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentsWithUser:(NSString*)username success:(void (^)(NSArray * comments))success failure:(void (^)(NSError * error))failure;
 /**
  Return an array of all of the comment IDs.
  */
-+ (void)accountCommentIDsWithUser:(NSString*)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentIDsWithUser:(NSString*)username success:(void (^)(NSArray * commentIDs))success failure:(void (^)(NSError * error))failure;
 /**
  Return information about a specific comment. This endpoint works the same as the Comment Endpoint. You can use any of the additional actions that the comment endpoint allows on this end point.
  */
-+ (void)accountCommentWithID:(NSInteger)commentID success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentWithID:(NSInteger)commentID success:(void (^)(IMGComment * comment))success failure:(void (^)(NSError * error))failure;
 /**
  Return a count of all of the comments associated with the current account.
  */
-+ (void)accountCommentCount:(NSString*)username success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure;
++ (void)accountCommentCount:(NSString*)username success:(void (^)(NSInteger commentCount))success failure:(void (^)(NSError * error))failure;
 /**
  Delete a comment from the current account. Must be logged in.
  */
-+ (void)accountDeleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)accountDeleteCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError * error))failure;
 
 
 #pragma mark - Replies associated with account
@@ -157,10 +157,10 @@
 /**
  Returns all new reply notifications for the current account
  */
-+ (void)accountReplies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountReplies:(void (^)(NSArray * freshReplies))success failure:(void (^)(NSError * error))failure;
 /**
  Returns all of the reply notifications for the current account
  */
-+ (void)accountRepliesWithFresh:(BOOL)freshOnly success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)accountRepliesWithFresh:(BOOL)freshOnly success:(void (^)(NSArray * replies))success failure:(void (^)(NSError * error))failure;
 
 @end

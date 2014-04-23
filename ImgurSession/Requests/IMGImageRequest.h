@@ -27,17 +27,17 @@
 /**
  Upload a gif with NSData
  */
-+ (void)uploadImageWithGifData:(NSData *)gifData title:(NSString *)title success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure;
-+ (void)uploadImageWithGifData:(NSData *)gifData compression:(CGFloat)compression title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure;
++ (void)uploadImageWithGifData:(NSData *)gifData title:(NSString *)title success:(void (^)(IMGImage * image))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError * error))failure;
++ (void)uploadImageWithGifData:(NSData *)gifData compression:(CGFloat)compression title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage * image))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError * error))failure;
 /**
  Upload an image with NSData
  */
-+ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure;
-+ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure;
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title success:(void (^)(IMGImage * image))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError * error))failure;
++ (void)uploadImageWithData:(NSData*)imageData title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage * image))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError * error))failure;
 /**
  Upload an image with local image URL
  */
-+ (void)uploadImageWithFileURL:(NSURL *)fileURL success:(void (^)(IMGImage *image))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *error))failure;
++ (void)uploadImageWithFileURL:(NSURL *)fileURL success:(void (^)(IMGImage *image))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError * error))failure;
 + (void)uploadImageWithFileURL:(NSURL *)fileURL title:(NSString *)title description:(NSString *)description linkToAlbumWithID:(NSString *)albumID success:(void (^)(IMGImage *image))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *error))failure;
 
 /**
@@ -51,8 +51,8 @@
 /**
  Upload multiple images using image file url, title and description in NSDictionary in files and optionally link the images to an album
  */
-+(void)uploadImages:(NSArray*)files toAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure;
-+(void)uploadImages:(NSArray*)files success:(void (^)(NSArray *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure;
++(void)uploadImages:(NSArray*)files toAlbumWithID:(NSString*)albumID success:(void (^)(NSArray *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError * error))failure;
++(void)uploadImages:(NSArray*)files success:(void (^)(NSArray *))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError * error))failure;
 
 #pragma mark - Delete
 
@@ -63,7 +63,7 @@
 /**
  Delete an image with an anonymous deletehash
  */
-+ (void)deleteImageWithHash:(NSString *)deletehash success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)deleteImageWithHash:(NSString *)deletehash success:(void (^)())success failure:(void (^)(NSError * error))failure;
 
 #pragma mark - Favourtie
 /**
@@ -77,9 +77,9 @@
 /**
  Change image title or description or both. Must be logged In.
  */
-+ (void)updateImageWithID:(NSString *)imageID title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)updateImageWithID:(NSString *)imageID title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError * error))failure;
 /**
  Anonymously change title or description with deletehash
  */
-+ (void)updateImageWithDeleteHash:(NSString *)deletehash title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)updateImageWithDeleteHash:(NSString *)deletehash title:(NSString*)title description:(NSString*)description success:(void (^)())success failure:(void (^)(NSError * error))failure;
 @end

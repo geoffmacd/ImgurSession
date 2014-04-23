@@ -225,7 +225,7 @@
     [IMGImageRequest imageWithID:album.coverID success:^(IMGImage *image) {
         
         //set just the cover image
-        [album setImages:[NSArray arrayWithObject:image]];
+        [album setCoverImage:image];
         
         if(success)
             success(album);

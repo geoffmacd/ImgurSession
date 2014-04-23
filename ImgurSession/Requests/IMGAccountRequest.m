@@ -50,7 +50,7 @@
 
 #pragma mark - Favourites
 
-+ (void)accountGalleryFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:username withOption:@"gallery_favorites"];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

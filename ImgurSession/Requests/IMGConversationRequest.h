@@ -20,17 +20,17 @@
 /**
  Get list of all conversations for the logged in user.Must be logged in.
  */
-+ (void)conversations:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++ (void)conversations:(void (^)(NSArray * conversations))success failure:(void (^)(NSError *error))failure;
 /**
  Get information about a specific conversation. Includes messages. Must be logged in.
  */
-+ (void)conversationWithMessageID:(NSInteger)messageID success:(void (^)(IMGConversation *))success failure:(void (^)(NSError *))failure;
++ (void)conversationWithMessageID:(NSInteger)messageID success:(void (^)(IMGConversation * conversation))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Create
 /**
  Create a new message. Must be logged in.
  */
-+ (void)createMessageWithRecipient:(NSString*)recipient withBody:(NSString*)body success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)createMessageWithRecipient:(NSString*)recipient withBody:(NSString*)body success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 
 #pragma mark - Delete
@@ -39,17 +39,17 @@
  @param commentId comment id to delete
  @return signal with request
  */
-+ (void)deleteConversation:(NSInteger)convoID success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)deleteConversation:(NSInteger)convoID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Report
 /**
  Report a user for sending messages that are against the Terms of Service. Must be logged in.
  */
-+ (void)reportSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)reportSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Block
 /**
  Report a user for sending messages that are against the Terms of Service. Must be logged in.
  */
-+ (void)blockSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *))failure;
++ (void)blockSender:(NSString*)username success:(void (^)())success failure:(void (^)(NSError *error))failure;
 @end
