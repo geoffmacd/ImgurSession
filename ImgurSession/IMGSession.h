@@ -27,6 +27,8 @@ static NSString * const IMGNeedsExternalWebviewNotification = @"IMGNeedsExternal
 static NSString * const IMGModelFetchedNotification = @"IMGModelFetchedNotification";
 static NSString * const IMGAuthChangedNotification = @"IMGAuthChangedNotification";
 static NSString * const IMGAuthRefreshedNotification = @"IMGAuthRefreshedNotification";
+static NSString * const IMGRefreshedUser = @"IMGRefreshedUser";
+static NSString * const IMGRefreshedNotifications = @"IMGRefreshedNotifications";
 
 /**
  Type of authorization to use, you will probably use PIN. See https://api.imgur.com/oauth2

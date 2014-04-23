@@ -68,12 +68,12 @@
 		243CCDA218DD32EF00B4FBC6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		243CCDB018DD336900B4FBC6 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */; };
 		243CCDB118DD338700B4FBC6 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
-		2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2444484219018E23008A02E7 /* IMGRequestSerializer.h */; };
-		2444484519018E23008A02E7 /* IMGRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2444484219018E23008A02E7 /* IMGRequestSerializer.h */; };
+		2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2444484219018E23008A02E7 /* IMGRequestSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		2444484519018E23008A02E7 /* IMGRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2444484219018E23008A02E7 /* IMGRequestSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2444484619018E23008A02E7 /* IMGRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2444484319018E23008A02E7 /* IMGRequestSerializer.m */; };
 		2444484719018E23008A02E7 /* IMGRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2444484319018E23008A02E7 /* IMGRequestSerializer.m */; };
-		2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; };
-		2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; };
+		2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2457E2DA18F77DDA00F022A1 /* NSDictionary+IMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */; };
 		2457E2DB18F77DDA00F022A1 /* NSDictionary+IMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */; };
 		2482266218CABF7B00C30677 /* IMGAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */; };
@@ -147,8 +147,8 @@
 		C328811F18EA0DFF00B080CF /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880F918EA0AF200B080CF /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C328812018EA0DFF00B080CF /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FA18EA0AF200B080CF /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C328812118EA0DFF00B080CF /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C32880FB18EA0AF200B080CF /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C35448031906D835001C88E8 /* NSError+IMGError.h in Headers */ = {isa = PBXBuildFile; fileRef = C35448011906D835001C88E8 /* NSError+IMGError.h */; };
-		C35448041906D835001C88E8 /* NSError+IMGError.h in Headers */ = {isa = PBXBuildFile; fileRef = C35448011906D835001C88E8 /* NSError+IMGError.h */; };
+		C35448031906D835001C88E8 /* NSError+IMGError.h in Headers */ = {isa = PBXBuildFile; fileRef = C35448011906D835001C88E8 /* NSError+IMGError.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C35448041906D835001C88E8 /* NSError+IMGError.h in Headers */ = {isa = PBXBuildFile; fileRef = C35448011906D835001C88E8 /* NSError+IMGError.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C35448051906D835001C88E8 /* NSError+IMGError.m in Sources */ = {isa = PBXBuildFile; fileRef = C35448021906D835001C88E8 /* NSError+IMGError.m */; };
 		C35448061906D835001C88E8 /* NSError+IMGError.m in Sources */ = {isa = PBXBuildFile; fileRef = C35448021906D835001C88E8 /* NSError+IMGError.m */; };
 		C355E5CF18CA80A100D5CEA5 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
@@ -954,6 +954,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */,
+				2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
+				2444484519018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
+				C35448041906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C328810F18EA0DFF00B080CF /* AFHTTPRequestOperation.h in Headers */,
 				C328811018EA0DFF00B080CF /* AFHTTPRequestOperationManager.h in Headers */,
 				C328811118EA0DFF00B080CF /* AFHTTPSessionManager.h in Headers */,
@@ -966,7 +969,6 @@
 				C328811818EA0DFF00B080CF /* AFURLResponseSerialization.h in Headers */,
 				C328811918EA0DFF00B080CF /* AFURLSessionManager.h in Headers */,
 				C328811A18EA0DFF00B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */,
-				2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
 				C328811B18EA0DFF00B080CF /* UIAlertView+AFNetworking.h in Headers */,
 				C328811C18EA0DFF00B080CF /* UIButton+AFNetworking.h in Headers */,
 				C328811D18EA0DFF00B080CF /* UIImageView+AFNetworking.h in Headers */,
@@ -997,10 +999,8 @@
 				C3F1B43C18E9B72D004ED254 /* IMGAlbumRequest.h in Headers */,
 				C3F1B43D18E9B72D004ED254 /* IMGCommentRequest.h in Headers */,
 				C3F1B43E18E9B72D004ED254 /* IMGConversationRequest.h in Headers */,
-				2444484519018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
 				C3F1B43F18E9B72D004ED254 /* IMGGalleryRequest.h in Headers */,
 				C3F1B44018E9B72D004ED254 /* IMGImageRequest.h in Headers */,
-				C35448041906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C3F1B44118E9B72D004ED254 /* IMGNotificationRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1010,6 +1010,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F1B48C18E9BD68004ED254 /* ImgurSession.h in Headers */,
+				2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
+				2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
+				C35448031906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C32880FC18EA0AF200B080CF /* AFHTTPRequestOperation.h in Headers */,
 				C32880FD18EA0AF200B080CF /* AFHTTPRequestOperationManager.h in Headers */,
 				C32880FE18EA0AF200B080CF /* AFHTTPSessionManager.h in Headers */,
@@ -1022,7 +1025,6 @@
 				C328810518EA0AF200B080CF /* AFURLResponseSerialization.h in Headers */,
 				C328810618EA0AF200B080CF /* AFURLSessionManager.h in Headers */,
 				C328810718EA0AF200B080CF /* UIActivityIndicatorView+AFNetworking.h in Headers */,
-				2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
 				C328810818EA0AF200B080CF /* UIAlertView+AFNetworking.h in Headers */,
 				C328810918EA0AF200B080CF /* UIButton+AFNetworking.h in Headers */,
 				C328810A18EA0AF200B080CF /* UIImageView+AFNetworking.h in Headers */,
@@ -1054,9 +1056,7 @@
 				C3C1356518FC6A6800829868 /* IMGObject.h in Headers */,
 				C3C1356218FC6A5900829868 /* IMGGalleryObject.h in Headers */,
 				C3F1B4A218E9BD69004ED254 /* IMGGalleryRequest.h in Headers */,
-				2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
 				C3F1B4A318E9BD69004ED254 /* IMGImageRequest.h in Headers */,
-				C35448031906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C3F1B4A418E9BD69004ED254 /* IMGNotificationRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

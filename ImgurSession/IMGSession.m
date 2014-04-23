@@ -235,7 +235,6 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSLog(@"%@", [error description]);
         if(failure)
             failure(error);
     }];
@@ -367,14 +366,16 @@
         //set need user
         self.user = account;
         
-        //only if delegate responds do we inform
-        if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionUserRefreshed:)]){
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [_delegate imgurSessionUserRefreshed:account];
+                //only if delegate responds do we inform
+                if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionUserRefreshed:)]){
+                    [_delegate imgurSessionUserRefreshed:account];
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedUser object:account];
             });
-        }
         
         //also check for notifications if necessary
         [self checkForUserNotifications];
@@ -395,6 +396,8 @@
         [IMGNotificationRequest notifications:^(NSArray * fresh) {
             
             [_delegate imgurSessionNewNotifications:fresh];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedNotifications object:fresh];
             
         } failure:^(NSError * err) {
             
@@ -461,29 +464,32 @@
     if(headers[IMGHeaderUserReset])
         self.creditsUserReset = [headers[IMGHeaderUserReset] integerValue];
     
-    //warn delegate if necessary
-    if(_creditsUserRemaining < _warnRateLimit && _creditsUserRemaining > 0){
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-        
-            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNearRateLimit:) ]){
-                [_delegate imgurSessionNearRateLimit:_creditsUserRemaining];
-            }
+    //only warn if headers were included
+    if(headers[IMGHeaderClientRemaining]){
+        //warn delegate if necessary
+        if(_creditsUserRemaining < _warnRateLimit && _creditsUserRemaining > 0){
             
-            //post notifications as well
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitNearLimitNotification object:nil];
-        });
-    } else if (_creditsUserRemaining == 0){
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-        
-            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
-                [_delegate imgurSessionRateLimitExceeded];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
             
-            //post notifications as well
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitExceededNotification object:nil];
-        });
+                if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNearRateLimit:) ]){
+                    [_delegate imgurSessionNearRateLimit:_creditsUserRemaining];
+                }
+                
+                //post notifications as well
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitNearLimitNotification object:nil];
+            });
+        } else if (_creditsUserRemaining == 0){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+            
+                if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
+                    [_delegate imgurSessionRateLimitExceeded];
+                }
+                
+                //post notifications as well
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGRateLimitExceededNotification object:nil];
+            });
+        }
     }
 }
 
