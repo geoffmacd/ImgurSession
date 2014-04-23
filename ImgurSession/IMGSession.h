@@ -75,15 +75,17 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 -(void)imgurSessionNearRateLimit:(NSInteger)remainingRequests;
 /**
- Informs delegate of new model objects
+ Informs delegate of new model objects being created
+ @param model Model object that was created
  */
 -(void)imgurSessionModelFetched:(id)model;
 /**
- Informs delegate of new token refreshs
+ Informs delegate of new access token refreshs
  */
 -(void)imgurSessionTokenRefreshed;
 /**
  Informs delegate of new authentication success
+ @param state authentication state of the session. You can call sessionAuthState anytime for this value.
  */
 -(void)imgurSessionAuthStateChanged:(IMGAuthState)state;
 
@@ -202,7 +204,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 #pragma mark - Authentication
 
 /**
- Returns status of session authentication
+ Returns status of session authentication. Based on token expiry, not gauranteed to work live.
  @return    IMGAuthState state of current session
  */
 -(IMGAuthState)sessionAuthState;

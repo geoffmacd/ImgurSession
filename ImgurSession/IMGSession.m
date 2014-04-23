@@ -69,7 +69,6 @@
     return [self sharedInstance];
 }
 
-
 - (instancetype)init{
     
     if(self = [self initWithBaseURL:[NSURL URLWithString:IMGBaseURL]]){
@@ -79,31 +78,48 @@
         IMGResponseSerializer * responseSerializer = [IMGResponseSerializer serializer];
         [self setResponseSerializer:responseSerializer];
         
-        //to prevent requests with no authorization
-        IMGRequestSerializer * reqSerializer = [IMGRequestSerializer serializer];
-        [self setRequestSerializer:reqSerializer];
+//        //to prevent requests with no authorization
+//        IMGRequestSerializer * reqSerializer = [IMGRequestSerializer serializer];
+//        [self setRequestSerializer:reqSerializer];
     }
     return self;
 }
 
 -(void)setupClientWithID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType{
     
+    //ensure stale fields are null
+    self.secret = nil;
+    self.accessToken = nil;
+    self.refreshToken =  nil;
+    self.accessTokenExpiry = nil;
+    self.user = nil;
+    self.codeAwaitingAuthentication = nil;
+    
     if(secret){
         self.secret = secret;
         self.isAnonymous = NO;
+        
+        [self informClientAuthStateChanged:IMGAuthStateNone];
     } else {
-        //should be anonymous
+        //assumed anon if no secret given
         self.isAnonymous = YES;
+        authType = IMGNoAuthType;
         [self setAnonmyousAuthenticationWithID:clientID];
+        
+        [self informClientAuthStateChanged:IMGAuthStateAnon];
     }
     
     self.clientID = clientID;
     //default
     self.warnRateLimit = 100;
     self.authType = authType;
+    
 }
 
 -(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType{
+    
+    //need at least this
+    NSParameterAssert(clientID);
     
     [self setupClientWithID:clientID secret:secret authType:authType];
 }
@@ -120,12 +136,7 @@
     //refresh token is no longer working, probably banned from API
     self.refreshToken = nil;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
-            [_delegate imgurSessionAuthStateChanged:IMGAuthStateBad];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
-    });
+    [self informClientAuthStateChanged:IMGAuthStateBad];
 }
 
 -(IMGAuthState)sessionAuthState{
@@ -204,13 +215,7 @@
         NSDictionary * json = authOp.responseObject;
         
         //alert delegate
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
-                [_delegate imgurSessionAuthStateChanged:IMGAuthStateAuthenticated];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
-        });
+        [self informClientAuthStateChanged:IMGAuthStateAuthenticated];
         
         //set auth header
         [self setAuthorizationHeader:json];
@@ -239,14 +244,8 @@
     //use super to bypass tracking
     [super POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        //if never logged in before, alert delegate
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
-                [_delegate imgurSessionAuthStateChanged:IMGAuthStateAuthenticated];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:nil];
-        });
+        //alert delegate
+        [self informClientAuthStateChanged:IMGAuthStateAuthenticated];
         
         NSDictionary * json = responseObject;
         //set auth header
@@ -272,29 +271,28 @@
 
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
     
-    if(!self.refreshToken){
+    if(!self.refreshToken.length){
         //we need to retrieve refresh token with client credentials first
         
         if(!self.codeAwaitingAuthentication){
             
+            [self informClientAuthStateChanged:IMGAuthStateAwaitingCodeInput];
+            
             //alert app that it needs to present webview or go to safari
-            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)]){
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
-                        [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
+                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                        
+                        [self refreshAuthentication:^(NSString * refresh) {
                             
-                            [self refreshAuthentication:^(NSString * refresh) {
-                                
-                                if(success)
-                                    success(refresh);
-                                
-                            } failure:failure];
-                        }];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
-                });
-            }
+                            if(success)
+                                success(refresh);
+                            
+                        } failure:failure];
+                    }];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
+            });
         } else {
             
             //post input code to retrieve tokens asynchronously
@@ -332,15 +330,13 @@
             [self refreshUserAccount:nil failure:nil];
             
             //alert
-            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)]){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
-                        [_delegate imgurSessionTokenRefreshed];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
-                });
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
+                    [_delegate imgurSessionTokenRefreshed];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
+            });
             
             if(success)
                 success(_refreshToken);
@@ -373,6 +369,16 @@
     self.refreshToken = refreshToken;
     
     [self refreshAuthentication:nil failure:nil];
+}
+
+-(void)informClientAuthStateChanged:(IMGAuthState)authState{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionAuthStateChanged:)])
+            [_delegate imgurSessionAuthStateChanged:authState];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthChangedNotification object:[NSNumber numberWithInt:authState]];
+    });
 }
 
 #pragma mark - Authorized User Account
