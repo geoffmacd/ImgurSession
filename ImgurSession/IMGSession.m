@@ -11,6 +11,7 @@
 #import "IMGResponseSerializer.h"
 #import "IMGRequestSerializer.h"
 #import "IMGAccountRequest.h"
+#import "IMGNotificationRequest.h"
 
 
 @interface IMGSession ()
@@ -30,6 +31,11 @@
 @property  (readwrite,nonatomic) NSInteger warnRateLimit;
 @property (readwrite, nonatomic) BOOL isAnonymous;
 @property (readwrite, nonatomic) IMGAccount * user;
+
+/**
+ Timer to check for notifications
+ */
+@property NSTimer * notificationRefreshTimer;
 
 -(void)accessTokenExpired;
 
@@ -99,8 +105,16 @@
         self.secret = secret;
         self.isAnonymous = NO;
         
+        //setup timer to check for notifications, does not actually check unless delegate responds
+        self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(checkForUserNotifications) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.notificationRefreshTimer forMode:NSDefaultRunLoopMode];
+        
         [self informClientAuthStateChanged:IMGAuthStateNone];
     } else {
+        
+        [self.notificationRefreshTimer invalidate];
+        self.notificationRefreshTimer = nil;
+        
         //assumed anon if no secret given
         self.isAnonymous = YES;
         authType = IMGNoAuthType;
@@ -353,12 +367,41 @@
         //set need user
         self.user = account;
         
+        //only if delegate responds do we inform
+        if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionUserRefreshed:)]){
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [_delegate imgurSessionUserRefreshed:account];
+            });
+        }
+        
+        //also check for notifications if necessary
+        [self checkForUserNotifications];
+        
         if(success)
             success(account);
         
     } failure:failure];
 }
 
+//notifications
+
+-(void)checkForUserNotifications{
+    
+    //only if delegate responds do we check
+    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNewNotifications:)]){
+        
+        [IMGNotificationRequest notifications:^(NSArray * fresh) {
+            
+            [_delegate imgurSessionNewNotifications:fresh];
+            
+        } failure:^(NSError * err) {
+            
+            //fail silently
+        }];
+    }
+}
 
 #pragma mark - Authorization header
 

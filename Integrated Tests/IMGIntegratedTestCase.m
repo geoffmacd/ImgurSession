@@ -275,4 +275,17 @@
     NSLog(@"Hit rate limit");
     failBlock(nil);
 }
+
+-(void)imgurSessionNewNotifications:(NSArray *)freshNotifications{
+    
+    if(freshNotifications.count)
+        NSLog(@"new notifications: %@", [freshNotifications description]);
+}
+
+
+-(void)imgurSessionUserRefreshed:(IMGAccount *)user{
+    
+    NSLog(@"User refreshed: %@", [user description]);
+}
+
 @end

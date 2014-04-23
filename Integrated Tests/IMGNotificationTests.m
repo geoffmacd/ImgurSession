@@ -66,4 +66,22 @@
     
     expect(isSuccess).willNot.beNil();
 }
+
+-(void)testSessionRefreshsNotifications{
+    __block BOOL isSuccess;
+    
+    //force login
+    [[IMGSession sharedInstance] refreshUserAccount:^(IMGAccount *user) {
+        
+        //waits until notification refresh happens after 30 seconds
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(40 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            isSuccess = YES;
+        });
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 @end

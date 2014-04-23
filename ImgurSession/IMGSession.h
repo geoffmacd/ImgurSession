@@ -88,6 +88,15 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param state authentication state of the session. You can call sessionAuthState anytime for this value.
  */
 -(void)imgurSessionAuthStateChanged:(IMGAuthState)state;
+/**
+ Informs delegate of user refreshes
+ */
+-(void)imgurSessionUserRefreshed:(IMGAccount*)user;
+/**
+ Informs delegate of fresh notifications
+ */
+-(void)imgurSessionNewNotifications:(NSArray*)freshNotifications;
+
 
 @end
 
