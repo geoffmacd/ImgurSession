@@ -25,8 +25,6 @@
     NSError * jsonError;
     NSDictionary * jsonResult = [super responseObjectForResponse:response data:data error:&jsonError];
     
-    //decoding successful, continue to API completion
-    
     if(httpRes.statusCode == 200){
         //successful request!
 
@@ -43,6 +41,8 @@
             *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:[NSDictionary dictionaryWithDictionary:errorDict]];
             return nil;
         }
+        
+        //decoding successful, continue to API completion
         
         if(jsonResult[@"data"]){
             //let response continue processing by ImgurSession completion blocks

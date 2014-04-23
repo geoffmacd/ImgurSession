@@ -243,6 +243,8 @@
 -(void)setAuthCode:(NSString*)code{
     
     self.codeAwaitingAuthentication = code;
+    
+    [self informClientAuthStateChanged:IMGAuthStateAwaitingCodeInput];
 }
 
 -(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure{
@@ -251,8 +253,6 @@
         //we need to retrieve refresh token with client credentials first
         
         if(!self.codeAwaitingAuthentication){
-            
-            [self informClientAuthStateChanged:IMGAuthStateAwaitingCodeInput];
             
             //alert app that it needs to present webview or go to safari
             dispatch_async(dispatch_get_main_queue(), ^{
