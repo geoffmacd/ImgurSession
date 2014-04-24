@@ -2,7 +2,7 @@
 //  IMGClient.h
 //  ImgurSession
 //
-//  Created by Johann Pardanaud on 29/06/13.
+//  Geoff MacDonald - Pivotal Labs
 //  Distributed under the MIT license.
 //
 
@@ -120,15 +120,15 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (readonly, nonatomic, copy) NSString *secret;
 /**
- Refresh token as retrieved from oauth/token GET request with PIN
+ Refresh token as retrieved from oauth/token GET request. Subsequent requests invalidate previous refresh tokens.
  */
 @property (readonly, nonatomic, copy) NSString *refreshToken;
 /**
- Access token as retrieved from oauth/token GET request with PIN. Expires after 1 hour after retrieval
+ Access token as retrieved from oauth/token GET request with PIN. Expires after 1 hour after retrieval as in the 'expires_in' header
  */
 @property (readonly, nonatomic, copy) NSString *accessToken;
 /**
- Code retrieved from imgur by using external URL for authentication
+ Code retrieved from imgur by using external URL for authentication. Set via setAuthCode to input code from web service.
  */
 @property (readonly, nonatomic, copy) NSString * codeAwaitingAuthentication;
 /**
@@ -147,7 +147,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  User Account if logged in
  */
 @property (readonly, nonatomic) IMGAccount * user;
-
+/**
+ Time period when notification updates are requested to see if user has new updates. Set to 0 to disable. 30 seconds by default. Only for authroized Sessions.
+ */
+@property  (readwrite,nonatomic) NSInteger notificationRefreshPeriod;
 
 // rate limiting
 
@@ -171,7 +174,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Daily limit for the app
  */
 @property (readonly,nonatomic) NSInteger creditsClientLimit;
-
 /**
  Warn client after going below this number of available requests. The default is 100 requests.
  */
@@ -193,8 +195,8 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 /**
  Returns authenticated session with these parameters
  @param clientID    client Id string as registered with Imgur
- @param secret    secret string as registered with Imgur
- @param authType    type of auth for session
+ @param secret      secret string as registered with Imgur
+ @param authType    type of authorization - code, pin or token
  @return            Session manager for interacting with Imgur account
  */
 +(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType;
@@ -205,7 +207,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 +(instancetype)anonymousSessionWithClientID:(NSString *)clientID;    
 /**
- Reset the session with these manual params. Leave secret nil and authType IMGNoAuthType for anon.
+ Reset the session with these manual parameters. Leave secret nil and authType IMGNoAuthType for anonymous session configuraton.
  @param clientID    client Id string as registered with Imgur
  @param secret      secret string as registered with Imgur
  @param authType    type of auth for session
@@ -220,12 +222,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 -(IMGAuthState)sessionAuthState;
 /**
- Retrieves URL associated with website authorization page
- @param authType     authorization type pin,code,token
- @return    authorization URL to open in Webview or Safari
- */
--(void)refreshAuthentication:(void (^)(NSString *))success failure:(void (^)(NSError *error))failure;
-/**
  Retrieves URL associated with website authorization page for session authentication type
  @return    authorization URL to open in Webview or Safari
  */
@@ -237,12 +233,12 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 - (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
 /**
- Sets input code from external URL for lazy authentication
- @param code    input code to authenticate with
+ Sets the session input code retrieved by the OAuth service upon allowing the application permission via external web service. This code will be used the next time a request is made to acquire a new refresh token
+ @param code input code to be submitted to OAuth to retrieve refresh token with
  */
 -(void)setAuthCode:(NSString*)code;
 /**
- Manual authenticates and refreshes with user provided refresh token
+ Manually authenticate directly from refresh token bypassing code input. Note that code input from oath/token will invalidate previous refresh tokens.
  @param refreshToken     valid refresh token to manually set
  */
 -(void)authenticateWithRefreshToken:(NSString*)refreshToken;
@@ -253,8 +249,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 
 #pragma mark - Authorized User Account
+
 /**
- Refresh sessions current user with optional blocks
+ Requests the logged-in user's account.
+ @param success completion block invoked on successful account retrieval
+ @param failure block invoked on failed request
  */
 -(void)refreshUserAccount:(void (^)(IMGAccount * user))success failure:(void (^)(NSError * err))failure;
 
@@ -264,30 +263,31 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 -(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure;
 
--(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure;
-
 -(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure;
 
+-(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure;
+
+/**
+ Post request with body completion block. Needed to re-implement from AFNetworking implementation without super call because progress is not handled in AFnetworking
+ */
 -(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure;
 
 
 #pragma mark - Rate Limit Tracking
 
 /**
- Updates session rate limit tracking with the headers of an AFNetworking Response
- @param response     the HTTP response
+ Tracks rate limiting using HTTP headers from the response
+ @param response HTTP response returned from Imgur call
  */
 -(void)updateClientRateLimiting:(NSHTTPURLResponse*)response;
 
 #pragma mark - Model Tracking
 
 /**
- Alerts session to a new model fetch
- @param model     the model fetched
+ Tracks new imgur Model objects being created to allow introspection by client
+ @param model the model object that was created
  */
 -(void)trackModelObjectsForDelegateHandling:(id)model;
-
-
 
 
 @end
