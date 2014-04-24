@@ -33,7 +33,7 @@
         return;
     }
     
-    [[IMGSession sharedInstance] GET:path parameters:@{@"new":[NSNumber numberWithBool:freshOnly]} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [[IMGSession sharedInstance] GET:path parameters:@{@"new":(freshOnly ? @"true" : @"false")} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         
         NSArray * repliesJSON = responseObject[@"replies"];
