@@ -15,7 +15,7 @@
 @implementation IMGResponseSerializer
 
 /**
- Returns data for IMG Request classes to parse from network request. The json should be parsed from data using the JSON serializer which this class inherits from. Thus the json should be the basic model described at https://api.imgur.com/models/basic . The 'data' key is all that matters unless we have 403 or success=false. We also use this opportunity to grab the response headers and track rate limiting since this method is called for every single response.
+ Returns data for IMG Request classes to parse from network request. The json should be parsed from data using the JSON serializer with the super call to responseObjectForResponse. Thus the json should be the basic model described at https://api.imgur.com/models/basic . The 'data' key is all that matters, additonal success and status keys are redundant and not useful for us since we can get those from the http status code. We also use this opportunity to grab the response headers and track rate limiting since this method is called for every single response.
  */
 -(id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error{
     
@@ -44,6 +44,7 @@
         
         //decoding successful, continue to API completion
         
+        //we need the data object or if does not exist pass the full JSON object for oauth/token endpoint
         if(jsonResult[@"data"]){
             //let response continue processing by ImgurSession completion blocks
             
@@ -55,7 +56,7 @@
             
         } else {
             //the basic model is not respected for oauth calls, still need to respond with JSON
-            //cannot handle client rate limiting in this case
+            //cannot handle client rate limiting in this case, headers are not sent
             return jsonResult;
         }
         

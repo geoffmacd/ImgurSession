@@ -26,7 +26,6 @@
 @property (readwrite,nonatomic) NSInteger creditsUserReset;
 @property (readwrite,nonatomic) NSInteger creditsClientRemaining;
 @property (readwrite,nonatomic) NSInteger creditsClientLimit;
-@property  (readwrite,nonatomic) NSInteger warnRateLimit;
 @property (readwrite, nonatomic) BOOL isAnonymous;
 @property (readwrite, nonatomic) IMGAccount * user;
 
@@ -357,6 +356,10 @@
     
     self.refreshToken = refreshToken;
     
+    //set access token to nil to ensure we have manually expired access tokens if they exist so that we get IMGAuthStateExpired to refresh
+    self.accessToken = nil;
+    self.codeAwaitingAuthentication = nil;
+    
     [self refreshAuthentication:nil failure:nil];
 }
 
@@ -374,6 +377,11 @@
 }
 
 #pragma mark - Authorized User Account
+
+-(void)refreshUserAccount{
+    
+    [self refreshUserAccount:nil failure:nil];
+}
 
 -(void)refreshUserAccount:(void (^)(IMGAccount * user))success failure:(void (^)(NSError * err))failure{
     

@@ -31,7 +31,7 @@ static NSString * const IMGRefreshedUser = @"IMGRefreshedUser";
 static NSString * const IMGRefreshedNotifications = @"IMGRefreshedNotifications";
 
 /**
- Type of authorization to use, you will probably use PIN. See https://api.imgur.com/oauth2
+ Type of authorization to use, you should probably use token on iOS. See https://api.imgur.com/oauth2
  */
 typedef NS_ENUM(NSInteger, IMGAuthType){
     IMGNoAuthType,
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 };
 
 /**
- State of authentication
+ Session state of the authentication. Determined based on information and expiry dates.
  */
 typedef NS_ENUM(NSInteger, IMGAuthState){
     IMGAuthStateMissingParameters = 0,
@@ -62,11 +62,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 @required
 
 /**
- Alerts delegate that request limit is hit and cannot continue
+ Alerts delegate that request limit is hit and cannot continue.
  */
 -(void)imgurSessionRateLimitExceeded;
 /**
- Alerts delegate that webview is needed to present Imgur OAuth authentication. Call completion upon authenticating with asyncAuthenticateWithType when you want to ensure previous requests do not fail, as this method was called lazily by the session.
+ Alerts delegate that webview is needed to present Imgur OAuth authentication with the authentication type (pin,code,token) set by the initializers. Call completion upon authenticating with asyncAuthenticateWithType when you want to ensure previous requests do not fail, as this method was called lazily by the session just before a request is attempted. Not calling completion will still work but result in the previous request never running.
  */
 -(void)imgurSessionNeedsExternalWebview:(NSURL*)url completion:(void(^)())completion;
 
@@ -98,7 +98,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Informs delegate of fresh notifications
  */
 -(void)imgurSessionNewNotifications:(NSArray*)freshNotifications;
-
 
 @end
 
@@ -193,7 +192,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 + (instancetype)sharedInstance;
 /**
- Returns authenticated session with these parameters
+ Resets sharedInstance to authenticated session with these parameters. If credentials are nil, assert will be thrown. Must be called before requests are made.
  @param clientID    client Id string as registered with Imgur
  @param secret      secret string as registered with Imgur
  @param authType    type of authorization - code, pin or token
@@ -201,7 +200,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 +(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType;
 /**
- Returns anonymous session with client ID
+ Resets sharedInstance to anonymous session with client ID. Must be called before requests are made.
  @param clientID    client Id string as registered with Imgur
  @return            Session manager for interacting with Imgur anonymously
  */
@@ -217,6 +216,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 #pragma mark - Authentication
 
 /**
+ Sets the session input code retrieved by the OAuth service upon allowing the application permission via external web service. This code will be used lazily the next time a request is made to acquire a new refresh token. If this is never set the session will never authenicate unless manually using authenticateWithRefreshToken: or authenticateWithType:
+ @param code input code to be submitted to OAuth to retrieve refresh token with
+ */
+-(void)setAuthCode:(NSString*)code;
+/**
  Returns status of session authentication. Based on token expiry, not gauranteed to work live.
  @return    IMGAuthState state of current session
  */
@@ -227,16 +231,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 - (NSURL *)authenticateWithExternalURL;
 /**
- Asynchronously requests refresh tokens using inputted pin code.
+ Manually authenticates by requesting refresh token using inputted code. Not needed. Lazily authenticates before each request by using setAuthCode:
  @param authType     authorization type pin,code,token
  @param code     code input string for authorization
  */
 - (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
-/**
- Sets the session input code retrieved by the OAuth service upon allowing the application permission via external web service. This code will be used the next time a request is made to acquire a new refresh token
- @param code input code to be submitted to OAuth to retrieve refresh token with
- */
--(void)setAuthCode:(NSString*)code;
 /**
  Manually authenticate directly from refresh token bypassing code input. Note that code input from oath/token will invalidate previous refresh tokens.
  @param refreshToken     valid refresh token to manually set
@@ -256,6 +255,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param failure block invoked on failed request
  */
 -(void)refreshUserAccount:(void (^)(IMGAccount * user))success failure:(void (^)(NSError * err))failure;
+-(void)refreshUserAccount;
 
 #pragma mark - Requests
 
