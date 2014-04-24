@@ -213,7 +213,7 @@
         return;
     }
     
-    NSDictionary * params = @{@"bio":bio,@"public_images":[NSNumber numberWithBool:publicImages],@"messaging_enabled":[NSNumber numberWithBool:msgEnabled],@"album_privacy":[IMGBasicAlbum strForPrivacy:privacy],@"accepted_gallery_terms":[NSNumber numberWithBool:galTerms]};
+    NSDictionary * params = @{@"bio":bio,@"public_images":(publicImages ? @YES : @NO ),@"messaging_enabled":(msgEnabled ? @YES : @NO),@"album_privacy":[IMGBasicAlbum strForPrivacy:privacy],@"accepted_gallery_terms":(galTerms ? @YES : @NO )};
     
     //put or post
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -494,7 +494,7 @@
         return;
     }
     
-    NSDictionary * params = @{@"new":[NSNumber numberWithBool:freshOnly]};
+    NSDictionary * params = @{@"new":(freshOnly ? @YES : @NO )};
     
     [[IMGSession sharedInstance] GET:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         

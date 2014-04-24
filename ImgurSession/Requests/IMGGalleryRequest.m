@@ -76,7 +76,7 @@
 
 +(void)userGalleryPage:(NSInteger)page withViralSort:(BOOL)viralSort showViral:(BOOL)showViral success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
-    NSDictionary * params = @{@"section":@"user", @"page":[NSNumber numberWithInteger:page], @"sort":(viralSort ? @"viral" : @"time"), @"showViral": [NSNumber numberWithBool:showViral]};
+    NSDictionary * params = @{@"section":@"user", @"page":[NSNumber numberWithInteger:page], @"sort":(viralSort ? @"viral" : @"time"), @"showViral": (showViral ? @YES : @NO )};
     
     [IMGGalleryRequest galleryWithParameters:params success:success failure:failure];
 }
@@ -248,7 +248,7 @@
         return;
     }
     
-    NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
+    NSDictionary *parameters = @{@"title":title , @"terms": (terms ? @YES : @NO )};
     
     [[IMGSession sharedInstance] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
 
@@ -271,7 +271,7 @@
         return;
     }
     
-    NSDictionary *parameters = @{@"title":title , @"terms": [NSNumber numberWithBool:terms]};
+    NSDictionary *parameters = @{@"title":title , @"terms": (terms ? @YES : @NO )};
     
     [[IMGSession sharedInstance] POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
     
