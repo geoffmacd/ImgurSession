@@ -630,38 +630,6 @@
 #pragma mark - Requests
 //overriden to handle authentication state proactively and reactively
 
--(NSURLSessionDataTask *)PUT:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
-    
-    
-    return [self methodRequest:^{
-        
-        return [super PUT:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            if([self canRequestFailureBeRecovered:error]){
-                
-                [self refreshAuthentication:^(NSString * accessCode) {
-                    
-                    [super PUT:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error){
-                        
-                        if(failure)
-                            failure(error);
-                    }];
-                } failure:^(NSError *error) {
-                    
-                    if(failure)
-                        failure(error);
-                }];
-                
-            } else {
-                
-                if(failure)
-                    failure(error);
-            }
-        }];
-        
-    }failure:failure];
-}
-
 -(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
     return [self methodRequest:^{
