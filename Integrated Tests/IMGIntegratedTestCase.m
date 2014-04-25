@@ -288,4 +288,9 @@
     NSLog(@"User refreshed: %@", [user description]);
 }
 
+-(void)imgurRequestFailed:(NSError *)error{
+    
+    NSLog(@"Request failed: %@", [error description]);
+}
+
 @end

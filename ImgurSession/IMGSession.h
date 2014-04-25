@@ -27,8 +27,9 @@ static NSString * const IMGNeedsExternalWebviewNotification = @"IMGNeedsExternal
 static NSString * const IMGModelFetchedNotification = @"IMGModelFetchedNotification";
 static NSString * const IMGAuthChangedNotification = @"IMGAuthChangedNotification";
 static NSString * const IMGAuthRefreshedNotification = @"IMGAuthRefreshedNotification";
-static NSString * const IMGRefreshedUser = @"IMGRefreshedUser";
-static NSString * const IMGRefreshedNotifications = @"IMGRefreshedNotifications";
+static NSString * const IMGRefreshedUserNotification = @"IMGRefreshedUserNotification";
+static NSString * const IMGRefreshedNotification = @"IMGRefreshedNotificationNotification";
+static NSString * const IMGRequestFailedNotification = @"IMGRequestFailedNotification";
 
 /**
  Type of authorization to use, you should probably use token on iOS. See https://api.imgur.com/oauth2
@@ -98,6 +99,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Informs delegate of fresh notifications
  */
 -(void)imgurSessionNewNotifications:(NSArray*)freshNotifications;
+/**
+ Inform delegate of request failures
+ */
+-(void)imgurRequestFailed:(NSError*)error;
 
 @end
 
@@ -258,8 +263,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 -(void)refreshUserAccount;
 
 #pragma mark - Requests
-
--(NSURLSessionDataTask *)PUT:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure;
 
 -(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure;
 

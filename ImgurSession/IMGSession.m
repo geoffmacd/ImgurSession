@@ -1,4 +1,4 @@
-//
+    //
 //  IMGClient.m
 //  ImgurSession
 //
@@ -94,9 +94,6 @@
     
     //ensure stale fields are null
     self.secret = nil;
-    self.accessToken = nil;
-    self.refreshToken =  nil;
-    self.accessTokenExpiry = nil;
     self.user = nil;
     self.codeAwaitingAuthentication = nil;
     
@@ -148,7 +145,7 @@
             return IMGAuthStateMissingParameters;
     } else {
         
-        if(self.accessToken.length && [self.accessTokenExpiry timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970])
+        if(self.accessToken.length && self.refreshToken.length && [self.accessTokenExpiry timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970])
             return IMGAuthStateAuthenticated;                   //continue with request
         else if(self.codeAwaitingAuthentication.length)
             return IMGAuthStateAwaitingCodeInput;               //no access token, delay the request until tokens are retrieved
@@ -210,7 +207,7 @@
         //set auth header
         [self setAuthorizationHeader:json];
         //retrieve user account
-        [self refreshUserAccount:nil failure:nil];
+        [self refreshUserAccount];
         
         if(success)
             success(self.refreshToken);
@@ -230,7 +227,7 @@
 }
 
 /**
- Acquires new access token. This method may choose to acquire access token from code input if it does not have a refresh token or elese refresh the access token with the refresh token. If authentication is not needed, this method just executes completion success block.
+ Acquires new access token. This method may choose to acquire access token from code input if it does not have a refresh token or elese refresh the access token with the refresh token.
  @param success completion block upon recieving a valid access token
  @param failure completion block upon inability to acquire tokens by any method
  */
@@ -263,11 +260,43 @@
                 failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:@{IMGErrorAuthenticationError:error}]);
         }];
         
-    } else if(state == IMGAuthStateExpired){
+    } else if(state == IMGAuthStateNone){
+        //we need to retrieve refresh token with client credentials first
+            
+        //alert app that it needs to present webview or go to safari
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
+                [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                    
+                    //refresh upon recieving new auth code
+                    [self refreshAuthentication:^(NSString * refresh) {
+                        
+                        if(success)
+                            success(refresh);
+                        
+                    } failure:failure];
+                }];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
+        });
+        
+    } else if(state == IMGAuthStateMissingParameters){
+        //we do not have enough information to authenticate
+        
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);
+        
+    } else if(state == IMGAuthStateBad){
+        //the client credentials are being refused
+        
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:nil]);
+        
+    } else {// if(state == IMGAuthStateExpired || state == IMGAuthStateAuthenticated || state == IMGAuthStateAnon){
         //refresh access token with refresh token
         
         NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
-        
+
         //call super to by pass authorization management
         [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
             
@@ -275,7 +304,7 @@
             //set auth header
             [self setAuthorizationHeader:json];
             //immediately request latest user updates
-            [self refreshUserAccount:nil failure:nil];
+            [self refreshUserAccount];
             
             //alert
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -311,44 +340,6 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
             });
         }];
-        
-    } else if(state == IMGAuthStateNone){
-        //we need to retrieve refresh token with client credentials first
-            
-        //alert app that it needs to present webview or go to safari
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
-                [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
-                    
-                    //refresh upon recieving new auth code
-                    [self refreshAuthentication:^(NSString * refresh) {
-                        
-                        if(success)
-                            success(refresh);
-                        
-                    } failure:failure];
-                }];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
-        });
-        
-    } else if(state == IMGAuthStateMissingParameters){
-        //we do not have enough information to authenticate
-        
-        if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);
-        
-    } else if(state == IMGAuthStateBad){
-        //the client credentials are being refused
-        
-        if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:nil]);
-        
-    } else {//if(state == IMGAuthStateAuthenticated || state == IMGAuthStateAnon){
-        //we are already authenticated or anonymous, continue
-        
-        if(success)
-            success(self.refreshToken);
     }
 }
 
@@ -396,8 +387,7 @@
             if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionUserRefreshed:)]){
                 [_delegate imgurSessionUserRefreshed:account];
             }
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedUser object:account];
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedUserNotification object:account];
         });
         
         //also check for notifications if necessary
@@ -421,7 +411,7 @@
             
             [_delegate imgurSessionNewNotifications:fresh];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedNotifications object:fresh];
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedNotification object:fresh];
             
         } failure:^(NSError * err) {
             
@@ -444,7 +434,6 @@
         self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:self.notificationRefreshPeriod target:self selector:@selector(checkForUserNotifications) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.notificationRefreshTimer forMode:NSDefaultRunLoopMode];
     }
-    
 }
 
 #pragma mark - Authorization Header
@@ -627,10 +616,38 @@
     }
 }
 
+/**
+ Convienience method to transform failure completions into one which alerts delegate of failures.
+ @param failure failure completion blocks to overwrite
+ */
+-(void(^)(NSError* error))requestFailure:(void (^)(NSError * error))failure{
+    
+    void (^modifiedFailure)(NSError* error) = ^void(NSError * error){
+        
+        //alert of failures
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurRequestFailed:)]){
+                
+                [_delegate imgurRequestFailed:error];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRequestFailedNotification object:self userInfo:@{@"error":error}];
+        });
+        
+        //ensure to call original failure completion block as well
+        if(failure)
+            failure(error);
+    };
+    
+    return modifiedFailure;
+}
+
 #pragma mark - Requests
 //overriden to handle authentication state proactively and reactively
 
 -(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
+    
+    failure = [self requestFailure:failure];
     
     return [self methodRequest:^{
         
@@ -642,27 +659,22 @@
                     
                     [super DELETE:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error){
                         
-                        if(failure)
-                            failure(error);
-                    }];
-                } failure:^(NSError *error) {
-                    
-                    if(failure)
                         failure(error);
-                }];
+                    }];
+                } failure:failure];
                 
             } else {
                 
-                if(failure)
-                    failure(error);
+                failure(error);
             }
-
         }];
         
     } failure:failure];
 }
 
 -(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure{
+    
+    failure = [self requestFailure:failure];
     
     return [self methodRequest:^{
         
@@ -674,19 +686,13 @@
                     
                     [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
                         
-                        if(failure)
-                            failure(error);
-                    }];
-                } failure:^(NSError *error) {
-                    
-                    if(failure)
                         failure(error);
-                }];
+                    }];
+                } failure:failure];
                 
             } else {
             
-                if(failure)
-                    failure(error);
+                failure(error);
             }
         }];
         
@@ -694,6 +700,8 @@
 }
 
 -(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
+    
+    failure = [self requestFailure:failure];
     
     return [self methodRequest:^{
         
@@ -706,19 +714,13 @@
                     
                     [super POST:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
                         
-                        if(failure)
-                            failure(error);
-                    }];
-                } failure:^(NSError *error) {
-                    
-                    if(failure)
                         failure(error);
-                }];
+                    }];
+                } failure:failure];
                 
             } else {
                 
-                if(failure)
-                    failure(error);
+                failure(error);
             }
         }];
         
