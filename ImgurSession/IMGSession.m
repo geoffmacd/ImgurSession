@@ -292,7 +292,13 @@
         if(failure)
             failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:nil]);
         
-    } else {// if(state == IMGAuthStateExpired || state == IMGAuthStateAuthenticated || state == IMGAuthStateAnon){
+    } else if(state == IMGAuthStateAnon){
+        
+        //just go to completion we don't care
+        if(success)
+            success(nil);
+        
+    } else {// if(state == IMGAuthStateExpired || state == IMGAuthStateAuthenticated){
         //refresh access token with refresh token
         
         NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
@@ -645,6 +651,39 @@
 #pragma mark - Requests
 //overriden to handle authentication state proactively and reactively
 
+-(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure{
+    
+    //override failure block to also allow failure tracking
+    failure = [self requestFailure:failure];
+    
+    //proactively check to ensure we can send a request if we are authenticated. If not, then authenticate before sending request
+    return [self methodRequest:^{
+        
+        //actually make the request after ensuring we are authenticated
+        return [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            //if the request fails based on status code, check to see if we can recover by authenticating if for some reason our previous check was not the truth
+            if([self canRequestFailureBeRecovered:error]){
+                
+                //reactive authentication in response to 401 or 403
+                [self refreshAuthentication:^(NSString * accessCode) {
+                    
+                    //send actual request to super this time and give-up if it still fails
+                    [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
+                        
+                        failure(error);
+                    }];
+                } failure:failure];
+                
+            } else {
+                //cannot recover
+                failure(error);
+            }
+        }];
+        //failure method from not being able to authenticate in refreshAuthentication:
+    } failure:failure];
+}
+
 -(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure{
     
     failure = [self requestFailure:failure];
@@ -665,33 +704,6 @@
                 
             } else {
                 
-                failure(error);
-            }
-        }];
-        
-    } failure:failure];
-}
-
--(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure{
-    
-    failure = [self requestFailure:failure];
-    
-    return [self methodRequest:^{
-        
-        return [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            if([self canRequestFailureBeRecovered:error]){
-                
-                [self refreshAuthentication:^(NSString * accessCode) {
-                    
-                    [super GET:URLString parameters:parameters success:success failure:^(NSURLSessionDataTask *task, NSError *error) {
-                        
-                        failure(error);
-                    }];
-                } failure:failure];
-                
-            } else {
-            
                 failure(error);
             }
         }];
