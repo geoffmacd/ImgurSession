@@ -68,10 +68,6 @@
 		243CCDA218DD32EF00B4FBC6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		243CCDB018DD336900B4FBC6 /* IMGAnonymousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */; };
 		243CCDB118DD338700B4FBC6 /* IMGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */; };
-		2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2444484219018E23008A02E7 /* IMGRequestSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2444484519018E23008A02E7 /* IMGRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2444484219018E23008A02E7 /* IMGRequestSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2444484619018E23008A02E7 /* IMGRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2444484319018E23008A02E7 /* IMGRequestSerializer.m */; };
-		2444484719018E23008A02E7 /* IMGRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2444484319018E23008A02E7 /* IMGRequestSerializer.m */; };
 		2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */ = {isa = PBXBuildFile; fileRef = 2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2457E2DA18F77DDA00F022A1 /* NSDictionary+IMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */; };
@@ -349,8 +345,6 @@
 		240747B418D62B1B00B92063 /* IMGResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGResponseSerializer.h; sourceTree = "<group>"; };
 		243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSessionOSXTests copy.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		243CCDAF18DD336900B4FBC6 /* IMGAnonymousTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGAnonymousTests.m; sourceTree = "<group>"; };
-		2444484219018E23008A02E7 /* IMGRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGRequestSerializer.h; sourceTree = "<group>"; };
-		2444484319018E23008A02E7 /* IMGRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGRequestSerializer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2457E2D618F77DDA00F022A1 /* NSDictionary+IMG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+IMG.h"; sourceTree = "<group>"; };
 		2457E2D718F77DDA00F022A1 /* NSDictionary+IMG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+IMG.m"; sourceTree = "<group>"; };
 		249DABDA18D65FD7008531FE /* IMGBasicAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = IMGBasicAlbum.h; path = ImgurSession/Models/IMGBasicAlbum.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -599,8 +593,6 @@
 		2407476A18D53BF900B92063 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				2444484219018E23008A02E7 /* IMGRequestSerializer.h */,
-				2444484319018E23008A02E7 /* IMGRequestSerializer.m */,
 				240747AD18D62B1B00B92063 /* IMGEndpoint.h */,
 				240747AC18D62B1B00B92063 /* IMGEndpoint.m */,
 				240747B418D62B1B00B92063 /* IMGResponseSerializer.h */,
@@ -955,7 +947,6 @@
 			files = (
 				C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */,
 				2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
-				2444484519018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
 				C35448041906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C328810F18EA0DFF00B080CF /* AFHTTPRequestOperation.h in Headers */,
 				C328811018EA0DFF00B080CF /* AFHTTPRequestOperationManager.h in Headers */,
@@ -1011,7 +1002,6 @@
 			files = (
 				C3F1B48C18E9BD68004ED254 /* ImgurSession.h in Headers */,
 				2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
-				2444484419018E23008A02E7 /* IMGRequestSerializer.h in Headers */,
 				C35448031906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C32880FC18EA0AF200B080CF /* AFHTTPRequestOperation.h in Headers */,
 				C32880FD18EA0AF200B080CF /* AFHTTPRequestOperationManager.h in Headers */,
@@ -1592,7 +1582,6 @@
 			files = (
 				C35448061906D835001C88E8 /* NSError+IMGError.m in Sources */,
 				2407479618D62AE200B92063 /* IMGAlbum.m in Sources */,
-				2444484719018E23008A02E7 /* IMGRequestSerializer.m in Sources */,
 				240747A218D62B0700B92063 /* IMGImage.m in Sources */,
 				24B4CBA218CABA2D00EC8E4A /* IMGSession.m in Sources */,
 				2407479218D62AD100B92063 /* IMGGalleryImage.m in Sources */,
@@ -1640,7 +1629,6 @@
 			files = (
 				C35448051906D835001C88E8 /* NSError+IMGError.m in Sources */,
 				2407479518D62AE200B92063 /* IMGAlbum.m in Sources */,
-				2444484619018E23008A02E7 /* IMGRequestSerializer.m in Sources */,
 				240747A118D62B0700B92063 /* IMGImage.m in Sources */,
 				2407479118D62AD100B92063 /* IMGGalleryImage.m in Sources */,
 				2407474F18D4F31600B92063 /* IMGVote.m in Sources */,
