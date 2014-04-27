@@ -134,7 +134,7 @@
         
         //assumed anon if no secret given
         self.isAnonymous = YES;
-        authType = IMGNoAuthType;
+        self.authType = IMGNoAuthType;
         [self setAnonmyousAuthenticationWithID:clientID];
         
         [self informClientAuthStateChanged:IMGAuthStateAnon];

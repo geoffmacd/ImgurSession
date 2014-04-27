@@ -39,7 +39,8 @@
         
         if(![jsonData isKindOfClass:[NSDictionary class]]){
             
-            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
             return nil;
         }
         //clean NSNull
@@ -63,7 +64,8 @@
         
         if (!_imageID || !_url){
             
-            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
             return nil;
         }
     }   
@@ -84,7 +86,8 @@
         
         if (!album.coverID){
             
-            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
             return nil;
         }
     }

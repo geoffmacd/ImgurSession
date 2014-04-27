@@ -36,11 +36,13 @@
         
         if(![jsonData isKindOfClass:[NSDictionary class]]){
             
-            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
             return nil;
         } else if (!jsonData[@"id"] || !jsonData[@"url"] || !jsonData[@"bio"]){
             
-            *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
             return nil;
         }
         
