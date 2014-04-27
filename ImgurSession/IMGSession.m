@@ -762,7 +762,7 @@
     [progress addObserver:self
                forKeyPath:@"fractionCompleted"
                   options:NSKeyValueObservingOptionNew
-                  context:(__bridge void *)(progressHandler)];
+                  context:(__bridge_retained void *)(progressHandler)];
     return task;
 }
 
