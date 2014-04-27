@@ -32,7 +32,7 @@
     //client id is all that necessary for this header
     [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Client-ID %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
     
-    [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
+    [IMGGalleryRequest albumWithID:@"HtAOg" success:^(IMGGalleryAlbum *album) {
         
         //fail, should not attempt refresh
         expect(0).beTruthy();
@@ -41,10 +41,18 @@
         
     } failure:^(NSError * error) {
         
+        expect(error.code == IMGErrorForbidden).beTruthy();
+        expect([error.userInfo[IMGErrorServerMethod] isEqualToString:@"GET"]).beTruthy();
+        expect([error.userInfo[IMGErrorServerPath] isEqualToString:@"/3/gallery/album/HtAOg"]).beTruthy();
+        expect([error.userInfo[NSLocalizedDescriptionKey] isEqualToString:@"Invalid client_id"]).beTruthy();
         isSuccess = YES;
     }];
-    
+
     expect(isSuccess).will.beTruthy();
+    
+    //fix for next test
+    [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Client-ID %@",
+                                                             [IMGSession sharedInstance].clientID] forHTTPHeaderField:@"Authorization"];
 }
 
 

@@ -39,6 +39,59 @@
 
 #pragma mark - Testing Authentication
 
+-(void)testMissingParameters{
+    __block BOOL isSuccess;
+    
+    //sets bad access token in header which will cause re-auth with correct refresh token
+    [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
+    
+    [[IMGSession sharedInstance] setClientID:nil];
+    [[IMGSession sharedInstance] setSecret:nil];
+    [[IMGSession sharedInstance] setRefreshToken:nil];
+    [[IMGSession sharedInstance] setAccessToken:nil];
+    
+    //should just fail with missing params
+    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        
+        expect(0).beTruthy();
+        isSuccess = YES;
+        
+    } failure:^(NSError *error) {
+        
+        expect(error.code == IMGErrorMissingClientAuthentication).beTruthy();
+        
+        isSuccess = YES;
+    }];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+-(void)testBadCode{
+    __block BOOL isSuccess;
+    
+    //get correct params first
+    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+        
+        //set code awaits
+        [[IMGSession sharedInstance] setAuthCode:@"badcode"];
+        
+        //request should fail after determining auth not possible
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            expect(0).beTruthy();
+            isSuccess = YES;
+            
+        } failure:^(NSError *error) {
+            
+            expect(error.code == IMGErrorCouldNotAuthenticate).beTruthy();
+            isSuccess = YES;
+        }];
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 -(void)testGarbageAccessToken{
  
      __block BOOL isSuccess;
@@ -155,6 +208,7 @@
         //in this case this test will fail with code 1 == IMGErrorResponseMissingParameters
         
         expect(error.code == 404).beTruthy();
+        expect([error.userInfo[IMGErrorServerMethod] isEqualToString:@"GET"]).beTruthy();
         
         //should go here
         isSuccess = YES;

@@ -237,6 +237,11 @@
 
 -(void)setAuthCode:(NSString*)code{
     
+    //immediately invalidate access token
+    self.accessToken = nil;
+    self.accessTokenExpiry = nil;
+    self.refreshToken = nil;
+    
     self.codeAwaitingAuthentication = code;
     
     [self informClientAuthStateChanged:IMGAuthStateAwaitingCodeInput];
@@ -581,7 +586,7 @@
     } else if (auth == IMGAuthStateBad){
         
         if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);
+            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:nil]);
         
     } else if (auth == IMGAuthStateExpired || auth == IMGAuthStateNone || auth == IMGAuthStateAwaitingCodeInput){
         
