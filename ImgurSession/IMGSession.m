@@ -96,6 +96,14 @@
     self.secret = nil;
     self.user = nil;
     self.codeAwaitingAuthentication = nil;
+    //clear auth fields
+    self.accessToken = nil;
+    self.accessTokenExpiry = nil;
+    self.refreshToken = nil;
+    
+    //clear header
+    AFHTTPRequestSerializer * serializer = self.requestSerializer;
+    [serializer clearAuthorizationHeader];
     
     self.clientID = clientID;
     self.authType = authType;
