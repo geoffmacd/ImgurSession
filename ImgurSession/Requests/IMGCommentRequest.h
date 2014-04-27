@@ -18,28 +18,26 @@
 
 #pragma mark - Load
 /**
+ Load comment with an ID
  @param commentId string Id for comment
- @param replies fetch the replies as well
- @return signal with request
+ @param replies boolean to fetch the replies if YES
  */
 + (void)commentWithID:(NSInteger)commentId withReplies:(BOOL)replies success:(void (^)(IMGComment * comment))success failure:(void (^)(NSError *error))failure;
 /**
- Fetch replies to a comment
- @param comment IMGComment object to fetch replies for
- @return signal with request
+ Fetch replies to a parent comment
+ @param commentID comment ID to fetch replies for
  */
-+ (void)repliesWithCommentID:(NSInteger)comment success:(void (^)(NSArray * replies))success failure:(void (^)(NSError *error))failure;
++ (void)repliesWithCommentID:(NSInteger)commentID success:(void (^)(NSArray * replies))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Create
 /**
- Create comment at the parent. Must be logged in.
+ Create top-level comment on the image or album. Must be logged in.
  @param caption comment string
- @param imageId id of image to comment on
- @param parentId id of parent image to comment on
+ @param imageID id of object to comment on
  */
-+ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageID withParentID:(NSInteger)parentID success:(void (^)(NSInteger commentID))success failure:(void (^)(NSError *error))failure;
++ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageID success:(void (^)(NSInteger commentID))success failure:(void (^)(NSError *error))failure;
 /**
- Reply to a parent comment. Must be logged in.
+ Reply to a comment. Must be logged in.
  @param caption comment string
  @param imageId id of image to comment on
  @param parentCommentId id of parent comment to reply to
@@ -63,7 +61,7 @@
 
 #pragma mark - Report
 /**
- Report a comment. Must be logged in.
+ Report a comment as inappropiate. Must be logged in.
  @param commentId comment id to report
  */
 + (void)reportCommentWithID:(NSInteger)commentID success:(void (^)())success failure:(void (^)(NSError *error))failure;

@@ -134,11 +134,7 @@
         
         expect(image.imageID).beTruthy();
         isSuccess = YES;
-    } progress:^(CGFloat progress) {
-        
-        progressTested = YES;
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
     
     expect(progressTested).will.beTruthy();
     expect(isSuccess).will.beTruthy();
@@ -156,11 +152,7 @@
         expect(image.imageID).beTruthy();
         isSuccess = YES;
         
-    } progress:^(CGFloat progress) {
-        
-        progressTested = YES;
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
     
     expect(progressTested).will.beTruthy();
     expect(isSuccess).will.beTruthy();
@@ -185,10 +177,7 @@
                 
             } failure:failBlock];
         } failure:failBlock];
-    } progress:^(CGFloat progress) {
-        
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
     
     expect(isSuccess).will.beTruthy();
 }
@@ -207,10 +196,7 @@
         expect(image.imageID).beTruthy();
         isSuccess = YES;
         
-    } progress:^(CGFloat progress) {
-        
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
     
     expect(isSuccess).will.beTruthy();
 }

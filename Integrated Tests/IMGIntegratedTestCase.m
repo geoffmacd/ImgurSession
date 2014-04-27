@@ -113,10 +113,7 @@
             
         } failure:failBlock];
         
-    } progress:^(CGFloat progress) {
-        
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
 }
 
 #warning Posting a test image will create spam if not deleted successfully by this method
@@ -143,10 +140,7 @@
                 } failure:failBlock];
             });
         
-    } progress:^(CGFloat progress) {
-        
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
 }
 
 #warning Posting a test gallery album will create spam if not deleted successfully by this method
@@ -194,10 +188,7 @@
             
         } failure:failBlock];
         
-    } progress:^(CGFloat progress) {
-        
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
 }
 
 #warning Posting a test album will create spam if not deleted successfully by this method
@@ -235,10 +226,7 @@
             } failure:failBlock];
         
         } failure:failBlock];
-    } progress:^(CGFloat progress) {
-        
-        
-    } failure:failBlock];
+    } progress:nil failure:failBlock];
 }
 
 #pragma mark - IMGSessionDelegate Delegate methods

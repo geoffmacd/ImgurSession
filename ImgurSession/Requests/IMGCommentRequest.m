@@ -20,7 +20,7 @@
 
 #pragma mark - Load
 
-+ (void)commentWithID:(NSInteger)commentID withReplies:(BOOL)replies success:(void (^)(IMGComment *))success failure:(void (^)(NSError *))failure{
++ (void)commentWithID:(NSInteger)commentID withReplies:(BOOL)replies success:(void (^)(IMGComment * comment))success failure:(void (^)(NSError * error))failure{
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", (unsigned long)commentID]];
     
     if(replies)
@@ -43,7 +43,7 @@
     } failure:failure];
 }
 
-+ (void)repliesWithCommentID:(NSInteger)commentID success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)repliesWithCommentID:(NSInteger)commentID success:(void (^)(NSArray * replies))success failure:(void (^)(NSError * error))failure{
     
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%lu", (unsigned long)commentID] withOption:@"replies"];
     
@@ -67,7 +67,7 @@
 
 #pragma mark - Create
 
-+ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageId withParentID:(NSInteger)parentId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
++ (void)submitComment:(NSString*)caption withImageID:(NSString *)imageId success:(void (^)(NSInteger commentID))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:imageId];
     
     if([[IMGSession sharedInstance] isAnonymous]){
@@ -76,13 +76,7 @@
         return;
     }
     
-    NSDictionary * params;
-    
-    if(parentId)
-        params = @{@"image_id":imageId,@"comment":caption,@"parent_id":[NSNumber numberWithInteger:parentId]};
-    else
-        params = @{@"image_id":imageId,@"comment":caption};
-        
+    NSDictionary * params = @{@"image_id":imageId,@"comment":caption};
     
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         

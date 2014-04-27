@@ -202,7 +202,7 @@
     [self postTestImage:^(IMGImage * image, void(^success)()) {
         
         
-        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID withParentID:0 success:^(NSInteger commentId) {
+        [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID success:^(NSInteger commentId) {
                 
             [IMGAccountRequest accountDeleteCommentWithID:commentId success:^{
                 
