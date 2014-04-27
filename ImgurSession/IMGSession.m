@@ -760,13 +760,11 @@
     } failure:failure];
 }
 
--(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success progress:(void (^)(CGFloat progress))progressHandler failure:(void (^)(NSError *))failure{
+-(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success progress:(NSProgress * __autoreleasing *)progress failure:(void (^)(NSError *))failure{
     
     NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:nil];
     
-    NSProgress * progress;
-    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
-        [progress removeObserver:self forKeyPath:@"fractionCompleted" context:NULL];
+    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:progress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         if (error) {
             
             if(failure)
@@ -780,28 +778,7 @@
     
     [task resume];
     
-    [progress addObserver:self
-               forKeyPath:@"fractionCompleted"
-                  options:NSKeyValueObservingOptionNew
-                  context:(__bridge_retained void *)(progressHandler)];
     return task;
-}
-
-#pragma mark - KVO for progress upload
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    //observe only the progress from any POST:contructingwithBlcok calls
-    
-    if ([keyPath isEqualToString:@"fractionCompleted"]) {
-        //we were tracking image upload progress probably
-        NSProgress *progress = (NSProgress *)object;
-        
-        //the progress handler was passed to context, type cast back to pass in float to alert requester of progress
-        void (^handler)(CGFloat progress) = (__bridge void (^)(CGFloat progress))context;
-        handler(progress.fractionCompleted);
-    } else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
 }
 
 #pragma mark - Model Tracking
