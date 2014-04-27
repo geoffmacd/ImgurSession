@@ -56,6 +56,10 @@
     NSParameterAssert(clientID);
     NSParameterAssert(secret);
     
+    //for testing, do not reset access tokens
+    if(![[self sharedInstance] isAnonymous] && [clientID isEqualToString:[[self sharedInstance] clientID]] && [secret isEqualToString:[[self sharedInstance] secret]] && authType == [[self sharedInstance] authType])
+        return [self sharedInstance];
+    
     [[IMGSession sharedInstance] resetWithClientID:clientID secret:secret authType:authType];
     
     return [self sharedInstance];
@@ -64,6 +68,10 @@
 +(instancetype)anonymousSessionWithClientID:(NSString *)clientID{
     
     NSParameterAssert(clientID);
+    
+    //for testing, do not reset access tokens
+    if([[self sharedInstance] isAnonymous] && clientID == [[self sharedInstance] clientID])
+        return [self sharedInstance];
     
     [[IMGSession sharedInstance] resetWithClientID:clientID secret:nil authType:IMGNoAuthType];
     
