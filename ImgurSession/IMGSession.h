@@ -30,7 +30,7 @@ static NSString * const IMGAuthRefreshedNotification = @"IMGAuthRefreshedNotific
 static NSString * const IMGRefreshedUserNotification = @"IMGRefreshedUserNotification";
 static NSString * const IMGRefreshedNotification = @"IMGRefreshedNotificationNotification";
 static NSString * const IMGRequestFailedNotification = @"IMGRequestFailedNotification";
-static NSString * const IMGNotReachableNotification = @"IMGNotReachableNotification";
+static NSString * const IMGReachabilityChangedNotification = @"IMGReachabilityChangedNotification";
 
 /**
  Type of authorization to use, you should probably use code on iOS. See https://api.imgur.com/oauth2
@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 /**
  Inform delegate of unreachable domain due to internet connection or domain status on either Wifi or cell
  */
--(void)imgurNotReachable:(AFNetworkReachabilityStatus)status;
+-(void)imgurReachabilityChanged:(AFNetworkReachabilityStatus)status;
 
 @end
 
@@ -189,7 +189,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 @property  (readonly,nonatomic) NSInteger warnRateLimit;
 
 /**
- Reachability manager for the domain imgur.com
+ Reachability manager for the domain imgur.com. Must call -startMonitoring to actual monitor.
  */
 @property AFNetworkReachabilityManager * imgurReachability;
 

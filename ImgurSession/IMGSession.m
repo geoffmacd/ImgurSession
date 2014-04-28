@@ -141,26 +141,14 @@
     }
     
     self.imgurReachability = [AFNetworkReachabilityManager managerForDomain:@"imgur.com"];
-    
     __weak typeof(self) welf = self;
     [self.imgurReachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            
-        //alert delegate only if not reachable
-        switch (status) {
-            case AFNetworkReachabilityStatusNotReachable:
-                if(welf.delegate && [welf.delegate respondsToSelector:@selector(imgurNotReachable:)])
-                    [welf.delegate imgurNotReachable:status];
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGNotReachableNotification object:[NSNumber numberWithInt:status]];
-                break;
-                
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-            case AFNetworkReachabilityStatusUnknown:
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-            default:
-                //no action
-                break;
-        }
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //warn delegate
+            if(welf.delegate && [welf.delegate respondsToSelector:@selector(imgurReachabilityChanged:)])
+                [welf.delegate imgurReachabilityChanged:status];
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGReachabilityChangedNotification object:nil];
+        });
     }];
 }
 
@@ -320,8 +308,7 @@
                         
                     } failure:failure];
                 }];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:self];
         });
         
     } else if(state == IMGAuthStateMissingParameters){
@@ -459,9 +446,11 @@
         
         [IMGNotificationRequest notifications:^(NSArray * fresh) {
             
-            [_delegate imgurSessionNewNotifications:fresh];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedNotification object:fresh];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate imgurSessionNewNotifications:fresh];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedNotification object:fresh];
+            });
             
         } failure:^(NSError * err) {
             
@@ -602,7 +591,7 @@
     
     IMGAuthState auth = [self sessionAuthState];
     
-    if(self.imgurReachability && ![self.imgurReachability isReachable]){
+    if(self.imgurReachability && [self.imgurReachability networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable){
         
         //error no connection, don't even try
         if(failure)
