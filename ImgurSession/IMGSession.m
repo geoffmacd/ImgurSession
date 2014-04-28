@@ -139,6 +139,29 @@
         
         [self informClientAuthStateChanged:IMGAuthStateAnon];
     }
+    
+    self.imgurReachability = [AFNetworkReachabilityManager managerForDomain:@"imgur.com"];
+    
+    __weak typeof(self) welf = self;
+    [self.imgurReachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            
+        //alert delegate only if not reachable
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:
+                if(welf.delegate && [welf.delegate respondsToSelector:@selector(imgurNotReachable:)])
+                    [welf.delegate imgurNotReachable:status];
+                [[NSNotificationCenter defaultCenter] postNotificationName:IMGNotReachableNotification object:[NSNumber numberWithInt:status]];
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+            case AFNetworkReachabilityStatusUnknown:
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            default:
+                //no action
+                break;
+        }
+        
+    }];
 }
 
 -(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType{
@@ -576,9 +599,16 @@
  */
 -(NSURLSessionDataTask *)methodRequest:(NSURLSessionDataTask * (^)())completion failure:(void (^)( NSError *))failure{
     
+    
     IMGAuthState auth = [self sessionAuthState];
     
-    if(auth == IMGAuthStateMissingParameters){
+    if(self.imgurReachability && ![self.imgurReachability isReachable]){
+        
+        //error no connection, don't even try
+        if(failure)
+            failure([NSError errorWithDomain:IMGErrorDomain code:AFNetworkReachabilityStatusNotReachable userInfo:nil]);
+        
+    } else if(auth == IMGAuthStateMissingParameters){
         
         if(failure)
             failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);

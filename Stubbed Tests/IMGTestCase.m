@@ -37,6 +37,8 @@
     [[IMGSession sharedInstance] setRefreshToken:@"efssdfsd"];
     [[IMGSession sharedInstance] setAccessToken:@"efssdfsd"];
     [[IMGSession sharedInstance] setAccessTokenExpiry:[NSDate dateWithTimeIntervalSinceNow:10000000]];
+    //no reachability for offline tests
+    [[IMGSession sharedInstance] setImgurReachability:nil];
     
     //need various values such as image title
     imgurUnitTestParams = infos[@"imgurUnitTestParams"];

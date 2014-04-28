@@ -47,6 +47,8 @@
     //dummy auth session
     [IMGSession anonymousSessionWithClientID:@"dfsfds"];
     
+    //no reachability for offline tests
+    [[IMGSession sharedInstance] setImgurReachability:nil];
     
     //need various values such as image title
     imgurUnitTestParams = infos[@"imgurUnitTestParams"];

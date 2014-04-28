@@ -30,9 +30,10 @@ static NSString * const IMGAuthRefreshedNotification = @"IMGAuthRefreshedNotific
 static NSString * const IMGRefreshedUserNotification = @"IMGRefreshedUserNotification";
 static NSString * const IMGRefreshedNotification = @"IMGRefreshedNotificationNotification";
 static NSString * const IMGRequestFailedNotification = @"IMGRequestFailedNotification";
+static NSString * const IMGNotReachableNotification = @"IMGNotReachableNotification";
 
 /**
- Type of authorization to use, you should probably use token on iOS. See https://api.imgur.com/oauth2
+ Type of authorization to use, you should probably use code on iOS. See https://api.imgur.com/oauth2
  */
 typedef NS_ENUM(NSInteger, IMGAuthType){
     IMGNoAuthType,
@@ -42,7 +43,7 @@ typedef NS_ENUM(NSInteger, IMGAuthType){
 };
 
 /**
- Session state of the authentication. Determined based on information and expiry dates.
+ Session state of the authentication. Determined based on expiry dates for authenticated sessions.
  */
 typedef NS_ENUM(NSInteger, IMGAuthState){
     IMGAuthStateMissingParameters = 0,
@@ -103,6 +104,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Inform delegate of request failures
  */
 -(void)imgurRequestFailed:(NSError*)error;
+/**
+ Inform delegate of unreachable domain due to internet connection or domain status on either Wifi or cell
+ */
+-(void)imgurNotReachable:(AFNetworkReachabilityStatus)status;
 
 @end
 
@@ -182,6 +187,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Warn client after going below this number of available requests. The default is 100 requests.
  */
 @property  (readonly,nonatomic) NSInteger warnRateLimit;
+
+/**
+ Reachability manager for the domain imgur.com
+ */
+@property AFNetworkReachabilityManager * imgurReachability;
 
 /**
  Required delegate to warn of imgur events.
