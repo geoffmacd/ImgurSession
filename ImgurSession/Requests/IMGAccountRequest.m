@@ -55,36 +55,6 @@
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSArray * favImagesJSON = responseObject;
-        NSMutableArray * favImages = [NSMutableArray new];
-        
-        for(NSDictionary * imageJSON in favImagesJSON){
-            
-            NSError *JSONError = nil;
-            IMGGalleryImage *image = [[IMGGalleryImage alloc] initWithJSONObject:imageJSON error:&JSONError];
-            
-            if(!JSONError && image){
-                [favImages addObject:image];
-            }
-        }
-        
-        if(success)
-            success([NSArray arrayWithArray:favImages]);
-        
-    } failure:failure];
-}
-
-+ (void)accountFavourites:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithID:@"me" withOption:@"favorites"];
-    
-    if([[IMGSession sharedInstance] isAnonymous]){
-        if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorRequiresUserAuthentication userInfo:@{IMGErrorServerPath:path}]);
-        return;
-    }
-    
-    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
         NSArray * fullJSON = responseObject;
         NSMutableArray * favs = [NSMutableArray new];
         
@@ -113,6 +83,11 @@
             success([NSArray arrayWithArray:favs]);
         
     } failure:failure];
+}
+
++ (void)accountFavourites:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+
+    [self accountFavouritesWithUser:@"me" success:success failure:failure];
 }
 
 + (void)accountSubmissionsWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{

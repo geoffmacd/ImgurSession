@@ -140,6 +140,12 @@
     return self.imageID;
 }
 
+-(NSURL *)link{
+    
+    //remove extension from url
+    return [self.url URLByDeletingPathExtension];
+}
+
 #pragma mark - Display
 
 - (NSURL *)URLWithSize:(IMGSize)size{

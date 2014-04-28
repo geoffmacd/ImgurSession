@@ -77,6 +77,10 @@ typedef NS_ENUM(NSInteger, IMGSize) {
  Get date object was created
  */
 - (NSDate *)datetime;
+/**
+ Get imgur web page for object
+ */
+-(NSURL*)link;
 
 @end
 

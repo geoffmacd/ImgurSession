@@ -161,6 +161,10 @@
     return [self.coverImage URLWithSize:size];
 }
 
+-(NSURL *)link{
+    return self.url;
+}
+
 #pragma mark - Album Layout setting
 
 +(NSString*)strForLayout:(IMGAlbumLayout)layoutType{
