@@ -223,6 +223,40 @@
     } failure:failure];
 }
 
+#pragma mark - Verify User Email
+
++(void)sendUserEmailVerification:(void (^)())success failure:(void (^)(NSError * error))failure{
+    
+    NSString *path = [self pathWithID:@"me" withOption:@"verifyemail"];
+    
+    [[IMGSession sharedInstance] POST:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if(success)
+            success();
+        
+    } failure:^(NSError *error) {
+        
+        if(failure)
+            failure(error);
+    }];
+}
+
++(void)isUserEmailVerification:(void (^)(BOOL verified))success failure:(void (^)(NSError * error))failure{
+    
+    NSString *path = [self pathWithID:@"me" withOption:@"verifyemail"];
+    
+    [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if(success)
+            success([responseObject boolValue]);
+        
+    } failure:^(NSError *error) {
+        
+        if(failure)
+            failure(error);
+    }];
+}
+
 #pragma mark - Albums associated with account
 
 + (void)accountAlbumsWithUser:(NSString*)username withPage:(NSInteger)page  success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{

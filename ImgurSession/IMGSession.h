@@ -274,16 +274,16 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 #pragma mark - Requests
 
--(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure;
+-(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask * task, id responseObject))success failure:(void (^)( NSError * error))failure;
 
--(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)(NSError *))failure;
+-(NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask * task, id responseObject))success failure:(void (^)(NSError * error))failure;
 
--(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *, id))success failure:(void (^)( NSError *))failure;
+-(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask * task, id responseObject))success failure:(void (^)( NSError * error))failure;
 
 /**
  Post request with body completion block. Needed to re-implement from AFNetworking implementation without super call because progress is not handled in AFnetworking
  */
--(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success progress:(NSProgress * __autoreleasing *)progress  failure:(void (^)(NSError *))failure;
+-(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success progress:(NSProgress * __autoreleasing *)progress  failure:(void (^)(NSError * error))failure;
 
 
 #pragma mark - Rate Limit Tracking

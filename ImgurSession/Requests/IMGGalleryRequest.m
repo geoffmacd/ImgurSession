@@ -12,6 +12,7 @@
 #import "IMGComment.h"
 #import "IMGCommentRequest.h"
 #import "IMGImageRequest.h"
+#import "IMGAccountRequest.h"
 #import "IMGSession.h"
 
 
@@ -255,7 +256,25 @@
         if(success)
             success();
         
-    } failure:failure];
+    } failure:^(NSError *error) {
+        
+        //is it unverified?
+        if(error.code == 400){
+            
+            //send user email
+            [IMGAccountRequest sendUserEmailVerification:^{
+                if(failure)
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorNeededVerificationAndSent userInfo:nil]);
+                
+            } failure:^(NSError *sendError) {
+                if(failure)
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorNeededVerificationCouldNotSend userInfo:nil]);
+            }];
+         } else {
+             if(failure)
+                 failure(error);
+         }
+    }];
 }
 
 + (void)submitAlbumWithID:(NSString *)albumID title:(NSString *)title success:(void (^)())success failure:(void (^)(NSError *))failure{
@@ -277,7 +296,25 @@
     
         if(success)
             success();
-    } failure:failure];
+    } failure:^(NSError *error) {
+        
+        //is it unverified?
+        if(error.code == 400){
+            
+            //send user email
+            [IMGAccountRequest sendUserEmailVerification:^{
+                if(failure)
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorNeededVerificationAndSent userInfo:nil]);
+                
+            } failure:^(NSError *sendError) {
+                if(failure)
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorNeededVerificationCouldNotSend userInfo:nil]);
+            }];
+        } else {
+            if(failure)
+                failure(error);
+        }
+    }];
 }
 
 #pragma mark - Remove Gallery objects

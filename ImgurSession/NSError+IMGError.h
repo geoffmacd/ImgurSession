@@ -19,6 +19,8 @@
 //error codes from model object creation
 #define IMGErrorMalformedResponseFormat         152   //Response data is in wrong format for model object to be created
 #define IMGErrorResponseMissingParameters       153   //some critical fields are not in response for model objects
+#define IMGErrorNeededVerificationAndSent       154   //request failed but email was sent to verify user email
+#define IMGErrorNeededVerificationCouldNotSend  155   //request failed due to email verification needed
 
 //status codes
 #define IMGErrorRequiresUserAuthentication      401   //valid tokens?

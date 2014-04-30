@@ -34,6 +34,19 @@
     expect(acc).willNot.beNil();
 }
 
+- (void)testAccountEmailIsVerified{
+    
+    __block BOOL isSuccess;
+    
+    [IMGAccountRequest isUserEmailVerification:^(BOOL verified) {
+        
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 - (void)testAccountLoadMyFavs{
     
     __block BOOL isSuccess;

@@ -26,7 +26,6 @@
 /**
  Request standard user information. If you need the username for the account that is logged in, it is returned in the request for an access token.
  @param username username to fetch
- @return signal with request
  */
 + (void)accountWithUser:(NSString *)username success:(void (^)(IMGAccount *account))success failure:(void (^)(NSError *error))failure;
 
@@ -34,12 +33,10 @@
 /**
  Return the images the user has favorited in the gallery.
  @param username name of account
- @return signal with request
  */
 + (void)accountFavouritesWithUser:(NSString *)username success:(void (^)(NSArray * favs))success failure:(void (^)(NSError *error))failure;
 /**
  Returns the current user's favorited images when signed in.  Must be logged in.
- @return signal with request
  */
 + (void)accountFavourites:(void (^)(NSArray * favs))success failure:(void (^)(NSError *error))failure;
 
@@ -47,16 +44,24 @@
 /**
  Returns the totals for the gallery profile.
  @param username name of account
- @return signal with request
  */
 + (void)accountGalleryProfileWithUser:(NSString *)username success:(void (^)(IMGGalleryProfile * profile))success failure:(void (^)(NSError *error))failure;
+
+#pragma mark - Verify User Email
+/**
+ Sends the verification email to user
+ */
++(void)sendUserEmailVerification:(void (^)())success failure:(void (^)(NSError * error))failure;
+/**
+ Determines whether the user has verified their email
+ */
++(void)isUserEmailVerification:(void (^)(BOOL verified))success failure:(void (^)(NSError * error))failure;
 
 #pragma mark - Submissions
 /**
  Retrieve account submissions.
  @param page pagination, page number to retrieve
  @param username name of account
- @return signal with request
  */
 + (void)accountSubmissionsWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray * submissions))success failure:(void (^)(NSError *error))failure;
 
@@ -64,7 +69,6 @@
 #pragma mark - Load settings
 /**
  Retrieve account settings only for current user. Must be logged in.
- @return signal with request
  */
 + (void)accountSettings:(void (^)(IMGAccountSettings *settings))success failure:(void (^)(NSError *error))failure;
 
