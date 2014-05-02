@@ -9,11 +9,6 @@
 #import "IMGAlbum.h"
 #import "IMGImage.h"
 
-@interface IMGAlbum ()
-
-@property (readwrite,nonatomic) NSString *deletehash;
-
-@end
 
 @implementation IMGAlbum;
 

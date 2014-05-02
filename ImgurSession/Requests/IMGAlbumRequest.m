@@ -51,7 +51,15 @@
 
 + (void)createAlbumWithTitle:(NSString *)title description:(NSString *)description imageIDs:(NSArray *)imageIDs privacy:(IMGAlbumPrivacy)privacy layout:(IMGAlbumLayout)layout cover:(NSString *)coverID success:(void (^)(NSString *, NSString*))success failure:(void (^)(NSError *))failure{
     
+    NSParameterAssert(title);
+    NSParameterAssert(imageIDs);
+    
     NSDictionary * params = [self updateAlbumParameters:title description:description imageIDs:imageIDs privacy:privacy layout:layout cover:coverID];
+    //if cover was not specified, choose first
+    NSMutableDictionary * mutableParams = [NSMutableDictionary dictionaryWithDictionary:params];
+    if(!params[@"cover"])
+        [mutableParams setObject:[imageIDs firstObject] forKey:@"cover"];
+    params = [NSDictionary dictionaryWithDictionary:mutableParams];
     
     [[IMGSession sharedInstance] POST:[self path] parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
 

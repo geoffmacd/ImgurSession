@@ -17,7 +17,7 @@
 /**
  Delete hash string
  */
-@property (nonatomic, readonly, copy) NSString *deletehash;
+@property (nonatomic, readwrite, copy) NSString *deletehash;
 
 
 
