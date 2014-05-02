@@ -29,6 +29,8 @@
 @property (readwrite, nonatomic) BOOL isAnonymous;
 @property (readwrite, nonatomic) IMGAccount * user;
 
+@property dispatch_semaphore_t refreshSemaphore;
+
 /**
  Timer to check for notifications
  */
@@ -213,16 +215,16 @@
     return [NSURL URLWithString:path];
 }
 
-- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
+- (void)authenticateWithCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
     
     //cancel all
     [self.operationQueue cancelAllOperations];
     [self.requestSerializer clearAuthorizationHeader];
     
-    NSString * grantTypeStr = (authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
+    NSString * grantTypeStr = (self.authType == IMGPinAuth ? [IMGSession strForAuthType:IMGPinAuth] : @"authorization_code");
     
     //call oauth/token with auth type
-    NSDictionary * params = @{[IMGSession strForAuthType:authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
+    NSDictionary * params = @{[IMGSession strForAuthType:self.authType]:code, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
     
     //use super to bypass authentication checks
     [super POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -265,119 +267,156 @@
  */
 -(void)refreshAuthentication:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
     
-    IMGAuthState state = [self sessionAuthState];
+    //create synchronous queue so that requests to refresh happen one at a time and multiple token posts are not sent
+    static dispatch_once_t onceToken;
+    static dispatch_queue_t refreshQueue;
+    dispatch_once(&onceToken, ^{
+        refreshQueue = dispatch_queue_create("RefreshQueue",DISPATCH_QUEUE_SERIAL);
+    });
     
-    if(state == IMGAuthStateAwaitingCodeInput){
-        //retrieve refresh tokens with input code
+    //keep track of multiple file uploads with semaphore
+    static dispatch_once_t twiceToken;
+    dispatch_once(&twiceToken, ^{
+        self.refreshSemaphore  = dispatch_semaphore_create(0);
+    });
+    
+    dispatch_async(refreshQueue, ^{
         
-        [self authenticateWithType:self.authType withCode:self.codeAwaitingAuthentication success:^(NSString *refreshToken){
-            
-            //set to nil so we don't do this again
-            self.codeAwaitingAuthentication = nil;
-            
-            //continue with requests which were paused until this routine was finished
-            if(success)
-                success(self.refreshToken);
-            
-        } failure:^(NSError *error) {
-            //if this fails, we have no choice but to tell the user we could not authenticate with the client and secret
-            
-            //refresh token is no longer working, probably banned from API
-            self.refreshToken = nil;
-            
-            //alert delegate
-            [self informClientAuthStateChanged:IMGAuthStateBad];
-            
-            if(failure)
-                failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:@{IMGErrorAuthenticationError:error}]);
-        }];
+        IMGAuthState state = [self sessionAuthState];
         
-    } else if(state == IMGAuthStateNone){
-        //we need to retrieve refresh token with client credentials first
+        if(state == IMGAuthStateExpired){
+            //refresh access token with refresh token
             
-        //alert app that it needs to present webview or go to safari
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
-                [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+            NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
+            
+            //call super to by pass authorization management
+            [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
+                
+                NSDictionary * json = responseObject;
+                //set auth header
+                [self setAuthorizationHeader:json];
+                //immediately request latest user updates
+                [self refreshUserAccount];
+                
+                if(success)
+                    success(_refreshToken);
+                
+                //resume
+                dispatch_semaphore_signal(self.refreshSemaphore);
+                
+                //alert after resuming
+                dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    //refresh upon recieving new auth code
-                    [self refreshAuthentication:^(NSString * refresh) {
-                        
-                        if(success)
-                            success(refresh);
-                        
-                    } failure:failure];
-                }];
-            [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:self];
-        });
-        
-    } else if(state == IMGAuthStateMissingParameters){
-        //we do not have enough information to authenticate
-        
-        if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);
-        
-    } else if(state == IMGAuthStateBad){
-        //the client credentials are being refused
-        
-        if(failure)
-            failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:nil]);
-        
-    } else if(state == IMGAuthStateAnon){
-        
-        //just go to completion we don't care
-        if(success)
-            success(nil);
-        
-    } else {// if(state == IMGAuthStateExpired || state == IMGAuthStateAuthenticated){
-        //refresh access token with refresh token
-        
-        NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
-
-        //call super to by pass authorization management
-        [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            NSDictionary * json = responseObject;
-            //set auth header
-            [self setAuthorizationHeader:json];
-            //immediately request latest user updates
-            [self refreshUserAccount];
-            
-            //alert
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
-                    [_delegate imgurSessionTokenRefreshed];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
-            });
-            
-            if(success)
-                success(_refreshToken);
-            
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            //in my experience, usually banned at this point, refresh codes shouldn't expire
-            
-            //set to nil to ensure we attempt to request new tokens
-            self.refreshToken = nil;
-            
-            //need to ask user for a new code input
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
+                        [_delegate imgurSessionTokenRefreshed];
                     
-                    //post code and retrieve newstokens
-                    [self refreshAuthentication:^(NSString * refresh) {
-                        
-                        if(success)
-                            success(refresh);
-                        
-                    } failure:failure]; //failure will generate IMGErrorCouldNotAuthenticate error code as per above
-                }];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
+                });
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
-            });
-        }];
-    }
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                //in my experience, usually banned at this point, refresh codes shouldn't expire
+                
+                //set to nil to ensure we attempt to request new tokens
+                self.refreshToken = nil;
+                
+                //resume
+                dispatch_semaphore_signal(self.refreshSemaphore);
+                
+                //need to ask user for a new code input
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                        
+                        //post code and retrieve newstokens
+                        [self refreshAuthentication:^(NSString * refresh) {
+                            
+                            if(success)
+                                success(refresh);
+                            
+                        } failure:failure]; //failure will generate IMGErrorCouldNotAuthenticate error code as per above
+                    }];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
+                });
+            }];
+            //wait for signal from post request before accepting new requests
+            dispatch_semaphore_wait(self.refreshSemaphore, DISPATCH_TIME_FOREVER);
+            
+        } else if(state == IMGAuthStateAwaitingCodeInput){
+            //retrieve refresh tokens with input code
+            
+            [self authenticateWithCode:self.codeAwaitingAuthentication success:^(NSString *refreshToken){
+                
+                //set to nil so we don't do this again
+                self.codeAwaitingAuthentication = nil;
+                
+                //continue with requests which were paused until this routine was finished
+                if(success)
+                    success(self.refreshToken);
+                
+                //resume
+                dispatch_semaphore_signal(self.refreshSemaphore);
+                
+            } failure:^(NSError *error) {
+                //if this fails, we have no choice but to tell the user we could not authenticate with the client and secret
+                
+                //refresh token is no longer working, probably banned from API
+                self.refreshToken = nil;
+                
+                //alert delegate
+                [self informClientAuthStateChanged:IMGAuthStateBad];
+                
+                if(failure)
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:@{IMGErrorAuthenticationError:error}]);
+                
+                //resume
+                dispatch_semaphore_signal(self.refreshSemaphore);
+            }];
+            //wait for signal from post request before accepting new requests
+            dispatch_semaphore_wait(self.refreshSemaphore, DISPATCH_TIME_FOREVER);
+        
+        } else {
+            
+            if(state == IMGAuthStateNone){
+                //we need to retrieve refresh token with client credentials first
+                
+                //alert app that it needs to present webview or go to safari
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
+                        [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                            
+                            //refresh upon recieving new auth code
+                            [self refreshAuthentication:^(NSString * refresh) {
+                                
+                                if(success)
+                                    success(refresh);
+                                
+                            } failure:failure];
+                        }];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:self];
+                });
+                
+                
+            } else if(state == IMGAuthStateMissingParameters){
+                //we do not have enough information to authenticate
+                
+                if(failure)
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);
+                
+            } else if(state == IMGAuthStateBad){
+                //the client credentials are being refused
+                
+                if(failure)
+                    failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:nil]);
+                
+            } else {//if(state == IMGAuthStateAnon || state == IMGAuthStateAuthenticated){
+                
+                //just go to completion we don't care
+                if(success)
+                    success(nil);
+            }
+        }
+    });
+    
 }
 
 -(void)authenticateWithRefreshToken:(NSString*)refreshToken{
@@ -478,50 +517,37 @@
 #pragma mark - Authorization Header
 
 /**
- Sets the Authorization header for requests with just he client ID for anonymous sessions. Suspends the queue while the headers are being changed.
+ Sets the Authorization header for requests with just he client ID for anonymous sessions.
  */
 -(void)setAnonmyousAuthenticationWithID:(NSString*)clientID{
-    
-    //suspend until complete
-    [self.operationQueue setSuspended:YES];
     
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;
     [serializer setValue:[NSString stringWithFormat:@"Client-ID %@", clientID] forHTTPHeaderField:@"Authorization"];
-    
-    [self.operationQueue setSuspended:NO];
 }
 
 /**
- Sets the Authorization header for authorized sessions with the access tokens. Suspends the queue while the headers are being changed. Sets expiry date and refresh tokens if available.
+ Sets the Authorization header for authorized sessions with the access tokens. Sets expiry date and refresh tokens if available.
  */
 - (void)setAuthorizationHeader:(NSDictionary *)tokens{
     //store authentication from oauth/token response and set metadata
     
-    @synchronized(self){
-        //suspend until complete
-        [self.operationQueue setSuspended:YES];
-    
-        //refresh token
-        if(tokens[@"refresh_token"]){
-            self.refreshToken = tokens[@"refresh_token"];
-        }
-        
-        //set expiracy time, currrently at 3600 seconds after
-        NSInteger expirySeconds = [tokens[@"expires_in"] integerValue];
-        self.accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + expirySeconds)];
-        //call accessToken expired to refresh authentication
-        NSTimer * timer = [NSTimer timerWithTimeInterval:expirySeconds target:self selector:@selector(accessTokenExpired) userInfo:nil repeats:NO];
-        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-        self.accessToken = tokens[@"access_token"];
-        
-        //change the serializer to include this authorization header
-        AFHTTPRequestSerializer * serializer = self.requestSerializer;
-        [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
-
-        //resume
-        [self.operationQueue setSuspended:NO];
+    //refresh token
+    if(tokens[@"refresh_token"]){
+        self.refreshToken = tokens[@"refresh_token"];
     }
+    
+    //set expiracy time, currrently at 3600 seconds after
+    NSInteger expirySeconds = [tokens[@"expires_in"] integerValue];
+    self.accessTokenExpiry = [NSDate dateWithTimeIntervalSinceReferenceDate:([[NSDate date] timeIntervalSinceReferenceDate] + expirySeconds)];
+    //call accessToken expired to refresh authentication
+    NSTimer * timer = [NSTimer timerWithTimeInterval:expirySeconds target:self selector:@selector(accessTokenExpired) userInfo:nil repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    self.accessToken = tokens[@"access_token"];
+    
+    //change the serializer to include this authorization header
+    AFHTTPRequestSerializer * serializer = self.requestSerializer;
+    [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
 }
 
 -(void)accessTokenExpired{

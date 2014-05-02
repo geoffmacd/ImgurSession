@@ -246,11 +246,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 - (NSURL *)authenticateWithExternalURL;
 /**
- Manually authenticates by requesting refresh token using inputted code. Not needed. Lazily authenticates before each request by using setAuthCode:
- @param authType     authorization type pin,code,token
+ Authenticates immediately by requesting refresh token using inputted code. Not needed. Lazily authenticates before each request by using setAuthCode:
  @param code     code input string for authorization
  */
-- (void)authenticateWithType:(IMGAuthType)authType withCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateWithCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
 /**
  Manually authenticate directly from refresh token bypassing code input. Note that code input from oath/token will invalidate previous refresh tokens.
  @param refreshToken     valid refresh token to manually set
