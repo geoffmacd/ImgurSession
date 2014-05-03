@@ -143,7 +143,7 @@
 - (void)testPostAnonymousGif{
     
     __block BOOL isSuccess;
-    __block BOOL progressTested;
+    NSProgress * progress;
     
     NSData * data = [NSData dataWithContentsOfURL:testGifURL];
     
@@ -152,9 +152,9 @@
         expect(image.imageID).beTruthy();
         isSuccess = YES;
         
-    } progress:nil failure:failBlock];
+    } progress:&progress failure:failBlock];
     
-    expect(progressTested).will.beTruthy();
+    expect(progress.fractionCompleted >= 1.0).will.beTruthy();
     expect(isSuccess).will.beTruthy();
 }
 
