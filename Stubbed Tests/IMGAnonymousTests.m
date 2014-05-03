@@ -45,7 +45,7 @@
     NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
     
     //dummy auth session
-    [IMGSession anonymousSessionWithClientID:@"dfsfds"];
+    [IMGSession anonymousSessionWithClientID:@"dfsfds" withDelegate:self];
     
     //no reachability for offline tests
     [[IMGSession sharedInstance] setImgurReachability:nil];

@@ -10,6 +10,18 @@
 
 #import "IMGSession.h"
 
+@interface IMGSession()
+
+#pragma mark - Model Tracking
+
+/**
+ Tracks new imgur Model objects being created to allow introspection by client
+ @param model the model object that was created
+ */
+-(void)trackModelObjectsForDelegateHandling:(id)model;
+
+@end
+
 @implementation IMGModel
 
 - (instancetype)initWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error{

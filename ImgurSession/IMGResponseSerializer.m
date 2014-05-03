@@ -12,6 +12,17 @@
 #import "IMGModel.h"
 
 
+@interface IMGSession()
+
+#pragma mark - Rate Limit Tracking
+/**
+ Tracks rate limiting using HTTP headers from the response
+ @param response HTTP response returned from Imgur call
+ */
+-(void)updateClientRateLimiting:(NSHTTPURLResponse*)response;
+
+@end
+
 @implementation IMGResponseSerializer
 
 /**

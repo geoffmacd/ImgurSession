@@ -53,29 +53,32 @@
     return sharedInstance;
 }
 
-+(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType{
++(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate{
     
     NSParameterAssert(clientID);
     NSParameterAssert(secret);
+    NSParameterAssert(authType != IMGNoAuthType);
+    NSParameterAssert(delegate);
     
     //for testing, do not reset access tokens
     if(![[self sharedInstance] isAnonymous] && [clientID isEqualToString:[[self sharedInstance] clientID]] && [secret isEqualToString:[[self sharedInstance] secret]] && authType == [[self sharedInstance] authType])
         return [self sharedInstance];
     
-    [[IMGSession sharedInstance] resetWithClientID:clientID secret:secret authType:authType];
+    [[IMGSession sharedInstance] setupClientWithID:clientID secret:secret authType:authType withDelegate:delegate];
     
     return [self sharedInstance];
 }
 
-+(instancetype)anonymousSessionWithClientID:(NSString *)clientID{
++(instancetype)anonymousSessionWithClientID:(NSString *)clientID withDelegate:(id<IMGSessionDelegate>)delegate{
     
     NSParameterAssert(clientID);
+    NSParameterAssert(delegate);
     
     //for testing, do not reset access tokens
     if([[self sharedInstance] isAnonymous] && clientID == [[self sharedInstance] clientID])
         return [self sharedInstance];
     
-    [[IMGSession sharedInstance] resetWithClientID:clientID secret:nil authType:IMGNoAuthType];
+    [[IMGSession sharedInstance] setupClientWithID:clientID secret:nil authType:IMGNoAuthType withDelegate:delegate];
     
     return [self sharedInstance];
 }
@@ -100,7 +103,7 @@
 /**
  Configure session with client credentials. Anonymous session if secret is null
  */
--(void)setupClientWithID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType{
+-(void)setupClientWithID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate{
     
     //ensure stale fields are null
     self.secret = nil;
@@ -154,14 +157,6 @@
     }];
 }
 
--(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType{
-    
-    //need at least this
-    NSParameterAssert(clientID);
-    
-    [self setupClientWithID:clientID secret:secret authType:authType];
-}
-
 #pragma mark - Authentication
 
 -(IMGAuthState)sessionAuthState{
@@ -187,6 +182,9 @@
     }
 }
 
+/**
+ String constant for auth type
+ */
 +(NSString*)strForAuthType:(IMGAuthType)authType{
     NSString * authStr;
     switch (authType) {
@@ -206,6 +204,10 @@
     return authStr;
 }
 
+/**
+ Retrieves URL associated with website authorization page for session authentication type
+ @return    authorization URL to open in Webview or Safari
+ */
 - (NSURL *)authenticateWithExternalURL{
     
     if(self.isAnonymous)

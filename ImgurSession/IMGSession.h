@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 @required
 
 /**
- Alerts delegate that request limit is hit and cannot continue.
+ Alerts delegate that request limit is hit and cannot continue. Must be implemented
  */
 -(void)imgurSessionRateLimitExceeded;
 /**
@@ -113,7 +113,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 
 
 /**
- Session manager class for ImgurSession Session instance. Controls all requests by subclassing AFHTTPSessionManager
+ Session manager class for ImgurSession session singleton. Controls all requests by subclassing AFHTTPSessionManager. Handles all imgur requests by managing authentication state for both authenticated sessions forom imgur authentication callbakc and anonymous sessions. Must supply credentials for Imgur registered app.
  */
 @interface IMGSession : AFHTTPSessionManager
 
@@ -153,7 +153,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (readonly, nonatomic) BOOL isAnonymous;
 /**
- User Account if logged in
+ User Account if logged in. Refreshed on authentication or refresh tokens. Also refreshed with refreshUserAccount method.
  */
 @property (readonly, nonatomic) IMGAccount * user;
 /**
@@ -198,7 +198,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (weak) id<IMGSessionDelegate> delegate;
 
-
 #pragma mark - Initialize
 
 /**
@@ -207,26 +206,19 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 + (instancetype)sharedInstance;
 /**
- Resets sharedInstance to authenticated session with these parameters. If credentials are nil, assert will be thrown. Must be called before requests are made.
+ Resets sharedInstance singleton to authenticated session with these parameters. If credentials are nil, assert will be thrown. Must be called before requests are made.
  @param clientID    client Id string as registered with Imgur
  @param secret      secret string as registered with Imgur
  @param authType    type of authorization - code, pin or token
- @return            Session manager for interacting with Imgur account
+ @param delegate    delegate to respond to required imgur delegate methods
  */
-+(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType;
++(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate;
 /**
- Resets sharedInstance to anonymous session with client ID. Must be called before requests are made.
+ Resets sharedInstance singleton to anonymous session with client ID. Must be called before requests are made.
  @param clientID    client Id string as registered with Imgur
- @return            Session manager for interacting with Imgur anonymously
+ @param delegate    delegate to respond to required imgur delegate methods
  */
-+(instancetype)anonymousSessionWithClientID:(NSString *)clientID;    
-/**
- Reset the session with these manual parameters. Leave secret nil and authType IMGNoAuthType for anonymous session configuraton.
- @param clientID    client Id string as registered with Imgur
- @param secret      secret string as registered with Imgur
- @param authType    type of auth for session
- */
--(void)resetWithClientID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType;
++(instancetype)anonymousSessionWithClientID:(NSString *)clientID withDelegate:(id<IMGSessionDelegate>)delegate;
 
 #pragma mark - Authentication
 
@@ -236,30 +228,20 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 -(void)setAuthCode:(NSString*)code;
 /**
- Returns status of session authentication. Based on token expiry, not gauranteed to work live.
+ Returns status of session authentication. Based on token expiry, not gauranteed to be accurate.
  @return    IMGAuthState state of current session
  */
 -(IMGAuthState)sessionAuthState;
 /**
- Retrieves URL associated with website authorization page for session authentication type
- @return    authorization URL to open in Webview or Safari
- */
-- (NSURL *)authenticateWithExternalURL;
-/**
- Authenticates immediately by requesting refresh token using inputted code. Not needed. Lazily authenticates before each request by using setAuthCode:
- @param code     code input string for authorization
- */
-- (void)authenticateWithCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
-/**
- Manually authenticate directly from refresh token bypassing code input. Note that code input from oath/token will invalidate previous refresh tokens.
+ Authenticate manually and immediately directly from refresh token. Note that code input from oath/token will invalidate previous refresh tokens. Necessary to avoid code input for persisting authentications between app launches.
  @param refreshToken     valid refresh token to manually set
  */
 -(void)authenticateWithRefreshToken:(NSString*)refreshToken;
 /**
- String constant for auth type
+ Authenticates immediately by requesting refresh token using inputted code. Not necessary. Lazily authenticates before each request by using setAuthCode:
+ @param code     code input string for authorization
  */
-+(NSString*)strForAuthType:(IMGAuthType)authType;
-
+- (void)authenticateWithCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Authorized User Account
 
@@ -269,9 +251,12 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param failure block invoked on failed request
  */
 -(void)refreshUserAccount:(void (^)(IMGAccount * user))success failure:(void (^)(NSError * err))failure;
+/**
+ Requests the logged-in user's account. Observe IMGRefreshedUserNotification or imgurSessionUserRefreshed: delegate method for asynchronous result.
+ */
 -(void)refreshUserAccount;
 
-#pragma mark - Requests
+#pragma mark - Imgur Request Methods - Handles authentication state, responding to errors and tracking
 
 -(NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask * task, id responseObject))success failure:(void (^)( NSError * error))failure;
 
@@ -283,23 +268,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Post request with body completion block. Needed to re-implement from AFNetworking implementation without super call because progress is not handled in AFnetworking
  */
 -(NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLSessionDataTask *, id))success progress:(NSProgress * __autoreleasing *)progress  failure:(void (^)(NSError * error))failure;
-
-
-#pragma mark - Rate Limit Tracking
-
-/**
- Tracks rate limiting using HTTP headers from the response
- @param response HTTP response returned from Imgur call
- */
--(void)updateClientRateLimiting:(NSHTTPURLResponse*)response;
-
-#pragma mark - Model Tracking
-
-/**
- Tracks new imgur Model objects being created to allow introspection by client
- @param model the model object that was created
- */
--(void)trackModelObjectsForDelegateHandling:(id)model;
 
 
 @end

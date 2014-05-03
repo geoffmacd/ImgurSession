@@ -47,16 +47,15 @@
     anon = [imgurClient[@"anonymous"] boolValue];
     
     if(anon){
-        [IMGSession anonymousSessionWithClientID:clientID];
+        [IMGSession anonymousSessionWithClientID:clientID withDelegate:self];
         [[IMGSession sharedInstance] securityPolicy].allowInvalidCertificates = YES;
     } else {
         //Lazy init, may already exist
-        IMGSession * ses = [IMGSession authenticatedSessionWithClientID:clientID secret:clientSecret authType:IMGPinAuth];
+        IMGSession * ses = [IMGSession authenticatedSessionWithClientID:clientID secret:clientSecret authType:IMGPinAuth withDelegate:self];
         [[IMGSession sharedInstance] securityPolicy].allowInvalidCertificates = YES;
         if([imgurClient[@"refreshToken"] length])
             ses.refreshToken = imgurClient[@"refreshToken"];
     }
-    [[IMGSession sharedInstance] setDelegate:self];
     
     //failure block
     failBlock = ^(NSError * error) {

@@ -33,7 +33,7 @@
     NSDictionary *infos = [[NSBundle bundleForClass:[self class]] infoDictionary];
     
     //dummy auth session that will always claim to be properly authenticated even though its not, otherwise we wrongly attempt refresh
-    [IMGSession authenticatedSessionWithClientID:@"ffdsf" secret:@"dfdsf" authType:IMGPinAuth];
+    [IMGSession authenticatedSessionWithClientID:@"ffdsf" secret:@"dfdsf" authType:IMGPinAuth withDelegate:self];
     [[IMGSession sharedInstance] setRefreshToken:@"efssdfsd"];
     [[IMGSession sharedInstance] setAccessToken:@"efssdfsd"];
     [[IMGSession sharedInstance] setAccessTokenExpiry:[NSDate dateWithTimeIntervalSinceNow:10000000]];
