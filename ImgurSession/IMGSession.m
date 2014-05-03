@@ -120,6 +120,7 @@
     
     self.clientID = clientID;
     self.authType = authType;
+    self.delegate = delegate;
     
     if(secret){
         self.secret = secret;
@@ -145,6 +146,7 @@
         [self informClientAuthStateChanged:IMGAuthStateAnon];
     }
     
+    //setup reachability manager to notify delegate of lost connections
     self.imgurReachability = [AFNetworkReachabilityManager managerForDomain:@"imgur.com"];
     __weak typeof(self) welf = self;
     [self.imgurReachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -277,8 +279,8 @@
     });
     
     //keep track of multiple file uploads with semaphore
-    static dispatch_once_t twiceToken;
-    dispatch_once(&twiceToken, ^{
+    static dispatch_once_t semaToken;
+    dispatch_once(&semaToken, ^{
         self.refreshSemaphore  = dispatch_semaphore_create(0);
     });
     
@@ -286,7 +288,8 @@
         
         IMGAuthState state = [self sessionAuthState];
         
-        if(state == IMGAuthStateExpired){
+        //refresh even if we think we are authenticated already because this was called in response to failure
+        if(state == IMGAuthStateExpired || state == IMGAuthStateAuthenticated){
             //refresh access token with refresh token
             
             NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
@@ -410,7 +413,7 @@
                 if(failure)
                     failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorCouldNotAuthenticate userInfo:nil]);
                 
-            } else {//if(state == IMGAuthStateAnon || state == IMGAuthStateAuthenticated){
+            } else {//if(state == IMGAuthStateAnon){
                 
                 //just go to completion we don't care
                 if(success)
@@ -493,10 +496,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedNotification object:fresh];
             });
             
-        } failure:^(NSError * err) {
-            
-            //fail silently
-        }];
+        } failure:nil];
     }
 }
 
@@ -534,7 +534,7 @@
 - (void)setAuthorizationHeader:(NSDictionary *)tokens{
     //store authentication from oauth/token response and set metadata
     
-    //refresh token
+    //refresh token may not be here if we are refreshing
     if(tokens[@"refresh_token"]){
         self.refreshToken = tokens[@"refresh_token"];
     }
@@ -556,7 +556,6 @@
     
     [self refreshAuthentication:nil failure:nil];
 }
-
 
 #pragma mark - Rate Limit Tracking
 

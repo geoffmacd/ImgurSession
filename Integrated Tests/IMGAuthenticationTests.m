@@ -27,6 +27,8 @@
 
 - (void)setAuthorizationHeader:(NSDictionary *)tokens;
 
+-(void)refreshAuthentication:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+
 @end
 
 
@@ -114,6 +116,44 @@
      expect(isSuccess).will.beTruthy();
 }
 
+-(void)testRequestWhileRefreshing{
+    //attempts to test ability to respond to expired authentication while other requests are attempting and only refresh auth once
+    
+    __block BOOL isSuccess;
+    
+    [[IMGSession sharedInstance] refreshUserAccount:^(IMGAccount *user) {
+        
+        [[IMGSession sharedInstance] refreshUserAccount:nil failure:failBlock];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [[IMGSession sharedInstance] refreshUserAccount:nil failure:failBlock];
+        });
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [[IMGSession sharedInstance] refreshUserAccount:nil failure:failBlock];
+            
+            [[IMGSession sharedInstance] setAccessToken:nil];
+            
+            [[IMGSession sharedInstance] refreshAuthentication:^(NSString *refreshToken) {
+                
+                NSLog(@"Refreshed token - %@", refreshToken);
+                
+            } failure:failBlock];
+            
+            [[IMGSession sharedInstance] refreshUserAccount:^(IMGAccount *user) {
+                
+                isSuccess = YES;
+                
+            } failure:failBlock];
+        });
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
 -(void)testSuspend{
     
     __block BOOL isSuccess;
@@ -188,6 +228,7 @@
     } failure:failBlock];
     
     expect(isAwaitingRefresh).will.beTruthy();
+    //waits until it observes that the accessToken has been updated from the 5 second timeout automatically refreshing auth with refresh
     expect(ses.accessToken != oldAccess).will.beTruthy();
 }
 
