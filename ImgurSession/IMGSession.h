@@ -157,6 +157,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (readonly, nonatomic) IMGAccount * user;
 /**
+ User notifications
+ */
+@property (readonly, nonatomic) NSArray * notifications;
+/**
  Time period when notification updates are requested to see if user has new updates. Set to 0 to disable. 30 seconds by default. Only for authroized Sessions.
  */
 @property  (readwrite,nonatomic) NSInteger notificationRefreshPeriod;
@@ -238,7 +242,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 -(void)setAuthenticationInputCode:(NSString*)code;
 /**
- Authenticate manually and immediately directly from refresh token. Note that code input from oath/token will invalidate previous refresh tokens. Necessary to avoid code input for persisting authentications between app launches.
+ Authenticates immediately directly from refresh token. Note that code input from oath/token will invalidate previous refresh tokens. Necessary to avoid code input for persisting authentications between app launches.
  @param refreshToken     valid refresh token to manually set
  */
 -(void)authenticateWithRefreshToken:(NSString*)refreshToken;
@@ -246,7 +250,7 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Authenticates immediately by requesting refresh token using inputted code. Not necessary. Lazily authenticates before each request by using setAuthCode:
  @param code     code input string for authorization
  */
-- (void)authenticateWithCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateWithCode:(NSString*)code;
 /**
  Returns status of session authentication. Based on token expiry, not gauranteed to be accurate.
  @return    IMGAuthState state of current session

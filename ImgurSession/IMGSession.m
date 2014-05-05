@@ -238,11 +238,7 @@
 }
 
 -(void)authenticate:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
-    
-    self.accessTokenExpiry = nil;
-    self.accessToken = nil;
-    self.refreshToken = nil;
-    //there may a be a code we don't want to erase
+
     
     [self refreshAuthentication:^(NSString *refreshToken) {
         
@@ -496,18 +492,21 @@
 -(void)authenticateWithRefreshToken:(NSString*)refreshToken{
     
     self.refreshToken = refreshToken;
-    
     //set access token to nil to ensure we have manually expired access tokens if they exist so that we get IMGAuthStateExpired to refresh
     self.accessToken = nil;
     self.codeAwaitingAuthentication = nil;
     
-    [self refreshAuthentication:nil failure:nil];
+    [self authenticate];
 }
 
-- (void)authenticateWithCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
+- (void)authenticateWithCode:(NSString*)code{
     
     [self setAuthenticationInputCode:code];
-    [self authenticate:success failure:failure];
+    //set access token to nil to ensure we have manually expired access tokens if they exist so that we get IMGAuthStateExpired to refresh
+    self.accessToken = nil;
+    self.refreshToken = nil;
+    
+    [self authenticate];
 }
 
 #pragma mark - Authorized User Account
