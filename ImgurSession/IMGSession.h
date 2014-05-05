@@ -28,7 +28,7 @@ static NSString * const IMGModelFetchedNotification = @"IMGModelFetchedNotificat
 static NSString * const IMGAuthChangedNotification = @"IMGAuthChangedNotification";
 static NSString * const IMGAuthRefreshedNotification = @"IMGAuthRefreshedNotification";
 static NSString * const IMGRefreshedUserNotification = @"IMGRefreshedUserNotification";
-static NSString * const IMGRefreshedNotification = @"IMGRefreshedNotificationNotification";
+static NSString * const IMGRefreshedNotificationsNotification = @"IMGRefreshedNotificationsNotification";
 static NSString * const IMGRequestFailedNotification = @"IMGRequestFailedNotification";
 static NSString * const IMGReachabilityChangedNotification = @"IMGReachabilityChangedNotification";
 
@@ -198,6 +198,8 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (weak) id<IMGSessionDelegate> delegate;
 
+#pragma mark - Public methods
+
 #pragma mark - Initialize
 
 /**
@@ -223,15 +225,18 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
 #pragma mark - Authentication
 
 /**
+ Immediately attempts to authenticate based on state of the session. If it does have a refresh token, this will post to oauth/token to refresh access tokens. If it does not have a refresh token, will authenticate with user inputted code. If there is not a user-inputted code, will attempt to retrieve from external webview.
+ */
+-(void)authenticate:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+/**
+ Immediately attempts to authenticate based on state of the session. Observe IMGAuthChangedNotification or imgurSessionAuthStateChanged: for asynchronous result.
+ */
+-(void)authenticate;
+/**
  Sets the session input code retrieved by the OAuth service upon allowing the application permission via external web service. This code will be used lazily the next time a request is made to acquire a new refresh token. If this is never set the session will never authenicate unless manually using authenticateWithRefreshToken: or authenticateWithType:
  @param code input code to be submitted to OAuth to retrieve refresh token with
  */
--(void)setAuthCode:(NSString*)code;
-/**
- Returns status of session authentication. Based on token expiry, not gauranteed to be accurate.
- @return    IMGAuthState state of current session
- */
--(IMGAuthState)sessionAuthState;
+-(void)setAuthenticationInputCode:(NSString*)code;
 /**
  Authenticate manually and immediately directly from refresh token. Note that code input from oath/token will invalidate previous refresh tokens. Necessary to avoid code input for persisting authentications between app launches.
  @param refreshToken     valid refresh token to manually set
@@ -242,6 +247,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  @param code     code input string for authorization
  */
 - (void)authenticateWithCode:(NSString*)code success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure;
+/**
+ Returns status of session authentication. Based on token expiry, not gauranteed to be accurate.
+ @return    IMGAuthState state of current session
+ */
+-(IMGAuthState)sessionAuthState;
 
 #pragma mark - Authorized User Account
 

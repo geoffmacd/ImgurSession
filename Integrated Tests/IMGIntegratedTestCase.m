@@ -32,7 +32,7 @@
     //run before each test
     
     //30 second timeout
-    [Expecta setAsynchronousTestTimeout:100.0];
+    [Expecta setAsynchronousTestTimeout:500.0];
     
         
     // Storing various testing values
@@ -246,7 +246,7 @@
     scanf("%s", pin);
     
     //send pin code to retrieve access tokens
-    [[IMGSession sharedInstance] setAuthCode:[NSString stringWithUTF8String:pin]];
+    [[IMGSession sharedInstance] setAuthenticationInputCode:[NSString stringWithUTF8String:pin]];
     
     //we need to continue previous requests this way
     completion();

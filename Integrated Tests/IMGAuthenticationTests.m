@@ -75,7 +75,7 @@
     [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
         
         //set code awaits
-        [[IMGSession sharedInstance] setAuthCode:@"badcode"];
+        [[IMGSession sharedInstance] setAuthenticationInputCode:@"badcode"];
         
         //request should fail after determining auth not possible
         [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
@@ -99,18 +99,18 @@
      __block BOOL isSuccess;
     
     //after getting correct tokens
-    [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+    [[IMGSession sharedInstance] authenticate:^(NSString *refreshToken) {
         
-         //sets bad access token in header which will cause re-auth with correct refresh token
+        //sets bad access token in header which will cause re-auth with correct refresh token
         [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
-         
-         //should fail and trigger re-auth
-         [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
-         
-             isSuccess = YES;
-             expect(account.username).beTruthy();
-         
-         } failure:failBlock];
+        
+        //should fail and trigger re-auth
+        [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
+            
+            isSuccess = YES;
+            expect(account.username).beTruthy();
+            
+        } failure:failBlock];
     } failure:failBlock];
      
      expect(isSuccess).will.beTruthy();
@@ -192,7 +192,7 @@
         [[IMGSession sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", @"BadAccessToken"] forHTTPHeaderField:@"Authorization"];
         [[IMGSession sharedInstance] setRefreshToken:@"blahblahblah"];
         
-        //should fail request, then attempt refresh, should fail refresh, then attempt code input before retrieving new refresh code and continuing requests
+        //should fail request, then attempt refresh, should post token refresh, then attempt code input before retrieving new refresh code and continuing with requests
         [IMGAccountRequest accountWithUser:@"me" success:^(IMGAccount *account) {
             
             //should go here
