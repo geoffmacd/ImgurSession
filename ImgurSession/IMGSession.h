@@ -157,10 +157,6 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (readonly, nonatomic) IMGAccount * user;
 /**
- User notifications
- */
-@property (readonly, nonatomic) NSArray * notifications;
-/**
  Time period when notification updates are requested to see if user has new updates. Set to 0 to disable. 30 seconds by default. Only for authroized Sessions.
  */
 @property  (readwrite,nonatomic) NSInteger notificationRefreshPeriod;

@@ -239,7 +239,6 @@
 
 -(void)authenticate:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
 
-    
     [self refreshAuthentication:^(NSString *refreshToken) {
         
         if(success)
@@ -276,6 +275,15 @@
         
         if(success)
             success(self.refreshToken);
+        
+        //alert after resuming
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionTokenRefreshed)])
+                [_delegate imgurSessionTokenRefreshed];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:IMGAuthRefreshedNotification object:nil];
+        });
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
