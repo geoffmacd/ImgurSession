@@ -18,8 +18,8 @@
 @property (readwrite,nonatomic) NSInteger accountID;
 @property (readwrite,nonatomic) IMGComment * reply;
 @property (readwrite,nonatomic) IMGConversation * conversation;
-@property (readwrite,nonatomic) BOOL isViewed;
 @property (readwrite,nonatomic) BOOL isReply;
+@property (readwrite,nonatomic) NSDate * datetime;
 
 @end
 
@@ -38,6 +38,7 @@
         
         IMGComment * comment = [[IMGComment alloc] initWithJSONObject:content error:error];
         _reply = comment;
+        _datetime = comment.datetime;
     }
     return [self trackModels];
 }
@@ -55,6 +56,7 @@
         
         IMGConversation * convo = [[IMGConversation alloc] initWithJSONObjectFromNotification:content error:error];
         _conversation = convo;
+        _datetime = convo.datetime;
     }
     return [self trackModels];
 }
@@ -96,7 +98,8 @@
     IMGConversation * conversation = [decoder decodeObjectForKey:@"conversation"];
     BOOL isViewed = [[decoder decodeObjectForKey:@"isViewed"] boolValue];
     BOOL isReply = [[decoder decodeObjectForKey:@"isReply"] boolValue];
-    
+    NSDate * date = [decoder decodeObjectForKey:@"date"];
+        
     if (self = [super initWithCoder:decoder]) {
         _accountID = accountID;
         _notificationID = notificationID;
@@ -105,6 +108,7 @@
         _conversation = conversation;
         _isViewed = isViewed;
         _isReply = isReply;
+        _datetime = date;
     }
     return self;
 }
@@ -116,6 +120,7 @@
     [coder encodeObject:self.notificationID forKey:@"notificationID"];
     [coder encodeObject:self.conversation forKey:@"conversation"];
     [coder encodeObject:self.reply forKey:@"reply"];
+    [coder encodeObject:self.datetime forKey:@"date"];
     
     [coder encodeObject:@(self.accountID) forKey:@"accountID"];
     [coder encodeObject:@(self.isViewed) forKey:@"isViewed"];
@@ -133,6 +138,7 @@
         [copy setNotificationID:[self.notificationID copyWithZone:zone]];
         [copy setReply:[self.reply copyWithZone:zone]];
         [copy setConversation:[self.conversation copyWithZone:zone]];
+        [copy setDatetime:[self.datetime copyWithZone:zone]];
         
         // Set primitives
         [copy setAccountID:self.accountID];

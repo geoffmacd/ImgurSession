@@ -159,12 +159,12 @@
 #pragma mark - Replies associated with account
 
 /**
- Returns all new reply notifications for the current account
+ Returns all reply notification for the current account
  */
-+ (void)accountReplies:(void (^)(NSArray * freshReplies))success failure:(void (^)(NSError * error))failure;
++ (void)accountAllReplies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
- Returns all of the reply notifications for the current account
+ Returns all unread reply notifications for the current account
  */
-+ (void)accountRepliesWithFresh:(BOOL)freshOnly success:(void (^)(NSArray * replies))success failure:(void (^)(NSError * error))failure;
++ (void)accountUnreadReplies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 
 @end

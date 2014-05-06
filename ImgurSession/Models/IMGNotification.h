@@ -26,7 +26,7 @@
 /**
  Has notification been viewed yet?
  */
-@property (readonly,nonatomic) BOOL isViewed;
+@property (readwrite,nonatomic) BOOL isViewed;
 /**
  Is the notification a IMGComment? Else it is IMGConversation
  */
@@ -39,6 +39,10 @@
  Conversation object if this notification was a conversation
  */
 @property (readonly,nonatomic) IMGConversation * conversation;
+/**
+ Datetime notification was triggered
+ */
+@property (readonly,nonatomic) NSDate * datetime;
 
 
 /**
@@ -49,5 +53,6 @@
  Special Init for notification with IMGConversation object
  */
 - (instancetype)initConversationNotificationWithJSONObject:(NSDictionary *)jsonData error:(NSError *__autoreleasing *)error;
+
 
 @end

@@ -116,9 +116,9 @@
     
     __block BOOL isSuccess;
     
-    [IMGAccountRequest accountReplies:^(NSArray * replies) {
+    [IMGAccountRequest accountUnreadReplies:^(NSArray * replies) {
 
-        [IMGAccountRequest accountRepliesWithFresh:NO success:^(NSArray * oldReplies) {
+        [IMGAccountRequest accountAllReplies:^(NSArray * oldReplies) {
         
             isSuccess = YES;
 

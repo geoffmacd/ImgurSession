@@ -39,7 +39,7 @@
         return;
     }
     
-    [[IMGSession sharedInstance] GET:path parameters:@{@"new":(unreadOnly ? @YES : @NO )} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [[IMGSession sharedInstance] GET:path parameters:@{@"new":(unreadOnly ? @"true" : @"false" )} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         
         NSArray * repliesJSON = responseObject[@"replies"];

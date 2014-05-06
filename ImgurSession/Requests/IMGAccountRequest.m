@@ -188,7 +188,7 @@
         return;
     }
     
-    NSDictionary * params = @{@"bio":bio,@"public_images":(publicImages ? @YES : @NO ),@"messaging_enabled":(msgEnabled ? @YES : @NO),@"album_privacy":[IMGBasicAlbum strForPrivacy:privacy],@"accepted_gallery_terms":(galTerms ? @YES : @NO )};
+    NSDictionary * params = @{@"bio":bio,@"public_images":(publicImages ? @"true" : @"false" ),@"messaging_enabled":(msgEnabled ? @"true" : @"false"),@"album_privacy":[IMGBasicAlbum strForPrivacy:privacy],@"accepted_gallery_terms":(galTerms ? @"true" : @"false" )};
     
     //put or post
     [[IMGSession sharedInstance] POST:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -487,7 +487,13 @@
 
 #pragma mark - Replies associated with account
 
-+ (void)accountReplies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)accountAllReplies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    //fresh replies only
+    [self accountRepliesWithFresh:NO success:success failure:failure];
+}
+
++ (void)accountUnreadReplies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     //fresh replies only
     [self accountRepliesWithFresh:YES success:success failure:failure];
@@ -503,7 +509,7 @@
         return;
     }
     
-    NSDictionary * params = @{@"new":(freshOnly ? @YES : @NO )};
+    NSDictionary * params = @{@"new":(freshOnly ? @"true" : @"false" )};
     
     [[IMGSession sharedInstance] GET:path parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
