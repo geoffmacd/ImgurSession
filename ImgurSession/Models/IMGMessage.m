@@ -8,6 +8,8 @@
 
 #import "IMGMessage.h"
 
+#import "IMGSession.h"
+
 @interface IMGMessage ()
 
 @property (readwrite,nonatomic) NSString *messageID;
@@ -35,6 +37,18 @@
         _body = jsonData[@"body"];
         _datetime = [NSDate dateWithTimeIntervalSince1970:[jsonData[@"datetime"] integerValue]];
         _conversationID = [jsonData[@"conversation_id"] integerValue];
+    }
+    return [self trackModels];
+}
+
+- (instancetype)initWithBody:(NSString*)body{
+    
+    if(self = [super init]) {
+        
+        _fromUsername = [[IMGSession sharedInstance] user].username;
+        _authorID = [[IMGSession sharedInstance] user].accountID;
+        _body = body;
+        _datetime = [NSDate date];
     }
     return [self trackModels];
 }

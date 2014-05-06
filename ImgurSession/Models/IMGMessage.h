@@ -43,7 +43,10 @@
  */
 @property (readonly,nonatomic) NSInteger conversationID;
 
-
+/**
+ Custom Init for use when usinbg model that hasn't been returned from server yet
+ */
+- (instancetype)initWithBody:(NSString*)body;
 
 //ALL MESSAGE ENDPOINTS ARE DEPRECATED, USE CONVERSATION INSTEAD
 
