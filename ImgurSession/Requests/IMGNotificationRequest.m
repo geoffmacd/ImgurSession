@@ -20,11 +20,17 @@
 
 #pragma mark - Load
 
-+ (void)notifications:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    return [IMGNotificationRequest notificationsWithFresh:YES success:success failure:failure];
++ (void)unreadNotifications:(void (^)(NSArray * notifications))success failure:(void (^)(NSError * error))failure{
+    
+    return [IMGNotificationRequest notificationsWithUnread:YES success:success failure:failure];
 }
 
-+ (void)notificationsWithFresh:(BOOL)freshOnly success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++ (void)allNotifications:(void (^)(NSArray * notifications))success failure:(void (^)(NSError * error))failure{
+    
+    return [IMGNotificationRequest notificationsWithUnread:NO success:success failure:failure];
+}
+
++ (void)notificationsWithUnread:(BOOL)unreadOnly success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     NSString *path = [self path];
     
     if([[IMGSession sharedInstance] isAnonymous]){
@@ -33,7 +39,7 @@
         return;
     }
     
-    [[IMGSession sharedInstance] GET:path parameters:@{@"new":(freshOnly ? @YES : @NO )} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [[IMGSession sharedInstance] GET:path parameters:@{@"new":(unreadOnly ? @YES : @NO )} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         
         NSArray * repliesJSON = responseObject[@"replies"];

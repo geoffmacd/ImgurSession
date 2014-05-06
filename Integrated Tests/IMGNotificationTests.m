@@ -20,7 +20,7 @@
     
     __block BOOL isSuccess;
     
-    [IMGNotificationRequest notifications:^(NSArray * notifications) {
+    [IMGNotificationRequest unreadNotifications:^(NSArray * notifications) {
         
         isSuccess = YES;
         
@@ -33,7 +33,7 @@
     
     __block BOOL isSuccess;
     
-    [IMGNotificationRequest notifications:^(NSArray * notifications) {
+    [IMGNotificationRequest unreadNotifications:^(NSArray * notifications) {
         
         IMGNotification * first = [notifications firstObject];
         
@@ -58,7 +58,7 @@
     
     __block BOOL isSuccess;
     
-    [IMGNotificationRequest notificationsWithFresh:NO success:^(NSArray * notifications) {
+    [IMGNotificationRequest allNotifications:^(NSArray * notifications) {
         
         isSuccess = YES;
         

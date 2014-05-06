@@ -557,7 +557,7 @@
     //only if delegate responds do we check
     if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNewNotifications:)]){
         
-        [IMGNotificationRequest notifications:^(NSArray * fresh) {
+        [IMGNotificationRequest unreadNotifications:^(NSArray * fresh) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_delegate imgurSessionNewNotifications:fresh];

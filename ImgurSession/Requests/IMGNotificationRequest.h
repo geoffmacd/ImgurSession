@@ -18,13 +18,14 @@
 
 #pragma mark - Load
 /**
- Get all fresh notifications for the user that's currently logged in. Must be logged in.
+ Get all unread  notifications for the user that's currently logged in. Must be logged in.
  */
-+ (void)notifications:(void (^)(NSArray * notifications))success failure:(void (^)(NSError * error))failure;
++ (void)unreadNotifications:(void (^)(NSArray * notifications))success failure:(void (^)(NSError * error))failure;
+
 /**
  Get all notifications for the user that's currently logged in. Must be logged in.
  */
-+ (void)notificationsWithFresh:(BOOL)freshOnly success:(void (^)(NSArray * freshNotifications))success failure:(void (^)(NSError * error))failure;
++ (void)allNotifications:(void (^)(NSArray * notifications))success failure:(void (^)(NSError * error))failure;
 /**
  Returns the data about a specific notification. Must be logged in.
  */

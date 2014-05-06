@@ -21,7 +21,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"freshnotification.json"];
     
-    [IMGNotificationRequest notifications:^(NSArray * notifications) {
+    [IMGNotificationRequest unreadNotifications:^(NSArray * notifications) {
         
         expect(notifications).haveCountOf(1);
         IMGNotification * first = [notifications firstObject];
@@ -56,7 +56,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"allnotifications.json"];
     
-    [IMGNotificationRequest notificationsWithFresh:NO success:^(NSArray * notifications) {
+    [IMGNotificationRequest allNotifications:^(NSArray * notifications) {
         
         expect(notifications).haveCountOf(1);
         IMGNotification * first = [notifications firstObject];
