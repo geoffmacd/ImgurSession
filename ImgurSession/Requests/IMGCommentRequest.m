@@ -91,7 +91,7 @@
     } failure:failure];
 }
 
-+ (void)replyToComment:(NSString*)caption withImageID:(NSString*)imageId withCommentID:(NSInteger)parentCommentId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
++ (void)replyToComment:(NSString*)caption withImageID:(NSString*)imageId withParentCommentID:(NSInteger)parentCommentId success:(void (^)(NSInteger))success failure:(void (^)(NSError *))failure{
     NSString *path = [self pathWithID:[NSString stringWithFormat:@"%ld",(long)parentCommentId]];
     
     if([[IMGSession sharedInstance] isAnonymous]){

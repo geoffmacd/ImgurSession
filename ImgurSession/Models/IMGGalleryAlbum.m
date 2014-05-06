@@ -138,6 +138,18 @@
     return self.accountURL;
 }
 
+-(void)setUsersVote:(IMGVoteType)vote{
+    
+    self.vote = vote;
+    
+}
+
+-(void)setUsersFav:(BOOL)faved{
+    
+    self.favorite = faved;
+}
+
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {

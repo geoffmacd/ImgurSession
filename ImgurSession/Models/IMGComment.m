@@ -10,6 +10,7 @@
 
 #import "IMGGalleryAlbum.h"
 #import "IMGGalleryImage.h"
+#import "IMGSession.h"
 
 @interface IMGComment ()
 
@@ -65,6 +66,23 @@
         _deleted = [jsonData[@"deleted"] boolValue];
         
         _children = jsonData[@"children"];
+    }
+    return [self trackModels];
+}
+
+- (instancetype)initUserCommentWithID:(NSInteger)commentID parentID:(NSInteger)parentID caption:(NSString*)caption{
+    
+    if(self = [super init]) {
+        
+        _commentID = commentID;
+        _caption = caption;
+        _author = [[IMGSession sharedInstance] user].username;//user made the reply
+        _authorID = [[IMGSession sharedInstance] user].accountID;
+        _ups = 0;
+        _downs = 0;
+        _points = 0;
+        _datetime = [NSDate date];//right now
+        _parentID = parentID;
     }
     return [self trackModels];
 }

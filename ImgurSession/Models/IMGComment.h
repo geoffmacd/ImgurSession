@@ -78,4 +78,9 @@
  */
 -(id <IMGGalleryObjectProtocol>)galleryObject;
 
+/**
+ Custom init for when replying to a comment and only the ID is returned by the server
+ */
+- (instancetype)initUserCommentWithID:(NSInteger)commentID parentID:(NSInteger)parentID caption:(NSString*)caption;
+
 @end

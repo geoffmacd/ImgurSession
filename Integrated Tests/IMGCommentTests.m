@@ -27,7 +27,7 @@
         
         [IMGCommentRequest submitComment:@"test comment" withImageID:image.imageID success:^(NSInteger commentId) {
             
-            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withCommentID:commentId success:^(NSInteger replyId) {
+            [IMGCommentRequest replyToComment:@"test reply" withImageID:image.imageID withParentCommentID:commentId success:^(NSInteger replyId) {
                 
                 
                 [IMGCommentRequest deleteCommentWithID:replyId success:^() {

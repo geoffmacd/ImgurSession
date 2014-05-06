@@ -38,7 +38,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"replytocomment.json"];
     
-    [IMGCommentRequest replyToComment:@"test reply" withImageID:@"sdfsdf" withCommentID:4354363476 success:^(NSInteger replyId) {
+    [IMGCommentRequest replyToComment:@"test reply" withImageID:@"sdfsdf" withParentCommentID:4354363476 success:^(NSInteger replyId) {
         
         expect(replyId).beGreaterThan(0);
         isSuccess = YES;

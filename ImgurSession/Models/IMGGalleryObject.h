@@ -49,6 +49,15 @@
  Username who submitted this gallery image or album.
  */
 -(NSString*)fromUsername;
+/**
+ Sets users vote
+ */
+-(void)setUsersVote:(IMGVoteType)vote;
+/**
+ Sets users fav
+ */
+-(void)setUsersFav:(BOOL)faved;
+
 
 @end
 

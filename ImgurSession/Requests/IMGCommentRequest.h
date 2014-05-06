@@ -42,7 +42,7 @@
  @param imageId id of image to comment on
  @param parentCommentId id of parent comment to reply to
  */
-+ (void)replyToComment:(NSString*)caption withImageID:(NSString *)imageID withCommentID:(NSInteger)parentCommentID success:(void (^)(NSInteger commentID))success failure:(void (^)(NSError * error))failure;
++ (void)replyToComment:(NSString*)caption withImageID:(NSString *)imageID withParentCommentID:(NSInteger)parentCommentID success:(void (^)(NSInteger commentID))success failure:(void (^)(NSError * error))failure;
 
 #pragma mark - Delete
 /**
