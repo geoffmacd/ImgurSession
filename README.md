@@ -50,15 +50,12 @@ Anywhere else in the app, make requests which will use the session singleton pre
 
 ```
 
-Support for
-*IMGGalleryRequest  Viral, User Submitted, Hot gallery lists
 
-*IMGAccountRequest  Account retrieval and modification, account images, albums, submissions and favourites
+### Imgur API Support - V3
 
-*IMGConversationRequest  Conversations with other users 
-
-*IMGNotificationRequest  Notifications of events. Automatically configured to retrieve every 30 seconds.
-
-*IMGImageRequest and IMGAlbumRequest CRUD actions with iamges and albums
-
-*IMGCommentRequest  Post comments on images in the gallery
+- `IMGGalleryRequest - Viral, User Submitted, Hot gallery lists`
+- `IMGAccountRequest - Account retrieval and modification, account images, albums, submissions and favourites`
+- `IMGConversationRequest - Conversations with other users`
+- `IMGNotificationRequest - Notifications. Automatically configured to retrieve every 30 seconds.`
+- `IMGImageRequest,IMGAlbumRequest - CRUD actions with iamges and albums`
+- `IMGCommentRequest -  Post comments on images in the gallery`
