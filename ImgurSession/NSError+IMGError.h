@@ -23,6 +23,7 @@
 #define IMGErrorNeededVerificationCouldNotSend  155   //request failed due to email verification needed
 
 //status codes
+#define IMGErrorInvalidRefreshToken             400
 #define IMGErrorRequiresUserAuthentication      401   //valid tokens?
 #define IMGErrorForbidden                       403   //valid tokens or rate limiting?
 #define IMGErrorUserRateLimitExceeded           429   //user rate limit hit

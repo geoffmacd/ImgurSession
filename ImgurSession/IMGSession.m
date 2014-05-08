@@ -375,21 +375,25 @@
                 //resume to allow possible refreshes
                 dispatch_semaphore_signal(self.refreshSemaphore);
                 
-                //need to ask user for a new code input
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                //only ask for webview if we are sure error is not due to internet,etc
+                if(error.code >= IMGErrorInvalidRefreshToken && error.code < 500){
+                
+                    //need to ask user for a new code input
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
+                            
+                            //post code and retrieve new tokens
+                            [self refreshAuthentication:^(NSString * refresh) {
+                                
+                                if(success)
+                                    success(refresh);
+                                
+                            } failure:failure]; //failure will generate IMGErrorCouldNotAuthenticate error code as per above
+                        }];
                         
-                        //post code and retrieve new tokens
-                        [self refreshAuthentication:^(NSString * refresh) {
-                            
-                            if(success)
-                                success(refresh);
-                            
-                        } failure:failure]; //failure will generate IMGErrorCouldNotAuthenticate error code as per above
-                    }];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
-                });
+                        [[NSNotificationCenter defaultCenter] postNotificationName:IMGNeedsExternalWebviewNotification object:nil];
+                    });
+                }
             }];
             //wait for signal from post request before accepting new requests
             dispatch_semaphore_wait(self.refreshSemaphore, DISPATCH_TIME_FOREVER);
