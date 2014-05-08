@@ -369,11 +369,11 @@
             
             [self postForAccessTokens:^(NSString *refreshToken) {
                 
-                if(success)
-                    success(refreshToken);
-                
                 //resume
                 dispatch_semaphore_signal(self.refreshSemaphore);
+                
+                if(success)
+                    success(refreshToken);
                 
             } failure:^(NSError *error) {
                 
@@ -404,11 +404,11 @@
             
             [self postForRefreshTokensWithCode:self.codeAwaitingAuthentication success:^(NSString *refreshToken) {
                 
-                if(success)
-                    success(refreshToken);
-                
                 //resume
                 dispatch_semaphore_signal(self.refreshSemaphore);
+                
+                if(success)
+                    success(refreshToken);
                 
             } failure:^(NSError *error) {
                 
