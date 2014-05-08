@@ -4,7 +4,7 @@ __ImgurSession__ is an Objective-C networking library to easily make [Imgur](htt
 
 # Using
 
-Just import ImgurSession.h and setup the session with your credentials before making any requests. A delegate is required for launching external webviews.
+Just import ImgurSession.h and setup the session with your credentials before making any requests. Two delegate methods are required,
 
 ```
 
@@ -19,11 +19,12 @@ Just import ImgurSession.h and setup the session with your credentials before ma
 
 -(void)imgurSessionNeedsExternalWebview:(NSURL *)url completion:(void (^)())completion{
     
-    NSLog(@"need webview");
-    
-    self.loginCompletion = completion;
-    
+    //open imgur website to authenticate with callback url
     [[UIApplication sharedApplication] openURL:url];
+}
+
+-(void)imgurSessionRateLimitExceeded{
+     ...alert your view controllers...
 }
 
 ```
@@ -34,13 +35,13 @@ Or anonymous session (as configured by registered app on Imgur).
 [IMGSession anonymousSessionWithClientID:@"anonToken" withDelegate:self];
 ```
 
-Anywhere else in the app. Make requests which will use the session singleton previously created to handle authentication and error handling. For example, to retrieve the viral gallery images and albums.
+Anywhere else in the app, make requests which will use the session singleton previously created to handle authentication and error handling. To retrieve the viral gallery:
 
 
 ```
     [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray *objects) {
         
-        [self.tableView reloadData];
+          .....
         
     } failure:^(NSError *error) {
         
@@ -48,3 +49,16 @@ Anywhere else in the app. Make requests which will use the session singleton pre
     }];
 
 ```
+
+Support for
+*IMGGalleryRequest  Viral, User Submitted, Hot gallery lists
+
+*IMGAccountRequest  Account retrieval and modification, account images, albums, submissions and favourites
+
+*IMGConversationRequest  Conversations with other users 
+
+*IMGNotificationRequest  Notifications of events. Automatically configured to retrieve every 30 seconds.
+
+*IMGImageRequest and IMGAlbumRequest CRUD actions with iamges and albums
+
+*IMGCommentRequest  Post comments on images in the gallery
