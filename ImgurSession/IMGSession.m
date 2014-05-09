@@ -128,7 +128,7 @@
         
         if(self.notificationRefreshPeriod){
             //setup timer to check for notifications, does not actually check unless delegate responds
-            self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:self.notificationRefreshPeriod target:self selector:@selector(checkForUserNotifications) userInfo:nil repeats:YES];
+            self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:self.notificationRefreshPeriod target:self selector:@selector(checkUserUnreadNotifications) userInfo:nil repeats:YES];
             [[NSRunLoop mainRunLoop] addTimer:self.notificationRefreshTimer forMode:NSDefaultRunLoopMode];
         }
         
@@ -546,7 +546,7 @@
         });
         
         //also check for notifications if necessary
-        [self checkForUserNotifications];
+        [self checkUserUnreadNotifications];
         
         if(success)
             success(account);
@@ -557,10 +557,10 @@
 /**
  Method request new user notifications if they are available. Called by default every 30 seconds.
  */
--(void)checkForUserNotifications{
+-(void)checkForUserNotifications:(void (^)(NSArray * unreadNotifications))success failure:(void (^)(NSError * err))failure{
     
     //only if delegate responds do we check
-    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNewNotifications:)]){
+    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNewNotifications:)] && [self sessionAuthState] == IMGAuthStateAuthenticated){
         
         [IMGNotificationRequest unreadNotifications:^(NSArray * fresh) {
             
@@ -570,7 +570,14 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:IMGRefreshedNotificationsNotification object:fresh];
             });
             
-        } failure:nil];
+            if(success)
+                success(fresh);
+            
+        } failure:^(NSError *error) {
+            
+            if(failure)
+                failure(error);
+        }];
     }
 }
 
@@ -585,9 +592,19 @@
     //ensure it is authorized session
     if(notificationRefreshPeriod && !self.isAnonymous){
         //setup timer to check for notifications, does not actually check unless delegate responds
-        self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:self.notificationRefreshPeriod target:self selector:@selector(checkForUserNotifications) userInfo:nil repeats:YES];
+        self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:self.notificationRefreshPeriod target:self selector:@selector(checkForUserNotifications:failure:) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.notificationRefreshTimer forMode:NSDefaultRunLoopMode];
     }
+}
+
+-(void)checkUserUnreadNotifications:(void (^)(NSArray * unreadNotifications))success failure:(void (^)(NSError * err))failure{
+    
+    [self checkForUserNotifications:success failure:failure];
+}
+
+-(void)checkUserUnreadNotifications{
+    
+    [self checkForUserNotifications:nil failure:nil];
 }
 
 #pragma mark - Authorization Header

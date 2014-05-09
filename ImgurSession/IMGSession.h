@@ -265,6 +265,16 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Requests the logged-in user's account. Observe IMGRefreshedUserNotification or imgurSessionUserRefreshed: delegate method for asynchronous result.
  */
 -(void)refreshUserAccount;
+/**
+ Requests any unread notifications if they exist for logged in user.
+ @param success completion block invoked on response
+ @param failure block invoked on failed request
+ */
+-(void)checkUserUnreadNotifications:(void (^)(NSArray * unreadNotifications))success failure:(void (^)(NSError * err))failure;
+/**
+ Requests any unread notifications if they exist for logged in user.
+ */
+-(void)checkUserUnreadNotifications;
 
 #pragma mark - Imgur Request Methods - Handles authentication state, responding to errors and tracking
 
