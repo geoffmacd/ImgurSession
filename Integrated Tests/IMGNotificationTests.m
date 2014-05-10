@@ -73,11 +73,11 @@
     //force login
     [[IMGSession sharedInstance] refreshUserAccount:^(IMGAccount *user) {
         
-        //waits until notification refresh happens after 30 seconds
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(40 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[IMGSession sharedInstance] checkUserUnreadNotifications:^(NSArray *unreadNotifications) {
             
             isSuccess = YES;
-        });
+            
+        } failure:failBlock];
         
     } failure:failBlock];
     

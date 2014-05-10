@@ -592,7 +592,7 @@
     //ensure it is authorized session
     if(notificationRefreshPeriod && !self.isAnonymous){
         //setup timer to check for notifications, does not actually check unless delegate responds
-        self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:self.notificationRefreshPeriod target:self selector:@selector(checkForUserNotifications:failure:) userInfo:nil repeats:YES];
+        self.notificationRefreshTimer = [NSTimer timerWithTimeInterval:self.notificationRefreshPeriod target:self selector:@selector(checkUserUnreadNotifications) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.notificationRefreshTimer forMode:NSDefaultRunLoopMode];
     }
 }
