@@ -91,7 +91,7 @@
     if(self = [self initWithBaseURL:[NSURL URLWithString:IMGBaseURL]]){
         
         _warnRateLimit = 100;
-        _notificationRefreshPeriod = 30;
+        _notificationRefreshPeriod = 60;
         
         //to enable rate tracking
         IMGResponseSerializer * responseSerializer = [IMGResponseSerializer serializer];
