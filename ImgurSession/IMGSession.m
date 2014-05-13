@@ -666,7 +666,7 @@
         self.creditsUserReset = [headers[IMGHeaderUserReset] integerValue];
     
     //only warn if headers were included
-    if(headers[IMGHeaderClientRemaining]){
+    if(headers[IMGHeaderUserRemaining]){
         //warn delegate if necessary
         if(_creditsUserRemaining < _warnRateLimit && _creditsUserRemaining > 0){
             

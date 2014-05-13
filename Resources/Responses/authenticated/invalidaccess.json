@@ -1,0 +1,9 @@
+{
+	"data": {
+		"error": "The access token provided is invalid.",
+		"request": "\/3\/account\/me",
+		"method": "GET"
+	},
+	"success": false,
+	"status": 403
+}

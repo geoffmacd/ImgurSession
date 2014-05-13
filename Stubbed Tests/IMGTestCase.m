@@ -67,6 +67,21 @@
     }];
 }
 
+-(void)stubWithFile:(NSString * )filename withHeader:(NSDictionary*)headerDict{
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return YES;
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        
+        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:@{@"Content-Type":@"text/json"}];
+        [dict addEntriesFromDictionary:headerDict];
+        
+        // Stub it with our "wsresponse.json" stub file
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(filename,nil)
+                                                statusCode:200 headers:[NSDictionary dictionaryWithDictionary:dict]];
+    }];
+}
+
 -(void)stubWithFile:(NSString *)filename withStatusCode:(int)status {
     
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
@@ -81,6 +96,7 @@
 
 -(void)imgurSessionNeedsExternalWebview:(NSURL *)url completion:(void (^)())completion{
     
+    self.calledImgurView = YES;
 }
 
 -(void)imgurSessionModelFetched:(id)model{

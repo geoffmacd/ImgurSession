@@ -23,6 +23,8 @@
     
 }
 
+@property BOOL calledImgurView;
+
 /**
  Stub reponse for next request
  */
@@ -31,6 +33,10 @@
  Stub reponse for next request with status code option
  */
 -(void)stubWithFile:(NSString *)filename withStatusCode:(int)status;
+/**
+ Stub reponse for next request with custom headers
+ */
+-(void)stubWithFile:(NSString * )filename withHeader:(NSDictionary*)headerDict;
 
 
 @end

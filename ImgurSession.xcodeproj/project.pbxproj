@@ -169,6 +169,14 @@
 		C3C6B75E19227BEE007C32C8 /* GMMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B75D19227BEE007C32C8 /* GMMViewController.m */; };
 		C3C6B76019227BEE007C32C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B75F19227BEE007C32C8 /* Images.xcassets */; };
 		C3C6B7CF1922A3C1007C32C8 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
+		C3C6B7D11922B0BD007C32C8 /* invalidrefresh.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D01922B0BD007C32C8 /* invalidrefresh.json */; };
+		C3C6B7D21922B0BD007C32C8 /* invalidrefresh.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D01922B0BD007C32C8 /* invalidrefresh.json */; };
+		C3C6B7D41922B49D007C32C8 /* refreshedtokens.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D31922B49D007C32C8 /* refreshedtokens.json */; };
+		C3C6B7D51922B49D007C32C8 /* refreshedtokens.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D31922B49D007C32C8 /* refreshedtokens.json */; };
+		C3C6B7D71922B8EB007C32C8 /* invalidaccess.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D61922B8EB007C32C8 /* invalidaccess.json */; };
+		C3C6B7D81922B8EB007C32C8 /* invalidaccess.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D61922B8EB007C32C8 /* invalidaccess.json */; };
+		C3C6B7DA1922BA1D007C32C8 /* invalidcode.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D91922BA1D007C32C8 /* invalidcode.json */; };
+		C3C6B7DB1922BA1D007C32C8 /* invalidcode.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D91922BA1D007C32C8 /* invalidcode.json */; };
 		C3CDA2DD18CA66DA003B7F96 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		C3CDA2DE18CA66DA003B7F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
 		C3CDA2DF18CA66DA003B7F96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A918CA1F87009D9C57 /* UIKit.framework */; };
@@ -442,6 +450,10 @@
 		C3C6B75D19227BEE007C32C8 /* GMMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMMViewController.m; sourceTree = "<group>"; };
 		C3C6B75F19227BEE007C32C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C3C6B7B21922A20E007C32C8 /* libPods-ImgurSession-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ImgurSession-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-ImgurSession-AFNetworking.a"; sourceTree = "<group>"; };
+		C3C6B7D01922B0BD007C32C8 /* invalidrefresh.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = invalidrefresh.json; path = authenticated/invalidrefresh.json; sourceTree = "<group>"; };
+		C3C6B7D31922B49D007C32C8 /* refreshedtokens.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = refreshedtokens.json; path = authenticated/refreshedtokens.json; sourceTree = "<group>"; };
+		C3C6B7D61922B8EB007C32C8 /* invalidaccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = invalidaccess.json; path = authenticated/invalidaccess.json; sourceTree = "<group>"; };
+		C3C6B7D91922BA1D007C32C8 /* invalidcode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = invalidcode.json; path = authenticated/invalidcode.json; sourceTree = "<group>"; };
 		C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSession Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGAccountTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -963,6 +975,9 @@
 				C3F1B3D618E369A9004ED254 /* conversationswithravener.json */,
 				C3F1B3D718E369A9004ED254 /* conversationwithid.json */,
 				C3F1B3D818E369A9004ED254 /* deletecomment.json */,
+				C3C6B7D91922BA1D007C32C8 /* invalidcode.json */,
+				C3C6B7D01922B0BD007C32C8 /* invalidrefresh.json */,
+				C3C6B7D61922B8EB007C32C8 /* invalidaccess.json */,
 				C3F1B3D918E369A9004ED254 /* deleteimage.json */,
 				C3F1B3DA18E369A9004ED254 /* deletenotification.json */,
 				C3F1B3DB18E369A9004ED254 /* freshnotification.json */,
@@ -971,6 +986,7 @@
 				C3F1B3DE18E369A9004ED254 /* myalbumcount.json */,
 				C3F1B3DF18E369A9004ED254 /* myalbumids.json */,
 				C3F1B3E018E369A9004ED254 /* myalbums.json */,
+				C3C6B7D31922B49D007C32C8 /* refreshedtokens.json */,
 				C3F1B3E118E369A9004ED254 /* myalbumwithid.json */,
 				C3F1B3E218E369A9004ED254 /* mycommentcount.json */,
 				C3F1B3E318E369A9004ED254 /* mycommentdeletewithid.json */,
@@ -1377,6 +1393,7 @@
 				C3F1B3FD18E369A9004ED254 /* deletenotification.json in Resources */,
 				C3F1B40918E369A9004ED254 /* mycommentwithid.json in Resources */,
 				C3F1B3F818E369A9004ED254 /* conversations.json in Resources */,
+				C3C6B7D21922B0BD007C32C8 /* invalidrefresh.json in Resources */,
 				C3F1B41518E369A9004ED254 /* replytocomment.json in Resources */,
 				C3F1B41618E369A9004ED254 /* topgallery.json in Resources */,
 				C3F1B40618E369A9004ED254 /* mycommentdeletewithid.json in Resources */,
@@ -1384,6 +1401,7 @@
 				C3F1B40318E369A9004ED254 /* myalbums.json in Resources */,
 				C3F1B41118E369A9004ED254 /* mysettingschange.json in Resources */,
 				C3F1B40D18E369A9004ED254 /* myimageIDs.json in Resources */,
+				C3C6B7D81922B8EB007C32C8 /* invalidaccess.json in Resources */,
 				C3F1B40F18E369A9004ED254 /* myimagewithid.json in Resources */,
 				C3F1B40018E369A9004ED254 /* myaccount.json in Resources */,
 				C3F1B41018E369A9004ED254 /* mysettings.json in Resources */,
@@ -1400,7 +1418,9 @@
 				C3F1B40218E369A9004ED254 /* myalbumids.json in Resources */,
 				C3F1B3FC18E369A9004ED254 /* deleteimage.json in Resources */,
 				C35A124418FDAD1C007D2260 /* example.gif in Resources */,
+				C3C6B7DB1922BA1D007C32C8 /* invalidcode.json in Resources */,
 				C3F1B40118E369A9004ED254 /* myalbumcount.json in Resources */,
+				C3C6B7D51922B49D007C32C8 /* refreshedtokens.json in Resources */,
 				C3F1B3F618E369A9004ED254 /* conversationdelete.json in Resources */,
 				C3F1B40A18E369A9004ED254 /* myfavs.json in Resources */,
 				C3F1B41418E369A9004ED254 /* postimage.json in Resources */,
@@ -1421,7 +1441,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3C6B7D41922B49D007C32C8 /* refreshedtokens.json in Resources */,
+				C3C6B7D11922B0BD007C32C8 /* invalidrefresh.json in Resources */,
 				C36C00F318CA7611004576A5 /* image-example.jpg in Resources */,
+				C3C6B7D71922B8EB007C32C8 /* invalidaccess.json in Resources */,
+				C3C6B7DA1922BA1D007C32C8 /* invalidcode.json in Resources */,
 				C35A124318FDAD1C007D2260 /* example.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
