@@ -159,6 +159,16 @@
 		C3C1356318FC6A5900829868 /* IMGGalleryObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356118FC6A5900829868 /* IMGGalleryObject.h */; };
 		C3C1356518FC6A6800829868 /* IMGObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356418FC6A6800829868 /* IMGObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C3C1356618FC6A6800829868 /* IMGObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C1356418FC6A6800829868 /* IMGObject.h */; };
+		C3C6B74919227BEE007C32C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
+		C3C6B74B19227BEE007C32C8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C6B74A19227BEE007C32C8 /* CoreGraphics.framework */; };
+		C3C6B74C19227BEE007C32C8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A918CA1F87009D9C57 /* UIKit.framework */; };
+		C3C6B75219227BEE007C32C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B75019227BEE007C32C8 /* InfoPlist.strings */; };
+		C3C6B75419227BEE007C32C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B75319227BEE007C32C8 /* main.m */; };
+		C3C6B75819227BEE007C32C8 /* GMMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B75719227BEE007C32C8 /* GMMAppDelegate.m */; };
+		C3C6B75B19227BEE007C32C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B75919227BEE007C32C8 /* Main.storyboard */; };
+		C3C6B75E19227BEE007C32C8 /* GMMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B75D19227BEE007C32C8 /* GMMViewController.m */; };
+		C3C6B76019227BEE007C32C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B75F19227BEE007C32C8 /* Images.xcassets */; };
+		C3C6B7CF1922A3C1007C32C8 /* libImgurSession.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339518CA1F87009D9C57 /* libImgurSession.a */; };
 		C3CDA2DD18CA66DA003B7F96 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		C3CDA2DE18CA66DA003B7F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
 		C3CDA2DF18CA66DA003B7F96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A918CA1F87009D9C57 /* UIKit.framework */; };
@@ -282,6 +292,13 @@
 			remoteGlobalIDString = 24B4CB7818CAB7B300EC8E4A;
 			remoteInfo = ImgurKitOSX;
 		};
+		C3C6B7CD1922A325007C32C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C309338D18CA1F87009D9C57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C309339418CA1F87009D9C57;
+			remoteInfo = ImgurSession;
+		};
 		C3F1B37218E2041C004ED254 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C309338D18CA1F87009D9C57 /* Project object */;
@@ -364,6 +381,7 @@
 		4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAuthenticatedTests.xcconfig"; path = "Pods/Pods-OSXAuthenticatedTests.xcconfig"; sourceTree = "<group>"; };
 		5C17F7D4AE624C3C855B4547 /* libPods-iOSAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE72095F6B24FBB9104E2EE /* libPods-ImgurSessionOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSessionOSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.xcconfig"; path = "Pods/Pods-SampleApp.xcconfig"; sourceTree = "<group>"; };
 		63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSession.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AD5E4AAC7E4142A9272C14 /* libPods-OSXIntegratedAnonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXIntegratedAnonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSX.xcconfig"; path = "Pods/Pods-ImgurSessionOSX.xcconfig"; sourceTree = "<group>"; };
@@ -411,6 +429,19 @@
 		C36C00E618CA7472004576A5 /* ImgurSession Tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ImgurSession Tests-Prefix.pch"; path = "Resources/ImgurSession Tests-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		C3C1356118FC6A5900829868 /* IMGGalleryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGGalleryObject.h; sourceTree = "<group>"; };
 		C3C1356418FC6A6800829868 /* IMGObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGObject.h; sourceTree = "<group>"; };
+		C3C6B74819227BED007C32C8 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3C6B74A19227BEE007C32C8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C3C6B74F19227BEE007C32C8 /* SampleApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SampleApp-Info.plist"; sourceTree = "<group>"; };
+		C3C6B75119227BEE007C32C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C3C6B75319227BEE007C32C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C3C6B75519227BEE007C32C8 /* SampleApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SampleApp-Prefix.pch"; sourceTree = "<group>"; };
+		C3C6B75619227BEE007C32C8 /* GMMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMMAppDelegate.h; sourceTree = "<group>"; };
+		C3C6B75719227BEE007C32C8 /* GMMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMMAppDelegate.m; sourceTree = "<group>"; };
+		C3C6B75A19227BEE007C32C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C3C6B75C19227BEE007C32C8 /* GMMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMMViewController.h; sourceTree = "<group>"; };
+		C3C6B75D19227BEE007C32C8 /* GMMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMMViewController.m; sourceTree = "<group>"; };
+		C3C6B75F19227BEE007C32C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C3C6B7B21922A20E007C32C8 /* libPods-ImgurSession-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ImgurSession-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-ImgurSession-AFNetworking.a"; sourceTree = "<group>"; };
 		C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSession Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGAccountTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -474,6 +505,7 @@
 		C3F1B41E18E369B6004ED254 /* image.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = image.json; path = anonymous/image.json; sourceTree = "<group>"; };
 		C3F1B41F18E369B6004ED254 /* topgalleryanon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = topgalleryanon.json; path = anonymous/topgalleryanon.json; sourceTree = "<group>"; };
 		C3F1B42018E369B6004ED254 /* usersubgalleryanon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersubgalleryanon.json; path = anonymous/usersubgalleryanon.json; sourceTree = "<group>"; };
+		CADD1C0A61474050AC1AE831 /* libPods-SampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -512,6 +544,17 @@
 			files = (
 				C309339918CA1F87009D9C57 /* Foundation.framework in Frameworks */,
 				1A559323052940B29978A00B /* libPods-ImgurSession.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3C6B74519227BED007C32C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3C6B7CF1922A3C1007C32C8 /* libImgurSession.a in Frameworks */,
+				C3C6B74B19227BEE007C32C8 /* CoreGraphics.framework in Frameworks */,
+				C3C6B74C19227BEE007C32C8 /* UIKit.framework in Frameworks */,
+				C3C6B74919227BEE007C32C8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +684,7 @@
 				C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */,
 				C3F1B33F18E1FE63004ED254 /* Integrated Tests */,
 				C3EB4B3E18CA20B20010FD19 /* Resources */,
+				C3C6B74D19227BEE007C32C8 /* SampleApp */,
 				C309339718CA1F87009D9C57 /* Frameworks */,
 				C309339618CA1F87009D9C57 /* Products */,
 				092DC70EA0C4429E854604CD /* Pods-ImgurSession.xcconfig */,
@@ -650,6 +694,7 @@
 				2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */,
 				021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */,
 				3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */,
+				612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -663,6 +708,7 @@
 				243CCDAA18DD32EF00B4FBC6 /* ImgurSessionOSXTests copy.xctest */,
 				C3F1B36718E2041C004ED254 /* OSXIntegratedAuthenticatedTests.xctest */,
 				C3F1B37B18E2042C004ED254 /* OSXIntegratedAnonTests.xctest */,
+				C3C6B74819227BED007C32C8 /* SampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -670,6 +716,7 @@
 		C309339718CA1F87009D9C57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3C6B7B21922A20E007C32C8 /* libPods-ImgurSession-AFNetworking.a */,
 				C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */,
 				C3EB4B4918CA32BE0010FD19 /* CFNetwork.framework */,
 				C309339818CA1F87009D9C57 /* Foundation.framework */,
@@ -677,6 +724,7 @@
 				C30933A918CA1F87009D9C57 /* UIKit.framework */,
 				C0E1EE857AF64A31A8CAA72E /* libPods.a */,
 				24AC155418CAB4F9005F86C8 /* Cocoa.framework */,
+				C3C6B74A19227BEE007C32C8 /* CoreGraphics.framework */,
 				24AC155618CAB4F9005F86C8 /* Other Frameworks */,
 				63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */,
 				5CE72095F6B24FBB9104E2EE /* libPods-ImgurSessionOSX.a */,
@@ -685,6 +733,7 @@
 				5C17F7D4AE624C3C855B4547 /* libPods-iOSAuthenticatedTests.a */,
 				70AD5E4AAC7E4142A9272C14 /* libPods-OSXIntegratedAnonTests.a */,
 				B18FC49F01B74CE7997BECDF /* libPods-OSXIntegratedAuthenticatedTests.a */,
+				CADD1C0A61474050AC1AE831 /* libPods-SampleApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -818,6 +867,31 @@
 				C3F1B3BE18E3693C004ED254 /* Authenticated */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		C3C6B74D19227BEE007C32C8 /* SampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				C3C6B75619227BEE007C32C8 /* GMMAppDelegate.h */,
+				C3C6B75719227BEE007C32C8 /* GMMAppDelegate.m */,
+				C3C6B75919227BEE007C32C8 /* Main.storyboard */,
+				C3C6B75C19227BEE007C32C8 /* GMMViewController.h */,
+				C3C6B75D19227BEE007C32C8 /* GMMViewController.m */,
+				C3C6B75F19227BEE007C32C8 /* Images.xcassets */,
+				C3C6B74E19227BEE007C32C8 /* Supporting Files */,
+			);
+			path = SampleApp;
+			sourceTree = "<group>";
+		};
+		C3C6B74E19227BEE007C32C8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C3C6B74F19227BEE007C32C8 /* SampleApp-Info.plist */,
+				C3C6B75019227BEE007C32C8 /* InfoPlist.strings */,
+				C3C6B75319227BEE007C32C8 /* main.m */,
+				C3C6B75519227BEE007C32C8 /* SampleApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */ = {
@@ -1133,6 +1207,26 @@
 			productReference = C309339518CA1F87009D9C57 /* libImgurSession.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		C3C6B74719227BED007C32C8 /* SampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3C6B77719227BEE007C32C8 /* Build configuration list for PBXNativeTarget "SampleApp" */;
+			buildPhases = (
+				723A88D346A744C3AE9184DC /* Check Pods Manifest.lock */,
+				C3C6B74419227BED007C32C8 /* Sources */,
+				C3C6B74519227BED007C32C8 /* Frameworks */,
+				C3C6B74619227BED007C32C8 /* Resources */,
+				DB9953C278984F499D19D918 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3C6B7CE1922A325007C32C8 /* PBXTargetDependency */,
+			);
+			name = SampleApp;
+			productName = SampleApp;
+			productReference = C3C6B74819227BED007C32C8 /* SampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C3CDA2DB18CA66DA003B7F96 /* iOSAuthenticatedTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C3CDA2EB18CA66DA003B7F96 /* Build configuration list for PBXNativeTarget "iOSAuthenticatedTests" */;
@@ -1224,6 +1318,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = C309338C18CA1F87009D9C57;
 			productRefGroup = C309339618CA1F87009D9C57 /* Products */;
@@ -1238,6 +1333,7 @@
 				243CCD9518DD32EF00B4FBC6 /* OSXAnonTests */,
 				C3F1B37A18E2042C004ED254 /* OSXIntegratedAnonTests */,
 				C328812618EB1AFD00B080CF /* UniversalLib */,
+				C3C6B74719227BED007C32C8 /* SampleApp */,
 			);
 		};
 /* End PBXProject section */
@@ -1308,6 +1404,16 @@
 				C3F1B3F618E369A9004ED254 /* conversationdelete.json in Resources */,
 				C3F1B40A18E369A9004ED254 /* myfavs.json in Resources */,
 				C3F1B41418E369A9004ED254 /* postimage.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3C6B74619227BED007C32C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3C6B76019227BEE007C32C8 /* Images.xcassets in Resources */,
+				C3C6B75219227BEE007C32C8 /* InfoPlist.strings in Resources */,
+				C3C6B75B19227BEE007C32C8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,6 +1520,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-ImgurSession-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		723A88D346A744C3AE9184DC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		792D86CF649D4B6CA648E336 /* Copy Pods Resources */ = {
@@ -1549,6 +1670,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		DB9953C278984F499D19D918 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-SampleApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EBAD6AE1537D4F76B4941F4A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1669,6 +1805,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C3C6B74419227BED007C32C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3C6B75E19227BEE007C32C8 /* GMMViewController.m in Sources */,
+				C3C6B75819227BEE007C32C8 /* GMMAppDelegate.m in Sources */,
+				C3C6B75419227BEE007C32C8 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C3F1B36318E2041C004ED254 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1705,6 +1851,11 @@
 			target = 24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */;
 			targetProxy = 24B4CB8C18CAB7B300EC8E4A /* PBXContainerItemProxy */;
 		};
+		C3C6B7CE1922A325007C32C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C309339418CA1F87009D9C57 /* ImgurSession */;
+			targetProxy = C3C6B7CD1922A325007C32C8 /* PBXContainerItemProxy */;
+		};
 		C3F1B37318E2041C004ED254 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 24B4CB7818CAB7B300EC8E4A /* ImgurSessionOSX */;
@@ -1716,6 +1867,25 @@
 			targetProxy = C3F1B38618E2042C004ED254 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C3C6B75019227BEE007C32C8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3C6B75119227BEE007C32C8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C3C6B75919227BEE007C32C8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3C6B75A19227BEE007C32C8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		243CCDA818DD32EF00B4FBC6 /* Debug */ = {
@@ -1975,6 +2145,60 @@
 			};
 			name = Release;
 		};
+		C3C6B77319227BEE007C32C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SampleApp/SampleApp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "SampleApp/SampleApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C3C6B77419227BEE007C32C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SampleApp/SampleApp-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "SampleApp/SampleApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		C3CDA2EC18CA66DA003B7F96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */;
@@ -2172,6 +2396,15 @@
 			buildConfigurations = (
 				C328812818EB1AFD00B080CF /* Debug */,
 				C328812918EB1AFD00B080CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3C6B77719227BEE007C32C8 /* Build configuration list for PBXNativeTarget "SampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3C6B77319227BEE007C32C8 /* Debug */,
+				C3C6B77419227BEE007C32C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
