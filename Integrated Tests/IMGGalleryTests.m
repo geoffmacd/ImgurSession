@@ -80,6 +80,9 @@
     expect(isSuccess).will.beTruthy();
 }
 
+
+// no longer working since POST does not retry authentications
+
 - (void)testPostAndDeleteGalleryImage{
     
     __block BOOL isDeleted;

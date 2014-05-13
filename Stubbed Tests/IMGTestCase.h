@@ -21,6 +21,9 @@
     NSDictionary *imgurUnitTestParams;
     __block void(^ failBlock)(NSError * error);
     
+    NSURL * testfileURL;
+    NSURL * testGifURL;
+    
 }
 
 @property BOOL calledImgurView;

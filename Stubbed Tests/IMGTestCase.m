@@ -43,6 +43,10 @@
     //need various values such as image title
     imgurUnitTestParams = infos[@"imgurUnitTestParams"];
     
+    
+    testfileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"image-example" ofType:@"jpg"]];
+    testGifURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"example" ofType:@"gif"]];
+    
     //failure block
     failBlock = ^(NSError * error) {
         

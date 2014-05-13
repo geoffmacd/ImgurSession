@@ -381,4 +381,21 @@
     expect(isSuccess).will.beTruthy();
 }
 
+- (void)testUsersCommentWithID{
+    
+    __block BOOL isSuccess;
+    [self stubWithFile:@"mycommentwithid.json"];
+    
+    [IMGAccountRequest accountCommentWithID:15325 success:^(IMGComment * firstComment) {
+        
+        expect(firstComment.caption).beTruthy();
+        expect(firstComment.galleryID).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+
 @end
