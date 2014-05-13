@@ -897,8 +897,8 @@
 		C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */ = {
 			isa = PBXGroup;
 			children = (
-				243CCDAC18DD332F00B4FBC6 /* Authenticated */,
 				243CCDAD18DD333900B4FBC6 /* Anonymous */,
+				243CCDAC18DD332F00B4FBC6 /* Authenticated */,
 				C3102D1318D8D5FF007A75C4 /* IMGTestCase.h */,
 				C3102D1418D8D5FF007A75C4 /* IMGTestCase.m */,
 			);

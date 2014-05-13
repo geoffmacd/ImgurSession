@@ -308,19 +308,4 @@
     expect(isSuccess).will.beTruthy();
 }
 
-//- (void)testAllCommentReplies{
-//    
-//    __block BOOL isSuccess;
-//    
-//    [IMGGalleryRequest allCommentsWithGalleryID:@"1I5nqe0" withSort:IMGGalleryCommentSortHot success:^(NSArray * comments) {
-//        
-//        IMGComment * first = [comments firstObject];
-//        expect(first.commentID).beTruthy();
-//        isSuccess = YES;
-//        
-//    } failure:failBlock];
-//    
-//    expect(isSuccess).will.beTruthy();
-//}
-
 @end

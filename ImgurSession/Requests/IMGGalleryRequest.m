@@ -440,48 +440,6 @@
     } failure:failure];
 }
 
-
-+ (void)allCommentsWithGalleryID:(NSString *)galleryObjectID withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    
-    [self commentIDsWithGalleryID:galleryObjectID withSort:commentSort success:^(NSArray * commentIDs) {
-        
-        NSMutableArray * allComments = [NSMutableArray new];
-        
-        //parent comments also retrieved
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-        
-        for(NSNumber *  commentID in commentIDs){
-            
-            [IMGCommentRequest repliesWithCommentID:[commentID integerValue] success:^(NSArray * secondcomments) {
-                
-                [allComments addObjectsFromArray:secondcomments];
-                
-                dispatch_semaphore_signal(sema);
-                
-            } failure:^(NSError * error) {
-            
-                if(failure)
-                    failure(error);
-                
-                dispatch_semaphore_signal(sema);
-                
-            }];
-        }
-        
-        //waits until above is completed
-        [commentIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            //for each
-            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        }];
-        
-        //collected comments
-        if(success){
-            success([NSArray arrayWithArray:allComments]);
-        }
-        
-    } failure:failure];
-}
-
 + (void)commentIDsWithGalleryID:(NSString *)galleryObjectID withSort:(IMGGalleryCommentSortType)commentSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString *path = [self pathWithID:galleryObjectID withOption:@"comments/ids"];
