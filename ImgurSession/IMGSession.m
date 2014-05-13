@@ -367,13 +367,13 @@
         if(state == IMGAuthStateExpired){
             //refresh access token with refresh token
             
-            [self postForAccessTokens:^(NSString *refreshToken) {
-                
+            [self postForAccessTokens:^{
+                 
                 //resume
                 dispatch_semaphore_signal(self.refreshSemaphore);
                 
                 if(success)
-                    success(refreshToken);
+                    success(self.refreshToken);
                 
             } failure:^(NSError *error) {
                 
