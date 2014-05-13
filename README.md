@@ -1,6 +1,6 @@
 # ImgurSession
 
-__ImgurSession__ is an Objective-C networking library to easily make [Imgur](http://imgur.com) API requests within iOS and OS X apps, it is built on [AFNetworking's](http://afnetworking.com/) AFHTTPSessionManager baseclass. ImgurSession provides access for V3 of the API. It handles OAuth2 authentication for user-authenticated sessions and also supports basic authentication for anonymous sessions. It covers all documented endpoints on Imgur's [documentation](https://api.imgur.com/).
+__ImgurSession__ is an Objective-C networking library to easily make [Imgur](http://imgur.com) API requests within iOS and OS X apps. It is built on [AFNetworking's](http://afnetworking.com/) AFHTTPSessionManager baseclass. ImgurSession provides access for V3 of the API. It handles OAuth2 authentication for user-authenticated sessions and also supports basic authentication for anonymous sessions. It covers all documented endpoints on Imgur's [documentation](https://api.imgur.com/).
 
 ### Imgur API Support - V3
 
@@ -24,9 +24,18 @@ Just import ImgurSession.h and setup the session with your credentials before ma
     return YES;
 }
 
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+
+
+     //call completion with retrieved code from URL
+
+}
+
 #pragma mark - IMGSessionDelegate
 
 -(void)imgurSessionNeedsExternalWebview:(NSURL *)url completion:(void (^)())completion{
+    
+    //save the completion block for later use when URL is opened above
     
     //open imgur website to authenticate with callback url
     [[UIApplication sharedApplication] openURL:url];
