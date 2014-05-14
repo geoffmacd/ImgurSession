@@ -291,8 +291,6 @@
     expect(isSuccess).will.beTruthy();
 }
 
-
-
 - (void)testCommentReplies{
     
     __block BOOL isSuccess;
@@ -301,6 +299,20 @@
         
         IMGComment * first = [comments firstObject];
         expect(first.commentID).beTruthy();
+        isSuccess = YES;
+        
+    } failure:failBlock];
+    
+    expect(isSuccess).will.beTruthy();
+}
+
+-(void)testMemes{
+    
+    __block BOOL isSuccess;
+    [IMGMemeGen defaultMemes:^(NSArray *memeImages) {
+        
+        IMGImage * first = [memeImages firstObject];
+        expect(first.imageID).beTruthy();
         isSuccess = YES;
         
     } failure:failBlock];

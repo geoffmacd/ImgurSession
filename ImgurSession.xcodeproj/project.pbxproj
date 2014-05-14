@@ -189,6 +189,14 @@
 		C3C6B7EC1922C042007C32C8 /* mycommentwithid.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3E618E369A9004ED254 /* mycommentwithid.json */; };
 		C3C6B7ED1922C12D007C32C8 /* IMGImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B7E71922BDD7007C32C8 /* IMGImageTests.m */; };
 		C3C6B7EE1922C139007C32C8 /* IMGAuthenticationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C5D0F918E6473300BB9EEB /* IMGAuthenticationTests.m */; };
+		C3C6B7F219240BD7007C32C8 /* IMGMeme.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C6B7F019240BD6007C32C8 /* IMGMeme.h */; };
+		C3C6B7F319240BD7007C32C8 /* IMGMeme.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C6B7F019240BD6007C32C8 /* IMGMeme.h */; };
+		C3C6B7F419240BD7007C32C8 /* IMGMeme.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B7F119240BD7007C32C8 /* IMGMeme.m */; };
+		C3C6B7F519240BD7007C32C8 /* IMGMeme.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B7F119240BD7007C32C8 /* IMGMeme.m */; };
+		C3C6B7F819240C3A007C32C8 /* IMGMemeGen.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C6B7F619240C3A007C32C8 /* IMGMemeGen.h */; };
+		C3C6B7F919240C3A007C32C8 /* IMGMemeGen.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C6B7F619240C3A007C32C8 /* IMGMemeGen.h */; };
+		C3C6B7FA19240C3A007C32C8 /* IMGMemeGen.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B7F719240C3A007C32C8 /* IMGMemeGen.m */; };
+		C3C6B7FB19240C3A007C32C8 /* IMGMemeGen.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B7F719240C3A007C32C8 /* IMGMemeGen.m */; };
 		C3CDA2DD18CA66DA003B7F96 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A618CA1F87009D9C57 /* XCTest.framework */; };
 		C3CDA2DE18CA66DA003B7F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309339818CA1F87009D9C57 /* Foundation.framework */; };
 		C3CDA2DF18CA66DA003B7F96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30933A918CA1F87009D9C57 /* UIKit.framework */; };
@@ -470,6 +478,10 @@
 		C3C6B7DF1922BCBA007C32C8 /* postimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = postimage.json; path = authenticated/postimage.json; sourceTree = "<group>"; };
 		C3C6B7E21922BCC5007C32C8 /* postimage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = postimage.json; path = authenticated/postimage.json; sourceTree = "<group>"; };
 		C3C6B7E71922BDD7007C32C8 /* IMGImageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGImageTests.m; sourceTree = "<group>"; };
+		C3C6B7F019240BD6007C32C8 /* IMGMeme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGMeme.h; sourceTree = "<group>"; };
+		C3C6B7F119240BD7007C32C8 /* IMGMeme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGMeme.m; sourceTree = "<group>"; };
+		C3C6B7F619240C3A007C32C8 /* IMGMemeGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGMemeGen.h; sourceTree = "<group>"; };
+		C3C6B7F719240C3A007C32C8 /* IMGMemeGen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGMemeGen.m; sourceTree = "<group>"; };
 		C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSession Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGAccountTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -786,18 +798,19 @@
 		C30933C618CA1FFE009D9C57 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2407478718D5488100B92063 /* IMGModel.h */,
-				2407478818D5488100B92063 /* IMGModel.m */,
 				C30933C718CA1FFE009D9C57 /* Account */,
 				C30933CA18CA1FFE009D9C57 /* Album */,
 				C319F7D118D0DB1D00C5E880 /* Comment */,
 				2407475B18D4F9E900B92063 /* Gallery */,
 				C30933D218CA1FFE009D9C57 /* Image */,
+				C3C1356118FC6A5900829868 /* IMGGalleryObject.h */,
+				2407478718D5488100B92063 /* IMGModel.h */,
+				2407478818D5488100B92063 /* IMGModel.m */,
+				C3C1356418FC6A6800829868 /* IMGObject.h */,
+				C3C6B7EF19240B42007C32C8 /* Meme */,
 				2407475618D4F76E00B92063 /* Message */,
 				2407475118D4F3E600B92063 /* Notifications */,
 				2407474C18D4F2F600B92063 /* Vote */,
-				C3C1356118FC6A5900829868 /* IMGGalleryObject.h */,
-				C3C1356418FC6A6800829868 /* IMGObject.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -850,6 +863,8 @@
 				240747A718D62B1B00B92063 /* IMGImageRequest.m */,
 				240747B218D62B1B00B92063 /* IMGNotificationRequest.h */,
 				240747AB18D62B1B00B92063 /* IMGNotificationRequest.m */,
+				C3C6B7F619240C3A007C32C8 /* IMGMemeGen.h */,
+				C3C6B7F719240C3A007C32C8 /* IMGMemeGen.m */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -921,6 +936,15 @@
 				C3C6B75519227BEE007C32C8 /* SampleApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C3C6B7EF19240B42007C32C8 /* Meme */ = {
+			isa = PBXGroup;
+			children = (
+				C3C6B7F019240BD6007C32C8 /* IMGMeme.h */,
+				C3C6B7F119240BD7007C32C8 /* IMGMeme.m */,
+			);
+			name = Meme;
 			sourceTree = "<group>";
 		};
 		C3CDA2E018CA66DA003B7F96 /* Stubbed Tests */ = {
@@ -1056,12 +1080,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3102D1B18DA02A5007A75C4 /* ImgurSession.h in Headers */,
+				C3C6B7F919240C3A007C32C8 /* IMGMemeGen.h in Headers */,
 				2457E2D918F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
 				C35448041906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C328810F18EA0DFF00B080CF /* AFHTTPRequestOperation.h in Headers */,
 				C328811018EA0DFF00B080CF /* AFHTTPRequestOperationManager.h in Headers */,
 				C328811118EA0DFF00B080CF /* AFHTTPSessionManager.h in Headers */,
 				C328811218EA0DFF00B080CF /* AFNetworkActivityIndicatorManager.h in Headers */,
+				C3C6B7F319240BD7007C32C8 /* IMGMeme.h in Headers */,
 				C328811318EA0DFF00B080CF /* AFNetworking.h in Headers */,
 				C328811418EA0DFF00B080CF /* AFNetworkReachabilityManager.h in Headers */,
 				C328811518EA0DFF00B080CF /* AFSecurityPolicy.h in Headers */,
@@ -1111,12 +1137,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F1B48C18E9BD68004ED254 /* ImgurSession.h in Headers */,
+				C3C6B7F819240C3A007C32C8 /* IMGMemeGen.h in Headers */,
 				2457E2D818F77DDA00F022A1 /* NSDictionary+IMG.h in Headers */,
 				C35448031906D835001C88E8 /* NSError+IMGError.h in Headers */,
 				C32880FC18EA0AF200B080CF /* AFHTTPRequestOperation.h in Headers */,
 				C32880FD18EA0AF200B080CF /* AFHTTPRequestOperationManager.h in Headers */,
 				C32880FE18EA0AF200B080CF /* AFHTTPSessionManager.h in Headers */,
 				C32880FF18EA0AF200B080CF /* AFNetworkActivityIndicatorManager.h in Headers */,
+				C3C6B7F219240BD7007C32C8 /* IMGMeme.h in Headers */,
 				C328810018EA0AF200B080CF /* AFNetworking.h in Headers */,
 				C328810118EA0AF200B080CF /* AFNetworkReachabilityManager.h in Headers */,
 				C328810218EA0AF200B080CF /* AFSecurityPolicy.h in Headers */,
@@ -1773,11 +1801,13 @@
 				2407479618D62AE200B92063 /* IMGAlbum.m in Sources */,
 				240747A218D62B0700B92063 /* IMGImage.m in Sources */,
 				24B4CBA218CABA2D00EC8E4A /* IMGSession.m in Sources */,
+				C3C6B7F519240BD7007C32C8 /* IMGMeme.m in Sources */,
 				2407479218D62AD100B92063 /* IMGGalleryImage.m in Sources */,
 				240747C218D62B1B00B92063 /* IMGConversationRequest.m in Sources */,
 				240747C018D62B1B00B92063 /* IMGCommentRequest.m in Sources */,
 				2407475018D4F31600B92063 /* IMGVote.m in Sources */,
 				2407475A18D4F77E00B92063 /* IMGMessage.m in Sources */,
+				C3C6B7FB19240C3A007C32C8 /* IMGMemeGen.m in Sources */,
 				2407475518D4F3FC00B92063 /* IMGNotification.m in Sources */,
 				2407479018D62AD100B92063 /* IMGGalleryAlbum.m in Sources */,
 				249DABDD18D65FD7008531FE /* IMGBasicAlbum.m in Sources */,
@@ -1821,11 +1851,13 @@
 				2407479518D62AE200B92063 /* IMGAlbum.m in Sources */,
 				240747A118D62B0700B92063 /* IMGImage.m in Sources */,
 				2407479118D62AD100B92063 /* IMGGalleryImage.m in Sources */,
+				C3C6B7F419240BD7007C32C8 /* IMGMeme.m in Sources */,
 				2407474F18D4F31600B92063 /* IMGVote.m in Sources */,
 				240747C118D62B1B00B92063 /* IMGConversationRequest.m in Sources */,
 				240747BF18D62B1B00B92063 /* IMGCommentRequest.m in Sources */,
 				2407475918D4F77E00B92063 /* IMGMessage.m in Sources */,
 				2407478F18D62AD100B92063 /* IMGGalleryAlbum.m in Sources */,
+				C3C6B7FA19240C3A007C32C8 /* IMGMemeGen.m in Sources */,
 				2407475418D4F3FC00B92063 /* IMGNotification.m in Sources */,
 				C319F7D418D0DB3F00C5E880 /* IMGComment.m in Sources */,
 				249DABDC18D65FD7008531FE /* IMGBasicAlbum.m in Sources */,

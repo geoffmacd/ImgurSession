@@ -70,7 +70,7 @@
     } failure:failure];
 }
 
-+ (void)notificationWithID:(NSString*)notificationId success:(void (^)(IMGNotification *))success failure:(void (^)(NSError *))failure{
++ (void)notificationWithID:(NSString*)notificationId success:(void (^)(IMGNotification * notification))success failure:(void (^)(NSError * error))failure{
     NSString *path = [self pathWithID:notificationId];
     
     if([[IMGSession sharedInstance] isAnonymous]){

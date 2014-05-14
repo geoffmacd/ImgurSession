@@ -23,6 +23,7 @@
         #import "IMGGalleryRequest.h"
         #import "IMGImageRequest.h"
         #import "IMGNotificationRequest.h"
+        #import "IMGMemeGen.h"
 
         #import "IMGObject.h"
         #import "IMGGalleryObject.h"
@@ -39,6 +40,7 @@
         #import "IMGGalleryProfile.h"
         #import "IMGImage.h"
         #import "IMGMessage.h"
+        #import "IMGMeme.h"
         #import "IMGVote.h"
 
     #endif
