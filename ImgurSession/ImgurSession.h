@@ -36,6 +36,7 @@
         #import "IMGNotification.h"
         #import "IMGGalleryAlbum.h"
         #import "IMGGalleryImage.h"
+        #import "IMGGalleryProfile.h"
         #import "IMGImage.h"
         #import "IMGMessage.h"
         #import "IMGVote.h"

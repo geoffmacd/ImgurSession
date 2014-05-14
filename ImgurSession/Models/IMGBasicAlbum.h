@@ -96,12 +96,14 @@ typedef NS_ENUM(NSInteger, IMGAlbumLayout){
 
 #pragma mark - Album Layout setting
 /**
+ Returns string for layout constant
  @param layoutType layout constant
  @return string for layout constant
  */
 +(NSString*)strForLayout:(IMGAlbumLayout)layoutType;
 
 /**
+ Returns constant for string layout
  @param string for layout constant
  @return layout layout constant
  */
@@ -109,12 +111,14 @@ typedef NS_ENUM(NSInteger, IMGAlbumLayout){
 
 #pragma mark - Album Privacy setting
 /**
+ Returns string for privacy constant
  @param privacy privacy constant
  @return string for privacy constant
  */
 +(NSString*)strForPrivacy:(IMGAlbumPrivacy)privacy;
 
 /**
+ Returns constant for privacy layout
  @param string for privacy constant
  @return privacy privacy constant
  */

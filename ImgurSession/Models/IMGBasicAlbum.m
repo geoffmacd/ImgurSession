@@ -129,7 +129,6 @@
             *stop = YES;
         }
     }];
-    
     return cover;
 }
 
@@ -148,7 +147,6 @@
 -(NSString *)objectID{
     
     return self.albumID;
-    
 }
 
 -(NSString*)galleryDescription{
@@ -183,7 +181,7 @@
             break;
             
         default:
-            return nil;
+            return @"blog";
             break;
     }
 }
@@ -217,6 +215,7 @@
             break;
             
         default:
+            return @"public";
             break;
     }
 }
@@ -228,10 +227,8 @@
         return IMGAlbumHidden;
     else if([[privacyStr lowercaseString] isEqualToString:@"secret"])
         return IMGAlbumSecret;
-    return IMGAlbumSecret;
+    return IMGAlbumDefault;
 }
-
-
 
 #pragma mark - Describe
 

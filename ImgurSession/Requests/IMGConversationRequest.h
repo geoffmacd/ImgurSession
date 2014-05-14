@@ -18,7 +18,7 @@
 
 #pragma mark - Load
 /**
- Get list of all conversations for the logged in user.Must be logged in.
+ Get list of all conversations for the logged in user. Must be logged in.
  */
 + (void)conversations:(void (^)(NSArray * conversations))success failure:(void (^)(NSError *error))failure;
 /**
@@ -37,7 +37,6 @@
 /**
  Delete a conversation. Must be logged in.
  @param commentId comment id to delete
- @return signal with request
  */
 + (void)deleteConversation:(NSInteger)convoID success:(void (^)())success failure:(void (^)(NSError *error))failure;
 

@@ -29,6 +29,18 @@
     
     if(self = [super init]) {
         
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"id"] || !jsonData[@"with_account"]){
+            
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
+        
         _conversationID = [jsonData[@"id"] integerValue];
         _fromUsername = jsonData[@"with_account"];
         _authorID = [jsonData[@"with_account_id"] integerValue];

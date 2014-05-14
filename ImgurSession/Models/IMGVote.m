@@ -16,6 +16,17 @@
     
     if(self = [super init]) {
         
+        if(![jsonData isKindOfClass:[NSDictionary class]]){
+            
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
+            return nil;
+        } else if (!jsonData[@"ups"] || !jsonData[@"downs"]){
+            
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
+        }
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];
     }

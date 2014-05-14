@@ -23,10 +23,12 @@
 #define IMGErrorNeededVerificationCouldNotSend  155   //request failed due to email verification needed
 
 //status codes
-#define IMGErrorInvalidRefreshToken             400
+#define IMGErrorInvalidRefreshToken             400   //also used as non-specific incorrect parameters
 #define IMGErrorRequiresUserAuthentication      401   //valid tokens?
 #define IMGErrorForbidden                       403   //valid tokens or rate limiting?
 #define IMGErrorUserRateLimitExceeded           429   //user rate limit hit
+
+//non-status code custom codes
 #define IMGErrorMissingClientAuthentication     150   //no authentication parameters for authorized session
 #define IMGErrorCouldNotAuthenticate            151   //refresh token did not succeed, possibly banned or rate limited?
 

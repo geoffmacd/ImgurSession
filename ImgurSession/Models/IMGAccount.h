@@ -39,7 +39,6 @@
  @param jsonData response "data" json Object for account
  @param username name of account
  @param error address of error object to output to
- @return signal with request
  */
 - (instancetype)initWithJSONObject:(NSDictionary *)jsonData withName:(NSString*)username error:(NSError * __autoreleasing *)error;
 

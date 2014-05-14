@@ -20,7 +20,7 @@
     if(self = [super init]) {
         _trophyID = jsonData[@"id"];
         _name = jsonData[@"name"];
-        _type = jsonData[@"name_clean"];
+        _type = jsonData[@"name_clean"];//doesn't really make sense
         _profileDescription = jsonData[@"description"];
         _data = jsonData[@"data"];
         _link = [NSURL URLWithString:jsonData[@"data_link"]];
@@ -67,8 +67,7 @@
             IMGGalleryTrophy * trophy = [[IMGGalleryTrophy alloc] initWithJSONObject:trophyJSON error:nil];
             [trophies addObject:trophy];
         }
-        _trophies = trophies;
-
+        _trophies = [NSArray arrayWithArray:trophies];
     }
     return [self trackModels];
 }

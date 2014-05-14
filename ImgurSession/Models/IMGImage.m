@@ -42,6 +42,11 @@
             if(error)
                 *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
             return nil;
+        } else if (!jsonData[@"id"] || !jsonData[@"link"]){
+            
+            if(error)
+                *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
+            return nil;
         }
         //clean NSNull
         jsonData = [jsonData cleanNull];

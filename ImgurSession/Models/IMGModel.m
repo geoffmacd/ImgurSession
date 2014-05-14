@@ -10,10 +10,10 @@
 
 #import "IMGSession.h"
 
+//category for declaring non-public IMGSession method only exposed to this class
 @interface IMGSession()
 
 #pragma mark - Model Tracking
-
 /**
  Tracks new imgur Model objects being created to allow introspection by client
  @param model the model object that was created
@@ -38,6 +38,9 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+//all model objects conform to NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {
  
