@@ -182,7 +182,6 @@
 		C3C6B7E01922BCBA007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7DF1922BCBA007C32C8 /* postimage.json */; };
 		C3C6B7E11922BCBA007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7DF1922BCBA007C32C8 /* postimage.json */; };
 		C3C6B7E31922BCC5007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7E21922BCC5007C32C8 /* postimage.json */; };
-		C3C6B7E41922BCC5007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7E21922BCC5007C32C8 /* postimage.json */; };
 		C3C6B7E51922BCC5007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7E21922BCC5007C32C8 /* postimage.json */; };
 		C3C6B7E91922BDD7007C32C8 /* IMGImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6B7E71922BDD7007C32C8 /* IMGImageTests.m */; };
 		C3C6B7EB1922BE5D007C32C8 /* image-example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3EB4B3F18CA20B20010FD19 /* image-example.jpg */; };
@@ -241,7 +240,6 @@
 		C3F1B41118E369A9004ED254 /* mysettingschange.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3EE18E369A9004ED254 /* mysettingschange.json */; };
 		C3F1B41218E369A9004ED254 /* mysubmissions.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3EF18E369A9004ED254 /* mysubmissions.json */; };
 		C3F1B41318E369A9004ED254 /* postcomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F018E369A9004ED254 /* postcomment.json */; };
-		C3F1B41418E369A9004ED254 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F118E369A9004ED254 /* postimage.json */; };
 		C3F1B41518E369A9004ED254 /* replytocomment.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F218E369A9004ED254 /* replytocomment.json */; };
 		C3F1B41618E369A9004ED254 /* topgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F318E369A9004ED254 /* topgallery.json */; };
 		C3F1B41718E369A9004ED254 /* usersubmittedgallery.json in Resources */ = {isa = PBXBuildFile; fileRef = C3F1B3F418E369A9004ED254 /* usersubmittedgallery.json */; };
@@ -1459,7 +1457,6 @@
 				C3F1B41018E369A9004ED254 /* mysettings.json in Resources */,
 				C3F1B3FB18E369A9004ED254 /* deletecomment.json in Resources */,
 				C3F1B3FE18E369A9004ED254 /* freshnotification.json in Resources */,
-				C3C6B7E41922BCC5007C32C8 /* postimage.json in Resources */,
 				C3F1B3F518E369A9004ED254 /* allnotifications.json in Resources */,
 				C3C6B7DE1922BB6E007C32C8 /* imagenotfound.json in Resources */,
 				C3F1B41718E369A9004ED254 /* usersubmittedgallery.json in Resources */,
@@ -1477,7 +1474,6 @@
 				C3C6B7D51922B49D007C32C8 /* refreshedtokens.json in Resources */,
 				C3F1B3F618E369A9004ED254 /* conversationdelete.json in Resources */,
 				C3F1B40A18E369A9004ED254 /* myfavs.json in Resources */,
-				C3F1B41418E369A9004ED254 /* postimage.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -130,7 +130,7 @@
     __block BOOL isSuccess;
     [self stubWithFile:@"topgalleryanon.json"];
     
-    [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
+    [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay success:^(NSArray * images) {
         
         expect(images).haveCountOf(183);
         

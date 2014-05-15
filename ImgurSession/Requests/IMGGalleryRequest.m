@@ -44,7 +44,7 @@
     [IMGGalleryRequest galleryWithParameters:params success:success failure:failure];
 }
 
-+(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window withViralSort:(BOOL)viralSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
++(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
     NSString * windowStr;
     switch (window) {
@@ -67,10 +67,9 @@
             windowStr = @"day";
             break;
     }
-    NSString * sortStr = (viralSort ? @"viral" : @"time");
     
     //defauts are viral sort
-    NSDictionary * params = @{@"section" : @"top", @"page":[NSNumber numberWithInteger:page], @"window": windowStr, @"sort":sortStr};
+    NSDictionary * params = @{@"section" : @"top", @"page":[NSNumber numberWithInteger:page], @"window": windowStr, @"sort":@"viral"};
     
     [IMGGalleryRequest galleryWithParameters:params success:success failure:failure];
 }
@@ -93,7 +92,7 @@
         path = [path stringByAppendingPathComponent:parameters[@"sort"]];
     
     if(parameters[@"page"])
-        path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", (long)[(NSNumber*)parameters[@"page"] integerValue]]];
+        path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld?page=%ld", (long)[(NSNumber*)parameters[@"page"] integerValue],(long)[(NSNumber*)parameters[@"page"] integerValue]]];
     
     if(parameters[@"showViral"])
         path = [path stringByAppendingString:[NSString stringWithFormat:@"&showViral=%@",[(NSNumber*)parameters[@"showViral"] boolValue] ? @"true" : @"false"]];

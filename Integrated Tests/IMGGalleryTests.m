@@ -14,28 +14,73 @@
 
 @implementation IMGGalleryTests
 
+
 - (void)testGalleryHot{
     
     __block BOOL isSuccess;
+    __block NSMutableOrderedSet * j = [NSMutableOrderedSet new];
     
     [IMGGalleryRequest hotGalleryPage:0 success:^(NSArray * images) {
         
-        isSuccess = YES;
+        [j addObjectsFromArray:images];
         
     } failure:failBlock];
+    
+    
+    [IMGGalleryRequest hotGalleryPage:1 success:^(NSArray * images) {
+        
+        [j addObjectsFromArray:images];
+        
+    } failure:failBlock];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [IMGGalleryRequest hotGalleryPage:2 success:^(NSArray * images) {
+            
+            [j addObjectsFromArray:images];
+            
+            if(j.count == images.count)
+                failBlock(nil);
+            else
+                isSuccess = YES;
+            
+        } failure:failBlock];
+    });
     
     expect(isSuccess).will.beTruthy();
 }
 
-- (void)testGalleryViral{
+- (void)testGalleryTop{
     
     __block BOOL isSuccess;
+    __block NSMutableOrderedSet * j = [NSMutableOrderedSet new];
     
-    [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay withViralSort:YES success:^(NSArray * images) {
+    [IMGGalleryRequest topGalleryPage:0 withWindow:IMGTopGalleryWindowDay success:^(NSArray * images) {
         
-        isSuccess = YES;
+        [j addObjectsFromArray:images];
         
     } failure:failBlock];
+    
+    
+    [IMGGalleryRequest topGalleryPage:1 withWindow:IMGTopGalleryWindowDay success:^(NSArray * images) {
+        
+        [j addObjectsFromArray:images];
+        
+    } failure:failBlock];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [IMGGalleryRequest topGalleryPage:2 withWindow:IMGTopGalleryWindowDay success:^(NSArray * images) {
+            
+            [j addObjectsFromArray:images];
+            
+            if(j.count == images.count)
+                failBlock(nil);
+            else
+                isSuccess = YES;
+            
+        } failure:failBlock];
+    });
     
     expect(isSuccess).will.beTruthy();
 }
@@ -43,12 +88,33 @@
 - (void)testGalleryUser{
     
     __block BOOL isSuccess;
+    __block NSMutableOrderedSet * j = [NSMutableOrderedSet new];
     
     [IMGGalleryRequest userGalleryPage:0 withViralSort:YES showViral:YES success:^(NSArray * images) {
         
-        isSuccess = YES;
+        [j addObjectsFromArray:images];
         
     } failure:failBlock];
+    
+    [IMGGalleryRequest userGalleryPage:1 withViralSort:YES showViral:YES success:^(NSArray * images) {
+        
+        [j addObjectsFromArray:images];
+        
+    } failure:failBlock];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [IMGGalleryRequest userGalleryPage:2 withViralSort:YES showViral:YES success:^(NSArray * images) {
+            
+            [j addObjectsFromArray:images];
+            
+            if(j.count == images.count)
+                failBlock(nil);
+            else
+                isSuccess = YES;
+            
+        } failure:failBlock];
+    });
     
     expect(isSuccess).will.beTruthy();
 }
