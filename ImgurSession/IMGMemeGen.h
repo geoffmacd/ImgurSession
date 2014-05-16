@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#import <ImgurSession/ImgurSession.h>
+#import "IMGEndpoint.h"
 
 @interface IMGMemeGen : IMGEndpoint
 

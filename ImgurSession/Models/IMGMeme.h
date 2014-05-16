@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
-#import <ImgurSession/ImgurSession.h>
+#import "IMGImage.h"
 
 @interface IMGMeme : IMGImage
 

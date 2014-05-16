@@ -8,6 +8,9 @@
 
 #import "IMGMemeGen.h"
 
+#import "IMGImage.h"
+#import "IMGSession.h"
+
 @implementation IMGMemeGen
 
 +(NSString*)pathComponent{
