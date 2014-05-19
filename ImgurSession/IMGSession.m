@@ -147,7 +147,7 @@
     }
     
     //setup reachability manager to notify delegate of lost connections
-    self.imgurReachability = [AFNetworkReachabilityManager managerForDomain:@"imgur.com"];
+    self.imgurReachability = [AFNetworkReachabilityManager managerForDomain:IMGBaseURL];
     __weak typeof(self) welf = self;
     [self.imgurReachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         dispatch_async(dispatch_get_main_queue(), ^{
