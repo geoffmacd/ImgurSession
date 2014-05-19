@@ -61,19 +61,15 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @protocol IMGSessionDelegate <NSObject>
 
-@required
-
+@optional
 /**
  Alerts delegate that request limit is hit and cannot continue. Must be implemented
  */
 -(void)imgurSessionRateLimitExceeded;
 /**
- Alerts delegate that webview is needed to present Imgur OAuth authentication with the authentication type (pin,code,token) set by the initializers. Call completion upon authenticating with asyncAuthenticateWithType when you want to ensure previous requests do not fail, as this method was called lazily by the session just before a request is attempted. Not calling completion will still work but result in the previous request never running.
+ Alerts delegate that webview is needed to present Imgur OAuth authentication with the authentication type (pin,code,token) set by the initializers. Call completion upon authenticating with asyncAuthenticateWithType when you want to ensure previous requests do not fail, as this method was called lazily by the session just before a request is attempted. Not calling completion will still work but result in the previous request never running. This method is required when using an authenticated session
  */
 -(void)imgurSessionNeedsExternalWebview:(NSURL*)url completion:(void(^)())completion;
-
-@optional
-
 /**
  Alerts delegate that request limit is being approached
  */

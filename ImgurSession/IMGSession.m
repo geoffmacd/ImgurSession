@@ -59,6 +59,8 @@
     NSParameterAssert(secret);
     NSParameterAssert(authType != IMGNoAuthType);
     NSParameterAssert(delegate);
+    NSAssert([delegate respondsToSelector:@selector(imgurSessionNeedsExternalWebview:completion:)], @"ImgurSession requires a delegate that implements imgurSessionNeedsExternalWebview: in order to authenticate from external imgur service");
+    
     
     //for testing, do not reset access tokens
     if(![[self sharedInstance] isAnonymous] && [clientID isEqualToString:[[self sharedInstance] clientID]] && [secret isEqualToString:[[self sharedInstance] secret]] && authType == [[self sharedInstance] authType])
@@ -72,7 +74,6 @@
 +(instancetype)anonymousSessionWithClientID:(NSString *)clientID withDelegate:(id<IMGSessionDelegate>)delegate{
     
     NSParameterAssert(clientID);
-    NSParameterAssert(delegate);
     
     //for testing, do not reset access tokens
     if([[self sharedInstance] isAnonymous] && clientID == [[self sharedInstance] clientID])
@@ -434,7 +435,7 @@
                 
                 //alert app that it needs to present webview or go to safari
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate)])
+                    if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionNeedsExternalWebview:completion:)])
                         [_delegate imgurSessionNeedsExternalWebview:[self authenticateWithExternalURL] completion:^{
                             
                             //refresh upon recieving new auth code
@@ -683,7 +684,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
             
-                if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
+                if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionRateLimitExceeded)]){
                     [_delegate imgurSessionRateLimitExceeded];
                 }
                 
@@ -763,7 +764,7 @@
         //warn client
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if(_delegate && [_delegate conformsToProtocol:@protocol(IMGSessionDelegate) ]){
+            if(_delegate && [_delegate respondsToSelector:@selector(imgurSessionRateLimitExceeded)]){
                 [_delegate imgurSessionRateLimitExceeded];
             }
             
