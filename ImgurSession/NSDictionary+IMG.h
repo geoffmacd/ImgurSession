@@ -10,6 +10,6 @@
 
 @interface NSDictionary (IMG)
 
--(NSDictionary *)cleanNull;
+-(NSDictionary *)IMG_cleanNull;
 
 @end
