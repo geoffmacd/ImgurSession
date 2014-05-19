@@ -10,7 +10,7 @@
 
 @implementation NSDictionary (IMG)
 
--(NSDictionary *)cleanNull {
+-(NSDictionary *)IMG_cleanNull {
     return [self dictionaryWithValuesForKeys:[[self keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
         return ![obj isEqual:[NSNull null]];
     }] allObjects]];

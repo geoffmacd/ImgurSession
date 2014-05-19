@@ -49,7 +49,7 @@
             return nil;
         }
         //clean NSNull
-        jsonData = [jsonData cleanNull];
+        jsonData = [jsonData IMG_cleanNull];
         
         _imageID = jsonData[@"id"];
         _title = jsonData[@"title"];

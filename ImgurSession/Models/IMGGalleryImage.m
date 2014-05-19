@@ -37,7 +37,7 @@
             return nil;
         }
         //clean NSNull
-        jsonData = [jsonData cleanNull];
+        jsonData = [jsonData IMG_cleanNull];
         
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];

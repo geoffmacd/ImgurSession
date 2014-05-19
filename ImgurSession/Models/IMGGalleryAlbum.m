@@ -36,7 +36,7 @@
             *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorMalformedResponseFormat userInfo:@{@"ImgurClass":[self class]}];
             return nil;
         }
-        jsonData = [jsonData cleanNull];
+        jsonData = [jsonData IMG_cleanNull];
         
         _ups = [jsonData[@"ups"] integerValue];
         _downs = [jsonData[@"downs"] integerValue];
