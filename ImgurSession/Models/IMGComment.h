@@ -72,15 +72,26 @@
  Responses to this comment. Only included with withReplies=YES
  */
 @property (readonly,nonatomic, copy) NSArray * children;
+/**
+ UNDOCUMENTED
+ Users up or down vote on the comment
+ */
+@property (nonatomic, readonly) IMGVoteType vote;
 
 /**
  Retrieve constructed gallery object for this comment
  */
 -(id <IMGGalleryObjectProtocol>)galleryObject;
 
+
 /**
  Custom init for when replying to a comment and only the ID is returned by the server
  */
 - (instancetype)initUserCommentWithID:(NSInteger)commentID parentID:(NSInteger)parentID caption:(NSString*)caption;
+
+/**
+ Set the user's vote for this comment
+ */
+-(void)setUsersVote:(IMGVoteType)vote;
 
 @end

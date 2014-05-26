@@ -28,6 +28,7 @@
 @property (readwrite,nonatomic) NSInteger parentID;
 @property (readwrite,nonatomic) BOOL deleted;
 @property (readwrite,nonatomic) NSArray * children;
+@property (readwrite,nonatomic) IMGVoteType vote;
 
 @end
 
@@ -65,6 +66,10 @@
         _parentID = [jsonData[@"parent_id"] integerValue];
         _deleted = [jsonData[@"deleted"] boolValue];
         
+        if(jsonData[@"vote"]){
+            _vote = [IMGVote voteForStr:jsonData[@"vote"]];
+        }
+        
         _children = jsonData[@"children"];
     }
     return [self trackModels];
@@ -83,10 +88,16 @@
         _points = 0;
         _datetime = [NSDate date];//right now
         _parentID = parentID;
+        _vote = IMGUpVote;//users vote starts as upvote
     }
     return [self trackModels];
 }
 
+-(void)setUsersVote:(IMGVoteType)vote{
+    
+    self.vote = vote;
+    
+}
 #pragma mark - Describe
 
 - (NSString *)description{
@@ -137,6 +148,7 @@
     NSInteger downs = [[decoder decodeObjectForKey:@"downs"] integerValue];
     NSInteger points = [[decoder decodeObjectForKey:@"points"] integerValue];
     NSInteger parentID = [[decoder decodeObjectForKey:@"parentID"] integerValue];
+    IMGVoteType vote = [[decoder decodeObjectForKey:@"vote"] integerValue];
     BOOL onAlbum = [[decoder decodeObjectForKey:@"onAlbum"] boolValue];
     BOOL deleted = [[decoder decodeObjectForKey:@"deleted"] boolValue];
     
@@ -162,6 +174,7 @@
         _caption = caption;
         _author = author;
         _albumCover = albumCover;
+        _vote = vote;
         
         _datetime = datetime;
         _children = children;
@@ -189,6 +202,7 @@
     [coder encodeObject:@(self.parentID) forKey:@"parentID"];
     [coder encodeObject:@(self.onAlbum) forKey:@"onAlbum"];
     [coder encodeObject:@(self.deleted) forKey:@"deleted"];
+    [coder encodeObject:@(self.vote) forKey:@"vote"];
 }
 
 #pragma mark - NSCopying
@@ -215,6 +229,7 @@
         [copy setParentID:self.parentID];
         [copy setOnAlbum:self.onAlbum];
         [copy setDeleted:self.deleted];
+        [copy setVote:self.vote];
     }
     
     return copy;
