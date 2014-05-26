@@ -8,6 +8,8 @@
 
 #import "IMGComment.h"
 
+#import "NSDictionary+IMG.h"
+
 #import "IMGGalleryAlbum.h"
 #import "IMGGalleryImage.h"
 #import "IMGSession.h"
@@ -51,6 +53,9 @@
                 *error = [NSError errorWithDomain:IMGErrorDomain code:IMGErrorResponseMissingParameters userInfo:nil];
             return nil;
         }
+        
+        //clean NSNull
+        jsonData = [jsonData cleanNull];
         
         _commentID = [jsonData[@"id"] integerValue];
         _galleryID = jsonData[@"image_id"];

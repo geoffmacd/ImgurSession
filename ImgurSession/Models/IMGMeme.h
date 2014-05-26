@@ -13,4 +13,7 @@
 @property (readonly,nonatomic,copy) NSString * topText;
 @property (readonly,nonatomic,copy) NSString * bottomText;
 
+
+-(instancetype)initWithImage:(IMGImage*)image withTopText:(NSString*)top withBottomText:(NSString*)bottom withTitle:(NSString*)title withDescription:(NSString*)description;
+
 @end
