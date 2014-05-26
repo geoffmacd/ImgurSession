@@ -55,7 +55,7 @@
         }
         
         //clean NSNull
-        jsonData = [jsonData cleanNull];
+        jsonData = [jsonData IMG_cleanNull];
         
         _commentID = [jsonData[@"id"] integerValue];
         _galleryID = jsonData[@"image_id"];
