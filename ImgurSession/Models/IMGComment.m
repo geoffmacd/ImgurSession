@@ -88,9 +88,9 @@
         _caption = caption;
         _author = [[IMGSession sharedInstance] user].username;//user made the reply
         _authorID = [[IMGSession sharedInstance] user].accountID;
-        _ups = 0;
+        _ups = 1;
         _downs = 0;
-        _points = 0;
+        _points = 1;
         _datetime = [NSDate date];//right now
         _parentID = parentID;
         _vote = IMGUpVote;//users vote starts as upvote
