@@ -33,12 +33,9 @@
 /**
  Return the images the user has favorited in the gallery.
  @param username name of account
+ @param page page of requests
  */
-+ (void)accountFavouritesWithUser:(NSString *)username success:(void (^)(NSArray * favs))success failure:(void (^)(NSError *error))failure;
-/**
- Returns the current user's favorited images when signed in.  Must be logged in.
- */
-+ (void)accountFavourites:(void (^)(NSArray * favs))success failure:(void (^)(NSError *error))failure;
++ (void)accountFavouritesWithUser:(NSString *)username withPage:(NSInteger)page success:(void (^)(NSArray * favs))success failure:(void (^)(NSError *error))failure;
 
 #pragma mark - Gallery Profile
 /**

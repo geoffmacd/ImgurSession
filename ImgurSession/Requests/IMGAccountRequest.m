@@ -50,8 +50,8 @@
 
 #pragma mark - Favourites
 
-+ (void)accountFavouritesWithUser:(NSString *)username success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-    NSString *path = [self pathWithID:username withOption:@"gallery_favorites"];
++ (void)accountFavouritesWithUser:(NSString *)username withPage:(NSInteger)page success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    NSString *path = [self pathWithID:username withOption:@"gallery_favorites" withID2:[[NSNumber numberWithInteger:page] stringValue]];
     
     [[IMGSession sharedInstance] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -83,11 +83,6 @@
             success([NSArray arrayWithArray:favs]);
         
     } failure:failure];
-}
-
-+ (void)accountFavourites:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
-
-    [self accountFavouritesWithUser:@"me" success:success failure:failure];
 }
 
 + (void)accountSubmissionsWithUser:(NSString*)username withPage:(NSInteger)page success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
