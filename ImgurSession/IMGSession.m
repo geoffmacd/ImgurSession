@@ -610,10 +610,10 @@
 
 -(void)retrieveRateLimitingCredits:(void (^)(NSDictionary * credits))success failure:(void (^)(NSError * error))failure{
     //request response serialized goes through updateClientRateLimiting: to update credits
-    [self GET:@"credits" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self GET:[NSString stringWithFormat:@"%@/3/credits", IMGBaseURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
-            failure(responseObject);
+            success(responseObject);
         
     } failure:^(NSError *error) {
         
@@ -723,7 +723,8 @@
     
     
     IMGAuthState auth = [self sessionAuthState];
-    /* Reachability is not reliable, we may as well try the request before failing
+    /*
+    // Reachability is not reliable, we may as well try the request before failing
     if(self.imgurReachability && [self.imgurReachability networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable){
         
         //error no connection, don't even try
