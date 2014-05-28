@@ -608,6 +608,20 @@
     [self checkForUserNotifications:nil failure:nil];
 }
 
+-(void)retrieveRateLimitingCredits:(void (^)(NSDictionary * credits))success failure:(void (^)(NSError * error))failure{
+    //request response serialized goes through updateClientRateLimiting: to update credits
+    [self GET:@"credits" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if(success)
+            failure(responseObject);
+        
+    } failure:^(NSError *error) {
+        
+        if(failure)
+            failure(error);
+    }];
+}
+
 #pragma mark - Authorization Header
 
 /**
@@ -709,14 +723,15 @@
     
     
     IMGAuthState auth = [self sessionAuthState];
-    
+    /* Reachability is not reliable, we may as well try the request before failing
     if(self.imgurReachability && [self.imgurReachability networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable){
         
         //error no connection, don't even try
         if(failure)
             failure([NSError errorWithDomain:IMGErrorDomain code:AFNetworkReachabilityStatusNotReachable userInfo:nil]);
         
-    } else if(auth == IMGAuthStateMissingParameters){
+    } else */
+    if(auth == IMGAuthStateMissingParameters){
         
         if(failure)
             failure([NSError errorWithDomain:IMGErrorDomain code:IMGErrorMissingClientAuthentication userInfo:nil]);

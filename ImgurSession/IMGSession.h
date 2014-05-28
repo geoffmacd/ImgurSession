@@ -271,6 +271,11 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  Requests any unread notifications if they exist for logged in user.
  */
 -(void)checkUserUnreadNotifications;
+/**
+ Request Imgur for latest API credits information. Use the session properties or returned dictionaries for result. This request is not necessary unless you need
+ the latest status otherwise just check the session class properties.
+*/
+-(void)retrieveRateLimitingCredits:(void (^)(NSDictionary * credits))success failure:(void (^)(NSError * error))failure;
 
 #pragma mark - Imgur Request Methods - Handles authentication state, responding to errors and tracking
 
