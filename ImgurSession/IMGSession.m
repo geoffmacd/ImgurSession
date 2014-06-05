@@ -27,6 +27,7 @@
 @property (readwrite,nonatomic) NSInteger creditsClientRemaining;
 @property (readwrite,nonatomic) NSInteger creditsClientLimit;
 @property (readwrite, nonatomic) BOOL isAnonymous;
+@property (readwrite, nonatomic) BOOL isConfigured;
 @property (readwrite, nonatomic) IMGAccount * user;
 
 @property dispatch_semaphore_t refreshSemaphore;
@@ -93,6 +94,7 @@
         
         _warnRateLimit = 100;
         _notificationRefreshPeriod = 60;
+        _isConfigured = NO;
         
         //to enable rate tracking
         IMGResponseSerializer * responseSerializer = [IMGResponseSerializer serializer];
@@ -114,6 +116,7 @@
     self.accessToken = nil;
     self.accessTokenExpiry = nil;
     self.refreshToken = nil;
+    self.isConfigured = YES;
     
     //clear header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;

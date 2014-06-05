@@ -149,6 +149,10 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 @property (readonly, nonatomic) BOOL isAnonymous;
 /**
+ Is session configured yet?
+ */
+@property (readonly, nonatomic) BOOL isConfigured;
+/**
  User Account if logged in. Refreshed on authentication or refresh tokens. Also refreshed with refreshUserAccount method.
  */
 @property (readonly, nonatomic) IMGAccount * user;

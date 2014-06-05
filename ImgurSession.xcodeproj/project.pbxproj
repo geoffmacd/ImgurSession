@@ -478,8 +478,8 @@
 		C3C6B7E71922BDD7007C32C8 /* IMGImageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGImageTests.m; sourceTree = "<group>"; };
 		C3C6B7F019240BD6007C32C8 /* IMGMeme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGMeme.h; sourceTree = "<group>"; };
 		C3C6B7F119240BD7007C32C8 /* IMGMeme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGMeme.m; sourceTree = "<group>"; };
-		C3C6B7F619240C3A007C32C8 /* IMGMemeGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGMemeGen.h; sourceTree = "<group>"; };
-		C3C6B7F719240C3A007C32C8 /* IMGMemeGen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGMemeGen.m; sourceTree = "<group>"; };
+		C3C6B7F619240C3A007C32C8 /* IMGMemeGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMGMemeGen.h; path = Requests/IMGMemeGen.h; sourceTree = "<group>"; };
+		C3C6B7F719240C3A007C32C8 /* IMGMemeGen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGMemeGen.m; path = Requests/IMGMemeGen.m; sourceTree = "<group>"; };
 		C3CDA2D618CA666F003B7F96 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C3CDA2DC18CA66DA003B7F96 /* ImgurSession Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ImgurSession Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CDA2E618CA66DA003B7F96 /* IMGAccountTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IMGAccountTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
