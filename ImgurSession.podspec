@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'ImgurSession'
-  spec.version          = '1.1.1'
+  spec.version          = '1.1.2'
   spec.license          = {:type => 'MIT'}
   spec.homepage         = 'https://github.com/geoffmacd/ImgurSession'
   spec.summary          = 'Imgur API for Objective C'
