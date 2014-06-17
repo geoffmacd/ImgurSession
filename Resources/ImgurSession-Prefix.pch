@@ -6,7 +6,6 @@
     #import <Foundation/Foundation.h>
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <Security/Security.h>
-    #import <AFNetworking/AFNetworking.h>
 
     #if TARGET_OS_IPHONE
         #import <UIKit/UIKit.h>

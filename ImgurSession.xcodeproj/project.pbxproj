@@ -179,7 +179,6 @@
 		C3C6B7DB1922BA1D007C32C8 /* invalidcode.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7D91922BA1D007C32C8 /* invalidcode.json */; };
 		C3C6B7DD1922BB6E007C32C8 /* imagenotfound.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7DC1922BB6E007C32C8 /* imagenotfound.json */; };
 		C3C6B7DE1922BB6E007C32C8 /* imagenotfound.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7DC1922BB6E007C32C8 /* imagenotfound.json */; };
-		C3C6B7E01922BCBA007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7DF1922BCBA007C32C8 /* postimage.json */; };
 		C3C6B7E11922BCBA007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7DF1922BCBA007C32C8 /* postimage.json */; };
 		C3C6B7E31922BCC5007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7E21922BCC5007C32C8 /* postimage.json */; };
 		C3C6B7E51922BCC5007C32C8 /* postimage.json in Resources */ = {isa = PBXBuildFile; fileRef = C3C6B7E21922BCC5007C32C8 /* postimage.json */; };
@@ -1354,7 +1353,7 @@
 		C309338D18CA1F87009D9C57 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = GeoffMacDonald;
 				TargetAttributes = {
 					243CCD9518DD32EF00B4FBC6 = {
@@ -1499,7 +1498,6 @@
 				C3C6B7D71922B8EB007C32C8 /* invalidaccess.json in Resources */,
 				C3C6B7DA1922BA1D007C32C8 /* invalidcode.json in Resources */,
 				C35A124318FDAD1C007D2260 /* example.gif in Resources */,
-				C3C6B7E01922BCBA007C32C8 /* postimage.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
