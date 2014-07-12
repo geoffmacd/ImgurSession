@@ -46,6 +46,11 @@
 
 +(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
     
+    [IMGGalleryRequest topGalleryPage:page withWindow:window withViralSort:YES success:success failure:failure];
+}
+
++(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window withViralSort:(BOOL)viralSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
     NSString * windowStr;
     switch (window) {
         case IMGTopGalleryWindowDay:
@@ -69,9 +74,14 @@
     }
     
     //defauts are viral sort
-    NSDictionary * params = @{@"section" : @"top", @"page":[NSNumber numberWithInteger:page], @"window": windowStr, @"sort":@"viral"};
+    NSDictionary * params = @{@"section" : @"top", @"page":[NSNumber numberWithInteger:page], @"window": windowStr, @"sort":(viralSort ? @"viral" : @"time")};
     
     [IMGGalleryRequest galleryWithParameters:params success:success failure:failure];
+}
+
++(void)userGalleryPage:(NSInteger)page showViral:(BOOL)showViral success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{
+    
+    [IMGGalleryRequest userGalleryPage:page withViralSort:NO showViral:showViral success:success failure:failure];
 }
 
 +(void)userGalleryPage:(NSInteger)page withViralSort:(BOOL)viralSort showViral:(BOOL)showViral success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure{

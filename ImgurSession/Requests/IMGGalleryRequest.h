@@ -54,7 +54,8 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param page    imgur pagination page to retrieve
  @param window    imgur time period to retrieve. day,year,etc.
  */
-+(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window success:(void (^)(NSArray * objects))success failure:(void (^)(NSError * error))failure;
++(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window success:(void (^)(NSArray * objects))success failure:(void (^)(NSError * error))failure;+(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
++(void)topGalleryPage:(NSInteger)page withWindow:(IMGTopGalleryWindow)window withViralSort:(BOOL)viralSort success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
  Retrieves user's gallery with viral options
  @param page    imgur pagination page to retrieve
@@ -62,6 +63,8 @@ typedef NS_ENUM(NSInteger, IMGGalleryCommentSortType) {
  @param showViral    show viral
  */
 +(void)userGalleryPage:(NSInteger)page withViralSort:(BOOL)viralSort showViral:(BOOL)showViral success:(void (^)(NSArray * objects))success failure:(void (^)(NSError * error))failure;
+
++(void)userGalleryPage:(NSInteger)page showViral:(BOOL)showViral success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure;
 /**
  Retrieves gallery with parameters specified in dictionary
  @param parameters    dictionary of parameters to specify
