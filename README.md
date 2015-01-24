@@ -16,7 +16,7 @@ This project was originally forked from [ImgurKit](https://github.com/Nesk/Imgur
     - Session will refresh your tokens lazily. Feel free to use any request at any time.
 
 - User account
-    - Session notifies delegate of replys and messages to the users account automatically every 1 minute. Can be disabled.
+    - Session notifies delegate of replies and messages to the users account automatically every 1 minute. Can be disabled.
     - Session refresh the user's account on token expiry every hour.
 
 
