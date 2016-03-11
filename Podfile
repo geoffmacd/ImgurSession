@@ -4,7 +4,7 @@
 target "ImgurSessionOSX", :exclusive => true do
 
 platform :osx, "10.9"
-pod 'AFNetworking', '~> 2.6.1'
+pod 'AFNetworking', '2.6.1'
 
 end
 
@@ -43,7 +43,7 @@ end
 target "ImgurSession", :exclusive => true do
 
 platform :ios, "8.0"
-pod 'AFNetworking', '~> 2.6.1'
+pod 'AFNetworking', '2.6.1'
 
 end
 

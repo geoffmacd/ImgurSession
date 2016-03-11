@@ -402,6 +402,7 @@
 		24C5D0FC18E64A4100BB9EEB /* IMGAuthenticationtests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGAuthenticationtests.m; path = "Integrated Tests/IMGAuthenticationtests.m"; sourceTree = SOURCE_ROOT; };
 		2F120CC11CCD73A807E9A9FC /* Pods-ImgurSessionOSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImgurSessionOSX/Pods-ImgurSessionOSX.debug.xcconfig"; sourceTree = "<group>"; };
 		3802B4D4215A70B2F0E97712 /* Pods-ImgurSession.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSession.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImgurSession/Pods-ImgurSession.debug.xcconfig"; sourceTree = "<group>"; };
+		47090D513F41D2ABF36F4381 /* Pods-iOSAuthenticatedTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAuthenticatedTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAuthenticatedTests/Pods-iOSAuthenticatedTests.release.xcconfig"; sourceTree = "<group>"; };
 		4E9BF0EB110055E4F5A1E38B /* Pods-OSXAuthenticatedTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAuthenticatedTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSXAuthenticatedTests/Pods-OSXAuthenticatedTests.debug.xcconfig"; sourceTree = "<group>"; };
 		51CF23D7CB2CB021D65A8734 /* Pods-OSXIntegratedAnonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAnonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSXIntegratedAnonTests/Pods-OSXIntegratedAnonTests.release.xcconfig"; sourceTree = "<group>"; };
 		585B9DEF3E190731893518E1 /* Pods-OSXIntegratedAnonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAnonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSXIntegratedAnonTests/Pods-OSXIntegratedAnonTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -410,6 +411,7 @@
 		5D34CA01302A5F14B8A976FA /* Pods-ImgurSessionOSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImgurSessionOSX/Pods-ImgurSessionOSX.release.xcconfig"; sourceTree = "<group>"; };
 		63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSession.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AD5E4AAC7E4142A9272C14 /* libPods-OSXIntegratedAnonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXIntegratedAnonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A7C04097FEAE6AD303B00C3 /* Pods-iOSAuthenticatedTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAuthenticatedTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAuthenticatedTests/Pods-iOSAuthenticatedTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B18FC49F01B74CE7997BECDF /* libPods-OSXIntegratedAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXIntegratedAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E1EE857AF64A31A8CAA72E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C309339518CA1F87009D9C57 /* libImgurSession.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImgurSession.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -733,6 +735,8 @@
 				51CF23D7CB2CB021D65A8734 /* Pods-OSXIntegratedAnonTests.release.xcconfig */,
 				20E17B63F0296D84AF89425B /* Pods-OSXIntegratedAuthenticatedTests.debug.xcconfig */,
 				F0E134AA0D60A686197454CC /* Pods-OSXIntegratedAuthenticatedTests.release.xcconfig */,
+				9A7C04097FEAE6AD303B00C3 /* Pods-iOSAuthenticatedTests.debug.xcconfig */,
+				47090D513F41D2ABF36F4381 /* Pods-iOSAuthenticatedTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1315,6 +1319,7 @@
 				C3CDA2D918CA66DA003B7F96 /* Frameworks */,
 				C3CDA2DA18CA66DA003B7F96 /* Resources */,
 				792D86CF649D4B6CA648E336 /* Copy Pods Resources */,
+				85D1C0320003F095DF14650F /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1704,7 +1709,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-iOSAuthenticatedTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSAuthenticatedTests/Pods-iOSAuthenticatedTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85D1C0320003F095DF14650F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSAuthenticatedTests/Pods-iOSAuthenticatedTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		875BF3F1C7FF4E5C985CBB06 /* Check Pods Manifest.lock */ = {
@@ -2366,6 +2386,7 @@
 		};
 		C3CDA2EC18CA66DA003B7F96 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A7C04097FEAE6AD303B00C3 /* Pods-iOSAuthenticatedTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2388,6 +2409,7 @@
 		};
 		C3CDA2ED18CA66DA003B7F96 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47090D513F41D2ABF36F4381 /* Pods-iOSAuthenticatedTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
