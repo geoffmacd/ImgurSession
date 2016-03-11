@@ -16,6 +16,7 @@
 
 @property (readwrite, nonatomic,copy) NSString *clientID;
 @property (readwrite, nonatomic, copy) NSString *secret;
+@property (readwrite, nonatomic, copy) NSString *mashapeKey;
 @property (readwrite, nonatomic, copy) NSString *refreshToken;
 @property (readwrite, nonatomic, copy) NSString *accessToken;
 @property (readwrite, nonatomic, copy) NSString *codeAwaitingAuthentication;
@@ -29,6 +30,7 @@
 @property (readwrite, nonatomic) BOOL isAnonymous;
 @property (readwrite, nonatomic) BOOL isConfigured;
 @property (readwrite, nonatomic) IMGAccount * user;
+@property (readwrite, nonatomic) AFHTTPSessionManager *authSession;
 
 @property dispatch_semaphore_t refreshSemaphore;
 
@@ -54,7 +56,14 @@
     return sharedInstance;
 }
 
+static BOOL useMashape = NO;
+
 +(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate{
+
+    return [self authenticatedSessionWithClientID:clientID secret:secret mashapeKey:nil authType:authType withDelegate:delegate];
+}
+
++(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret mashapeKey:(NSString *)mashapeKey authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate{
     
     NSParameterAssert(clientID);
     NSParameterAssert(secret);
@@ -62,25 +71,33 @@
     NSParameterAssert(delegate);
     NSAssert([delegate respondsToSelector:@selector(imgurSessionNeedsExternalWebview:completion:)], @"ImgurSession requires a delegate that implements imgurSessionNeedsExternalWebview: in order to authenticate from external imgur service");
     
+    useMashape = mashapeKey != nil;
     
     //for testing, do not reset access tokens
     if(![[self sharedInstance] isAnonymous] && [clientID isEqualToString:[[self sharedInstance] clientID]] && [secret isEqualToString:[[self sharedInstance] secret]] && authType == [[self sharedInstance] authType])
         return [self sharedInstance];
     
-    [[IMGSession sharedInstance] setupClientWithID:clientID secret:secret authType:authType withDelegate:delegate];
+    [[IMGSession sharedInstance] setupClientWithID:clientID secret:secret mashapeKey:mashapeKey authType:authType withDelegate:delegate];
     
     return [self sharedInstance];
 }
 
 +(instancetype)anonymousSessionWithClientID:(NSString *)clientID withDelegate:(id<IMGSessionDelegate>)delegate{
     
+    return [self anonymousSessionWithClientID:clientID mashapeKey:nil withDelegate:delegate];
+}
+
++(instancetype)anonymousSessionWithClientID:(NSString *)clientID mashapeKey:(NSString *)mashapeKey withDelegate:(id<IMGSessionDelegate>)delegate{
+    
     NSParameterAssert(clientID);
+    
+    useMashape = mashapeKey != nil;
     
     //for testing, do not reset access tokens
     if([[self sharedInstance] isAnonymous] && clientID == [[self sharedInstance] clientID])
         return [self sharedInstance];
     
-    [[IMGSession sharedInstance] setupClientWithID:clientID secret:nil authType:IMGNoAuthType withDelegate:delegate];
+    [[IMGSession sharedInstance] setupClientWithID:clientID secret:nil mashapeKey:mashapeKey authType:IMGNoAuthType withDelegate:delegate];
     
     return [self sharedInstance];
 }
@@ -90,7 +107,7 @@
  */
 - (instancetype)init{
     
-    if(self = [self initWithBaseURL:[NSURL URLWithString:IMGBaseURL]]){
+    if(self = [self initWithBaseURL:[NSURL URLWithString:useMashape ? IMGMashapeBaseURL : IMGImgurBaseURL]]){
         
         _warnRateLimit = 100;
         _notificationRefreshPeriod = 60;
@@ -106,7 +123,7 @@
 /**
  Configure session with client credentials. Anonymous session if secret is null
  */
--(void)setupClientWithID:(NSString*)clientID secret:(NSString*)secret authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate{
+-(void)setupClientWithID:(NSString*)clientID secret:(NSString*)secret mashapeKey:(NSString *)mashapeKey authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate{
     
     //ensure stale fields are null
     self.secret = nil;
@@ -123,6 +140,7 @@
     [serializer clearAuthorizationHeader];
     
     self.clientID = clientID;
+    self.mashapeKey = mashapeKey;
     self.authType = authType;
     self.delegate = delegate;
     
@@ -219,7 +237,8 @@
     if(self.isAnonymous)
         return nil;
     
-    NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGBaseURL, [IMGSession strForAuthType:self.authType], _clientID];
+    // Always use the imgur base URL for auth
+    NSString *path = [NSString stringWithFormat:@"%@/oauth2/authorize?response_type=%@&client_id=%@", IMGImgurBaseURL, [IMGSession strForAuthType:self.authType], _clientID];
     return [NSURL URLWithString:path];
 }
 
@@ -256,6 +275,21 @@
     }];
 }
 
+-(AFHTTPSessionManager *)authSession {
+    
+    if(!_authSession) {
+        
+        // Always use the imgur base URL for auth
+        self.authSession = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:IMGImgurBaseURL]];
+        
+        //to enable rate tracking
+        IMGResponseSerializer * responseSerializer = [IMGResponseSerializer serializer];
+        [_authSession setResponseSerializer:responseSerializer];
+    }
+    
+    return _authSession;
+}
+
 -(void)postForRefreshTokensWithCode:(NSString *)inputCode success:(void (^)(NSString * refreshToken))success failure:(void (^)(NSError *error))failure{
     
     [self.requestSerializer clearAuthorizationHeader];
@@ -266,7 +300,7 @@
     NSDictionary * params = @{[IMGSession strForAuthType:self.authType]:inputCode, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":grantTypeStr};
     
     //use super to bypass authentication checks
-    [super POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.authSession POST:IMGOAuthEndpoint parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         
         //alert delegate
         [self informClientAuthStateChanged:IMGAuthStateAuthenticated];
@@ -304,7 +338,7 @@
     NSDictionary * refreshParams = @{@"refresh_token":_refreshToken, @"client_id":_clientID, @"client_secret":_secret, @"grant_type":@"refresh_token"};
     
     //use super to bypass authentication checks
-    [super POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.authSession POST:IMGOAuthEndpoint parameters:refreshParams success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary * json = responseObject;
         //set auth header
@@ -613,7 +647,7 @@
 
 -(void)retrieveRateLimitingCredits:(void (^)(NSDictionary * credits))success failure:(void (^)(NSError * error))failure{
     //request response serialized goes through updateClientRateLimiting: to update credits
-    [self GET:[NSString stringWithFormat:@"%@/3/credits", IMGBaseURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self GET:[NSString stringWithFormat:@"%@/3/credits", useMashape ? IMGMashapeBaseURL : IMGImgurBaseURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if(success)
             success(responseObject);
@@ -635,6 +669,10 @@
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;
     [serializer setValue:[NSString stringWithFormat:@"Client-ID %@", clientID] forHTTPHeaderField:@"Authorization"];
+    
+    if(self.mashapeKey){
+        [serializer setValue:self.mashapeKey forHTTPHeaderField:@"X-Mashape-Key"];
+    }
 }
 
 /**
@@ -659,6 +697,10 @@
     //change the serializer to include this authorization header
     AFHTTPRequestSerializer * serializer = self.requestSerializer;
     [serializer setValue:[NSString stringWithFormat:@"Bearer %@", tokens[@"access_token"]] forHTTPHeaderField:@"Authorization"];
+    
+    if(self.mashapeKey){
+        [serializer setValue:self.mashapeKey forHTTPHeaderField:@"X-Mashape-Key"];
+    }
 }
 
 -(void)accessTokenExpired{

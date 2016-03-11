@@ -10,7 +10,8 @@
 #import <AFNetworking/AFNetworking.h>
 
 //endpoints
-static NSString * const IMGBaseURL = @"https://api.imgur.com";
+static NSString * const IMGImgurBaseURL = @"https://api.imgur.com";
+static NSString * const IMGMashapeBaseURL = @"https://imgur-apiv3.p.mashape.com";
 static NSString * const IMGAPIVersion = @"3";
 static NSString * const IMGOAuthEndpoint = @"oauth2/token";
 
@@ -217,11 +218,27 @@ typedef NS_ENUM(NSInteger, IMGAuthState){
  */
 +(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate;
 /**
+ Resets sharedInstance singleton to authenticated session with these parameters. If credentials are nil, assert will be thrown. Must be called before requests are made.
+ @param clientID    client Id string as registered with Imgur
+ @param secret      secret string as registered with Imgur
+ @param mashapeKey  Mashape key as registered with Mashape, or nil to access imgur directly
+ @param authType    type of authorization - code, pin or token
+ @param delegate    delegate to respond to required imgur delegate methods
+ */
++(instancetype)authenticatedSessionWithClientID:(NSString *)clientID secret:(NSString *)secret mashapeKey:(NSString *)mashapeKey authType:(IMGAuthType)authType withDelegate:(id<IMGSessionDelegate>)delegate;
+/**
  Resets sharedInstance singleton to anonymous session with client ID. Must be called before requests are made.
  @param clientID    client Id string as registered with Imgur
  @param delegate    delegate to respond to required imgur delegate methods
  */
 +(instancetype)anonymousSessionWithClientID:(NSString *)clientID withDelegate:(id<IMGSessionDelegate>)delegate;
+/**
+ Resets sharedInstance singleton to anonymous session with client ID. Must be called before requests are made.
+ @param clientID    client Id string as registered with Imgur
+ @param mashapeKey  Mashape key as registered with Mashape, or nil to access imgur directly
+ @param delegate    delegate to respond to required imgur delegate methods
+ */
++(instancetype)anonymousSessionWithClientID:(NSString *)clientID mashapeKey:(NSString *)mashapeKey withDelegate:(id<IMGSessionDelegate>)delegate;
 
 #pragma mark - Authentication
 
