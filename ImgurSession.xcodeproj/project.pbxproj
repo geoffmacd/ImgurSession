@@ -341,9 +341,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAnonTests.xcconfig"; path = "Pods/Pods-OSXIntegratedAnonTests.xcconfig"; sourceTree = "<group>"; };
-		092DC70EA0C4429E854604CD /* Pods-ImgurSession.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSession.xcconfig"; path = "Pods/Pods-ImgurSession.xcconfig"; sourceTree = "<group>"; };
+		158ABCB6A9C688A52F2C1771 /* Pods-OSXAnonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAnonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSXAnonTests/Pods-OSXAnonTests.release.xcconfig"; sourceTree = "<group>"; };
 		19486AE3CD394A55907AA7A3 /* libPods-OSXAnonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXAnonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20E17B63F0296D84AF89425B /* Pods-OSXIntegratedAuthenticatedTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAuthenticatedTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSXIntegratedAuthenticatedTests/Pods-OSXIntegratedAuthenticatedTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2155B9E8F1254B7783782111 /* libPods-OSXAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2407474D18D4F31600B92063 /* IMGVote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGVote.h; sourceTree = "<group>"; };
 		2407474E18D4F31600B92063 /* IMGVote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGVote.m; sourceTree = "<group>"; };
@@ -400,16 +400,16 @@
 		24C5D0F618E6441200BB9EEB /* badhotgalleryrequest-noauthenticiation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "badhotgalleryrequest-noauthenticiation.json"; path = "anonymous/badhotgalleryrequest-noauthenticiation.json"; sourceTree = "<group>"; };
 		24C5D0F918E6473300BB9EEB /* IMGAuthenticationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGAuthenticationTests.m; sourceTree = "<group>"; };
 		24C5D0FC18E64A4100BB9EEB /* IMGAuthenticationtests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMGAuthenticationtests.m; path = "Integrated Tests/IMGAuthenticationtests.m"; sourceTree = SOURCE_ROOT; };
-		2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAuthenticatedTests.xcconfig"; path = "Pods/Pods-iOSAuthenticatedTests.xcconfig"; sourceTree = "<group>"; };
-		2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAnonTests.xcconfig"; path = "Pods/Pods-OSXAnonTests.xcconfig"; sourceTree = "<group>"; };
-		3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAuthenticatedTests.xcconfig"; path = "Pods/Pods-OSXIntegratedAuthenticatedTests.xcconfig"; sourceTree = "<group>"; };
-		4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAuthenticatedTests.xcconfig"; path = "Pods/Pods-OSXAuthenticatedTests.xcconfig"; sourceTree = "<group>"; };
+		2F120CC11CCD73A807E9A9FC /* Pods-ImgurSessionOSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImgurSessionOSX/Pods-ImgurSessionOSX.debug.xcconfig"; sourceTree = "<group>"; };
+		3802B4D4215A70B2F0E97712 /* Pods-ImgurSession.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSession.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImgurSession/Pods-ImgurSession.debug.xcconfig"; sourceTree = "<group>"; };
+		4E9BF0EB110055E4F5A1E38B /* Pods-OSXAuthenticatedTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAuthenticatedTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSXAuthenticatedTests/Pods-OSXAuthenticatedTests.debug.xcconfig"; sourceTree = "<group>"; };
+		51CF23D7CB2CB021D65A8734 /* Pods-OSXIntegratedAnonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAnonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSXIntegratedAnonTests/Pods-OSXIntegratedAnonTests.release.xcconfig"; sourceTree = "<group>"; };
+		585B9DEF3E190731893518E1 /* Pods-OSXIntegratedAnonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAnonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSXIntegratedAnonTests/Pods-OSXIntegratedAnonTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5C17F7D4AE624C3C855B4547 /* libPods-iOSAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE72095F6B24FBB9104E2EE /* libPods-ImgurSessionOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSessionOSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.xcconfig"; path = "Pods/Pods-SampleApp.xcconfig"; sourceTree = "<group>"; };
+		5D34CA01302A5F14B8A976FA /* Pods-ImgurSessionOSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImgurSessionOSX/Pods-ImgurSessionOSX.release.xcconfig"; sourceTree = "<group>"; };
 		63FF1E5F82DB4DDF82FE86D9 /* libPods-ImgurSession.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImgurSession.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AD5E4AAC7E4142A9272C14 /* libPods-OSXIntegratedAnonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXIntegratedAnonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSessionOSX.xcconfig"; path = "Pods/Pods-ImgurSessionOSX.xcconfig"; sourceTree = "<group>"; };
 		B18FC49F01B74CE7997BECDF /* libPods-OSXIntegratedAuthenticatedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OSXIntegratedAuthenticatedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E1EE857AF64A31A8CAA72E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C309339518CA1F87009D9C57 /* libImgurSession.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImgurSession.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -543,6 +543,10 @@
 		C3F1B41F18E369B6004ED254 /* topgalleryanon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = topgalleryanon.json; path = anonymous/topgalleryanon.json; sourceTree = "<group>"; };
 		C3F1B42018E369B6004ED254 /* usersubgalleryanon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersubgalleryanon.json; path = anonymous/usersubgalleryanon.json; sourceTree = "<group>"; };
 		CADD1C0A61474050AC1AE831 /* libPods-SampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC17D8CE60DE225FE6440523 /* Pods-ImgurSession.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgurSession.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImgurSession/Pods-ImgurSession.release.xcconfig"; sourceTree = "<group>"; };
+		E637FE857869B5BF854873D7 /* Pods-OSXAnonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAnonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OSXAnonTests/Pods-OSXAnonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F0E134AA0D60A686197454CC /* Pods-OSXIntegratedAuthenticatedTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXIntegratedAuthenticatedTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSXIntegratedAuthenticatedTests/Pods-OSXIntegratedAuthenticatedTests.release.xcconfig"; sourceTree = "<group>"; };
+		F7B086D7A670F1A8F397E60E /* Pods-OSXAuthenticatedTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSXAuthenticatedTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OSXAuthenticatedTests/Pods-OSXAuthenticatedTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -714,6 +718,25 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
+		8DA2A819204ABDFE39DE68A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3802B4D4215A70B2F0E97712 /* Pods-ImgurSession.debug.xcconfig */,
+				CC17D8CE60DE225FE6440523 /* Pods-ImgurSession.release.xcconfig */,
+				2F120CC11CCD73A807E9A9FC /* Pods-ImgurSessionOSX.debug.xcconfig */,
+				5D34CA01302A5F14B8A976FA /* Pods-ImgurSessionOSX.release.xcconfig */,
+				E637FE857869B5BF854873D7 /* Pods-OSXAnonTests.debug.xcconfig */,
+				158ABCB6A9C688A52F2C1771 /* Pods-OSXAnonTests.release.xcconfig */,
+				4E9BF0EB110055E4F5A1E38B /* Pods-OSXAuthenticatedTests.debug.xcconfig */,
+				F7B086D7A670F1A8F397E60E /* Pods-OSXAuthenticatedTests.release.xcconfig */,
+				585B9DEF3E190731893518E1 /* Pods-OSXIntegratedAnonTests.debug.xcconfig */,
+				51CF23D7CB2CB021D65A8734 /* Pods-OSXIntegratedAnonTests.release.xcconfig */,
+				20E17B63F0296D84AF89425B /* Pods-OSXIntegratedAuthenticatedTests.debug.xcconfig */,
+				F0E134AA0D60A686197454CC /* Pods-OSXIntegratedAuthenticatedTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C309338C18CA1F87009D9C57 = {
 			isa = PBXGroup;
 			children = (
@@ -725,14 +748,7 @@
 				C3C6B74D19227BEE007C32C8 /* SampleApp */,
 				C309339718CA1F87009D9C57 /* Frameworks */,
 				C309339618CA1F87009D9C57 /* Products */,
-				092DC70EA0C4429E854604CD /* Pods-ImgurSession.xcconfig */,
-				92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */,
-				2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */,
-				4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */,
-				2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */,
-				021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */,
-				3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */,
-				612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */,
+				8DA2A819204ABDFE39DE68A0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1198,6 +1214,7 @@
 				243CCDA018DD32EF00B4FBC6 /* Frameworks */,
 				243CCDA418DD32EF00B4FBC6 /* Resources */,
 				243CCDA618DD32EF00B4FBC6 /* Copy Pods Resources */,
+				19BC86E12B1BB3B0DB27957C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1238,6 +1255,7 @@
 				24B4CB8618CAB7B300EC8E4A /* Frameworks */,
 				24B4CB8718CAB7B300EC8E4A /* Resources */,
 				AC44662E5DBB435494FFBF4B /* Copy Pods Resources */,
+				77EB27D802D16D734F685EC3 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1316,6 +1334,7 @@
 				C3F1B36418E2041C004ED254 /* Frameworks */,
 				C3F1B36518E2041C004ED254 /* Resources */,
 				AF73007D9E5443B2A6D9768F /* Copy Pods Resources */,
+				4A3A5ED8D92A4A75C8804D93 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1336,6 +1355,7 @@
 				C3F1B37818E2042C004ED254 /* Frameworks */,
 				C3F1B37918E2042C004ED254 /* Resources */,
 				EBAD6AE1537D4F76B4941F4A /* Copy Pods Resources */,
+				6C61AFE8A664097019B76A0A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1353,7 +1373,7 @@
 		C309338D18CA1F87009D9C57 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = GeoffMacDonald;
 				TargetAttributes = {
 					243CCD9518DD32EF00B4FBC6 = {
@@ -1522,6 +1542,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19BC86E12B1BB3B0DB27957C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXAnonTests/Pods-OSXAnonTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		243CCD9818DD32EF00B4FBC6 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1549,7 +1584,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-OSXAnonTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXAnonTests/Pods-OSXAnonTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		46E46679617747D3B90A29DC /* Check Pods Manifest.lock */ = {
@@ -1567,6 +1602,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4A3A5ED8D92A4A75C8804D93 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXIntegratedAuthenticatedTests/Pods-OSXIntegratedAuthenticatedTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		624F18CA8C3F4D8090FE97EE /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1579,7 +1629,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-ImgurSessionOSX-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ImgurSessionOSX/Pods-ImgurSessionOSX-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C61AFE8A664097019B76A0A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXIntegratedAnonTests/Pods-OSXIntegratedAnonTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6DC15E212CEF4D17B2A9DDE9 /* Copy Pods Resources */ = {
@@ -1594,7 +1659,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-ImgurSession-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ImgurSession/Pods-ImgurSession-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		723A88D346A744C3AE9184DC /* Check Pods Manifest.lock */ = {
@@ -1610,6 +1675,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		77EB27D802D16D734F685EC3 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXAuthenticatedTests/Pods-OSXAuthenticatedTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		792D86CF649D4B6CA648E336 /* Copy Pods Resources */ = {
@@ -1669,7 +1749,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-OSXAuthenticatedTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXAuthenticatedTests/Pods-OSXAuthenticatedTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AF73007D9E5443B2A6D9768F /* Copy Pods Resources */ = {
@@ -1684,7 +1764,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-OSXIntegratedAuthenticatedTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXIntegratedAuthenticatedTests/Pods-OSXIntegratedAuthenticatedTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7069A2DA43749C2B305489E /* Check Pods Manifest.lock */ = {
@@ -1772,7 +1852,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-OSXIntegratedAnonTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OSXIntegratedAnonTests/Pods-OSXIntegratedAnonTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1972,7 +2052,7 @@
 /* Begin XCBuildConfiguration section */
 		243CCDA818DD32EF00B4FBC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */;
+			baseConfigurationReference = E637FE857869B5BF854873D7 /* Pods-OSXAnonTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1998,7 +2078,7 @@
 		};
 		243CCDA918DD32EF00B4FBC6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FC257101CC740B89141A31E /* Pods-OSXAnonTests.xcconfig */;
+			baseConfigurationReference = 158ABCB6A9C688A52F2C1771 /* Pods-OSXAnonTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2021,7 +2101,7 @@
 		};
 		24B4CB9818CAB7B400EC8E4A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */;
+			baseConfigurationReference = 2F120CC11CCD73A807E9A9FC /* Pods-ImgurSessionOSX.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2040,6 +2120,7 @@
 				);
 				INFOPLIST_FILE = "Resources/ImgurSession-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jpardanaud.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ImgurSessionOSX;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -2048,7 +2129,7 @@
 		};
 		24B4CB9918CAB7B400EC8E4A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92BC7968A5764FEAA29E82CC /* Pods-ImgurSessionOSX.xcconfig */;
+			baseConfigurationReference = 5D34CA01302A5F14B8A976FA /* Pods-ImgurSessionOSX.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2064,6 +2145,7 @@
 				GCC_PREFIX_HEADER = "Resources/ImgurSession-Prefix.pch";
 				INFOPLIST_FILE = "Resources/ImgurSession-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jpardanaud.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ImgurSessionOSX;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -2072,7 +2154,7 @@
 		};
 		24B4CB9B18CAB7B400EC8E4A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */;
+			baseConfigurationReference = 4E9BF0EB110055E4F5A1E38B /* Pods-OSXAuthenticatedTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2098,7 +2180,7 @@
 		};
 		24B4CB9C18CAB7B400EC8E4A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BC71F69ADB2426E981E8411 /* Pods-OSXAuthenticatedTests.xcconfig */;
+			baseConfigurationReference = F7B086D7A670F1A8F397E60E /* Pods-OSXAuthenticatedTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2136,6 +2218,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2189,7 +2272,7 @@
 		};
 		C30933B918CA1F87009D9C57 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 092DC70EA0C4429E854604CD /* Pods-ImgurSession.xcconfig */;
+			baseConfigurationReference = 3802B4D4215A70B2F0E97712 /* Pods-ImgurSession.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/ImgurSession.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2202,7 +2285,7 @@
 		};
 		C30933BA18CA1F87009D9C57 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 092DC70EA0C4429E854604CD /* Pods-ImgurSession.xcconfig */;
+			baseConfigurationReference = CC17D8CE60DE225FE6440523 /* Pods-ImgurSession.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/ImgurSession.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2229,7 +2312,6 @@
 		};
 		C3C6B77319227BEE007C32C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2251,6 +2333,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeoffMacDonald.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2258,7 +2341,6 @@
 		};
 		C3C6B77419227BEE007C32C8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 612C65B7186541E6BBEDA0BD /* Pods-SampleApp.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2276,6 +2358,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GeoffMacDonald.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2283,7 +2366,6 @@
 		};
 		C3CDA2EC18CA66DA003B7F96 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2306,7 +2388,6 @@
 		};
 		C3CDA2ED18CA66DA003B7F96 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C7E9E8BB5BF4985AC44F2BE /* Pods-iOSAuthenticatedTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2325,7 +2406,7 @@
 		};
 		C3F1B37518E2041C004ED254 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */;
+			baseConfigurationReference = 20E17B63F0296D84AF89425B /* Pods-OSXIntegratedAuthenticatedTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2352,7 +2433,7 @@
 		};
 		C3F1B37618E2041C004ED254 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3507314232AD4D6988DAADAF /* Pods-OSXIntegratedAuthenticatedTests.xcconfig */;
+			baseConfigurationReference = F0E134AA0D60A686197454CC /* Pods-OSXIntegratedAuthenticatedTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2376,7 +2457,7 @@
 		};
 		C3F1B38918E2042C004ED254 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */;
+			baseConfigurationReference = 585B9DEF3E190731893518E1 /* Pods-OSXIntegratedAnonTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2403,7 +2484,7 @@
 		};
 		C3F1B38A18E2042C004ED254 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 021C4CA233CF41DDB17E9B2C /* Pods-OSXIntegratedAnonTests.xcconfig */;
+			baseConfigurationReference = 51CF23D7CB2CB021D65A8734 /* Pods-OSXIntegratedAnonTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ImgurSessionOSX.framework/Versions/A/ImgurSessionOSX";
 				COMBINE_HIDPI_IMAGES = YES;
