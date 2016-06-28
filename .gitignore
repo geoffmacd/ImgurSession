@@ -19,6 +19,7 @@ DerivedData
 
 #CocoaPods
 Pods
+Podfile.lock
 
 Resources/ImgurKit_Tests-Info.plist
 ImgurSession.xcodeproj/project.xcworkspace/contents.xcworkspacedata
