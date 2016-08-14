@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   spec.source_files     = 'ImgurSession/**/*.{h,m}'
   spec.author              = { "Geoff MacDonald" => "geoffmacd@gmail.com" }
   spec.framework        = 'Foundation'
-  spec.dependency 'AFNetworking', '2.6.3'
+  spec.dependency 'AFNetworking', '3.1.0'
   spec.ios.deployment_target = '8.0'
   spec.osx.deployment_target = "10.9"
   spec.requires_arc     = true
